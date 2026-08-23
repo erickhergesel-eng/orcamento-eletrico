@@ -3,68 +3,73 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calculadora de Orçamento & Gerador de PDF</title>
-  <!-- Biblioteca para Gerar PDF direto pelo Navegador -->
+  <title>Calculadora de Orçamento - Elétrica & Segurança</title>
+  <!-- Biblioteca para Gerar PDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <style>
     :root {
       --primary: #1b365d;
+      --secondary: #0d233a;
       --accent: #107c41;
       --bg: #f4f6f9;
       --card: #ffffff;
       --text: #333333;
     }
     * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; }
-    body { background-color: var(--bg); color: var(--text); padding: 15px; max-width: 600px; margin: 0 auto; }
-    header { background: var(--primary); color: #fff; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 20px; }
-    header h1 { font-size: 1.4rem; }
-    header p { font-size: 0.85rem; opacity: 0.8; }
-    .card { background: var(--card); border-radius: 12px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-    .card h2 { font-size: 1.1rem; color: var(--primary); margin-bottom: 10px; border-bottom: 2px solid var(--bg); padding-bottom: 5px; }
-    .field { margin-bottom: 10px; }
-    .field label { display: block; font-size: 0.85rem; font-weight: bold; margin-bottom: 4px; }
-    .field input, .field select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 0.95rem; }
-    .service-row { display: flex; gap: 8px; margin-bottom: 10px; align-items: center; }
-    .service-row select { flex: 2; }
-    .service-row input { flex: 0.8; text-align: center; }
-    .btn-add { background: var(--primary); color: #fff; border: none; padding: 10px; border-radius: 6px; width: 100%; font-weight: bold; cursor: pointer; }
-    .item-list { list-style: none; margin-top: 10px; }
-    .item-list li { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; font-size: 0.9rem; }
-    .total-box { background: var(--accent); color: #fff; border-radius: 8px; padding: 15px; text-align: center; margin-top: 15px; }
-    .total-box h3 { font-size: 1.5rem; }
+    body { background-color: var(--bg); color: var(--text); padding: 15px; max-width: 650px; margin: 0 auto; }
+    header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    header h1 { font-size: 1.4rem; font-weight: 700; }
+    header p { font-size: 0.85rem; opacity: 0.9; margin-top: 4px; }
     
-    /* Botões de Ação */
+    .card { background: var(--card); border-radius: 12px; padding: 16px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    .card h2 { font-size: 1.1rem; color: var(--primary); margin-bottom: 12px; border-bottom: 2px solid var(--bg); padding-bottom: 6px; }
+    
+    .field { margin-bottom: 12px; }
+    .field label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 5px; color: #444; }
+    .field input, .field select { width: 100%; padding: 11px; border: 1px solid #ccc; border-radius: 8px; font-size: 0.95rem; outline: none; }
+    .field input:focus, .field select:focus { border-color: var(--primary); }
+    
+    .btn-add { background: var(--primary); color: #fff; border: none; padding: 12px; border-radius: 8px; width: 100%; font-weight: bold; cursor: pointer; font-size: 0.95rem; margin-top: 5px; }
+    
+    .item-list { list-style: none; margin-top: 15px; }
+    .item-list li { display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #eee; background: #fafafa; border-radius: 6px; margin-bottom: 6px; }
+    .item-info { display: flex; flex-direction: column; }
+    .item-title { font-weight: 600; color: #222; font-size: 0.9rem; }
+    .item-sub { font-size: 0.8rem; color: #666; }
+    .remove-btn { color: #e74c3c; font-weight: bold; text-decoration: none; padding: 4px 8px; font-size: 1.1rem; cursor: pointer; }
+    
+    .total-box { background: var(--accent); color: #fff; border-radius: 10px; padding: 16px; text-align: center; margin-top: 15px; }
+    .total-box span { font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; }
+    .total-box h3 { font-size: 1.7rem; margin-top: 2px; }
+    
     .btn-group { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
-    .btn-whatsapp { background: #25d366; color: #fff; border: none; padding: 12px; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; text-align: center; }
-    .btn-pdf { background: #e74c3c; color: #fff; border: none; padding: 12px; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; text-align: center; }
+    .btn-whatsapp { background: #25d366; color: #fff; border: none; padding: 14px; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; text-align: center; }
+    .btn-pdf { background: #e74c3c; color: #fff; border: none; padding: 14px; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; text-align: center; }
 
-    /* Layout Oculto/Exclusivo para o PDF */
-    #pdfTemplate {
-      display: none;
-      padding: 30px;
-      font-family: Arial, sans-serif;
-      color: #333;
-    }
+    /* LAYOUT EXCLUSIVO PARA O PDF */
+    #pdfTemplate { display: none; padding: 30px; font-family: Arial, sans-serif; color: #333; }
     .pdf-header { text-align: center; border-bottom: 2px solid #1b365d; padding-bottom: 15px; margin-bottom: 20px; }
-    .pdf-header h1 { color: #1b365d; font-size: 22px; }
-    .pdf-header p { font-size: 12px; color: #666; }
+    .pdf-header h1 { color: #1b365d; font-size: 22px; text-transform: uppercase; }
+    .pdf-header p { font-size: 12px; color: #555; }
+    .pdf-client-box { background: #f8f9fa; border: 1px solid #e9ecef; padding: 12px; border-radius: 6px; margin-bottom: 15px; font-size: 13px; }
     .pdf-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-    .pdf-table th, .pdf-table td { border: 1px solid #ddd; padding: 10px; text-align: left; font-size: 13px; }
-    .pdf-table th { background-color: #1b365d; color: white; }
+    .pdf-table th, .pdf-table td { border: 1px solid #ddd; padding: 9px; text-align: left; font-size: 12px; }
+    .pdf-table th { background-color: #1b365d; color: white; text-transform: uppercase; font-size: 11px; }
     .pdf-total { margin-top: 20px; text-align: right; font-size: 16px; font-weight: bold; color: #107c41; }
-    .pdf-footer { margin-top: 40px; font-size: 11px; text-align: center; color: #777; border-top: 1px solid #eee; padding-top: 10px; }
+    .pdf-terms { margin-top:25px; font-size:11px; background:#f9f9f9; padding:12px; border-radius:6px; border-left: 4px solid #1b365d; }
+    .pdf-footer { margin-top: 35px; font-size: 11px; text-align: center; color: #777; border-top: 1px solid #eee; padding-top: 10px; }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>⚡ Érick Serviços Elétricos</h1>
-    <p>Simulador & Gerador de Orçamento Rápido</p>
+    <h1>⚡ Érick Serviços & Segurança</h1>
+    <p>Elétrica Residencial, Comercial e Segurança Eletrônica</p>
   </header>
 
   <!-- Dados do Cliente -->
   <div class="card">
-    <h2>Dados do Cliente</h2>
+    <h2>👤 Dados do Cliente</h2>
     <div class="field">
       <label>Nome do Cliente:</label>
       <input type="text" id="clienteNome" placeholder="Ex: João Silva">
@@ -77,27 +82,72 @@
 
   <!-- Seleção de Serviços -->
   <div class="card">
-    <h2>Adicionar Serviços</h2>
-    <div class="service-row">
+    <h2>🛠️ Adicionar Serviços ao Orçamento</h2>
+    
+    <div class="field">
+      <label>Selecione o Serviço:</label>
       <select id="servicoSelect">
         <option value="">-- Selecione o serviço --</option>
-        <option value="Troca/Instalação Tomada|50">Troca/Instalação Tomada (R$ 50,00)</option>
-        <option value="Instalação Luminária/Plafon|70">Instalação Luminária/Plafon (R$ 70,00)</option>
-        <option value="Painel LED Embutir|80">Painel LED de Embutir (R$ 80,00)</option>
-        <option value="Troca de Chuveiro|90">Troca de Chuveiro (R$ 90,00)</option>
-        <option value="Instalação Ventilador Teto|160">Instalação Ventilador Teto (R$ 160,00)</option>
-        <option value="Montagem Quadro Elétrico|450">Montagem Quadro Elétrico (R$ 450,00)</option>
-        <option value="Passagem de Cabo / metro|9">Passagem de Cabo / metro (R$ 9,00)</option>
-        <option value="Diagnóstico / Curto Elétrico|150">Diagnóstico / Busca Curto (R$ 150,00)</option>
+        
+        <optgroup label="⚡ Elétrica Básica & Iluminação">
+          <option value="Troca/Instalação de Tomada ou Interruptor|50">Troca/Instalação Tomada ou Interruptor - R$ 50,00</option>
+          <option value="Instalação de Ponto Novo de Tomada/Iluminação|120">Ponto Novo Elétrico (infra + fiação) - R$ 120,00</option>
+          <option value="Instalação de Luminária / Plafon / Lustre|80">Instalação Luminária/Plafon/Lustre - R$ 80,00</option>
+          <option value="Instalação de Painel LED Embutir/Sobrepor|85">Painel LED Embutir/Sobrepor - R$ 85,00</option>
+          <option value="Instalação de Fita LED com Fonte|120">Instalação Fita LED com Fonte (até 5m) - R$ 120,00</option>
+          <option value="Troca/Instalação de Chuveiro Elétrico|90">Troca de Chuveiro Elétrico - R$ 90,00</option>
+          <option value="Instalação de Ventilador de Teto|160">Instalação Ventilador de Teto - R$ 160,00</option>
+          <option value="Passagem de Fiação Elétrica (por metro)|9">Passagem Fiação Elétrica (por metro) - R$ 9,00</option>
+        </optgroup>
+
+        <optgroup label="⚙️ Quadros Elétricos, Proteção & Entrada">
+          <option value="Troca/Instalação de Disjuntor Individual|60">Troca/Instalação Disjuntor Individual - R$ 60,00</option>
+          <option value="Instalação de Disjuntor DR ou DPS|90">Instalação Disjuntor DR ou DPS - R$ 90,00</option>
+          <option value="Montagem de Quadro Elétrico (até 12 disjuntor)|450">Montagem Quadro Elétrico (até 12 disj.) - R$ 450,00</option>
+          <option value="Montagem de Quadro Elétrico (acima de 12 disj.)|750">Montagem Quadro Elétrico (acima 12 disj.) - R$ 750,00</option>
+          <option value="Instalação de Sistema de Aterramento|350">Instalação Haste de Aterramento - R$ 350,00</option>
+          <option value="Diagnóstico Elétrico / Busca de Curto-Circuito|180">Diagnóstico / Busca de Curto - R$ 180,00</option>
+        </optgroup>
+
+        <optgroup label="📹 Câmeras de Segurança (DVR / NVR / Wi-Fi)">
+          <option value="Instalação de Câmera HD Intelbras/Hikvision (DVR)|110">Instalação Câmera DVR (Ponto + Config) - R$ 110,00</option>
+          <option value="Instalação de Câmera IP / NVR (Poe)|140">Instalação Câmera IP NVR - R$ 140,00</option>
+          <option value="Instalação de Câmera Wi-Fi Inteligente|90">Instalação Câmera Wi-Fi (Robô/Externa) - R$ 90,00</option>
+          <option value="Configuração e Fixação de DVR/NVR + HD|150">Instalação e Configuração DVR/NVR - R$ 150,00</option>
+          <option value="Configuração de Acesso Remoto no Celular|100">Configuração de Acesso Remoto Celular - R$ 100,00</option>
+          <option value="Lançamento de Cabo Coaxial/UTP para Câmeras (metro)|8">Lançamento Cabo Câmera (por metro) - R$ 8,00</option>
+        </optgroup>
+
+        <optgroup label="🚗 Automadores & Motores de Portão">
+          <option value="Instalação de Motor de Portão Deslizante (Kit)|350">Instalação Motor Portão Deslizante - R$ 350,00</option>
+          <option value="Instalação de Motor de Portão Basculante/Pivotante|420">Instalação Motor Basculante/Pivotante - R$ 420,00</option>
+          <option value="Codificação de Controle Remoto de Portão|30">Codificação de Controle de Portão - R$ 30,00</option>
+          <option value="Instalação de Sensor Anti-esmagamento (Fotocélula)|90">Instalação Fotocélula Anti-esmagamento - R$ 90,00</option>
+          <option value="Troca de Placa Central de Comando de Portão|140">Troca de Placa Central de Portão - R$ 140,00</option>
+        </optgroup>
+
+        <optgroup label="🚨 Controle de Acesso, Alarmes & Cerca Elétrica">
+          <option value="Instalação de Interfone / Porteiro Eletrônico|180">Instalação Interfone Residencial - R$ 180,00</option>
+          <option value="Instalação de Vídeo Porteiro|250">Instalação Vídeo Porteiro - R$ 250,00</option>
+          <option value="Instalação de Fechadura Elétrica / Eletroímã|160">Instalação Fechadura Elétrica/Eletroímã - R$ 160,00</option>
+          <option value="Instalação de Fechadura Digital / Biometria|200">Instalação Fechadura Digital/Biometria - R$ 200,00</option>
+          <option value="Instalação de Central de Alarme + Sensores (Kit)|380">Instalação Central Alarme + Sensores - R$ 380,00</option>
+          <option value="Instalação/Manutenção Cerca Elétrica (metro linear)|25">Cerca Elétrica (por metro linear) - R$ 25,00</option>
+        </optgroup>
       </select>
+    </div>
+
+    <div class="field">
+      <label>Quantidade / Metros:</label>
       <input type="number" id="servicoQtd" value="1" min="1" placeholder="Qtd">
     </div>
-    <button class="btn-add" onclick="adicionarItem()">+ Adicionar ao Orçamento</button>
+
+    <button type="button" class="btn-add" onclick="adicionarItem()">+ Adicionar Serviço</button>
 
     <ul class="item-list" id="listaItens"></ul>
 
     <div class="field" style="margin-top: 15px;">
-      <label>Taxa de Material Extra / Deslocamento (R$):</label>
+      <label>Taxa de Materiais Extras / Deslocamento (R$):</label>
       <input type="number" id="taxaExtra" value="0" oninput="calcularTotal()">
     </div>
 
@@ -107,29 +157,31 @@
     </div>
 
     <div class="btn-group">
-      <button class="btn-pdf" onclick="gerarPDF()">📄 Baixar PDF do Orçamento</button>
-      <button class="btn-whatsapp" onclick="enviarWhatsApp()">📱 Enviar Resumo no WhatsApp</button>
+      <button type="button" class="btn-pdf" onclick="gerarPDF()">📄 Baixar PDF do Orçamento</button>
+      <button type="button" class="btn-whatsapp" onclick="enviarWhatsApp()">📱 Enviar Resumo no WhatsApp</button>
     </div>
   </div>
 
   <!-- TEMPLATE OCULTO PARA A GERAÇÃO DO PDF -->
   <div id="pdfTemplate">
     <div class="pdf-header">
-      <h1>Érick Serviços Elétricos</h1>
-      <p>Serviços Especializados de Eletricidade & Manutenção</p>
+      <h1>Érick Serviços & Segurança</h1>
+      <p>Proposta Comercial de Eletricidade & Segurança Eletrônica</p>
       <p id="pdfData" style="margin-top: 5px; font-weight: bold;"></p>
     </div>
 
-    <p><strong>Cliente:</strong> <span id="pdfClienteNome"></span></p>
-    <p><strong>Telefone:</strong> <span id="pdfClienteTel"></span></p>
+    <div class="pdf-client-box">
+      <p><strong>Cliente:</strong> <span id="pdfClienteNome"></span></p>
+      <p><strong>Telefone / WhatsApp:</strong> <span id="pdfClienteTel"></span></p>
+    </div>
 
     <table class="pdf-table">
       <thead>
         <tr>
-          <th>Qtd</th>
-          <th>Descrição do Serviço</th>
-          <th>Unitário</th>
-          <th>Total</th>
+          <th style="width: 10%;">Qtd</th>
+          <th style="width: 55%;">Descrição do Serviço / Equipamento</th>
+          <th style="width: 17%;">Valor Unit.</th>
+          <th style="width: 18%;">Subtotal</th>
         </tr>
       </thead>
       <tbody id="pdfTbody"></tbody>
@@ -137,31 +189,43 @@
 
     <div class="pdf-total" id="pdfValorTotal"></div>
 
-    <div style="margin-top:25px; font-size:12px; background:#f9f9f9; padding:10px; border-radius:5px;">
-      <p><strong>Condições de Pagamento:</strong> 50% na aprovação do serviço e 50% no término.</p>
-      <p><strong>Formas de Aceitas:</strong> Pix e Cartão de Crédito.</p>
-      <p><strong>Validade da Proposta:</strong> 15 dias.</p>
+    <div class="pdf-terms">
+      <p><strong>Condições Gerais de Fornecimento:</strong></p>
+      <p>• Pagamento: 50% na aprovação / início do serviço e 50% na entrega e testes.</p>
+      <p>• Aceitamos Pix e Cartões de Crédito.</p>
+      <p>• Validade deste orçamento: 15 dias corridos.</p>
+      <p>• Garantia da Mão de Obra: 90 dias após a conclusão do serviço.</p>
     </div>
 
     <div class="pdf-footer">
-      <p>Obrigado pela preferência! Atendimento com qualidade e segurança.</p>
+      <p>Érick Serviços Elétricos & Segurança Eletrônica - Atendimento com Qualidade, Agilidade e Segurança!</p>
     </div>
   </div>
 
   <script>
-    let itensOrcamento = [];
+    var itensOrcamento = [];
 
     function adicionarItem() {
-      const select = document.getElementById('servicoSelect');
-      const qtdInput = document.getElementById('servicoQtd');
+      var select = document.getElementById('servicoSelect');
+      var qtdInput = document.getElementById('servicoQtd');
       
-      if (!select.value) return alert('Selecione um serviço!');
+      if (!select.value) {
+        alert('Por favor, selecione um serviço na lista!');
+        return;
+      }
       
-      const [nome, preco] = select.value.split('|');
-      const qtd = parseInt(qtdInput.value) || 1;
-      const totalItem = parseFloat(preco) * qtd;
+      var partes = select.value.split('|');
+      var nome = partes[0];
+      var preco = parseFloat(partes[1]);
+      var qtd = parseFloat(qtdInput.value) || 1;
+      var totalItem = preco * qtd;
 
-      itensOrcamento.push({ nome, preco: parseFloat(preco), qtd, totalItem });
+      itensOrcamento.push({
+        nome: nome,
+        preco: preco,
+        qtd: qtd,
+        totalItem: totalItem
+      });
       
       select.value = '';
       qtdInput.value = 1;
@@ -170,17 +234,23 @@
     }
 
     function atualizarLista() {
-      const lista = document.getElementById('listaItens');
+      var lista = document.getElementById('listaItens');
       lista.innerHTML = '';
 
-      itensOrcamento.forEach((item, index) => {
-        const li = document.createElement('li');
-        li.innerHTML = `
-          <span>${item.qtd}x ${item.nome}</span>
-          <span><b>R$ ${item.totalItem.toFixed(2)}</b> <a href="#" onclick="removerItem(${index})" style="color:red; margin-left:8px; text-decoration:none;">✕</a></span>
-        `;
+      for (var i = 0; i < itensOrcamento.length; i++) {
+        var item = itensOrcamento[i];
+        var li = document.createElement('li');
+        li.innerHTML = 
+          '<div class="item-info">' +
+            '<span class="item-title">' + item.qtd + 'x ' + item.nome + '</span>' +
+            '<span class="item-sub">Unitário: R$ ' + item.preco.toFixed(2) + '</span>' +
+          '</div>' +
+          '<div>' +
+            '<b>R$ ' + item.totalItem.toFixed(2) + '</b> ' +
+            '<span class="remove-btn" onclick="removerItem(' + i + ')">✕</span>' +
+          '</div>';
         lista.appendChild(li);
-      });
+      }
 
       calcularTotal();
     }
@@ -191,98 +261,109 @@
     }
 
     function calcularTotal() {
-      const subtotal = itensOrcamento.reduce((acc, curr) => acc + curr.totalItem, 0);
-      const taxaExtra = parseFloat(document.getElementById('taxaExtra').value) || 0;
-      const totalGeral = subtotal + taxaExtra;
+      var subtotal = 0;
+      for (var i = 0; i < itensOrcamento.length; i++) {
+        subtotal += itensOrcamento[i].totalItem;
+      }
+      
+      var taxaExtraInput = document.getElementById('taxaExtra');
+      var taxaExtra = parseFloat(taxaExtraInput.value) || 0;
+      var totalGeral = subtotal + taxaExtra;
 
-      document.getElementById('valorTotal').innerText = `R$ ${totalGeral.toFixed(2)}`;
+      document.getElementById('valorTotal').innerText = 'R$ ' + totalGeral.toFixed(2);
       return totalGeral;
     }
 
     function prepararDadosPDF() {
-      const cliente = document.getElementById('clienteNome').value || 'Não informado';
-      const tel = document.getElementById('clienteTel').value || 'Não informado';
-      const total = calcularTotal();
+      var cliente = document.getElementById('clienteNome').value || 'Cliente não informado';
+      var tel = document.getElementById('clienteTel').value || 'Não informado';
+      var total = calcularTotal();
 
       document.getElementById('pdfClienteNome').innerText = cliente;
       document.getElementById('pdfClienteTel').innerText = tel;
-      document.getElementById('pdfData').innerText = "Data: " + new Date().toLocaleDateString('pt-BR');
+      document.getElementById('pdfData').innerText = "Data da Proposta: " + new Date().toLocaleDateString('pt-BR');
 
-      const tbody = document.getElementById('pdfTbody');
+      var tbody = document.getElementById('pdfTbody');
       tbody.innerHTML = '';
 
-      itensOrcamento.forEach(item => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td>${item.qtd}</td>
-          <td>${item.nome}</td>
-          <td>R$ ${item.preco.toFixed(2)}</td>
-          <td>R$ ${item.totalItem.toFixed(2)}</td>
-        `;
+      for (var i = 0; i < itensOrcamento.length; i++) {
+        var item = itensOrcamento[i];
+        var tr = document.createElement('tr');
+        tr.innerHTML = 
+          '<td>' + item.qtd + '</td>' +
+          '<td>' + item.nome + '</td>' +
+          '<td>R$ ' + item.preco.toFixed(2) + '</td>' +
+          '<td>R$ ' + item.totalItem.toFixed(2) + '</td>';
         tbody.appendChild(tr);
-      });
+      }
 
-      const taxaExtra = parseFloat(document.getElementById('taxaExtra').value) || 0;
+      var taxaExtra = parseFloat(document.getElementById('taxaExtra').value) || 0;
       if (taxaExtra > 0) {
-        const trExtra = document.createElement('tr');
-        trExtra.innerHTML = `
-          <td>1</td>
-          <td>Taxa de Materiais / Deslocamento</td>
-          <td>R$ ${taxaExtra.toFixed(2)}</td>
-          <td>R$ ${taxaExtra.toFixed(2)}</td>
-        `;
+        var trExtra = document.createElement('tr');
+        trExtra.innerHTML = 
+          '<td>1</td>' +
+          '<td>Taxa de Materiais Extras / Deslocamento</td>' +
+          '<td>R$ ' + taxaExtra.toFixed(2) + '</td>' +
+          '<td>R$ ' + taxaExtra.toFixed(2) + '</td>';
         tbody.appendChild(trExtra);
       }
 
-      document.getElementById('pdfValorTotal').innerText = `VALOR TOTAL: R$ ${total.toFixed(2)}`;
+      document.getElementById('pdfValorTotal').innerText = 'VALOR TOTAL DA PROPOSTA: R$ ' + total.toFixed(2);
     }
 
     function gerarPDF() {
-      if (itensOrcamento.length === 0) return alert('Adicione pelo menos um serviço!');
+      if (itensOrcamento.length === 0) {
+        alert('Adicione pelo menos um serviço antes de gerar o PDF!');
+        return;
+      }
 
       prepararDadosPDF();
-      const element = document.getElementById('pdfTemplate');
-      element.style.display = 'block'; // Mostra temporariamente para captura
+      var element = document.getElementById('pdfTemplate');
+      element.style.display = 'block';
 
-      const cliente = document.getElementById('clienteNome').value || 'Cliente';
-      const opt = {
+      var cliente = document.getElementById('clienteNome').value || 'Cliente';
+      var opt = {
         margin:       10,
-        filename:     `Orcamento_${cliente.replace(/\s+/g, '_')}.pdf`,
+        filename:     'Orcamento_' + cliente.replace(/\s+/g, '_') + '.pdf',
         image:        { type: 'jpeg', quality: 0.98 },
         html2canvas:  { scale: 2 },
         jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
 
-      html2pdf().set(opt).from(element).save().then(() => {
-        element.style.display = 'none'; // Oculta novamente
+      html2pdf().set(opt).from(element).save().then(function() {
+        element.style.display = 'none';
       });
     }
 
     function enviarWhatsApp() {
-      const cliente = document.getElementById('clienteNome').value || 'Cliente';
-      const tel = document.getElementById('clienteTel').value.replace(/\D/g, '');
-      const total = calcularTotal();
+      var cliente = document.getElementById('clienteNome').value || 'Cliente';
+      var tel = document.getElementById('clienteTel').value.replace(/\D/g, '');
+      var total = calcularTotal();
 
-      if (itensOrcamento.length === 0) return alert('Adicione pelo menos um serviço!');
-
-      let msg = `⚡ *ORÇAMENTO DE SERVIÇOS ELÉTRICOS*\n`;
-      msg += `👤 *Cliente:* ${cliente}\n\n`;
-      msg += `📋 *Serviços Solicitados:*\n`;
-
-      itensOrcamento.forEach(item => {
-        msg += `• ${item.qtd}x ${item.nome} - R$ ${item.totalItem.toFixed(2)}\n`;
-      });
-
-      const taxaExtra = parseFloat(document.getElementById('taxaExtra').value) || 0;
-      if (taxaExtra > 0) {
-        msg += `• Taxa de Materiais/Deslocamento: R$ ${taxaExtra.toFixed(2)}\n`;
+      if (itensOrcamento.length === 0) {
+        alert('Adicione pelo menos um serviço antes de enviar!');
+        return;
       }
 
-      msg += `\n💰 *VALOR TOTAL: R$ ${total.toFixed(2)}*\n`;
-      msg += `\n📄 *Nota:* Baixei o documento em PDF detalhado do seu orçamento e estou anexando nesta conversa!\n`;
-      msg += `\n📌 *Condições:* 50% na aprovação / 50% no término.\n💳 Aceitamos Pix e Cartão.`;
+      var msg = '⚡ *ORÇAMENTO DE SERVIÇOS & SEGURANÇA*\n';
+      msg += '👤 *Cliente:* ' + cliente + '\n\n';
+      msg += '📋 *Serviços Solicitados:*\n';
 
-      const url = tel ? `https://wa.me/55${tel}?text=${encodeURIComponent(msg)}` : `https://wa.me/?text=${encodeURIComponent(msg)}`;
+      for (var i = 0; i < itensOrcamento.length; i++) {
+        var item = itensOrcamento[i];
+        msg += '• ' + item.qtd + 'x ' + item.nome + ' - R$ ' + item.totalItem.toFixed(2) + '\n';
+      }
+
+      var taxaExtra = parseFloat(document.getElementById('taxaExtra').value) || 0;
+      if (taxaExtra > 0) {
+        msg += '• Taxa de Materiais/Deslocamento: R$ ' + taxaExtra.toFixed(2) + '\n';
+      }
+
+      msg += '\n💰 *VALOR TOTAL: R$ ' + total.toFixed(2) + '*\n';
+      msg += '\n📄 *Nota:* Baixei a proposta comercial em PDF detalhada e estou enviando anexada aqui na conversa!\n';
+      msg += '\n📌 *Condições:* 50% na aprovação / 50% no término.\n💳 Aceitamos Pix e Cartão de Crédito.';
+
+      var url = tel ? 'https://wa.me/55' + tel + '?text=' + encodeURIComponent(msg) : 'https://wa.me/?text=' + encodeURIComponent(msg);
       window.open(url, '_blank');
     }
   </script>
