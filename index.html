@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calculadora de Orçamento Elétrico</title>
+  <title>Calculadora de Orçamento & Gerador de PDF</title>
+  <!-- Biblioteca para Gerar PDF direto pelo Navegador -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <style>
     :root {
       --primary: #1b365d;
@@ -30,7 +32,27 @@
     .item-list li { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; font-size: 0.9rem; }
     .total-box { background: var(--accent); color: #fff; border-radius: 8px; padding: 15px; text-align: center; margin-top: 15px; }
     .total-box h3 { font-size: 1.5rem; }
-    .btn-whatsapp { background: #25d366; color: #fff; border: none; padding: 12px; border-radius: 8px; width: 100%; font-size: 1rem; font-weight: bold; margin-top: 15px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    
+    /* Botões de Ação */
+    .btn-group { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
+    .btn-whatsapp { background: #25d366; color: #fff; border: none; padding: 12px; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; text-align: center; }
+    .btn-pdf { background: #e74c3c; color: #fff; border: none; padding: 12px; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; text-align: center; }
+
+    /* Layout Oculto/Exclusivo para o PDF */
+    #pdfTemplate {
+      display: none;
+      padding: 30px;
+      font-family: Arial, sans-serif;
+      color: #333;
+    }
+    .pdf-header { text-align: center; border-bottom: 2px solid #1b365d; padding-bottom: 15px; margin-bottom: 20px; }
+    .pdf-header h1 { color: #1b365d; font-size: 22px; }
+    .pdf-header p { font-size: 12px; color: #666; }
+    .pdf-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+    .pdf-table th, .pdf-table td { border: 1px solid #ddd; padding: 10px; text-align: left; font-size: 13px; }
+    .pdf-table th { background-color: #1b365d; color: white; }
+    .pdf-total { margin-top: 20px; text-align: right; font-size: 16px; font-weight: bold; color: #107c41; }
+    .pdf-footer { margin-top: 40px; font-size: 11px; text-align: center; color: #777; border-top: 1px solid #eee; padding-top: 10px; }
   </style>
 </head>
 <body>
@@ -55,18 +77,18 @@
 
   <!-- Seleção de Serviços -->
   <div class="card">
-    <h2> Adicionar Serviços</h2>
+    <h2>Adicionar Serviços</h2>
     <div class="service-row">
       <select id="servicoSelect">
         <option value="">-- Selecione o serviço --</option>
-        <option value="Tomada Simples 10A/20A|50">Troca/Instalação Tomada (R$ 50,00)</option>
-        <option value="Instalação de Luminária/Plafon|70">Instalação Luminária/Plafon (R$ 70,00)</option>
+        <option value="Troca/Instalação Tomada|50">Troca/Instalação Tomada (R$ 50,00)</option>
+        <option value="Instalação Luminária/Plafon|70">Instalação Luminária/Plafon (R$ 70,00)</option>
         <option value="Painel LED Embutir|80">Painel LED de Embutir (R$ 80,00)</option>
-        <option value="Chuveiro Elétrico|90">Troca de Chuveiro (R$ 90,00)</option>
-        <option value="Ventilador de Teto|160">Instalação Ventilador Teto (R$ 160,00)</option>
-        <option value="Quadro Elétrico até 12 Disj.|450">Montagem Quadro Elétrico (R$ 450,00)</option>
-        <option value="Passagem Fiação (metro)|9">Passagem de Cabo / metro (R$ 9,00)</option>
-        <option value="Diagnóstico / Visita Técnica|150">Diagnóstico / Busca Curto (R$ 150,00)</option>
+        <option value="Troca de Chuveiro|90">Troca de Chuveiro (R$ 90,00)</option>
+        <option value="Instalação Ventilador Teto|160">Instalação Ventilador Teto (R$ 160,00)</option>
+        <option value="Montagem Quadro Elétrico|450">Montagem Quadro Elétrico (R$ 450,00)</option>
+        <option value="Passagem de Cabo / metro|9">Passagem de Cabo / metro (R$ 9,00)</option>
+        <option value="Diagnóstico / Curto Elétrico|150">Diagnóstico / Busca Curto (R$ 150,00)</option>
       </select>
       <input type="number" id="servicoQtd" value="1" min="1" placeholder="Qtd">
     </div>
@@ -84,11 +106,50 @@
       <h3 id="valorTotal">R$ 0,00</h3>
     </div>
 
-    <button class="btn-whatsapp" onclick="enviarWhatsApp()">📱 Enviar Orçamento pelo WhatsApp</button>
+    <div class="btn-group">
+      <button class="btn-pdf" onclick="gerarPDF()">📄 Baixar PDF do Orçamento</button>
+      <button class="btn-whatsapp" onclick="enviarWhatsApp()">📱 Enviar Resumo no WhatsApp</button>
+    </div>
+  </div>
+
+  <!-- TEMPLATE OCULTO PARA A GERAÇÃO DO PDF -->
+  <div id="pdfTemplate">
+    <div class="pdf-header">
+      <h1>Érick Serviços Elétricos</h1>
+      <p>Serviços Especializados de Eletricidade & Manutenção</p>
+      <p id="pdfData" style="margin-top: 5px; font-weight: bold;"></p>
+    </div>
+
+    <p><strong>Cliente:</strong> <span id="pdfClienteNome"></span></p>
+    <p><strong>Telefone:</strong> <span id="pdfClienteTel"></span></p>
+
+    <table class="pdf-table">
+      <thead>
+        <tr>
+          <th>Qtd</th>
+          <th>Descrição do Serviço</th>
+          <th>Unitário</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody id="pdfTbody"></tbody>
+    </table>
+
+    <div class="pdf-total" id="pdfValorTotal"></div>
+
+    <div style="margin-top:25px; font-size:12px; background:#f9f9f9; padding:10px; border-radius:5px;">
+      <p><strong>Condições de Pagamento:</strong> 50% na aprovação do serviço e 50% no término.</p>
+      <p><strong>Formas de Aceitas:</strong> Pix e Cartão de Crédito.</p>
+      <p><strong>Validade da Proposta:</strong> 15 dias.</p>
+    </div>
+
+    <div class="pdf-footer">
+      <p>Obrigado pela preferência! Atendimento com qualidade e segurança.</p>
+    </div>
   </div>
 
   <script>
-    let itensOrçamento = [];
+    let itensOrcamento = [];
 
     function adicionarItem() {
       const select = document.getElementById('servicoSelect');
@@ -100,9 +161,8 @@
       const qtd = parseInt(qtdInput.value) || 1;
       const totalItem = parseFloat(preco) * qtd;
 
-      itensOrçamento.push({ nome, preco: parseFloat(preco), qtd, totalItem });
+      itensOrcamento.push({ nome, preco: parseFloat(preco), qtd, totalItem });
       
-      // Reset inputs
       select.value = '';
       qtdInput.value = 1;
       
@@ -113,7 +173,7 @@
       const lista = document.getElementById('listaItens');
       lista.innerHTML = '';
 
-      itensOrçamento.forEach((item, index) => {
+      itensOrcamento.forEach((item, index) => {
         const li = document.createElement('li');
         li.innerHTML = `
           <span>${item.qtd}x ${item.nome}</span>
@@ -126,12 +186,12 @@
     }
 
     function removerItem(index) {
-      itensOrçamento.splice(index, 1);
+      itensOrcamento.splice(index, 1);
       atualizarLista();
     }
 
     function calcularTotal() {
-      const subtotal = itensOrçamento.reduce((acc, curr) => acc + curr.totalItem, 0);
+      const subtotal = itensOrcamento.reduce((acc, curr) => acc + curr.totalItem, 0);
       const taxaExtra = parseFloat(document.getElementById('taxaExtra').value) || 0;
       const totalGeral = subtotal + taxaExtra;
 
@@ -139,18 +199,77 @@
       return totalGeral;
     }
 
+    function prepararDadosPDF() {
+      const cliente = document.getElementById('clienteNome').value || 'Não informado';
+      const tel = document.getElementById('clienteTel').value || 'Não informado';
+      const total = calcularTotal();
+
+      document.getElementById('pdfClienteNome').innerText = cliente;
+      document.getElementById('pdfClienteTel').innerText = tel;
+      document.getElementById('pdfData').innerText = "Data: " + new Date().toLocaleDateString('pt-BR');
+
+      const tbody = document.getElementById('pdfTbody');
+      tbody.innerHTML = '';
+
+      itensOrcamento.forEach(item => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${item.qtd}</td>
+          <td>${item.nome}</td>
+          <td>R$ ${item.preco.toFixed(2)}</td>
+          <td>R$ ${item.totalItem.toFixed(2)}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      const taxaExtra = parseFloat(document.getElementById('taxaExtra').value) || 0;
+      if (taxaExtra > 0) {
+        const trExtra = document.createElement('tr');
+        trExtra.innerHTML = `
+          <td>1</td>
+          <td>Taxa de Materiais / Deslocamento</td>
+          <td>R$ ${taxaExtra.toFixed(2)}</td>
+          <td>R$ ${taxaExtra.toFixed(2)}</td>
+        `;
+        tbody.appendChild(trExtra);
+      }
+
+      document.getElementById('pdfValorTotal').innerText = `VALOR TOTAL: R$ ${total.toFixed(2)}`;
+    }
+
+    function gerarPDF() {
+      if (itensOrcamento.length === 0) return alert('Adicione pelo menos um serviço!');
+
+      prepararDadosPDF();
+      const element = document.getElementById('pdfTemplate');
+      element.style.display = 'block'; // Mostra temporariamente para captura
+
+      const cliente = document.getElementById('clienteNome').value || 'Cliente';
+      const opt = {
+        margin:       10,
+        filename:     `Orcamento_${cliente.replace(/\s+/g, '_')}.pdf`,
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+
+      html2pdf().set(opt).from(element).save().then(() => {
+        element.style.display = 'none'; // Oculta novamente
+      });
+    }
+
     function enviarWhatsApp() {
       const cliente = document.getElementById('clienteNome').value || 'Cliente';
       const tel = document.getElementById('clienteTel').value.replace(/\D/g, '');
       const total = calcularTotal();
 
-      if (itensOrçamento.length === 0) return alert('Adicione pelo menos um serviço!');
+      if (itensOrcamento.length === 0) return alert('Adicione pelo menos um serviço!');
 
       let msg = `⚡ *ORÇAMENTO DE SERVIÇOS ELÉTRICOS*\n`;
       msg += `👤 *Cliente:* ${cliente}\n\n`;
       msg += `📋 *Serviços Solicitados:*\n`;
 
-      itensOrçamento.forEach(item => {
+      itensOrcamento.forEach(item => {
         msg += `• ${item.qtd}x ${item.nome} - R$ ${item.totalItem.toFixed(2)}\n`;
       });
 
@@ -160,7 +279,8 @@
       }
 
       msg += `\n💰 *VALOR TOTAL: R$ ${total.toFixed(2)}*\n`;
-      msg += `\n📌 *Condições:* 50% na aprovação / 50% no término.\n💳 Aceitamos Pix e Cartão de Crédito.`;
+      msg += `\n📄 *Nota:* Baixei o documento em PDF detalhado do seu orçamento e estou anexando nesta conversa!\n`;
+      msg += `\n📌 *Condições:* 50% na aprovação / 50% no término.\n💳 Aceitamos Pix e Cartão.`;
 
       const url = tel ? `https://wa.me/55${tel}?text=${encodeURIComponent(msg)}` : `https://wa.me/?text=${encodeURIComponent(msg)}`;
       window.open(url, '_blank');
