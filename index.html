@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Orçamento Elétrico</title>
+  <style>
+    :root {
+      --primary: #1b365d;
+      --accent: #107c41;
+      --bg: #f4f6f9;
+      --card: #ffffff;
+      --text: #333333;
+    }
+    * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; }
+    body { background-color: var(--bg); color: var(--text); padding: 15px; max-width: 600px; margin: 0 auto; }
+    header { background: var(--primary); color: #fff; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 20px; }
+    header h1 { font-size: 1.4rem; }
+    header p { font-size: 0.85rem; opacity: 0.8; }
+    .card { background: var(--card); border-radius: 12px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    .card h2 { font-size: 1.1rem; color: var(--primary); margin-bottom: 10px; border-bottom: 2px solid var(--bg); padding-bottom: 5px; }
+    .field { margin-bottom: 10px; }
+    .field label { display: block; font-size: 0.85rem; font-weight: bold; margin-bottom: 4px; }
+    .field input, .field select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 0.95rem; }
+    .service-row { display: flex; gap: 8px; margin-bottom: 10px; align-items: center; }
+    .service-row select { flex: 2; }
+    .service-row input { flex: 0.8; text-align: center; }
+    .btn-add { background: var(--primary); color: #fff; border: none; padding: 10px; border-radius: 6px; width: 100%; font-weight: bold; cursor: pointer; }
+    .item-list { list-style: none; margin-top: 10px; }
+    .item-list li { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; font-size: 0.9rem; }
+    .total-box { background: var(--accent); color: #fff; border-radius: 8px; padding: 15px; text-align: center; margin-top: 15px; }
+    .total-box h3 { font-size: 1.5rem; }
+    .btn-whatsapp { background: #25d366; color: #fff; border: none; padding: 12px; border-radius: 8px; width: 100%; font-size: 1rem; font-weight: bold; margin-top: 15px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>⚡ Érick Serviços Elétricos</h1>
+    <p>Simulador & Gerador de Orçamento Rápido</p>
+  </header>
+
+  <!-- Dados do Cliente -->
+  <div class="card">
+    <h2>Dados do Cliente</h2>
+    <div class="field">
+      <label>Nome do Cliente:</label>
+      <input type="text" id="clienteNome" placeholder="Ex: João Silva">
+    </div>
+    <div class="field">
+      <label>WhatsApp do Cliente (com DDD):</label>
+      <input type="tel" id="clienteTel" placeholder="Ex: 11999998888">
+    </div>
+  </div>
+
+  <!-- Seleção de Serviços -->
+  <div class="card">
+    <h2> Adicionar Serviços</h2>
+    <div class="service-row">
+      <select id="servicoSelect">
+        <option value="">-- Selecione o serviço --</option>
+        <option value="Tomada Simples 10A/20A|50">Troca/Instalação Tomada (R$ 50,00)</option>
+        <option value="Instalação de Luminária/Plafon|70">Instalação Luminária/Plafon (R$ 70,00)</option>
+        <option value="Painel LED Embutir|80">Painel LED de Embutir (R$ 80,00)</option>
+        <option value="Chuveiro Elétrico|90">Troca de Chuveiro (R$ 90,00)</option>
+        <option value="Ventilador de Teto|160">Instalação Ventilador Teto (R$ 160,00)</option>
+        <option value="Quadro Elétrico até 12 Disj.|450">Montagem Quadro Elétrico (R$ 450,00)</option>
+        <option value="Passagem Fiação (metro)|9">Passagem de Cabo / metro (R$ 9,00)</option>
+        <option value="Diagnóstico / Visita Técnica|150">Diagnóstico / Busca Curto (R$ 150,00)</option>
+      </select>
+      <input type="number" id="servicoQtd" value="1" min="1" placeholder="Qtd">
+    </div>
+    <button class="btn-add" onclick="adicionarItem()">+ Adicionar ao Orçamento</button>
+
+    <ul class="item-list" id="listaItens"></ul>
+
+    <div class="field" style="margin-top: 15px;">
+      <label>Taxa de Material Extra / Deslocamento (R$):</label>
+      <input type="number" id="taxaExtra" value="0" oninput="calcularTotal()">
+    </div>
+
+    <div class="total-box">
+      <span>VALOR TOTAL ESTIMADO</span>
+      <h3 id="valorTotal">R$ 0,00</h3>
+    </div>
+
+    <button class="btn-whatsapp" onclick="enviarWhatsApp()">📱 Enviar Orçamento pelo WhatsApp</button>
+  </div>
+
+  <script>
+    let itensOrçamento = [];
+
+    function adicionarItem() {
+      const select = document.getElementById('servicoSelect');
+      const qtdInput = document.getElementById('servicoQtd');
+      
+      if (!select.value) return alert('Selecione um serviço!');
+      
+      const [nome, preco] = select.value.split('|');
+      const qtd = parseInt(qtdInput.value) || 1;
+      const totalItem = parseFloat(preco) * qtd;
+
+      itensOrçamento.push({ nome, preco: parseFloat(preco), qtd, totalItem });
+      
+      // Reset inputs
+      select.value = '';
+      qtdInput.value = 1;
+      
+      atualizarLista();
+    }
+
+    function atualizarLista() {
+      const lista = document.getElementById('listaItens');
+      lista.innerHTML = '';
+
+      itensOrçamento.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <span>${item.qtd}x ${item.nome}</span>
+          <span><b>R$ ${item.totalItem.toFixed(2)}</b> <a href="#" onclick="removerItem(${index})" style="color:red; margin-left:8px; text-decoration:none;">✕</a></span>
+        `;
+        lista.appendChild(li);
+      });
+
+      calcularTotal();
+    }
+
+    function removerItem(index) {
+      itensOrçamento.splice(index, 1);
+      atualizarLista();
+    }
+
+    function calcularTotal() {
+      const subtotal = itensOrçamento.reduce((acc, curr) => acc + curr.totalItem, 0);
+      const taxaExtra = parseFloat(document.getElementById('taxaExtra').value) || 0;
+      const totalGeral = subtotal + taxaExtra;
+
+      document.getElementById('valorTotal').innerText = `R$ ${totalGeral.toFixed(2)}`;
+      return totalGeral;
+    }
+
+    function enviarWhatsApp() {
+      const cliente = document.getElementById('clienteNome').value || 'Cliente';
+      const tel = document.getElementById('clienteTel').value.replace(/\D/g, '');
+      const total = calcularTotal();
+
+      if (itensOrçamento.length === 0) return alert('Adicione pelo menos um serviço!');
+
+      let msg = `⚡ *ORÇAMENTO DE SERVIÇOS ELÉTRICOS*\n`;
+      msg += `👤 *Cliente:* ${cliente}\n\n`;
+      msg += `📋 *Serviços Solicitados:*\n`;
+
+      itensOrçamento.forEach(item => {
+        msg += `• ${item.qtd}x ${item.nome} - R$ ${item.totalItem.toFixed(2)}\n`;
+      });
+
+      const taxaExtra = parseFloat(document.getElementById('taxaExtra').value) || 0;
+      if (taxaExtra > 0) {
+        msg += `• Taxa de Materiais/Deslocamento: R$ ${taxaExtra.toFixed(2)}\n`;
+      }
+
+      msg += `\n💰 *VALOR TOTAL: R$ ${total.toFixed(2)}*\n`;
+      msg += `\n📌 *Condições:* 50% na aprovação / 50% no término.\n💳 Aceitamos Pix e Cartão de Crédito.`;
+
+      const url = tel ? `https://wa.me/55${tel}?text=${encodeURIComponent(msg)}` : `https://wa.me/?text=${encodeURIComponent(msg)}`;
+      window.open(url, '_blank');
+    }
+  </script>
+</body>
+</html>
