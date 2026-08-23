@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calculadora de Orçamento - Elétrica & Segurança</title>
+  <title>Érick - Orçamento & Consulta Técnica NBR 5410</title>
   <!-- Biblioteca para Gerar PDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <style>
@@ -11,40 +11,63 @@
       --primary: #1b365d;
       --secondary: #0d233a;
       --accent: #107c41;
+      --highlight: #2563eb;
       --bg: #f4f6f9;
       --card: #ffffff;
       --text: #333333;
     }
     * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; }
-    body { background-color: var(--bg); color: var(--text); padding: 15px; max-width: 650px; margin: 0 auto; }
-    header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    header h1 { font-size: 1.4rem; font-weight: 700; }
-    header p { font-size: 0.85rem; opacity: 0.9; margin-top: 4px; }
+    body { background-color: var(--bg); color: var(--text); padding: 12px; max-width: 650px; margin: 0 auto; }
     
+    header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; padding: 18px; border-radius: 12px; text-align: center; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    header h1 { font-size: 1.3rem; font-weight: 700; }
+    header p { font-size: 0.8rem; opacity: 0.9; margin-top: 4px; }
+    
+    /* MENU DE NAVEGAÇÃO ENTRE ABAS */
+    .nav-tabs { display: flex; gap: 8px; margin-bottom: 15px; }
+    .tab-btn { flex: 1; padding: 12px 8px; border: none; border-radius: 8px; font-weight: bold; font-size: 0.85rem; cursor: pointer; background: #e2e8f0; color: #475569; transition: 0.2s; text-align: center; }
+    .tab-btn.active { background: var(--highlight); color: #ffffff; box-shadow: 0 2px 6px rgba(37,99,235,0.3); }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
     .card { background: var(--card); border-radius: 12px; padding: 16px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-    .card h2 { font-size: 1.1rem; color: var(--primary); margin-bottom: 12px; border-bottom: 2px solid var(--bg); padding-bottom: 6px; }
+    .card h2 { font-size: 1.05rem; color: var(--primary); margin-bottom: 12px; border-bottom: 2px solid var(--bg); padding-bottom: 6px; }
     
     .field { margin-bottom: 12px; }
     .field label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 5px; color: #444; }
-    .field input, .field select { width: 100%; padding: 11px; border: 1px solid #ccc; border-radius: 8px; font-size: 0.95rem; outline: none; }
+    .field input, .field select { width: 100%; padding: 11px; border: 1px solid #ccc; border-radius: 8px; font-size: 0.92rem; outline: none; }
     .field input:focus, .field select:focus { border-color: var(--primary); }
     
     .btn-add { background: var(--primary); color: #fff; border: none; padding: 12px; border-radius: 8px; width: 100%; font-weight: bold; cursor: pointer; font-size: 0.95rem; margin-top: 5px; }
     
-    .item-list { list-style: none; margin-top: 15px; }
+    .item-list { list-style: none; margin-top: 12px; }
     .item-list li { display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #eee; background: #fafafa; border-radius: 6px; margin-bottom: 6px; }
     .item-info { display: flex; flex-direction: column; }
-    .item-title { font-weight: 600; color: #222; font-size: 0.9rem; }
-    .item-sub { font-size: 0.8rem; color: #666; }
+    .item-title { font-weight: 600; color: #222; font-size: 0.88rem; }
+    .item-sub { font-size: 0.78rem; color: #666; }
     .remove-btn { color: #e74c3c; font-weight: bold; text-decoration: none; padding: 4px 8px; font-size: 1.1rem; cursor: pointer; }
     
-    .total-box { background: var(--accent); color: #fff; border-radius: 10px; padding: 16px; text-align: center; margin-top: 15px; }
-    .total-box span { font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; }
-    .total-box h3 { font-size: 1.7rem; margin-top: 2px; }
+    .total-box { background: var(--accent); color: #fff; border-radius: 10px; padding: 15px; text-align: center; margin-top: 15px; }
+    .total-box span { font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; }
+    .total-box h3 { font-size: 1.6rem; margin-top: 2px; }
     
     .btn-group { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
-    .btn-whatsapp { background: #25d366; color: #fff; border: none; padding: 14px; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; text-align: center; }
-    .btn-pdf { background: #e74c3c; color: #fff; border: none; padding: 14px; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; text-align: center; }
+    .btn-whatsapp { background: #25d366; color: #fff; border: none; padding: 13px; border-radius: 8px; font-size: 0.95rem; font-weight: bold; cursor: pointer; text-align: center; }
+    .btn-pdf { background: #e74c3c; color: #fff; border: none; padding: 13px; border-radius: 8px; font-size: 0.95rem; font-weight: bold; cursor: pointer; text-align: center; }
+
+    /* ESTILOS DA CONSULTA TÉCNICA */
+    .sub-tabs { display: flex; gap: 6px; margin-bottom: 15px; }
+    .sub-btn { flex: 1; padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px; background: #fff; font-size: 0.8rem; font-weight: 600; cursor: pointer; color: #334155; text-align: center; }
+    .sub-btn.active { background: #e0e7ff; border-color: var(--highlight); color: var(--highlight); }
+
+    .tech-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.82rem; }
+    .tech-table th, .tech-table td { border: 1px solid #e2e8f0; padding: 9px 8px; text-align: left; }
+    .tech-table th { background-color: #f1f5f9; color: var(--primary); font-weight: 700; text-transform: uppercase; font-size: 0.72rem; }
+    .tech-table tr:nth-child(even) { background-color: #f8fafc; }
+    .tech-table td strong { color: var(--primary); }
+    
+    .info-note { font-size: 0.75rem; color: #64748b; margin-top: 12px; line-height: 1.4; background: #f1f5f9; padding: 10px; border-radius: 6px; border-left: 3px solid var(--highlight); }
 
     /* LAYOUT EXCLUSIVO PARA O PDF */
     #pdfTemplate { display: none; padding: 30px; font-family: Arial, sans-serif; color: #333; }
@@ -67,98 +90,170 @@
     <p>Elétrica Residencial, Comercial e Segurança Eletrônica</p>
   </header>
 
-  <!-- Dados do Cliente -->
-  <div class="card">
-    <h2>👤 Dados do Cliente</h2>
-    <div class="field">
-      <label>Nome do Cliente:</label>
-      <input type="text" id="clienteNome" placeholder="Ex: João Silva">
+  <!-- ABAS DE NAVEGAÇÃO PRINCIPAL -->
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="trocarAba('orcamentoTab', this)">📝 Fazer Orçamento</button>
+    <button class="tab-btn" onclick="trocarAba('consultaTab', this)">📚 Consulta NBR 5410</button>
+  </div>
+
+  <!-- ABA 1: GERADOR DE ORÇAMENTOS -->
+  <div id="orcamentoTab" class="tab-content active">
+    <!-- Dados do Cliente -->
+    <div class="card">
+      <h2>👤 Dados do Cliente</h2>
+      <div class="field">
+        <label>Nome do Cliente:</label>
+        <input type="text" id="clienteNome" placeholder="Ex: João Silva">
+      </div>
+      <div class="field">
+        <label>WhatsApp do Cliente (com DDD):</label>
+        <input type="tel" id="clienteTel" placeholder="Ex: 11999998888">
+      </div>
     </div>
-    <div class="field">
-      <label>WhatsApp do Cliente (com DDD):</label>
-      <input type="tel" id="clienteTel" placeholder="Ex: 11999998888">
+
+    <!-- Seleção de Serviços -->
+    <div class="card">
+      <h2>🛠️ Adicionar Serviços</h2>
+      
+      <div class="field">
+        <label>Selecione o Serviço:</label>
+        <select id="servicoSelect">
+          <option value="">-- Selecione o serviço --</option>
+          
+          <optgroup label="⚡ Elétrica Básica & Iluminação">
+            <option value="Troca/Instalação de Tomada ou Interruptor|50">Troca/Instalação Tomada ou Interruptor - R$ 50,00</option>
+            <option value="Instalação de Ponto Novo de Tomada/Iluminação|120">Ponto Novo Elétrico (infra + fiação) - R$ 120,00</option>
+            <option value="Instalação de Luminária / Plafon / Lustre|80">Instalação Luminária/Plafon/Lustre - R$ 80,00</option>
+            <option value="Instalação de Painel LED Embutir/Sobrepor|85">Painel LED Embutir/Sobrepor - R$ 85,00</option>
+            <option value="Instalação de Fita LED com Fonte|120">Instalação Fita LED com Fonte (até 5m) - R$ 120,00</option>
+            <option value="Troca/Instalação de Chuveiro Elétrico|90">Troca de Chuveiro Elétrico - R$ 90,00</option>
+            <option value="Instalação de Ventilador de Teto|160">Instalação Ventilador de Teto - R$ 160,00</option>
+            <option value="Passagem de Fiação Elétrica (por metro)|9">Passagem Fiação Elétrica (por metro) - R$ 9,00</option>
+          </optgroup>
+
+          <optgroup label="⚙️ Quadros Elétricos, Proteção & Entrada">
+            <option value="Troca/Instalação de Disjuntor Individual|60">Troca/Instalação Disjuntor Individual - R$ 60,00</option>
+            <option value="Instalação de Disjuntor DR ou DPS|90">Instalação Disjuntor DR ou DPS - R$ 90,00</option>
+            <option value="Montagem de Quadro Elétrico (até 12 disjuntor)|450">Montagem Quadro Elétrico (até 12 disj.) - R$ 450,00</option>
+            <option value="Montagem de Quadro Elétrico (acima de 12 disj.)|750">Montagem Quadro Elétrico (acima 12 disj.) - R$ 750,00</option>
+            <option value="Instalação de Sistema de Aterramento|350">Instalação Haste de Aterramento - R$ 350,00</option>
+            <option value="Diagnóstico Elétrico / Busca de Curto-Circuito|180">Diagnóstico / Busca de Curto - R$ 180,00</option>
+          </optgroup>
+
+          <optgroup label="📹 Câmeras de Segurança (DVR / NVR / Wi-Fi)">
+            <option value="Instalação de Câmera HD Intelbras/Hikvision (DVR)|110">Instalação Câmera DVR (Ponto + Config) - R$ 110,00</option>
+            <option value="Instalação de Câmera IP / NVR (Poe)|140">Instalação Câmera IP NVR - R$ 140,00</option>
+            <option value="Instalação de Câmera Wi-Fi Inteligente|90">Instalação Câmera Wi-Fi (Robô/Externa) - R$ 90,00</option>
+            <option value="Configuração e Fixação de DVR/NVR + HD|150">Instalação e Configuração DVR/NVR - R$ 150,00</option>
+            <option value="Configuração de Acesso Remoto no Celular|100">Configuração de Acesso Remoto Celular - R$ 100,00</option>
+            <option value="Lançamento de Cabo Coaxial/UTP para Câmeras (metro)|8">Lançamento Cabo Câmera (por metro) - R$ 8,00</option>
+          </optgroup>
+
+          <optgroup label="🚗 Automadores & Motores de Portão">
+            <option value="Instalação de Motor de Portão Deslizante (Kit)|350">Instalação Motor Portão Deslizante - R$ 350,00</option>
+            <option value="Instalação de Motor de Portão Basculante/Pivotante|420">Instalação Motor Basculante/Pivotante - R$ 420,00</option>
+            <option value="Codificação de Controle Remoto de Portão|30">Codificação de Controle de Portão - R$ 30,00</option>
+            <option value="Instalação de Sensor Anti-esmagamento (Fotocélula)|90">Instalação Fotocélula Anti-esmagamento - R$ 90,00</option>
+            <option value="Troca de Placa Central de Comando de Portão|140">Troca de Placa Central de Portão - R$ 140,00</option>
+          </optgroup>
+
+          <optgroup label="🚨 Controle de Acesso, Alarmes & Cerca Elétrica">
+            <option value="Instalação de Interfone / Porteiro Eletrônico|180">Instalação Interfone Residencial - R$ 180,00</option>
+            <option value="Instalação de Vídeo Porteiro|250">Instalação Vídeo Porteiro - R$ 250,00</option>
+            <option value="Instalação de Fechadura Elétrica / Eletroímã|160">Instalação Fechadura Elétrica/Eletroímã - R$ 160,00</option>
+            <option value="Instalação de Fechadura Digital / Biometria|200">Instalação Fechadura Digital/Biometria - R$ 200,00</option>
+            <option value="Instalação de Central de Alarme + Sensores (Kit)|380">Instalação Central Alarme + Sensores - R$ 380,00</option>
+            <option value="Instalação/Manutenção Cerca Elétrica (metro linear)|25">Cerca Elétrica (por metro linear) - R$ 25,00</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Quantidade / Metros:</label>
+        <input type="number" id="servicoQtd" value="1" min="1" placeholder="Qtd">
+      </div>
+
+      <button type="button" class="btn-add" onclick="adicionarItem()">+ Adicionar Serviço</button>
+
+      <ul class="item-list" id="listaItens"></ul>
+
+      <div class="field" style="margin-top: 15px;">
+        <label>Taxa de Materiais Extras / Deslocamento (R$):</label>
+        <input type="number" id="taxaExtra" value="0" oninput="calcularTotal()">
+      </div>
+
+      <div class="total-box">
+        <span>VALOR TOTAL ESTIMADO</span>
+        <h3 id="valorTotal">R$ 0,00</h3>
+      </div>
+
+      <div class="btn-group">
+        <button type="button" class="btn-pdf" onclick="gerarPDF()">📄 Baixar PDF do Orçamento</button>
+        <button type="button" class="btn-whatsapp" onclick="enviarWhatsApp()">📱 Enviar Resumo no WhatsApp</button>
+      </div>
     </div>
   </div>
 
-  <!-- Seleção de Serviços -->
-  <div class="card">
-    <h2>🛠️ Adicionar Serviços ao Orçamento</h2>
-    
-    <div class="field">
-      <label>Selecione o Serviço:</label>
-      <select id="servicoSelect">
-        <option value="">-- Selecione o serviço --</option>
-        
-        <optgroup label="⚡ Elétrica Básica & Iluminação">
-          <option value="Troca/Instalação de Tomada ou Interruptor|50">Troca/Instalação Tomada ou Interruptor - R$ 50,00</option>
-          <option value="Instalação de Ponto Novo de Tomada/Iluminação|120">Ponto Novo Elétrico (infra + fiação) - R$ 120,00</option>
-          <option value="Instalação de Luminária / Plafon / Lustre|80">Instalação Luminária/Plafon/Lustre - R$ 80,00</option>
-          <option value="Instalação de Painel LED Embutir/Sobrepor|85">Painel LED Embutir/Sobrepor - R$ 85,00</option>
-          <option value="Instalação de Fita LED com Fonte|120">Instalação Fita LED com Fonte (até 5m) - R$ 120,00</option>
-          <option value="Troca/Instalação de Chuveiro Elétrico|90">Troca de Chuveiro Elétrico - R$ 90,00</option>
-          <option value="Instalação de Ventilador de Teto|160">Instalação Ventilador de Teto - R$ 160,00</option>
-          <option value="Passagem de Fiação Elétrica (por metro)|9">Passagem Fiação Elétrica (por metro) - R$ 9,00</option>
-        </optgroup>
+  <!-- ABA 2: CONSULTA RÁPIDA NBR 5410 -->
+  <div id="consultaTab" class="tab-content">
+    <div class="card">
+      <h2>📖 Consulta Rápida (NBR 5410)</h2>
+      <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 12px;">Tabelas essenciais para verificação rápida no meio da obra.</p>
 
-        <optgroup label="⚙️ Quadros Elétricos, Proteção & Entrada">
-          <option value="Troca/Instalação de Disjuntor Individual|60">Troca/Instalação Disjuntor Individual - R$ 60,00</option>
-          <option value="Instalação de Disjuntor DR ou DPS|90">Instalação Disjuntor DR ou DPS - R$ 90,00</option>
-          <option value="Montagem de Quadro Elétrico (até 12 disjuntor)|450">Montagem Quadro Elétrico (até 12 disj.) - R$ 450,00</option>
-          <option value="Montagem de Quadro Elétrico (acima de 12 disj.)|750">Montagem Quadro Elétrico (acima 12 disj.) - R$ 750,00</option>
-          <option value="Instalação de Sistema de Aterramento|350">Instalação Haste de Aterramento - R$ 350,00</option>
-          <option value="Diagnóstico Elétrico / Busca de Curto-Circuito|180">Diagnóstico / Busca de Curto - R$ 180,00</option>
-        </optgroup>
+      <div class="sub-tabs">
+        <button class="sub-btn active" onclick="trocarSubAba('disjuntorSub', this)">⚡ Disjuntores & Curvas</button>
+        <button class="sub-btn" onclick="trocarSubAba('correnteSub', this)">🧵 Corrente por Bitola</button>
+      </div>
 
-        <optgroup label="📹 Câmeras de Segurança (DVR / NVR / Wi-Fi)">
-          <option value="Instalação de Câmera HD Intelbras/Hikvision (DVR)|110">Instalação Câmera DVR (Ponto + Config) - R$ 110,00</option>
-          <option value="Instalação de Câmera IP / NVR (Poe)|140">Instalação Câmera IP NVR - R$ 140,00</option>
-          <option value="Instalação de Câmera Wi-Fi Inteligente|90">Instalação Câmera Wi-Fi (Robô/Externa) - R$ 90,00</option>
-          <option value="Configuração e Fixação de DVR/NVR + HD|150">Instalação e Configuração DVR/NVR - R$ 150,00</option>
-          <option value="Configuração de Acesso Remoto no Celular|100">Configuração de Acesso Remoto Celular - R$ 100,00</option>
-          <option value="Lançamento de Cabo Coaxial/UTP para Câmeras (metro)|8">Lançamento Cabo Câmera (por metro) - R$ 8,00</option>
-        </optgroup>
+      <!-- Tabela 1: Disjuntores x Bitola x Aplicação -->
+      <div id="disjuntorSub" class="sub-content">
+        <table class="tech-table">
+          <thead>
+            <tr>
+              <th>Disjuntor</th>
+              <th>Cabo Mínimo</th>
+              <th>Uso Típico</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>6 A</strong></td><td>1,5 mm²</td><td>Iluminação e tomadas leves</td></tr>
+            <tr><td><strong>10 A</strong></td><td>1,5 mm²</td><td>Iluminação e tomadas leves</td></tr>
+            <tr><td><strong>16 A</strong></td><td>1,5 mm²</td><td>Iluminação e tomadas</td></tr>
+            <tr><td><strong>20 A</strong></td><td>2,5 mm²</td><td>Tomadas gerais (TUG)</td></tr>
+            <tr><td><strong>25 A</strong></td><td>4,0 mm²</td><td>Tomadas de força, Ar condicionado</td></tr>
+            <tr><td><strong>32 A</strong></td><td>4,0 mm² / 6,0 mm²</td><td>Ar condicionado, Micro-ondas</td></tr>
+            <tr><td><strong>40 A</strong></td><td>6,0 mm²</td><td>Chuveiro, Forno elétrico</td></tr>
+            <tr><td><strong>50 A</strong></td><td>10,0 mm²</td><td>Chuveiro forte, Forno, Geral</td></tr>
+          </tbody>
+        </table>
+      </div>
 
-        <optgroup label="🚗 Automadores & Motores de Portão">
-          <option value="Instalação de Motor de Portão Deslizante (Kit)|350">Instalação Motor Portão Deslizante - R$ 350,00</option>
-          <option value="Instalação de Motor de Portão Basculante/Pivotante|420">Instalação Motor Basculante/Pivotante - R$ 420,00</option>
-          <option value="Codificação de Controle Remoto de Portão|30">Codificação de Controle de Portão - R$ 30,00</option>
-          <option value="Instalação de Sensor Anti-esmagamento (Fotocélula)|90">Instalação Fotocélula Anti-esmagamento - R$ 90,00</option>
-          <option value="Troca de Placa Central de Comando de Portão|140">Troca de Placa Central de Portão - R$ 140,00</option>
-        </optgroup>
+      <!-- Tabela 2: Corrente Suportada por Bitola -->
+      <div id="correnteSub" class="sub-content" style="display: none;">
+        <table class="tech-table">
+          <thead>
+            <tr>
+              <th>Bitola (mm²)</th>
+              <th>Eletroduto (Parede)</th>
+              <th>Eletroduto (Aparente)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>1,5 mm²</strong></td><td>17,5 A</td><td>16,5 A</td></tr>
+            <tr><td><strong>2,5 mm²</strong></td><td>24,0 A</td><td>23,0 A</td></tr>
+            <tr><td><strong>4,0 mm²</strong></td><td>32,0 A</td><td>30,0 A</td></tr>
+            <tr><td><strong>6,0 mm²</strong></td><td>41,0 A</td><td>38,0 A</td></tr>
+            <tr><td><strong>10,0 mm²</strong></td><td>57,0 A</td><td>52,0 A</td></tr>
+            <tr><td><strong>16,0 mm²</strong></td><td>76,0 A</td><td>69,0 A</td></tr>
+            <tr><td><strong>25,0 mm²</strong></td><td>101,0 A</td><td>90,0 A</td></tr>
+            <tr><td><strong>35,0 mm²</strong></td><td>125,0 A</td><td>111,0 A</td></tr>
+          </tbody>
+        </table>
+      </div>
 
-        <optgroup label="🚨 Controle de Acesso, Alarmes & Cerca Elétrica">
-          <option value="Instalação de Interfone / Porteiro Eletrônico|180">Instalação Interfone Residencial - R$ 180,00</option>
-          <option value="Instalação de Vídeo Porteiro|250">Instalação Vídeo Porteiro - R$ 250,00</option>
-          <option value="Instalação de Fechadura Elétrica / Eletroímã|160">Instalação Fechadura Elétrica/Eletroímã - R$ 160,00</option>
-          <option value="Instalação de Fechadura Digital / Biometria|200">Instalação Fechadura Digital/Biometria - R$ 200,00</option>
-          <option value="Instalação de Central de Alarme + Sensores (Kit)|380">Instalação Central Alarme + Sensores - R$ 380,00</option>
-          <option value="Instalação/Manutenção Cerca Elétrica (metro linear)|25">Cerca Elétrica (por metro linear) - R$ 25,00</option>
-        </optgroup>
-      </select>
-    </div>
-
-    <div class="field">
-      <label>Quantidade / Metros:</label>
-      <input type="number" id="servicoQtd" value="1" min="1" placeholder="Qtd">
-    </div>
-
-    <button type="button" class="btn-add" onclick="adicionarItem()">+ Adicionar Serviço</button>
-
-    <ul class="item-list" id="listaItens"></ul>
-
-    <div class="field" style="margin-top: 15px;">
-      <label>Taxa de Materiais Extras / Deslocamento (R$):</label>
-      <input type="number" id="taxaExtra" value="0" oninput="calcularTotal()">
-    </div>
-
-    <div class="total-box">
-      <span>VALOR TOTAL ESTIMADO</span>
-      <h3 id="valorTotal">R$ 0,00</h3>
-    </div>
-
-    <div class="btn-group">
-      <button type="button" class="btn-pdf" onclick="gerarPDF()">📄 Baixar PDF do Orçamento</button>
-      <button type="button" class="btn-whatsapp" onclick="enviarWhatsApp()">📱 Enviar Resumo no WhatsApp</button>
+      <div class="info-note">
+        <strong>Nota Técnica:</strong> Cobre, isolação PVC (70°C), 2 condutores carregados, ambiente a 30°C. Múltiplos circuitos no mesmo eletroduto ou temperaturas mais altas reduzem esses valores (fator de correção NBR 5410).
+      </div>
     </div>
   </div>
 
@@ -203,6 +298,30 @@
   </div>
 
   <script>
+    // SISTEMA DE TROCA DE ABAS
+    function trocarAba(tabId, btn) {
+      document.querySelectorAll('.tab-content').forEach(function(content) {
+        content.classList.remove('active');
+      });
+      document.querySelectorAll('.tab-btn').forEach(function(button) {
+        button.classList.remove('active');
+      });
+      document.getElementById(tabId).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    function trocarSubAba(subTabId, btn) {
+      document.querySelectorAll('.sub-content').forEach(function(content) {
+        content.style.display = 'none';
+      });
+      document.querySelectorAll('.sub-btn').forEach(function(button) {
+        button.classList.remove('active');
+      });
+      document.getElementById(subTabId).style.display = 'block';
+      btn.classList.add('active');
+    }
+
+    // LÓGICA DO ORÇAMENTO
     var itensOrcamento = [];
 
     function adicionarItem() {
