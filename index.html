@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+html_code = """<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
@@ -29,8 +29,8 @@
     header p { font-size: 0.8rem; opacity: 0.9; margin-top: 4px; }
     
     /* MENU DE NAVEGAÇÃO ENTRE ABAS */
-    .nav-tabs { display: flex; gap: 6px; margin-bottom: 15px; }
-    .tab-btn { flex: 1; padding: 11px 4px; border: none; border-radius: 8px; font-weight: bold; font-size: 0.8rem; cursor: pointer; background: #e2e8f0; color: #475569; transition: 0.2s; text-align: center; }
+    .nav-tabs { display: flex; gap: 4px; margin-bottom: 15px; flex-wrap: wrap; }
+    .tab-btn { flex: 1 1 22%; padding: 10px 4px; border: none; border-radius: 8px; font-weight: bold; font-size: 0.78rem; cursor: pointer; background: #e2e8f0; color: #475569; transition: 0.2s; text-align: center; }
     .tab-btn.active { background: var(--highlight); color: #ffffff; box-shadow: 0 2px 6px rgba(37,99,235,0.3); }
 
     .tab-content { display: none; }
@@ -109,6 +109,7 @@
   <!-- ABAS DE NAVEGAÇÃO PRINCIPAL -->
   <div class="nav-tabs">
     <button class="tab-btn active" onclick="trocarAba('orcamentoTab', this)">📝 Orçamento</button>
+    <button class="tab-btn" onclick="trocarAba('casaTab', this)">🏠 Instalação Casa</button>
     <button class="tab-btn" onclick="trocarAba('calculoTab', this)">🔧 Disjuntor Certo</button>
     <button class="tab-btn" onclick="trocarAba('consultaTab', this)">📚 Tabelas NBR</button>
   </div>
@@ -207,6 +208,164 @@
       <div class="btn-group">
         <button type="button" class="btn-pdf" onclick="gerarPDF()">📄 Baixar PDF do Orçamento</button>
         <button type="button" class="btn-whatsapp" onclick="enviarWhatsApp()">📱 Enviar Resumo no WhatsApp</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABA NOVA: INSTALAÇÃO COMPLETA DE CASA & MATERIAIS -->
+  <div id="casaTab" class="tab-content">
+    <!-- SUB-NAVEGAÇÃO DA ABA CASA -->
+    <div class="sub-tabs">
+      <button class="sub-btn active" onclick="trocarSubCasa('metragemSub', this)">📐 Por m²</button>
+      <button class="sub-btn" onclick="trocarSubCasa('pontosSub', this)">🔌 Por Pontos</button>
+      <button class="sub-btn" onclick="trocarSubCasa('materiaisSub', this)">📦 Lista de Materiais</button>
+    </div>
+
+    <!-- SUB-ABA 1: CÁLCULO POR METRAGEM QUADRADA (m²) -->
+    <div id="metragemSub" class="sub-casa-content">
+      <div class="card">
+        <h2>📐 Instalação Completa por Metragem (m²)</h2>
+        <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 12px;">Cálculo estimado da mão de obra baseada no tamanho da casa e padrão da obra.</p>
+
+        <div class="field">
+          <label>Área Construída da Casa (m²):</label>
+          <input type="number" id="casaMetragem" placeholder="Ex: 80" value="80" oninput="calcularMaoObraMetragem()">
+        </div>
+
+        <div class="field">
+          <label>Padrão da Instalação / Acabamento:</label>
+          <select id="casaPadrao" onchange="calcularMaoObraMetragem()">
+            <option value="35">Econômico / Simples (R$ 35/m²)</option>
+            <option value="50" selected>Médio Padrão (R$ 50/m²)</option>
+            <option value="75">Alto Padrão / Automação (R$ 75/m²)</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Estágio da Obra:</label>
+          <select id="casaEstagio" onchange="calcularMaoObraMetragem()">
+            <option value="1">Obra Nova / Do Zero</option>
+            <option value="1.2">Reforma Residencial (Troca de fiação existente +20%)</option>
+          </select>
+        </div>
+
+        <div class="result-box">
+          <h3>💰 Mão de Obra Estimada (m²)</h3>
+          <div class="result-row">
+            <span>Área da Casa:</span>
+            <span class="val" id="resM2Area">80 m²</span>
+          </div>
+          <div class="result-row">
+            <span>Preço Médio / m²:</span>
+            <span class="val" id="resM2Preco">R$ 50,00</span>
+          </div>
+          <div class="result-row">
+            <span>Total Mão de Obra:</span>
+            <span class="val" id="resM2Total" style="font-size: 1.1rem; color: var(--accent);">R$ 4.000,00</span>
+          </div>
+        </div>
+
+        <button type="button" class="btn-add" style="margin-top: 15px;" onclick="adicionarM2AoOrcamento()">➕ Adicionar Mão de Obra ao Orçamento Principal</button>
+      </div>
+    </div>
+
+    <!-- SUB-ABA 2: CÁLCULO POR CONTAGEM DE PONTOS -->
+    <div id="pontosSub" class="sub-casa-content" style="display: none;">
+      <div class="card">
+        <h2>🔌 Mão de Obra por Levantamento de Pontos</h2>
+        <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 12px;">Informe as quantidades de pontos da casa para um orçamento preciso por unidade.</p>
+
+        <div class="field-row">
+          <div class="field">
+            <label>Tomadas Simples (10A/20A):</label>
+            <input type="number" id="qtdTomadas" value="20" min="0" oninput="calcularMaoObraPontos()">
+          </div>
+          <div class="field">
+            <label>Pontos de Iluminação:</label>
+            <input type="number" id="qtdIlum" value="12" min="0" oninput="calcularMaoObraPontos()">
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label>Interruptores (Simples/Paralelo):</label>
+            <input type="number" id="qtdInterr" value="10" min="0" oninput="calcularMaoObraPontos()">
+          </div>
+          <div class="field">
+            <label>Circuitos Especiais (Chuveiro/Ar/Forno):</label>
+            <input type="number" id="qtdEspeciais" value="3" min="0" oninput="calcularMaoObraPontos()">
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Montagem do Quadro de Distribuição (QDC):</label>
+          <select id="qtdQDC" onchange="calcularMaoObraPontos()">
+            <option value="0">Não incluir QDC</option>
+            <option value="450" selected>QDC Pequeno/Médio (Até 12 Disjuntores) - R$ 450</option>
+            <option value="750">QDC Grande (Acima de 12 Disjuntores) - R$ 750</option>
+          </select>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label>Valor Mão de Obra p/ Ponto Simples (R$):</label>
+            <input type="number" id="valPontoSimples" value="45" oninput="calcularMaoObraPontos()">
+          </div>
+          <div class="field">
+            <label>Valor p/ Ponto Especial (R$):</label>
+            <input type="number" id="valPontoEspecial" value="120" oninput="calcularMaoObraPontos()">
+          </div>
+        </div>
+
+        <div class="result-box">
+          <h3>💰 Mão de Obra por Pontos</h3>
+          <div class="result-row">
+            <span>Total de Pontos Simples:</span>
+            <span class="val" id="resTotalPontosSimples">42 pts</span>
+          </div>
+          <div class="result-row">
+            <span>Total de Pontos Especiais:</span>
+            <span class="val" id="resTotalPontosEspeciais">3 pts</span>
+          </div>
+          <div class="result-row">
+            <span>Total Mão de Obra:</span>
+            <span class="val" id="resPontosTotal" style="font-size: 1.1rem; color: var(--accent);">R$ 2.710,00</span>
+          </div>
+        </div>
+
+        <button type="button" class="btn-add" style="margin-top: 15px;" onclick="adicionarPontosAoOrcamento()">➕ Adicionar Mão de Obra (Pontos) ao Orçamento</button>
+      </div>
+    </div>
+
+    <!-- SUB-ABA 3: ESTIMATIVA DE MATERIAIS DA CASA -->
+    <div id="materiaisSub" class="sub-casa-content" style="display: none;">
+      <div class="card">
+        <h2>📦 Estimativa de Materiais e Custos (Casa)</h2>
+        <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 12px;">Estimativa automática de materiais necessários calculada a partir da metragem quadrada (NBR 5410).</p>
+
+        <div class="field">
+          <label>Metragem da Casa para Lista de Materiais (m²):</label>
+          <input type="number" id="matMetragem" value="80" oninput="gerarListaMateriais()">
+        </div>
+
+        <table class="tech-table">
+          <thead>
+            <tr>
+              <th>Material</th>
+              <th>Qtd Estimada</th>
+              <th>Valor Estimado</th>
+            </tr>
+          </thead>
+          <tbody id="tbodyMateriais">
+          </tbody>
+        </table>
+
+        <div class="total-box" style="background: var(--primary); margin-top: 15px;">
+          <span>CUSTO ESTIMADO DE MATERIAIS</span>
+          <h3 id="totalCustoMateriais">R$ 0,00</h3>
+        </div>
+
+        <button type="button" class="btn-add" style="margin-top: 15px;" onclick="adicionarMateriaisAoOrcamento()">📦 Incluir Custo dos Materiais no Orçamento Principal</button>
       </div>
     </div>
   </div>
@@ -374,7 +533,7 @@
   </div>
 
   <script>
-    // NAVEGAÇÃO DE ABAS
+    // NAVEGAÇÃO DE ABAS PRINCIPAIS
     function trocarAba(tabId, btn) {
       document.querySelectorAll('.tab-content').forEach(function(content) {
         content.classList.remove('active');
@@ -387,6 +546,10 @@
 
       if(tabId === 'calculoTab') {
         executarCalculoElétrico();
+      } else if(tabId === 'casaTab') {
+        calcularMaoObraMetragem();
+        calcularMaoObraPontos();
+        gerarListaMateriais();
       }
     }
 
@@ -399,6 +562,143 @@
       });
       document.getElementById(subTabId).style.display = 'block';
       btn.classList.add('active');
+    }
+
+    // NAVEGAÇÃO SUB-ABAS CASA
+    function trocarSubCasa(subCasaId, btn) {
+      document.querySelectorAll('.sub-casa-content').forEach(function(content) {
+        content.style.display = 'none';
+      });
+      btn.parentElement.querySelectorAll('.sub-btn').forEach(function(button) {
+        button.classList.remove('active');
+      });
+      document.getElementById(subCasaId).style.display = 'block';
+      btn.classList.add('active');
+    }
+
+    // LÓGICA DE CÁLCULOS DA ABA "INSTALAÇÃO CASA"
+    var totalM2MaoObraCalculado = 0;
+    var totalPontosMaoObraCalculado = 0;
+    var totalMateriaisCalculado = 0;
+
+    function calcularMaoObraMetragem() {
+      var m2 = parseFloat(document.getElementById('casaMetragem').value) || 0;
+      var valorM2 = parseFloat(document.getElementById('casaPadrao').value) || 50;
+      var estagio = parseFloat(document.getElementById('casaEstagio').value) || 1;
+
+      totalM2MaoObraCalculado = m2 * valorM2 * estagio;
+
+      document.getElementById('resM2Area').innerText = m2 + ' m²';
+      document.getElementById('resM2Preco').innerText = 'R$ ' + (valorM2 * estagio).toFixed(2) + ' / m²';
+      document.getElementById('resM2Total').innerText = 'R$ ' + totalM2MaoObraCalculado.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    }
+
+    function calcularMaoObraPontos() {
+      var qTomadas = parseFloat(document.getElementById('qtdTomadas').value) || 0;
+      var qIlum = parseFloat(document.getElementById('qtdIlum').value) || 0;
+      var qInterr = parseFloat(document.getElementById('qtdInterr').value) || 0;
+      var qEspeciais = parseFloat(document.getElementById('qtdEspeciais').value) || 0;
+      var vQDC = parseFloat(document.getElementById('qtdQDC').value) || 0;
+
+      var vSimples = parseFloat(document.getElementById('valPontoSimples').value) || 45;
+      var vEspecial = parseFloat(document.getElementById('valPontoEspecial').value) || 120;
+
+      var totalSimples = qTomadas + qIlum + qInterr;
+      var valorSimples = totalSimples * vSimples;
+      var valorEspeciais = qEspeciais * vEspecial;
+
+      totalPontosMaoObraCalculado = valorSimples + valorEspeciais + vQDC;
+
+      document.getElementById('resTotalPontosSimples').innerText = totalSimples + ' pts (R$ ' + valorSimples.toFixed(2) + ')';
+      document.getElementById('resTotalPontosEspeciais').innerText = qEspeciais + ' pts (R$ ' + valorEspeciais.toFixed(2) + ')';
+      document.getElementById('resPontosTotal').innerText = 'R$ ' + totalPontosMaoObraCalculado.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    }
+
+    function gerarListaMateriais() {
+      var m2 = parseFloat(document.getElementById('matMetragem').value) || 0;
+      
+      // Fatores aproximados por m² para estimativa de material
+      var rulos25 = Math.ceil(m2 * 2.5 / 100); // 2.5m de cabo 2.5mm² por m²
+      var rulos15 = Math.ceil(m2 * 1.5 / 100); // 1.5m de cabo 1.5mm² por m²
+      var rulos60 = Math.ceil(m2 * 0.4 / 100); // cabo 6.0mm² para chuveiros/entradas
+      var eletroduto = Math.ceil(m2 * 1.2 / 3); // tubos de 3 metros
+      var caixas4x2 = Math.ceil(m2 * 0.5);
+      var disjuntores = Math.max(6, Math.ceil(m2 / 12));
+      var qdcBox = 1;
+      var dps = 2;
+      var dr = 1;
+
+      var materiais = [
+        { nome: 'Cabo Flexível 2.5mm² (Rolo 100m)', qtd: rulos25, preco: 190.00 },
+        { nome: 'Cabo Flexível 1.5mm² (Rolo 100m)', qtd: rulos15, preco: 130.00 },
+        { nome: 'Cabo Flexível 6.0mm² (Rolo 100m)', qtd: rulos60, preco: 420.00 },
+        { nome: 'Eletroduto Corrugado 3/4" (Varas 3m ou Rolo)', qtd: eletroduto, preco: 14.00 },
+        { nome: 'Caixa de Luz 4x2 Embutir', qtd: caixas4x2, preco: 3.50 },
+        { nome: 'Disjuntores Monopolares DIN (10A a 32A)', qtd: disjuntores, preco: 18.00 },
+        { nome: 'Quadro de Distribuição (QDC Embutir)', qtd: qdcBox, preco: 95.00 },
+        { nome: 'Dispositivo DPS 275V 20kA', qtd: dps, preco: 55.00 },
+        { nome: 'Interruptor Diferencial DR 40A/30mA', qtd: dr, preco: 140.00 },
+        { nome: 'Fita Isolante 20m + Conectores WAGO', qtd: 1, preco: 85.00 }
+      ];
+
+      var tbody = document.getElementById('tbodyMateriais');
+      tbody.innerHTML = '';
+      totalMateriaisCalculado = 0;
+
+      materiais.forEach(function(mat) {
+        var subtotal = mat.qtd * mat.preco;
+        totalMateriaisCalculado += subtotal;
+
+        var tr = document.createElement('tr');
+        tr.innerHTML = '<td><strong>' + mat.nome + '</strong></td>' +
+                       '<td>' + mat.qtd + ' un/rolo</td>' +
+                       '<td>R$ ' + subtotal.toFixed(2) + '</td>';
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById('totalCustoMateriais').innerText = 'R$ ' + totalMateriaisCalculado.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    }
+
+    function adicionarM2AoOrcamento() {
+      var m2 = document.getElementById('casaMetragem').value;
+      itensOrcamento.push({
+        nome: 'Mão de Obra Instalação Elétrica Completa (' + m2 + ' m²)',
+        preco: totalM2MaoObraCalculado,
+        qtd: 1,
+        totalItem: totalM2MaoObraCalculado
+      });
+      atualizarLista();
+      trocarAba('orcamentoTab', document.querySelectorAll('.tab-btn')[0]);
+      alert('Mão de obra por m² adicionada ao orçamento principal com sucesso!');
+    }
+
+    function adicionarPontosAoOrcamento() {
+      var totalPontos = (parseFloat(document.getElementById('qtdTomadas').value)||0) +
+                        (parseFloat(document.getElementById('qtdIlum').value)||0) +
+                        (parseFloat(document.getElementById('qtdInterr').value)||0) +
+                        (parseFloat(document.getElementById('qtdEspeciais').value)||0);
+      itensOrcamento.push({
+        nome: 'Mão de Obra Elétrica Residencial (' + totalPontos + ' pontos + QDC)',
+        preco: totalPontosMaoObraCalculado,
+        qtd: 1,
+        totalItem: totalPontosMaoObraCalculado
+      });
+      atualizarLista();
+      trocarAba('orcamentoTab', document.querySelectorAll('.tab-btn')[0]);
+      alert('Mão de obra por pontos adicionada ao orçamento principal!');
+    }
+
+    function adicionarMateriaisAoOrcamento() {
+      var m2 = document.getElementById('matMetragem').value;
+      itensOrcamento.push({
+        nome: 'Kit Completo de Materiais Elétricos (Estimativa ' + m2 + ' m²)',
+        preco: totalMateriaisCalculado,
+        qtd: 1,
+        totalItem: totalMateriaisCalculado
+      });
+      atualizarLista();
+      trocarAba('orcamentoTab', document.querySelectorAll('.tab-btn')[0]);
+      alert('Lista de materiais incluída no orçamento principal!');
     }
 
     // CALCULADORA TÉCNICA
@@ -620,3 +920,8 @@
   </script>
 </body>
 </html>
+"""
+
+with open("app_erick_atualizado.html", "w", encoding="utf-8") as f:
+    f.write(html_code)
+print("Arquivo gerado com sucesso.")
