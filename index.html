@@ -29,7 +29,7 @@
     header p { font-size: 0.8rem; opacity: 0.9; margin-top: 4px; }
     
     .nav-tabs { display: flex; gap: 4px; margin-bottom: 15px; flex-wrap: wrap; }
-    .tab-btn { flex: 1 1 22%; padding: 10px 4px; border: none; border-radius: 8px; font-weight: bold; font-size: 0.78rem; cursor: pointer; background: #e2e8f0; color: #475569; transition: 0.2s; text-align: center; }
+    .tab-btn { flex: 1 1 18%; padding: 10px 2px; border: none; border-radius: 8px; font-weight: bold; font-size: 0.75rem; cursor: pointer; background: #e2e8f0; color: #475569; transition: 0.2s; text-align: center; }
     .tab-btn.active { background: var(--highlight); color: #ffffff; box-shadow: 0 2px 6px rgba(37,99,235,0.3); }
 
     .tab-content { display: none; }
@@ -67,8 +67,8 @@
     .btn-whatsapp { background: #25d366; color: #fff; border: none; padding: 13px; border-radius: 8px; font-size: 0.95rem; font-weight: bold; cursor: pointer; text-align: center; }
     .btn-pdf { background: #e74c3c; color: #fff; border: none; padding: 13px; border-radius: 8px; font-size: 0.95rem; font-weight: bold; cursor: pointer; text-align: center; }
 
-    .sub-tabs { display: flex; gap: 6px; margin-bottom: 15px; }
-    .sub-btn { flex: 1; padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px; background: #fff; font-size: 0.8rem; font-weight: 600; cursor: pointer; color: #334155; text-align: center; }
+    .sub-tabs { display: flex; gap: 6px; margin-bottom: 15px; flex-wrap: wrap; }
+    .sub-btn { flex: 1 1 30%; padding: 8px 4px; border: 1px solid #cbd5e1; border-radius: 6px; background: #fff; font-size: 0.78rem; font-weight: 600; cursor: pointer; color: #334155; text-align: center; }
     .sub-btn.active { background: #e0e7ff; border-color: var(--highlight); color: var(--highlight); }
 
     .tech-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.82rem; }
@@ -105,11 +105,12 @@
 
   <header>
     <h1>⚡ Érick Serviços & Segurança</h1>
-    <p>Elétrica Residencial, Comercial e Segurança Eletrônica</p>
+    <p>Elétrica, Climatização Residencial e Segurança Eletrônica</p>
   </header>
 
   <div class="nav-tabs">
     <button class="tab-btn active" onclick="trocarAba('orcamentoTab', this)">📝 Orçamento</button>
+    <button class="tab-btn" onclick="trocarAba('arTab', this)">❄️ Ar Condicionado</button>
     <button class="tab-btn" onclick="trocarAba('casaTab', this)">🏠 Instalação Casa</button>
     <button class="tab-btn" onclick="trocarAba('calculoTab', this)">🔧 Disjuntor Certo</button>
     <button class="tab-btn" onclick="trocarAba('consultaTab', this)">📚 Tabelas NBR</button>
@@ -137,7 +138,7 @@
         <label>Buscar Serviço Rápidamente:</label>
         <div class="search-box">
           <span class="search-icon">🔍</span>
-          <input type="text" id="buscaServico" placeholder="Digite para buscar (ex: chuveiro, câmera, disjuntor)..." oninput="filtrarServicos()">
+          <input type="text" id="buscaServico" placeholder="Digite para buscar (ex: ar, câmara, chuveiro, disjuntor)..." oninput="filtrarServicos()">
         </div>
       </div>
 
@@ -145,6 +146,17 @@
         <label>Selecione o Serviço:</label>
         <select id="servicoSelect">
           <option value="">-- Selecione o serviço --</option>
+          <optgroup label="❄️ Ar Condicionado & Climatização">
+            <option value="Instalação Ar Split 9.000 a 12.000 BTU (até 3m tubulação)|550">Instalação Split 9k/12k BTU (até 3m) - R$ 550,00</option>
+            <option value="Instalação Ar Split 18.000 a 24.000 BTU (até 3m tubulação)|750">Instalação Split 18k/24k BTU (até 3m) - R$ 750,00</option>
+            <option value="Instalação Ar Split 30.000 BTU (até 3m tubulação)|950">Instalação Split 30k BTU (até 3m) - R$ 950,00</option>
+            <option value="Higienização e Limpeza Completa Ar Split|200">Higienização e Limpeza Completa Split - R$ 200,00</option>
+            <option value="Carga de Gás Refrigerante (R410A / R32)|250">Carga de Gás Refrigerante (R410A/R32) - R$ 250,00</option>
+            <option value="Desinstalação de Ar Condicionado Split|200">Desinstalação de Ar Split - R$ 200,00</option>
+            <option value="Instalação de Infraestrutura de Ar (por metro adicional)|120">Infraestrutura Ar Condicionado (metro extra) - R$ 120,00</option>
+            <option value="Instalação de Circuito Elétrico Dedicado 220V P/ Ar|280">Circuito Elétrico Dedicado 220V p/ Ar - R$ 280,00</option>
+          </optgroup>
+
           <optgroup label="⚡ Elétrica Básica & Iluminação">
             <option value="Troca/Instalação de Tomada ou Interruptor|50">Troca/Instalação Tomada ou Interruptor - R$ 50,00</option>
             <option value="Instalação de Ponto Novo de Tomada/Iluminação|120">Ponto Novo Elétrico (infra + fiação) - R$ 120,00</option>
@@ -215,6 +227,141 @@
       <div class="btn-group">
         <button type="button" class="btn-pdf" onclick="gerarPDF()">📄 Baixar PDF do Orçamento</button>
         <button type="button" class="btn-whatsapp" onclick="enviarWhatsApp()">📱 Enviar Resumo no WhatsApp</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABA NOVAR: AR CONDICIONADO COMPLETA -->
+  <div id="arTab" class="tab-content">
+    <div class="sub-tabs">
+      <button class="sub-btn active" onclick="trocarSubAr('btuSub', this)">❄️ Cálculo BTUs</button>
+      <button class="sub-btn" onclick="trocarSubAr('especsSub', this)">📐 Tabela NBR & Tubos</button>
+      <button class="sub-btn" onclick="trocarSubAr('matArSub', this)">📦 Kit de Materiais</button>
+    </div>
+
+    <!-- SUB-ABA 1: CÁLCULO DE BTUS -->
+    <div id="btuSub" class="sub-ar-content">
+      <div class="card">
+        <h2>🌡️ Dimensionamento de BTUs (Carga Térmica)</h2>
+        <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 12px;">Calcule a potência ideal do aparelho conforme as dimensões do ambiente e exposição solar.</p>
+
+        <div class="field-row">
+          <div class="field">
+            <label>Comprimento (m):</label>
+            <input type="number" id="arComp" value="4" oninput="calcularBTUs()">
+          </div>
+          <div class="field">
+            <label>Largura (m):</label>
+            <input type="number" id="arLarg" value="3.5" oninput="calcularBTUs()">
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Exposição Solar:</label>
+          <select id="arSol" onchange="calcularBTUs()">
+            <option value="600">Sol da Manhã ou Sombra (600 BTU/m²)</option>
+            <option value="800" selected>Sol Tarde / Incidência Direta (800 BTU/m²)</option>
+          </select>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label>Pessoas no Ambiente:</label>
+            <input type="number" id="arPessoas" value="2" min="1" oninput="calcularBTUs()">
+          </div>
+          <div class="field">
+            <label>Eletrônicos (TV, PC):</label>
+            <input type="number" id="arEletro" value="1" min="0" oninput="calcularBTUs()">
+          </div>
+        </div>
+
+        <div class="result-box">
+          <h3>⚡ Resultado da Potência Recomendada</h3>
+          <div class="result-row">
+            <span>Área Total:</span>
+            <span class="val" id="resArArea">14.0 m²</span>
+          </div>
+          <div class="result-row">
+            <span>Carga Térmica Exata:</span>
+            <span class="val" id="resArBtuExato">11.800 BTU/h</span>
+          </div>
+          <div class="result-row">
+            <span>Aparelho Recomendado:</span>
+            <span class="val" id="resArBtuRecomendado" style="font-size: 1.1rem; color: var(--highlight);">12.000 BTU/h</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUB-ABA 2: TABELA NBR & TUBULAÇÕES -->
+    <div id="especsSub" class="sub-ar-content" style="display: none;">
+      <div class="card">
+        <h2>📊 Especificações Técnicas de Instalação (Padrão NBR)</h2>
+        <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 12px;">Consulte bitolas de tubulação de cobre, fiação e disjuntor elétrico recomendado.</p>
+
+        <div style="overflow-x: auto;">
+          <tech-table style="width:100%;">
+            <table class="tech-table">
+              <thead>
+                <tr>
+                  <th>Capacidade</th>
+                  <th>Linha Líquido</th>
+                  <th>Linha Sucção</th>
+                  <th>Cabo Elétrico</th>
+                  <th>Disjuntor</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>9.000 BTU</strong></td><td>1/4" (6,35mm)</td><td>3/8" (9,52mm)</td><td>2,5 mm²</td><td>10A / 16A</td></tr>
+                <tr><td><strong>12.000 BTU</strong></td><td>1/4" (6,35mm)</td><td>1/2" (12,7mm)</td><td>2,5 mm²</td><td>16A</td></tr>
+                <tr><td><strong>18.000 BTU</strong></td><td>1/4" (6,35mm)</td><td>1/2" ou 5/8"</td><td>2,5 mm² / 4mm²</td><td>20A / 25A</td></tr>
+                <tr><td><strong>24.000 BTU</strong></td><td>3/8" (9,52mm)</td><td>5/8" (15,88mm)</td><td>4,0 mm²</td><td>25A / 32A</td></tr>
+                <tr><td><strong>30.000 BTU</strong></td><td>3/8" (9,52mm)</td><td>5/8" ou 3/4"</td><td>4,0 mm² / 6mm²</td><td>32A / 40A</td></tr>
+              </tbody>
+            </table>
+          </tech-table>
+        </div>
+
+        <div class="info-note">
+          <strong>Regras de Ouro na Instalação de Ar Split:</strong><br>
+          • <strong>Vácuo Obrigatório:</strong> Executar vácuo no sistema com bomba até atingir menos de 500 Microns.<br>
+          • <strong>Distância Mínima:</strong> A maioria das fabricantes exige distância mínima de tubulação de 2 a 3 metros (para evitar ruídos de expansão de fluido).<br>
+          • <strong>Alimentação Elétrica:</strong> O circuito deve ser individual com disjuntor dedicado no quadro (QDC) e cabo exclusivo.
+        </div>
+      </div>
+    </div>
+
+    <!-- SUB-ABA 3: MATERIAIS PARA INSTALAÇÃO DE AR -->
+    <div id="matArSub" class="sub-ar-content" style="display: none;">
+      <div class="card">
+        <h2>📦 Materiais Necessários para Instalação (Kit Infra)</h2>
+        <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 12px;">Ajuste a metragem da tubulação de cobre e materiais para estimar o custo do kit.</p>
+
+        <div class="field">
+          <label>Metragem da Tubulação de Cobre (m):</label>
+          <input type="number" id="metroCobreAr" value="3" min="1" oninput="gerarMateriaisAr()">
+        </div>
+
+        <div style="overflow-x: auto; margin-top: 10px;">
+          <table class="tech-table">
+            <thead>
+              <tr>
+                <th style="width: 45%;">Item / Material</th>
+                <th style="width: 15%;">Qtd</th>
+                <th style="width: 20%;">Preço Un.</th>
+                <th style="width: 20%;">Subtotal</th>
+              </tr>
+            </thead>
+            <tbody id="tbodyMateriaisAr"></tbody>
+          </table>
+        </div>
+
+        <div class="total-box" style="background: var(--primary); margin-top: 15px;">
+          <span>CUSTO ESTIMADO DE MATERIAIS DO AR</span>
+          <h3 id="totalCustoMateriaisAr">R$ 0,00</h3>
+        </div>
+
+        <button type="button" class="btn-add" style="margin-top: 15px;" onclick="adicionarMateriaisArAoOrcamento()">📦 Incluir Materiais do Ar no Orçamento</button>
       </div>
     </div>
   </div>
@@ -513,7 +660,7 @@
     <div id="pdfTemplate">
       <div class="pdf-header">
         <h1>Érick Serviços & Segurança</h1>
-        <p>Proposta Comercial de Eletricidade & Segurança Eletrônica</p>
+        <p>Proposta Comercial - Elétrica, Climatização & Segurança Eletrônica</p>
         <p id="pdfData" style="margin-top: 5px; font-weight: bold; color: #1b365d;"></p>
       </div>
 
@@ -545,7 +692,7 @@
       </div>
 
       <div class="pdf-footer">
-        <p>Érick Serviços Elétricos & Segurança Eletrônica - Atendimento com Qualidade, Agilidade e Segurança!</p>
+        <p>Érick Serviços Elétricos, Ar Condicionado & Segurança - Atendimento Técnico Especializado!</p>
       </div>
     </div>
   </div>
@@ -553,6 +700,7 @@
   <script>
     var itensOrcamento = [];
     var listaMateriaisGlobal = [];
+    var listaMateriaisArGlobal = [];
 
     // LÓGICA DA LUPA DE BUSCA RÁPIDA DE SERVIÇOS
     function filtrarServicos() {
@@ -563,7 +711,7 @@
 
       for (var i = 0; i < options.length; i++) {
         var txt = options[i].text.toLowerCase();
-        if (options[i].value === "") continue; // ignora a opção padrão
+        if (options[i].value === "") continue;
         if (txt.indexOf(filtro) > -1) {
           options[i].style.display = "";
         } else {
@@ -571,7 +719,6 @@
         }
       }
 
-      // Oculta grupos vazios
       for (var j = 0; j < optgroups.length; j++) {
         var groupOptions = optgroups[j].getElementsByTagName('option');
         var temVisivel = false;
@@ -604,6 +751,9 @@
         if(listaMateriaisGlobal.length === 0) {
           recalcularMateriaisArea();
         }
+      } else if(tabId === 'arTab') {
+        calcularBTUs();
+        gerarMateriaisAr();
       }
     }
 
@@ -627,6 +777,92 @@
       });
       document.getElementById(subCasaId).style.display = 'block';
       btn.classList.add('active');
+    }
+
+    function trocarSubAr(subArId, btn) {
+      document.querySelectorAll('.sub-ar-content').forEach(function(content) {
+        content.style.display = 'none';
+      });
+      btn.parentElement.querySelectorAll('.sub-btn').forEach(function(button) {
+        button.classList.remove('active');
+      });
+      document.getElementById(subArId).style.display = 'block';
+      btn.classList.add('active');
+    }
+
+    // LÓGICA DE CÁLCULO DE BTUS
+    function calcularBTUs() {
+      var comp = parseFloat(document.getElementById('arComp').value) || 0;
+      var larg = parseFloat(document.getElementById('arLarg').value) || 0;
+      var fatorSol = parseFloat(document.getElementById('arSol').value) || 600;
+      var pessoas = parseFloat(document.getElementById('arPessoas').value) || 1;
+      var eletro = parseFloat(document.getElementById('arEletro').value) || 0;
+
+      var area = comp * larg;
+      var btuBase = area * fatorSol;
+      var btuPessoas = (pessoas - 1) > 0 ? (pessoas - 1) * fatorSol : 0;
+      var btuEletro = eletro * 600;
+
+      var totalBTU = btuBase + btuPessoas + btuEletro;
+
+      var recomendado = "9.000 BTU/h";
+      if(totalBTU > 9000 && totalBTU <= 12000) recomendado = "12.000 BTU/h";
+      else if(totalBTU > 12000 && totalBTU <= 18000) recomendado = "18.000 BTU/h";
+      else if(totalBTU > 18000 && totalBTU <= 24000) recomendado = "24.000 BTU/h";
+      else if(totalBTU > 24000) recomendado = "30.000 BTU/h";
+
+      document.getElementById('resArArea').innerText = area.toFixed(1) + " m²";
+      document.getElementById('resArBtuExato').innerText = Math.round(totalBTU).toLocaleString('pt-BR') + " BTU/h";
+      document.getElementById('resArBtuRecomendado').innerText = recomendado;
+    }
+
+    // LISTA DE MATERIAIS PARA AR CONDICIONADO
+    var totalMateriaisArCalculado = 0;
+    function gerarMateriaisAr() {
+      var metros = parseFloat(document.getElementById('metroCobreAr').value) || 3;
+
+      listaMateriaisArGlobal = [
+        { nome: "Tubulação de Cobre Isolada (Par)", qtd: metros, preco: 65 },
+        { nome: "Cabo PP 4x1.5mm² (Interligação)", qtd: metros + 1, preco: 12 },
+        { nome: "Mangueira de Dreno Corrugada", qtd: metros, preco: 6 },
+        { nome: "Suporte de Alumínio/Aço Condensadora", qtd: 1, preco: 75 },
+        { nome: "Coxins Anti-vibração de Borracha", qtd: 1, preco: 25 },
+        { nome: "Fita PP de Acabamento Tecida", qtd: 1, preco: 20 },
+        { nome: "Siringa / Buchas / Parafusos Inox", qtd: 1, preco: 15 }
+      ];
+
+      renderizarMateriaisAr();
+    }
+
+    function renderizarMateriaisAr() {
+      var tbody = document.getElementById('tbodyMateriaisAr');
+      tbody.innerHTML = "";
+      totalMateriaisArCalculado = 0;
+
+      listaMateriaisArGlobal.forEach(function(m) {
+        var sub = m.qtd * m.preco;
+        totalMateriaisArCalculado += sub;
+
+        var tr = document.createElement('tr');
+        tr.innerHTML = '<td>' + m.nome + '</td>' +
+                       '<td>' + m.qtd + '</td>' +
+                       '<td>R$ ' + m.preco.toFixed(2) + '</td>' +
+                       '<td style="font-weight:bold; color:var(--primary);">R$ ' + sub.toFixed(2) + '</td>';
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById('totalCustoMateriaisAr').innerText = 'R$ ' + totalMateriaisArCalculado.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    }
+
+    function adicionarMateriaisArAoOrcamento() {
+      var m = document.getElementById('metroCobreAr').value;
+      itensOrcamento.push({
+        nome: "Kit Completo de Materiais P/ Ar Condicionado (" + m + " metros de infra)",
+        preco: totalMateriaisArCalculado,
+        qtd: 1
+      });
+      atualizarListaItens();
+      trocarAba('orcamentoTab', document.querySelectorAll('.tab-btn')[0]);
     }
 
     // LÓGICA DE ORÇAMENTO
