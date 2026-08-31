@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Érick - Orçamento & Dimensionamento Elétrico</title>
+  <title>Erick Hergesel - ERTEC SOLUÇÕES ELÉTRICAS</title>
   
   <link rel="apple-touch-icon" sizes="180x180" href="https://img.icons8.com/color/180/lightning-bolt.png">
   <link rel="icon" type="image/png" sizes="32x32" href="https://img.icons8.com/color/32/lightning-bolt.png">
@@ -24,7 +24,7 @@
     body { background-color: var(--bg); color: var(--text); padding: 12px; max-width: 650px; margin: 0 auto; }
     
     header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; padding: 18px; border-radius: 12px; text-align: center; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    header h1 { font-size: 1.3rem; font-weight: 700; }
+    header h1 { font-size: 1.2rem; font-weight: 700; text-transform: uppercase; }
     header p { font-size: 0.8rem; opacity: 0.9; margin-top: 4px; }
     
     .nav-tabs { display: flex; gap: 4px; margin-bottom: 15px; flex-wrap: wrap; }
@@ -84,13 +84,12 @@
     .result-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px dashed #cbd5e1; font-size: 0.88rem; }
     .result-row:last-child { border-bottom: none; }
     .result-row span.val { font-weight: bold; color: var(--primary); }
-    .alert-box { background: #fff3cd; border-left: 4px solid #ffc107; padding: 10px; border-radius: 6px; font-size: 0.8rem; color: #856404; margin-top: 10px; }
 
     /* LAYOUT DO TEMPLATE PDF */
     #pdfContainer { display: none; }
     #pdfTemplate { background: #ffffff; padding: 25px; font-family: Arial, sans-serif; color: #333; width: 680px; }
     .pdf-header { text-align: center; border-bottom: 2px solid #1b365d; padding-bottom: 12px; margin-bottom: 15px; }
-    .pdf-header h1 { color: #1b365d; font-size: 20px; text-transform: uppercase; margin-bottom: 4px; }
+    .pdf-header h1 { color: #1b365d; font-size: 18px; text-transform: uppercase; margin-bottom: 4px; }
     .pdf-header p { font-size: 11px; color: #555; }
     .pdf-client-box { background: #f8f9fa; border: 1px solid #e9ecef; padding: 10px; border-radius: 6px; margin-bottom: 15px; font-size: 12px; line-height: 1.4; }
     .pdf-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
@@ -104,8 +103,8 @@
 <body>
 
   <header>
-    <h1>⚡ Érick Serviços & Segurança</h1>
-    <p>Elétrica, Climatização Residencial e Segurança Eletrônica</p>
+    <h1>⚡ ERTEC SOLUÇÕES ELÉTRICAS</h1>
+    <p>Erick Hergesel - Elétrica, Climatização Residencial & Segurança Eletrônica</p>
   </header>
 
   <div class="nav-tabs">
@@ -133,7 +132,6 @@
     <div class="card">
       <h2>🛠️ Adicionar Serviços</h2>
       
-      <!-- LUPA DE PESQUISA DE SERVIÇOS CORRIGIDA -->
       <div class="field">
         <label>Buscar Serviço Rapidamente:</label>
         <div class="search-box">
@@ -533,8 +531,8 @@
   <div id="pdfContainer">
     <div id="pdfTemplate">
       <div class="pdf-header">
-        <h1>Érick Serviços & Segurança</h1>
-        <p>Proposta Comercial - Elétrica, Climatização & Segurança Eletrônica</p>
+        <h1>ERTEC SOLUÇÕES ELÉTRICAS</h1>
+        <p>Erick Hergesel - Proposta Comercial de Elétrica, Climatização & Segurança</p>
         <p id="pdfData" style="margin-top: 5px; font-weight: bold; color: #1b365d;"></p>
       </div>
 
@@ -566,7 +564,7 @@
       </div>
 
       <div class="pdf-footer">
-        <p>Érick Serviços Elétricos, Ar Condicionado & Segurança - Atendimento Técnico Especializado!</p>
+        <p>Erick Hergesel - ERTEC SOLUÇÕES ELÉTRICAS | Atendimento Técnico Especializado</p>
       </div>
     </div>
   </div>
@@ -576,7 +574,6 @@
     var listaMateriaisGlobal = [];
     var listaMateriaisArGlobal = [];
 
-    // CORREÇÃO DA BUSCA NA LUPA (BUSCA RÁPIDA)
     function filtrarServicos() {
       var termo = document.getElementById('buscaServico').value.toLowerCase().trim();
       var select = document.getElementById('servicoSelect');
@@ -600,7 +597,6 @@
       }
     }
 
-    // TROCAR ABAS
     function trocarAba(tabId, btn) {
       document.querySelectorAll('.tab-content').forEach(function(content) {
         content.classList.remove('active');
@@ -637,7 +633,6 @@
       btn.classList.add('active');
     }
 
-    // AR CONDICIONADO - CÁLCULOS
     function calcularBTUs() {
       var comp = parseFloat(document.getElementById('arComp').value) || 0;
       var larg = parseFloat(document.getElementById('arLarg').value) || 0;
@@ -690,7 +685,6 @@
       trocarAba('orcamentoTab', document.querySelectorAll('.tab-btn')[0]);
     }
 
-    // OPERAÇÕES DO ORÇAMENTO
     function adicionarItem() {
       var select = document.getElementById('servicoSelect');
       var val = select.value;
@@ -725,7 +719,6 @@
       return total;
     }
 
-    // CÁLCULOS DA ABA CASA
     var totalM2MaoObraCalculado = 0;
     function calcularMaoObraMetragem() {
       var m2 = parseFloat(document.getElementById('casaMetragem').value) || 0;
@@ -796,7 +789,6 @@
       trocarAba('orcamentoTab', document.querySelectorAll('.tab-btn')[0]);
     }
 
-    // DISJUNTOR CERTO
     function executarCalculoElétrico() {
       var tensao = parseFloat(document.getElementById('calcTensao').value) || 220;
       var pot = parseFloat(document.getElementById('calcPotencia').value) || 0;
@@ -817,7 +809,6 @@
       document.getElementById('resCabo').innerText = cabo;
     }
 
-    // GERAÇÃO DE PDF SEM CORTAR INFORMAÇÕES
     function gerarPDF() {
       if (itensOrcamento.length === 0) {
         alert("Adicione pelo menos um serviço ao orçamento!");
@@ -847,14 +838,13 @@
 
       document.getElementById('pdfValorTotal').innerText = 'VALOR TOTAL: R$ ' + total.toLocaleString('pt-BR', {minimumFractionDigits: 2});
 
-      // MOSTRA TEMPORARIAMENTE PARA A FOTO DO PDF
       var container = document.getElementById('pdfContainer');
       container.style.display = "block";
 
       var elemento = document.getElementById('pdfTemplate');
       var opt = {
         margin:       [8, 8, 8, 8],
-        filename:     'Orcamento_Erick_' + cliente.replace(/\s+/g, '_') + '.pdf',
+        filename:     'Orcamento_Ertec_' + cliente.replace(/\s+/g, '_') + '.pdf',
         image:        { type: 'jpeg', quality: 0.98 },
         html2canvas:  { scale: 2, scrollY: 0 },
         jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
@@ -865,14 +855,13 @@
       });
     }
 
-    // ENVIO WHATSAPP
     function enviarWhatsApp() {
       if (itensOrcamento.length === 0) { alert("Adicione pelo menos um serviço!"); return; }
       var cliente = document.getElementById('clienteNome').value || 'Cliente';
       var tel = document.getElementById('clienteTel').value.replace(/\D/g, '');
       var total = calcularTotal();
 
-      var texto = "*⚡ Érick Serviços & Segurança*\n*Orçamento Comercial*\n\n👤 *Cliente:* " + cliente + "\n\n📋 *ServiçosSolitados:*\n";
+      var texto = "*⚡ Erick Hergesel - ERTEC SOLUÇÕES ELÉTRICAS*\n*Orçamento Comercial*\n\n👤 *Cliente:* " + cliente + "\n\n📋 *Serviços Solicitados:*\n";
       itensOrcamento.forEach(function(item) {
         texto += "• " + item.qtd + "x " + item.nome + " - R$ " + (item.preco * item.qtd).toFixed(2) + "\n";
       });
