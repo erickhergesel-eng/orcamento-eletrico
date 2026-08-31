@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Érick - Orçamento & Dimensionamento Elétrico</title>
   
-  <!-- ÍCONE DO APLICATIVO NA TELA INICIAL DO CELULAR -->
   <link rel="apple-touch-icon" sizes="180x180" href="https://img.icons8.com/color/180/lightning-bolt.png">
   <link rel="icon" type="image/png" sizes="32x32" href="https://img.icons8.com/color/32/lightning-bolt.png">
   
@@ -87,18 +86,19 @@
     .result-row span.val { font-weight: bold; color: var(--primary); }
     .alert-box { background: #fff3cd; border-left: 4px solid #ffc107; padding: 10px; border-radius: 6px; font-size: 0.8rem; color: #856404; margin-top: 10px; }
 
-    #pdfContainer { position: absolute; left: -9999px; top: -9999px; width: 700px; }
-    #pdfTemplate { background: #ffffff; padding: 30px; font-family: Arial, sans-serif; color: #333; }
-    .pdf-header { text-align: center; border-bottom: 2px solid #1b365d; padding-bottom: 15px; margin-bottom: 20px; }
-    .pdf-header h1 { color: #1b365d; font-size: 22px; text-transform: uppercase; margin-bottom: 4px; }
-    .pdf-header p { font-size: 12px; color: #555; }
-    .pdf-client-box { background: #f8f9fa; border: 1px solid #e9ecef; padding: 12px; border-radius: 6px; margin-bottom: 15px; font-size: 13px; line-height: 1.5; }
-    .pdf-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-    .pdf-table th, .pdf-table td { border: 1px solid #ddd; padding: 9px; text-align: left; font-size: 12px; }
-    .pdf-table th { background-color: #1b365d; color: white; text-transform: uppercase; font-size: 11px; }
-    .pdf-total { margin-top: 20px; text-align: right; font-size: 16px; font-weight: bold; color: #107c41; }
-    .pdf-terms { margin-top:25px; font-size:11px; background:#f9f9f9; padding:12px; border-radius:6px; border-left: 4px solid #1b365d; line-height: 1.6; }
-    .pdf-footer { margin-top: 35px; font-size: 11px; text-align: center; color: #777; border-top: 1px solid #eee; padding-top: 10px; }
+    /* LAYOUT DO TEMPLATE PDF */
+    #pdfContainer { display: none; }
+    #pdfTemplate { background: #ffffff; padding: 25px; font-family: Arial, sans-serif; color: #333; width: 680px; }
+    .pdf-header { text-align: center; border-bottom: 2px solid #1b365d; padding-bottom: 12px; margin-bottom: 15px; }
+    .pdf-header h1 { color: #1b365d; font-size: 20px; text-transform: uppercase; margin-bottom: 4px; }
+    .pdf-header p { font-size: 11px; color: #555; }
+    .pdf-client-box { background: #f8f9fa; border: 1px solid #e9ecef; padding: 10px; border-radius: 6px; margin-bottom: 15px; font-size: 12px; line-height: 1.4; }
+    .pdf-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    .pdf-table th, .pdf-table td { border: 1px solid #ddd; padding: 8px; text-align: left; font-size: 11px; }
+    .pdf-table th { background-color: #1b365d; color: white; text-transform: uppercase; font-size: 10px; }
+    .pdf-total { margin-top: 15px; text-align: right; font-size: 15px; font-weight: bold; color: #107c41; }
+    .pdf-terms { margin-top: 20px; font-size: 10px; background: #f9f9f9; padding: 10px; border-radius: 6px; border-left: 4px solid #1b365d; line-height: 1.5; }
+    .pdf-footer { margin-top: 25px; font-size: 10px; text-align: center; color: #777; border-top: 1px solid #eee; padding-top: 8px; }
   </style>
 </head>
 <body>
@@ -133,19 +133,19 @@
     <div class="card">
       <h2>🛠️ Adicionar Serviços</h2>
       
-      <!-- LUPA DE PESQUISA DE SERVIÇOS -->
+      <!-- LUPA DE PESQUISA DE SERVIÇOS CORRIGIDA -->
       <div class="field">
-        <label>Buscar Serviço Rápidamente:</label>
+        <label>Buscar Serviço Rapidamente:</label>
         <div class="search-box">
           <span class="search-icon">🔍</span>
-          <input type="text" id="buscaServico" placeholder="Digite para buscar (ex: ar, câmara, chuveiro, disjuntor)..." oninput="filtrarServicos()">
+          <input type="text" id="buscaServico" placeholder="Digite para filtrar os serviços abaixo..." onkeyup="filtrarServicos()">
         </div>
       </div>
 
       <div class="field">
         <label>Selecione o Serviço:</label>
-        <select id="servicoSelect">
-          <option value="">-- Selecione o serviço --</option>
+        <select id="servicoSelect" size="6" style="height: auto; max-height: 180px;">
+          <option value="" selected>-- Selecione um serviço abaixo --</option>
           <optgroup label="❄️ Ar Condicionado & Climatização">
             <option value="Instalação Ar Split 9.000 a 12.000 BTU (até 3m tubulação)|550">Instalação Split 9k/12k BTU (até 3m) - R$ 550,00</option>
             <option value="Instalação Ar Split 18.000 a 24.000 BTU (até 3m tubulação)|750">Instalação Split 18k/24k BTU (até 3m) - R$ 750,00</option>
@@ -231,7 +231,7 @@
     </div>
   </div>
 
-  <!-- ABA NOVAR: AR CONDICIONADO COMPLETA -->
+  <!-- ABA AR CONDICIONADO -->
   <div id="arTab" class="tab-content">
     <div class="sub-tabs">
       <button class="sub-btn active" onclick="trocarSubAr('btuSub', this)">❄️ Cálculo BTUs</button>
@@ -239,12 +239,9 @@
       <button class="sub-btn" onclick="trocarSubAr('matArSub', this)">📦 Kit de Materiais</button>
     </div>
 
-    <!-- SUB-ABA 1: CÁLCULO DE BTUS -->
     <div id="btuSub" class="sub-ar-content">
       <div class="card">
         <h2>🌡️ Dimensionamento de BTUs (Carga Térmica)</h2>
-        <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 12px;">Calcule a potência ideal do aparelho conforme as dimensões do ambiente e exposição solar.</p>
-
         <div class="field-row">
           <div class="field">
             <label>Comprimento (m):</label>
@@ -293,50 +290,35 @@
       </div>
     </div>
 
-    <!-- SUB-ABA 2: TABELA NBR & TUBULAÇÕES -->
     <div id="especsSub" class="sub-ar-content" style="display: none;">
       <div class="card">
         <h2>📊 Especificações Técnicas de Instalação (Padrão NBR)</h2>
-        <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 12px;">Consulte bitolas de tubulação de cobre, fiação e disjuntor elétrico recomendado.</p>
-
         <div style="overflow-x: auto;">
-          <tech-table style="width:100%;">
-            <table class="tech-table">
-              <thead>
-                <tr>
-                  <th>Capacidade</th>
-                  <th>Linha Líquido</th>
-                  <th>Linha Sucção</th>
-                  <th>Cabo Elétrico</th>
-                  <th>Disjuntor</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td><strong>9.000 BTU</strong></td><td>1/4" (6,35mm)</td><td>3/8" (9,52mm)</td><td>2,5 mm²</td><td>10A / 16A</td></tr>
-                <tr><td><strong>12.000 BTU</strong></td><td>1/4" (6,35mm)</td><td>1/2" (12,7mm)</td><td>2,5 mm²</td><td>16A</td></tr>
-                <tr><td><strong>18.000 BTU</strong></td><td>1/4" (6,35mm)</td><td>1/2" ou 5/8"</td><td>2,5 mm² / 4mm²</td><td>20A / 25A</td></tr>
-                <tr><td><strong>24.000 BTU</strong></td><td>3/8" (9,52mm)</td><td>5/8" (15,88mm)</td><td>4,0 mm²</td><td>25A / 32A</td></tr>
-                <tr><td><strong>30.000 BTU</strong></td><td>3/8" (9,52mm)</td><td>5/8" ou 3/4"</td><td>4,0 mm² / 6mm²</td><td>32A / 40A</td></tr>
-              </tbody>
-            </table>
-          </tech-table>
-        </div>
-
-        <div class="info-note">
-          <strong>Regras de Ouro na Instalação de Ar Split:</strong><br>
-          • <strong>Vácuo Obrigatório:</strong> Executar vácuo no sistema com bomba até atingir menos de 500 Microns.<br>
-          • <strong>Distância Mínima:</strong> A maioria das fabricantes exige distância mínima de tubulação de 2 a 3 metros (para evitar ruídos de expansão de fluido).<br>
-          • <strong>Alimentação Elétrica:</strong> O circuito deve ser individual com disjuntor dedicado no quadro (QDC) e cabo exclusivo.
+          <table class="tech-table">
+            <thead>
+              <tr>
+                <th>Capacidade</th>
+                <th>Linha Líquido</th>
+                <th>Linha Sucção</th>
+                <th>Cabo Elétrico</th>
+                <th>Disjuntor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>9.000 BTU</strong></td><td>1/4" (6,35mm)</td><td>3/8" (9,52mm)</td><td>2,5 mm²</td><td>10A / 16A</td></tr>
+              <tr><td><strong>12.000 BTU</strong></td><td>1/4" (6,35mm)</td><td>1/2" (12,7mm)</td><td>2,5 mm²</td><td>16A</td></tr>
+              <tr><td><strong>18.000 BTU</strong></td><td>1/4" (6,35mm)</td><td>1/2" ou 5/8"</td><td>2,5 mm² / 4mm²</td><td>20A / 25A</td></tr>
+              <tr><td><strong>24.000 BTU</strong></td><td>3/8" (9,52mm)</td><td>5/8" (15,88mm)</td><td>4,0 mm²</td><td>25A / 32A</td></tr>
+              <tr><td><strong>30.000 BTU</strong></td><td>3/8" (9,52mm)</td><td>5/8" ou 3/4"</td><td>4,0 mm² / 6mm²</td><td>32A / 40A</td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
 
-    <!-- SUB-ABA 3: MATERIAIS PARA INSTALAÇÃO DE AR -->
     <div id="matArSub" class="sub-ar-content" style="display: none;">
       <div class="card">
         <h2>📦 Materiais Necessários para Instalação (Kit Infra)</h2>
-        <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 12px;">Ajuste a metragem da tubulação de cobre e materiais para estimar o custo do kit.</p>
-
         <div class="field">
           <label>Metragem da Tubulação de Cobre (m):</label>
           <input type="number" id="metroCobreAr" value="3" min="1" oninput="gerarMateriaisAr()">
@@ -377,8 +359,6 @@
     <div id="metragemSub" class="sub-casa-content">
       <div class="card">
         <h2>📐 Instalação Completa por Metragem (m²)</h2>
-        <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 12px;">Cálculo estimado da mão de obra baseada no tamanho da casa e padrão da obra.</p>
-
         <div class="field">
           <label>Área Construída da Casa (m²):</label>
           <input type="number" id="casaMetragem" placeholder="Ex: 80" value="80" oninput="calcularMaoObraMetragem()">
@@ -397,7 +377,7 @@
           <label>Estágio da Obra:</label>
           <select id="casaEstagio" onchange="calcularMaoObraMetragem()">
             <option value="1">Obra Nova / Do Zero</option>
-            <option value="1.2">Reforma Residencial (Troca de fiação existente +20%)</option>
+            <option value="1.2">Reforma Residencial (+20%)</option>
           </select>
         </div>
 
@@ -424,11 +404,9 @@
     <div id="pontosSub" class="sub-casa-content" style="display: none;">
       <div class="card">
         <h2>🔌 Mão de Obra por Levantamento de Pontos</h2>
-        <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 12px;">Informe as quantidades de pontos da casa para um orçamento preciso por unidade.</p>
-
         <div class="field-row">
           <div class="field">
-            <label>Tomadas Simples (10A/20A):</label>
+            <label>Tomadas Simples:</label>
             <input type="number" id="qtdTomadas" value="20" min="0" oninput="calcularMaoObraPontos()">
           </div>
           <div class="field">
@@ -439,32 +417,12 @@
 
         <div class="field-row">
           <div class="field">
-            <label>Interruptores (Simples/Paralelo):</label>
+            <label>Interruptores:</label>
             <input type="number" id="qtdInterr" value="10" min="0" oninput="calcularMaoObraPontos()">
           </div>
           <div class="field">
-            <label>Circuitos Especiais (Chuveiro/Ar/Forno):</label>
+            <label>Circuitos Especiais:</label>
             <input type="number" id="qtdEspeciais" value="3" min="0" oninput="calcularMaoObraPontos()">
-          </div>
-        </div>
-
-        <div class="field">
-          <label>Montagem do Quadro de Distribuição (QDC):</label>
-          <select id="qtdQDC" onchange="calcularMaoObraPontos()">
-            <option value="0">Não incluir QDC</option>
-            <option value="450" selected>QDC Pequeno/Médio (Até 12 Disjuntores) - R$ 450</option>
-            <option value="750">QDC Grande (Acima de 12 Disjuntores) - R$ 750</option>
-          </select>
-        </div>
-
-        <div class="field-row">
-          <div class="field">
-            <label>Valor Mão de Obra p/ Ponto Simples (R$):</label>
-            <input type="number" id="valPontoSimples" value="45" oninput="calcularMaoObraPontos()">
-          </div>
-          <div class="field">
-            <label>Valor p/ Ponto Especial (R$):</label>
-            <input type="number" id="valPontoEspecial" value="120" oninput="calcularMaoObraPontos()">
           </div>
         </div>
 
@@ -475,32 +433,18 @@
             <span class="val" id="resTotalPontosSimples">42 pts</span>
           </div>
           <div class="result-row">
-            <span>Total de Pontos Especiais:</span>
-            <span class="val" id="resTotalPontosEspeciais">3 pts</span>
-          </div>
-          <div class="result-row">
             <span>Total Mão de Obra:</span>
             <span class="val" id="resPontosTotal" style="font-size: 1.1rem; color: var(--accent);">R$ 2.710,00</span>
           </div>
         </div>
 
-        <button type="button" class="btn-add" style="margin-top: 15px;" onclick="adicionarPontosAoOrcamento()">➕ Adicionar Mão de Obra (Pontos) ao Orçamento</button>
+        <button type="button" class="btn-add" style="margin-top: 15px;" onclick="adicionarPontosAoOrcamento()">➕ Adicionar Mão de Obra ao Orçamento</button>
       </div>
     </div>
 
     <div id="materiaisSub" class="sub-casa-content" style="display: none;">
       <div class="card">
         <h2>📦 Lista & Estimativa de Materiais</h2>
-        <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 12px;">Edite valores, altere quantidades ou adicione novos materiais para calcular o valor exato.</p>
-
-        <div class="field-row" style="align-items: flex-end;">
-          <div class="field" style="margin-bottom:0;">
-            <label>Cálculo Automático (m²):</label>
-            <input type="number" id="matMetragem" value="80">
-          </div>
-          <button type="button" class="btn-add" style="margin-top:0; padding:11px;" onclick="recalcularMateriaisArea()">Recalcular Estimativa</button>
-        </div>
-
         <div style="overflow-x: auto; margin-top: 15px;">
           <table class="tech-table">
             <thead>
@@ -516,16 +460,6 @@
           </table>
         </div>
 
-        <div style="background: #f1f5f9; padding: 10px; border-radius: 8px; margin-top: 15px;">
-          <label style="font-weight: bold; font-size: 0.8rem; color: var(--primary);">➕ Adicionar Material Extra</label>
-          <div class="field-row" style="margin-top: 8px;">
-            <input type="text" id="novoMatNome" placeholder="Nome do Material" style="flex:2; padding:8px; font-size:0.8rem;">
-            <input type="number" id="novoMatQtd" placeholder="Qtd" value="1" style="flex:1; padding:8px; font-size:0.8rem;">
-            <input type="number" id="novoMatPreco" placeholder="R$ Un." value="0" style="flex:1; padding:8px; font-size:0.8rem;">
-            <button type="button" class="btn-add" style="margin-top:0; padding:8px 12px; font-size:0.8rem;" onclick="adicionarMaterialPersonalizado()">+</button>
-          </div>
-        </div>
-
         <div class="total-box" style="background: var(--primary); margin-top: 15px;">
           <span>CUSTO ESTIMADO DE MATERIAIS</span>
           <h3 id="totalCustoMateriais">R$ 0,00</h3>
@@ -539,20 +473,7 @@
   <!-- ABA CÁLCULO ELÉTRICO -->
   <div id="calculoTab" class="tab-content">
     <div class="card">
-      <h2>🔧 Disjuntor certo</h2>
-      <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 12px;">Preencha os campos abaixo para descobrir o disjuntor e o cabo exato do circuito.</p>
-
-      <div class="field">
-        <label>TIPO DE CIRCUITO</label>
-        <select id="calcTipo">
-          <option value="chuveiro">Chuveiro / torneira / forno elétrico</option>
-          <option value="ar">Ar Condicionado / Refrigeração</option>
-          <option value="iluminacao">Iluminação</option>
-          <option value="tomada">Tomadas de Uso Geral (TUG)</option>
-          <option value="motor">Motor de Portão / Bomba d'Água</option>
-        </select>
-      </div>
-
+      <h2>🔧 Disjuntor Certo</h2>
       <div class="field-row">
         <div class="field">
           <label>TENSÃO</label>
@@ -565,11 +486,6 @@
           <label>POTÊNCIA (W)</label>
           <input type="number" id="calcPotencia" placeholder="Ex: 5500" value="5500" oninput="executarCalculoElétrico()">
         </div>
-      </div>
-
-      <div class="field">
-        <label>OU DIGITE A CORRENTE (A) [OPCIONAL]:</label>
-        <input type="number" id="calcCorrenteDireta" placeholder="Ex: 25" oninput="executarCalculoElétrico()">
       </div>
 
       <div class="result-box">
@@ -587,10 +503,6 @@
           <span class="val" id="resCabo">-</span>
         </div>
       </div>
-
-      <div id="alertaSeguranca" class="alert-box">
-        ⚠️ <strong>Aviso que salva:</strong> A fiação deve suportar a corrente do disjuntor. Nunca coloque um disjuntor maior sem trocar o cabo!
-      </div>
     </div>
   </div>
 
@@ -598,64 +510,26 @@
   <div id="consultaTab" class="tab-content">
     <div class="card">
       <h2>📖 Consulta Rápida (NBR 5410)</h2>
-      <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 12px;">Tabelas essenciais para verificação rápida no meio da obra.</p>
-
-      <div class="sub-tabs">
-        <button class="sub-btn active" onclick="trocarSubAba('disjuntorSub', this)">⚡ Disjuntores & Curvas</button>
-        <button class="sub-btn" onclick="trocarSubAba('correnteSub', this)">🧵 Corrente por Bitola</button>
-      </div>
-
-      <div id="disjuntorSub" class="sub-content">
-        <table class="tech-table">
-          <thead>
-            <tr>
-              <th>Disjuntor</th>
-              <th>Cabo Mínimo</th>
-              <th>Uso Típico</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td><strong>6 A</strong></td><td>1,5 mm²</td><td>Iluminação e tomadas leves</td></tr>
-            <tr><td><strong>10 A</strong></td><td>1,5 mm²</td><td>Iluminação e tomadas leves</td></tr>
-            <tr><td><strong>16 A</strong></td><td>1,5 mm²</td><td>Iluminação e tomadas</td></tr>
-            <tr><td><strong>20 A</strong></td><td>2,5 mm²</td><td>Tomadas gerais (TUG)</td></tr>
-            <tr><td><strong>25 A</strong></td><td>4,0 mm²</td><td>Tomadas de força, Ar condicionado</td></tr>
-            <tr><td><strong>32 A</strong></td><td>4,0 mm² / 6,0 mm²</td><td>Ar condicionado, Micro-ondas</td></tr>
-            <tr><td><strong>40 A</strong></td><td>6,0 mm²</td><td>Chuveiro, Forno elétrico</td></tr>
-            <tr><td><strong>50 A</strong></td><td>10,0 mm²</td><td>Chuveiro forte, Forno, Geral</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div id="correnteSub" class="sub-content" style="display: none;">
-        <table class="tech-table">
-          <thead>
-            <tr>
-              <th>Bitola (mm²)</th>
-              <th>Eletroduto (Parede)</th>
-              <th>Eletroduto (Aparente)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td><strong>1,5 mm²</strong></td><td>17,5 A</td><td>16,5 A</td></tr>
-            <tr><td><strong>2,5 mm²</strong></td><td>24,0 A</td><td>23,0 A</td></tr>
-            <tr><td><strong>4,0 mm²</strong></td><td>32,0 A</td><td>30,0 A</td></tr>
-            <tr><td><strong>6,0 mm²</strong></td><td>41,0 A</td><td>38,0 A</td></tr>
-            <tr><td><strong>10,0 mm²</strong></td><td>57,0 A</td><td>52,0 A</td></tr>
-            <tr><td><strong>16,0 mm²</strong></td><td>76,0 A</td><td>69,0 A</td></tr>
-            <tr><td><strong>25,0 mm²</strong></td><td>101,0 A</td><td>90,0 A</td></tr>
-            <tr><td><strong>35,0 mm²</strong></td><td>125,0 A</td><td>111,0 A</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="info-note">
-        <strong>Nota Técnica:</strong> Cobre, isolação PVC (70°C), 2 condutores carregados, ambiente a 30°C. Múltiplos circuitos no mesmo eletroduto ou temperaturas mais altas reduzem esses valores (fator de correção NBR 5410).
-      </div>
+      <table class="tech-table">
+        <thead>
+          <tr>
+            <th>Disjuntor</th>
+            <th>Cabo Mínimo</th>
+            <th>Uso Típico</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>10 A</strong></td><td>1,5 mm²</td><td>Iluminação e tomadas leves</td></tr>
+          <tr><td><strong>20 A</strong></td><td>2,5 mm²</td><td>Tomadas gerais (TUG)</td></tr>
+          <tr><td><strong>25 A</strong></td><td>4,0 mm²</td><td>Ar condicionado / Tomadas de força</td></tr>
+          <tr><td><strong>40 A</strong></td><td>6,0 mm²</td><td>Chuveiro, Forno elétrico</td></tr>
+          <tr><td><strong>50 A</strong></td><td>10,0 mm²</td><td>Chuveiro forte / Geral</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
-  <!-- CONTAINER DE RENDERIZAÇÃO OCULTO DO PDF -->
+  <!-- CONTAINER DO TEMPLATE PDF -->
   <div id="pdfContainer">
     <div id="pdfTemplate">
       <div class="pdf-header">
@@ -686,7 +560,7 @@
       <div class="pdf-terms">
         <p><strong>Condições Gerais de Fornecimento:</strong></p>
         <p>• Pagamento: 50% na aprovação / início do serviço e 50% na entrega e testes.</p>
-        <p>• Aceitamos Pix e Cartões de Crédito.</p>
+        <p>• Formas de pagamento: Pix e Cartões de Crédito.</p>
         <p>• Validade deste orçamento: 15 dias corridos.</p>
         <p>• Garantia da Mão de Obra: 90 dias após a conclusão do serviço.</p>
       </div>
@@ -702,37 +576,31 @@
     var listaMateriaisGlobal = [];
     var listaMateriaisArGlobal = [];
 
-    // LÓGICA DA LUPA DE BUSCA RÁPIDA DE SERVIÇOS
+    // CORREÇÃO DA BUSCA NA LUPA (BUSCA RÁPIDA)
     function filtrarServicos() {
-      var filtro = document.getElementById('buscaServico').value.toLowerCase();
+      var termo = document.getElementById('buscaServico').value.toLowerCase().trim();
       var select = document.getElementById('servicoSelect');
       var options = select.getElementsByTagName('option');
-      var optgroups = select.getElementsByTagName('optgroup');
+      var emPrimeiro = false;
 
       for (var i = 0; i < options.length; i++) {
-        var txt = options[i].text.toLowerCase();
+        var textoOpcao = options[i].text.toLowerCase();
+        
         if (options[i].value === "") continue;
-        if (txt.indexOf(filtro) > -1) {
+
+        if (termo === "" || textoOpcao.indexOf(termo) !== -1) {
           options[i].style.display = "";
+          if (!emPrimeiro && termo !== "") {
+            options[i].selected = true;
+            emPrimeiro = true;
+          }
         } else {
           options[i].style.display = "none";
         }
       }
-
-      for (var j = 0; j < optgroups.length; j++) {
-        var groupOptions = optgroups[j].getElementsByTagName('option');
-        var temVisivel = false;
-        for (var k = 0; k < groupOptions.length; k++) {
-          if (groupOptions[k].style.display !== "none") {
-            temVisivel = true;
-            break;
-          }
-        }
-        optgroups[j].style.display = temVisivel ? "" : "none";
-      }
     }
 
-    // NAVEGAÇÃO ENTRE ABAS
+    // TROCAR ABAS
     function trocarAba(tabId, btn) {
       document.querySelectorAll('.tab-content').forEach(function(content) {
         content.classList.remove('active');
@@ -743,54 +611,33 @@
       document.getElementById(tabId).classList.add('active');
       btn.classList.add('active');
 
-      if(tabId === 'calculoTab') {
-        executarCalculoElétrico();
-      } else if(tabId === 'casaTab') {
+      if(tabId === 'calculoTab') executarCalculoElétrico();
+      if(tabId === 'casaTab') {
         calcularMaoObraMetragem();
         calcularMaoObraPontos();
-        if(listaMateriaisGlobal.length === 0) {
-          recalcularMateriaisArea();
-        }
-      } else if(tabId === 'arTab') {
+        if(listaMateriaisGlobal.length === 0) recalcularMateriaisArea();
+      }
+      if(tabId === 'arTab') {
         calcularBTUs();
         gerarMateriaisAr();
       }
     }
 
-    function trocarSubAba(subTabId, btn) {
-      document.querySelectorAll('.sub-content').forEach(function(content) {
-        content.style.display = 'none';
-      });
-      document.querySelectorAll('.sub-btn').forEach(function(button) {
-        button.classList.remove('active');
-      });
-      document.getElementById(subTabId).style.display = 'block';
-      btn.classList.add('active');
-    }
-
-    function trocarSubCasa(subCasaId, btn) {
-      document.querySelectorAll('.sub-casa-content').forEach(function(content) {
-        content.style.display = 'none';
-      });
-      btn.parentElement.querySelectorAll('.sub-btn').forEach(function(button) {
-        button.classList.remove('active');
-      });
-      document.getElementById(subCasaId).style.display = 'block';
-      btn.classList.add('active');
-    }
-
     function trocarSubAr(subArId, btn) {
-      document.querySelectorAll('.sub-ar-content').forEach(function(content) {
-        content.style.display = 'none';
-      });
-      btn.parentElement.querySelectorAll('.sub-btn').forEach(function(button) {
-        button.classList.remove('active');
-      });
+      document.querySelectorAll('.sub-ar-content').forEach(function(c) { c.style.display = 'none'; });
+      btn.parentElement.querySelectorAll('.sub-btn').forEach(function(b) { b.classList.remove('active'); });
       document.getElementById(subArId).style.display = 'block';
       btn.classList.add('active');
     }
 
-    // LÓGICA DE CÁLCULO DE BTUS
+    function trocarSubCasa(subCasaId, btn) {
+      document.querySelectorAll('.sub-casa-content').forEach(function(c) { c.style.display = 'none'; });
+      btn.parentElement.querySelectorAll('.sub-btn').forEach(function(b) { b.classList.remove('active'); });
+      document.getElementById(subCasaId).style.display = 'block';
+      btn.classList.add('active');
+    }
+
+    // AR CONDICIONADO - CÁLCULOS
     function calcularBTUs() {
       var comp = parseFloat(document.getElementById('arComp').value) || 0;
       var larg = parseFloat(document.getElementById('arLarg').value) || 0;
@@ -799,11 +646,7 @@
       var eletro = parseFloat(document.getElementById('arEletro').value) || 0;
 
       var area = comp * larg;
-      var btuBase = area * fatorSol;
-      var btuPessoas = (pessoas - 1) > 0 ? (pessoas - 1) * fatorSol : 0;
-      var btuEletro = eletro * 600;
-
-      var totalBTU = btuBase + btuPessoas + btuEletro;
+      var totalBTU = (area * fatorSol) + ((pessoas - 1) * fatorSol) + (eletro * 600);
 
       var recomendado = "9.000 BTU/h";
       if(totalBTU > 9000 && totalBTU <= 12000) recomendado = "12.000 BTU/h";
@@ -816,21 +659,15 @@
       document.getElementById('resArBtuRecomendado').innerText = recomendado;
     }
 
-    // LISTA DE MATERIAIS PARA AR CONDICIONADO
     var totalMateriaisArCalculado = 0;
     function gerarMateriaisAr() {
       var metros = parseFloat(document.getElementById('metroCobreAr').value) || 3;
-
       listaMateriaisArGlobal = [
         { nome: "Tubulação de Cobre Isolada (Par)", qtd: metros, preco: 65 },
-        { nome: "Cabo PP 4x1.5mm² (Interligação)", qtd: metros + 1, preco: 12 },
+        { nome: "Cabo PP 4x1.5mm²", qtd: metros + 1, preco: 12 },
         { nome: "Mangueira de Dreno Corrugada", qtd: metros, preco: 6 },
-        { nome: "Suporte de Alumínio/Aço Condensadora", qtd: 1, preco: 75 },
-        { nome: "Coxins Anti-vibração de Borracha", qtd: 1, preco: 25 },
-        { nome: "Fita PP de Acabamento Tecida", qtd: 1, preco: 20 },
-        { nome: "Siringa / Buchas / Parafusos Inox", qtd: 1, preco: 15 }
+        { nome: "Suporte de Condensadora + Coxins", qtd: 1, preco: 100 }
       ];
-
       renderizarMateriaisAr();
     }
 
@@ -838,50 +675,31 @@
       var tbody = document.getElementById('tbodyMateriaisAr');
       tbody.innerHTML = "";
       totalMateriaisArCalculado = 0;
-
       listaMateriaisArGlobal.forEach(function(m) {
         var sub = m.qtd * m.preco;
         totalMateriaisArCalculado += sub;
-
-        var tr = document.createElement('tr');
-        tr.innerHTML = '<td>' + m.nome + '</td>' +
-                       '<td>' + m.qtd + '</td>' +
-                       '<td>R$ ' + m.preco.toFixed(2) + '</td>' +
-                       '<td style="font-weight:bold; color:var(--primary);">R$ ' + sub.toFixed(2) + '</td>';
-        tbody.appendChild(tr);
+        tbody.innerHTML += '<tr><td>' + m.nome + '</td><td>' + m.qtd + '</td><td>R$ ' + m.preco.toFixed(2) + '</td><td>R$ ' + sub.toFixed(2) + '</td></tr>';
       });
-
-      document.getElementById('totalCustoMateriaisAr').innerText = 'R$ ' + totalMateriaisArCalculado.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+      document.getElementById('totalCustoMateriaisAr').innerText = 'R$ ' + totalMateriaisArCalculado.toLocaleString('pt-BR', {minimumFractionDigits: 2});
     }
 
     function adicionarMateriaisArAoOrcamento() {
       var m = document.getElementById('metroCobreAr').value;
-      itensOrcamento.push({
-        nome: "Kit Completo de Materiais P/ Ar Condicionado (" + m + " metros de infra)",
-        preco: totalMateriaisArCalculado,
-        qtd: 1
-      });
+      itensOrcamento.push({ nome: "Kit Materiais P/ Ar Condicionado (" + m + "m)", preco: totalMateriaisArCalculado, qtd: 1 });
       atualizarListaItens();
       trocarAba('orcamentoTab', document.querySelectorAll('.tab-btn')[0]);
     }
 
-    // LÓGICA DE ORÇAMENTO
+    // OPERAÇÕES DO ORÇAMENTO
     function adicionarItem() {
       var select = document.getElementById('servicoSelect');
       var val = select.value;
-      if (!val) {
-        alert("Selecione um serviço primeiro!");
-        return;
-      }
+      if (!val) { alert("Selecione um serviço primeiro!"); return; }
       var partes = val.split('|');
-      var nome = partes[0];
-      var preco = parseFloat(partes[1]);
       var qtd = parseInt(document.getElementById('servicoQtd').value) || 1;
 
-      itensOrcamento.push({ nome: nome, preco: preco, qtd: qtd });
+      itensOrcamento.push({ nome: partes[0], preco: parseFloat(partes[1]), qtd: qtd });
       atualizarListaItens();
-      select.value = "";
-      document.getElementById('servicoQtd').value = "1";
     }
 
     function removerItem(index) {
@@ -892,18 +710,10 @@
     function atualizarListaItens() {
       var lista = document.getElementById('listaItens');
       lista.innerHTML = "";
-
       itensOrcamento.forEach(function(item, idx) {
         var subtotal = item.preco * item.qtd;
-        var li = document.createElement('li');
-        li.innerHTML = '<div class="item-info">' +
-                         '<span class="item-title">' + item.nome + '</span>' +
-                         '<span class="item-sub">' + item.qtd + 'x R$ ' + item.preco.toFixed(2) + ' = R$ ' + subtotal.toFixed(2) + '</span>' +
-                       '</div>' +
-                       '<span class="remove-btn" onclick="removerItem(' + idx + ')">&times;</span>';
-        lista.appendChild(li);
+        lista.innerHTML += '<li><div class="item-info"><span class="item-title">' + item.nome + '</span><span class="item-sub">' + item.qtd + 'x R$ ' + item.preco.toFixed(2) + ' = R$ ' + subtotal.toFixed(2) + '</span></div><span class="remove-btn" onclick="removerItem(' + idx + ')">&times;</span></li>';
       });
-
       calcularTotal();
     }
 
@@ -911,91 +721,55 @@
       var subtotal = itensOrcamento.reduce(function(acc, item) { return acc + (item.preco * item.qtd); }, 0);
       var taxa = parseFloat(document.getElementById('taxaExtra').value) || 0;
       var total = subtotal + taxa;
-      document.getElementById('valorTotal').innerText = 'R$ ' + total.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+      document.getElementById('valorTotal').innerText = 'R$ ' + total.toLocaleString('pt-BR', {minimumFractionDigits: 2});
       return total;
     }
 
-    // ADICIONAR CÁLCULOS DE CASA AO ORÇAMENTO
+    // CÁLCULOS DA ABA CASA
     var totalM2MaoObraCalculado = 0;
-    var totalPontosMaoObraCalculado = 0;
-    var totalMateriaisCalculado = 0;
-
     function calcularMaoObraMetragem() {
       var m2 = parseFloat(document.getElementById('casaMetragem').value) || 0;
       var valorM2 = parseFloat(document.getElementById('casaPadrao').value) || 50;
       var estagio = parseFloat(document.getElementById('casaEstagio').value) || 1;
-
       totalM2MaoObraCalculado = m2 * valorM2 * estagio;
-
       document.getElementById('resM2Area').innerText = m2 + ' m²';
       document.getElementById('resM2Preco').innerText = 'R$ ' + (valorM2 * estagio).toFixed(2) + ' / m²';
-      document.getElementById('resM2Total').innerText = 'R$ ' + totalM2MaoObraCalculado.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+      document.getElementById('resM2Total').innerText = 'R$ ' + totalM2MaoObraCalculado.toLocaleString('pt-BR', {minimumFractionDigits: 2});
     }
 
     function adicionarM2AoOrcamento() {
       var m2 = document.getElementById('casaMetragem').value;
-      itensOrcamento.push({
-        nome: "Mão de Obra Instalação Completa (" + m2 + "m²)",
-        preco: totalM2MaoObraCalculado,
-        qtd: 1
-      });
+      itensOrcamento.push({ nome: "Mão de Obra Instalação Completa (" + m2 + "m²)", preco: totalM2MaoObraCalculado, qtd: 1 });
       atualizarListaItens();
       trocarAba('orcamentoTab', document.querySelectorAll('.tab-btn')[0]);
     }
 
+    var totalPontosMaoObraCalculado = 0;
     function calcularMaoObraPontos() {
       var qTomadas = parseFloat(document.getElementById('qtdTomadas').value) || 0;
       var qIlum = parseFloat(document.getElementById('qtdIlum').value) || 0;
       var qInterr = parseFloat(document.getElementById('qtdInterr').value) || 0;
       var qEspeciais = parseFloat(document.getElementById('qtdEspeciais').value) || 0;
-      var vQDC = parseFloat(document.getElementById('qtdQDC').value) || 0;
-
-      var vSimples = parseFloat(document.getElementById('valPontoSimples').value) || 45;
-      var vEspecial = parseFloat(document.getElementById('valPontoEspecial').value) || 120;
-
       var totalSimples = qTomadas + qIlum + qInterr;
-      var valorSimples = totalSimples * vSimples;
-      var valorEspeciais = qEspeciais * vEspecial;
-
-      totalPontosMaoObraCalculado = valorSimples + valorEspeciais + vQDC;
-
-      document.getElementById('resTotalPontosSimples').innerText = totalSimples + ' pts (R$ ' + valorSimples.toFixed(2) + ')';
-      document.getElementById('resTotalPontosEspeciais').innerText = qEspeciais + ' pts (R$ ' + valorEspeciais.toFixed(2) + ')';
-      document.getElementById('resPontosTotal').innerText = 'R$ ' + totalPontosMaoObraCalculado.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+      totalPontosMaoObraCalculado = (totalSimples * 45) + (qEspeciais * 120);
+      document.getElementById('resTotalPontosSimples').innerText = totalSimples + ' pts';
+      document.getElementById('resPontosTotal').innerText = 'R$ ' + totalPontosMaoObraCalculado.toLocaleString('pt-BR', {minimumFractionDigits: 2});
     }
 
     function adicionarPontosAoOrcamento() {
-      itensOrcamento.push({
-        nome: "Mão de Obra Elétrica por Levantamento de Pontos",
-        preco: totalPontosMaoObraCalculado,
-        qtd: 1
-      });
+      itensOrcamento.push({ nome: "Mão de Obra Elétrica por Levantamento de Pontos", preco: totalPontosMaoObraCalculado, qtd: 1 });
       atualizarListaItens();
       trocarAba('orcamentoTab', document.querySelectorAll('.tab-btn')[0]);
     }
 
-    // LISTA DE MATERIAIS EXPANDIDA E TOTALMENTE EDITÁVEL
+    var totalMateriaisCalculado = 0;
     function recalcularMateriaisArea() {
-      var m2 = parseFloat(document.getElementById('matMetragem').value) || 0;
-
       listaMateriaisGlobal = [
-        { nome: "Cabo Flexível 2.5mm² (Rolo 100m)", qtd: Math.ceil((m2 * 2.5) / 100), preco: 180 },
-        { nome: "Cabo Flexível 1.5mm² (Rolo 100m)", qtd: Math.ceil((m2 * 1.5) / 100), preco: 120 },
-        { nome: "Cabo Flexível 6.0mm² (Rolo 100m)", qtd: Math.ceil((m2 * 0.4) / 100), preco: 420 },
-        { nome: "Eletroduto Corrugado 3/4 (Metros)", qtd: Math.ceil(m2 * 0.8), preco: 4.5 },
-        { nome: "Caixa de Passagem 4x2", qtd: Math.ceil(m2 * 0.5), preco: 3.5 },
-        { nome: "Quadro de Distribuição (QDC) 12/16", qtd: 1, preco: 150 },
-        { nome: "Disjuntor Monopolar (10A a 32A)", qtd: Math.ceil(m2 / 10), preco: 18 },
-        { nome: "Disjuntor Bipolar (40A / Chuveiro)", qtd: 2, preco: 45 },
-        { nome: "Disjuntor Diferencial Residual (DR 40A)", qtd: 1, preco: 130 },
-        { nome: "Dispositivo DPS (Surto)", qtd: 2, preco: 55 },
-        { nome: "Haste de Aterramento 5/8 (2.4m)", qtd: 1, preco: 65 },
-        { nome: "Barramento Neutro/Terra", qtd: 2, preco: 25 },
-        { nome: "Conjunto Tomada 10A / 20A Completo", qtd: Math.ceil(m2 * 0.35), preco: 16 },
-        { nome: "Conjunto Interruptor Completo", qtd: Math.ceil(m2 * 0.15), preco: 18 },
-        { nome: "Fita Isolante Anti-Chamas 20m", qtd: 3, preco: 14 }
+        { nome: "Cabo Flexível 2.5mm² (Rolo 100m)", qtd: 2, preco: 180 },
+        { nome: "Cabo Flexível 1.5mm² (Rolo 100m)", qtd: 1, preco: 120 },
+        { nome: "Eletroduto Corrugado 3/4 (Metros)", qtd: 50, preco: 4.5 },
+        { nome: "Disjuntor Monopolar (10A a 32A)", qtd: 8, preco: 18 }
       ];
-
       renderizarListaMateriais();
     }
 
@@ -1003,28 +777,12 @@
       var tbody = document.getElementById('tbodyMateriais');
       tbody.innerHTML = "";
       totalMateriaisCalculado = 0;
-
       listaMateriaisGlobal.forEach(function(m, idx) {
         var sub = m.qtd * m.preco;
         totalMateriaisCalculado += sub;
-
-        var tr = document.createElement('tr');
-        tr.innerHTML = '<td><input type="text" value="' + m.nome + '" onchange="atualizarMat(' + idx + ', \'nome\', this.value)"></td>' +
-                       '<td><input type="number" min="0" value="' + m.qtd + '" onchange="atualizarMat(' + idx + ', \'qtd\', this.value)"></td>' +
-                       '<td><input type="number" step="0.5" value="' + m.preco + '" onchange="atualizarMat(' + idx + ', \'preco\', this.value)"></td>' +
-                       '<td style="font-weight:bold; color:var(--primary); text-align:right;">R$ ' + sub.toFixed(2) + '</td>' +
-                       '<td style="text-align:center;"><span style="color:red; font-weight:bold; cursor:pointer;" onclick="removerMaterial(' + idx + ')">&times;</span></td>';
-        tbody.appendChild(tr);
+        tbody.innerHTML += '<tr><td>' + m.nome + '</td><td>' + m.qtd + '</td><td>R$ ' + m.preco.toFixed(2) + '</td><td>R$ ' + sub.toFixed(2) + '</td><td><span onclick="removerMaterial(' + idx + ')" style="color:red; cursor:pointer; font-weight:bold;">&times;</span></td></tr>';
       });
-
-      document.getElementById('totalCustoMateriais').innerText = 'R$ ' + totalMateriaisCalculado.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-    }
-
-    function atualizarMat(idx, campo, valor) {
-      if(campo === 'nome') listaMateriaisGlobal[idx].nome = valor;
-      if(campo === 'qtd') listaMateriaisGlobal[idx].qtd = parseFloat(valor) || 0;
-      if(campo === 'preco') listaMateriaisGlobal[idx].preco = parseFloat(valor) || 0;
-      renderizarListaMateriais();
+      document.getElementById('totalCustoMateriais').innerText = 'R$ ' + totalMateriaisCalculado.toLocaleString('pt-BR', {minimumFractionDigits: 2});
     }
 
     function removerMaterial(idx) {
@@ -1032,64 +790,37 @@
       renderizarListaMateriais();
     }
 
-    function adicionarMaterialPersonalizado() {
-      var nome = document.getElementById('novoMatNome').value;
-      var qtd = parseFloat(document.getElementById('novoMatQtd').value) || 1;
-      var preco = parseFloat(document.getElementById('novoMatPreco').value) || 0;
-
-      if(!nome) {
-        alert("Digite o nome do material!");
-        return;
-      }
-
-      listaMateriaisGlobal.push({ nome: nome, qtd: qtd, preco: preco });
-      renderizarListaMateriais();
-
-      document.getElementById('novoMatNome').value = "";
-      document.getElementById('novoMatQtd').value = "1";
-      document.getElementById('novoMatPreco').value = "0";
-    }
-
     function adicionarMateriaisAoOrcamento() {
-      itensOrcamento.push({
-        nome: "Lista Estimativa de Materiais Completa",
-        preco: totalMateriaisCalculado,
-        qtd: 1
-      });
+      itensOrcamento.push({ nome: "Lista Estimativa de Materiais Completa", preco: totalMateriaisCalculado, qtd: 1 });
       atualizarListaItens();
       trocarAba('orcamentoTab', document.querySelectorAll('.tab-btn')[0]);
     }
 
-    // CÁLCULO DE DISJUNTOR & CABO
+    // DISJUNTOR CERTO
     function executarCalculoElétrico() {
       var tensao = parseFloat(document.getElementById('calcTensao').value) || 220;
       var pot = parseFloat(document.getElementById('calcPotencia').value) || 0;
-      var corrDireta = parseFloat(document.getElementById('calcCorrenteDireta').value) || 0;
-
-      var corrente = corrDireta > 0 ? corrDireta : (pot / tensao);
+      var corrente = pot / tensao;
       document.getElementById('resCorrente').innerText = corrente.toFixed(2) + ' A';
 
       var disjuntor = "-";
       var cabo = "-";
-
       if (corrente <= 10) { disjuntor = "10 A"; cabo = "1,5 mm²"; }
       else if (corrente <= 16) { disjuntor = "16 A"; cabo = "1,5 mm²"; }
       else if (corrente <= 20) { disjuntor = "20 A"; cabo = "2,5 mm²"; }
       else if (corrente <= 25) { disjuntor = "25 A"; cabo = "4,0 mm²"; }
       else if (corrente <= 32) { disjuntor = "32 A"; cabo = "6,0 mm²"; }
-      else if (corrente <= 40) { disjuntor = "40 A"; cabo = "6,0 mm² / 10,0 mm²"; }
-      else if (corrente <= 50) { disjuntor = "50 A"; cabo = "10,0 mm²"; }
-      else if (corrente <= 63) { disjuntor = "63 A"; cabo = "16,0 mm²"; }
-      else { disjuntor = "Consultar Engenheiro"; cabo = ">= 25 mm²"; }
+      else if (corrente <= 40) { disjuntor = "40 A"; cabo = "6,0 mm²"; }
+      else { disjuntor = "50 A+"; cabo = "10,0 mm²+"; }
 
       document.getElementById('resDisjuntor').innerText = disjuntor;
       document.getElementById('resCabo').innerText = cabo;
     }
 
-    // GERAÇÃO DE PDF PROFISSIONAL
+    // GERAÇÃO DE PDF SEM CORTAR INFORMAÇÕES
     function gerarPDF() {
       if (itensOrcamento.length === 0) {
-        alert("Adicione pelo menos um serviço para gerar o PDF!");
+        alert("Adicione pelo menos um serviço ao orçamento!");
         return;
       }
 
@@ -1100,75 +831,54 @@
 
       document.getElementById('pdfClienteNome').innerText = cliente;
       document.getElementById('pdfClienteTel').innerText = tel;
-      
-      var hoje = new Date();
-      document.getElementById('pdfData').innerText = "Data: " + hoje.toLocaleDateString('pt-BR');
+      document.getElementById('pdfData').innerText = "Data: " + new Date().toLocaleDateString('pt-BR');
 
       var tbody = document.getElementById('pdfTbody');
       tbody.innerHTML = "";
 
       itensOrcamento.forEach(function(item) {
         var sub = item.preco * item.qtd;
-        var tr = document.createElement('tr');
-        tr.innerHTML = '<td>' + item.qtd + '</td>' +
-                       '<td>' + item.nome + '</td>' +
-                       '<td>R$ ' + item.preco.toFixed(2) + '</td>' +
-                       '<td>R$ ' + sub.toFixed(2) + '</td>';
-        tbody.appendChild(tr);
+        tbody.innerHTML += '<tr><td>' + item.qtd + '</td><td>' + item.nome + '</td><td>R$ ' + item.preco.toFixed(2) + '</td><td>R$ ' + sub.toFixed(2) + '</td></tr>';
       });
 
       if (taxa > 0) {
-        var trTaxa = document.createElement('tr');
-        trTaxa.innerHTML = '<td>1</td><td>Taxa de Deslocamento / Materiais Extras</td><td>R$ ' + taxa.toFixed(2) + '</td><td>R$ ' + taxa.toFixed(2) + '</td>';
-        tbody.appendChild(trTaxa);
+        tbody.innerHTML += '<tr><td>1</td><td>Taxa de Deslocamento / Materiais Extras</td><td>R$ ' + taxa.toFixed(2) + '</td><td>R$ ' + taxa.toFixed(2) + '</td></tr>';
       }
 
-      document.getElementById('pdfValorTotal').innerText = 'VALOR TOTAL: R$ ' + total.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+      document.getElementById('pdfValorTotal').innerText = 'VALOR TOTAL: R$ ' + total.toLocaleString('pt-BR', {minimumFractionDigits: 2});
+
+      // MOSTRA TEMPORARIAMENTE PARA A FOTO DO PDF
+      var container = document.getElementById('pdfContainer');
+      container.style.display = "block";
 
       var elemento = document.getElementById('pdfTemplate');
       var opt = {
-        margin:       10,
+        margin:       [8, 8, 8, 8],
         filename:     'Orcamento_Erick_' + cliente.replace(/\s+/g, '_') + '.pdf',
         image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true },
+        html2canvas:  { scale: 2, scrollY: 0 },
         jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
 
-      html2pdf().set(opt).from(elemento).save();
+      html2pdf().set(opt).from(elemento).save().then(function() {
+        container.style.display = "none";
+      });
     }
 
-    // ENVIO VIA WHATSAPP
+    // ENVIO WHATSAPP
     function enviarWhatsApp() {
-      if (itensOrcamento.length === 0) {
-        alert("Adicione pelo menos um serviço!");
-        return;
-      }
-
+      if (itensOrcamento.length === 0) { alert("Adicione pelo menos um serviço!"); return; }
       var cliente = document.getElementById('clienteNome').value || 'Cliente';
       var tel = document.getElementById('clienteTel').value.replace(/\D/g, '');
       var total = calcularTotal();
 
-      var texto = "*⚡ Érick Serviços & Segurança*\n";
-      texto += "*Orçamento Comercial*\n\n";
-      texto += "👤 *Cliente:* " + cliente + "\n\n";
-      texto += "📋 *Serviços Solicitados:*\n";
-
+      var texto = "*⚡ Érick Serviços & Segurança*\n*Orçamento Comercial*\n\n👤 *Cliente:* " + cliente + "\n\n📋 *ServiçosSolitados:*\n";
       itensOrcamento.forEach(function(item) {
-        var sub = item.preco * item.qtd;
-        texto += "• " + item.qtd + "x " + item.nome + " - R$ " + sub.toFixed(2) + "\n";
+        texto += "• " + item.qtd + "x " + item.nome + " - R$ " + (item.preco * item.qtd).toFixed(2) + "\n";
       });
+      texto += "\n💰 *VALOR TOTAL ESTIMADO:* R$ " + total.toFixed(2) + "\n\n💳 *Pagamento:* Pix e Cartões\n⏱️ *Validade:* 15 dias";
 
-      var taxa = parseFloat(document.getElementById('taxaExtra').value) || 0;
-      if (taxa > 0) {
-        texto += "• Taxa de Deslocamento/Extras: R$ " + taxa.toFixed(2) + "\n";
-      }
-
-      texto += "\n💰 *VALOR TOTAL ESTIMADO:* R$ " + total.toFixed(2) + "\n\n";
-      texto += "💳 *Formas de Pagamento:* Pix e Cartões\n";
-      texto += "⏱️ *Validade:* 15 dias";
-
-      var url = "https://api.whatsapp.com/send?phone=" + (tel.length >= 10 ? "55" + tel : "") + "&text=" + encodeURIComponent(texto);
-      window.open(url, '_blank');
+      window.open("https://api.whatsapp.com/send?phone=" + (tel.length >= 10 ? "55" + tel : "") + "&text=" + encodeURIComponent(texto), '_blank');
     }
   </script>
 </body>
