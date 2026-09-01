@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Erick Hergesel - ERTEC SOLUÇÕES ELÉTRICAS</title>
   
-  <link rel="apple-touch-icon" sizes="180x180" href="https://img.icons8.com/color/180/lightning-bolt.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="https://img.icons8.com/color/32/lightning-bolt.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="WhatsApp Image 2026-08-31 at 08.26.55.jpeg">
+  <link rel="icon" type="image/jpeg" href="WhatsApp Image 2026-08-31 at 08.26.55.jpeg">
   
   <!-- Biblioteca para Gerar PDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -23,9 +23,10 @@
     * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; }
     body { background-color: var(--bg); color: var(--text); padding: 12px; max-width: 650px; margin: 0 auto; }
     
-    header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; padding: 18px; border-radius: 12px; text-align: center; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; padding: 18px; border-radius: 12px; text-align: center; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+    header img.logo-header { max-width: 130px; height: auto; border-radius: 8px; border: 2px solid rgba(255, 255, 255, 0.2); }
     header h1 { font-size: 1.2rem; font-weight: 700; text-transform: uppercase; }
-    header p { font-size: 0.8rem; opacity: 0.9; margin-top: 4px; }
+    header p { font-size: 0.8rem; opacity: 0.9; }
     
     .nav-tabs { display: flex; gap: 4px; margin-bottom: 15px; flex-wrap: wrap; }
     .tab-btn { flex: 1 1 18%; padding: 10px 2px; border: none; border-radius: 8px; font-weight: bold; font-size: 0.75rem; cursor: pointer; background: #e2e8f0; color: #475569; transition: 0.2s; text-align: center; }
@@ -76,8 +77,6 @@
     .tech-table tr:nth-child(even) { background-color: #f8fafc; }
     .tech-table td strong { color: var(--primary); }
     .tech-table input { width: 100%; padding: 5px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 0.8rem; }
-    
-    .info-note { font-size: 0.75rem; color: #64748b; margin-top: 12px; line-height: 1.4; background: #f1f5f9; padding: 10px; border-radius: 6px; border-left: 3px solid var(--highlight); }
 
     .result-box { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px; padding: 14px; margin-top: 15px; }
     .result-box h3 { color: #1e40af; font-size: 1rem; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
@@ -85,25 +84,52 @@
     .result-row:last-child { border-bottom: none; }
     .result-row span.val { font-weight: bold; color: var(--primary); }
 
-    /* LAYOUT DO TEMPLATE PDF */
+    /* LAYOUT DO TEMPLATE PDF COM MARCA D'ÁGUA */
     #pdfContainer { display: none; }
-    #pdfTemplate { background: #ffffff; padding: 25px; font-family: Arial, sans-serif; color: #333; width: 680px; }
+    #pdfTemplate { 
+      background: #ffffff; 
+      padding: 25px; 
+      font-family: Arial, sans-serif; 
+      color: #333; 
+      width: 680px; 
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 380px;
+      opacity: 0.08;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .pdf-content {
+      position: relative;
+      z-index: 1;
+    }
+
     .pdf-header { text-align: center; border-bottom: 2px solid #1b365d; padding-bottom: 12px; margin-bottom: 15px; }
+    .pdf-header img.pdf-logo { max-width: 100px; height: auto; margin-bottom: 8px; }
     .pdf-header h1 { color: #1b365d; font-size: 18px; text-transform: uppercase; margin-bottom: 4px; }
     .pdf-header p { font-size: 11px; color: #555; }
-    .pdf-client-box { background: #f8f9fa; border: 1px solid #e9ecef; padding: 10px; border-radius: 6px; margin-bottom: 15px; font-size: 12px; line-height: 1.4; }
-    .pdf-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    .pdf-client-box { background: rgba(248, 249, 250, 0.85); border: 1px solid #e9ecef; padding: 10px; border-radius: 6px; margin-bottom: 15px; font-size: 12px; line-height: 1.4; }
+    .pdf-table { width: 100%; border-collapse: collapse; margin-top: 10px; background: rgba(255, 255, 255, 0.85); }
     .pdf-table th, .pdf-table td { border: 1px solid #ddd; padding: 8px; text-align: left; font-size: 11px; }
     .pdf-table th { background-color: #1b365d; color: white; text-transform: uppercase; font-size: 10px; }
     .pdf-total { margin-top: 15px; text-align: right; font-size: 15px; font-weight: bold; color: #107c41; }
-    .pdf-terms { margin-top: 20px; font-size: 10px; background: #f9f9f9; padding: 10px; border-radius: 6px; border-left: 4px solid #1b365d; line-height: 1.5; }
+    .pdf-terms { margin-top: 20px; font-size: 10px; background: rgba(249, 249, 249, 0.85); padding: 10px; border-radius: 6px; border-left: 4px solid #1b365d; line-height: 1.5; }
     .pdf-footer { margin-top: 25px; font-size: 10px; text-align: center; color: #777; border-top: 1px solid #eee; padding-top: 8px; }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>⚡ ERTEC SOLUÇÕES ELÉTRICAS</h1>
+    <img src="WhatsApp Image 2026-08-31 at 08.26.55.jpeg" alt="ERTEC Soluções Elétricas" class="logo-header">
+    <h1>ERTEC SOLUÇÕES ELÉTRICAS</h1>
     <p>Erick Hergesel - Elétrica, Climatização Residencial & Segurança Eletrônica</p>
   </header>
 
@@ -527,44 +553,50 @@
     </div>
   </div>
 
-  <!-- CONTAINER DO TEMPLATE PDF -->
+  <!-- CONTAINER DO TEMPLATE PDF COM MARCA D'ÁGUA -->
   <div id="pdfContainer">
     <div id="pdfTemplate">
-      <div class="pdf-header">
-        <h1>ERTEC SOLUÇÕES ELÉTRICAS</h1>
-        <p>Erick Hergesel - Proposta Comercial de Elétrica, Climatização & Segurança</p>
-        <p id="pdfData" style="margin-top: 5px; font-weight: bold; color: #1b365d;"></p>
-      </div>
+      <!-- Marca D'água do PDF -->
+      <img src="WhatsApp Image 2026-08-31 at 08.26.55.jpeg" class="watermark" alt="Marca D'água ERTEC">
 
-      <div class="pdf-client-box">
-        <p><strong>Cliente:</strong> <span id="pdfClienteNome">---</span></p>
-        <p><strong>Telefone / WhatsApp:</strong> <span id="pdfClienteTel">---</span></p>
-      </div>
+      <div class="pdf-content">
+        <div class="pdf-header">
+          <img src="WhatsApp Image 2026-08-31 at 08.26.55.jpeg" alt="ERTEC Logo" class="pdf-logo">
+          <h1>ERTEC SOLUÇÕES ELÉTRICAS</h1>
+          <p>Erick Hergesel - Proposta Comercial de Elétrica, Climatização & Segurança</p>
+          <p id="pdfData" style="margin-top: 5px; font-weight: bold; color: #1b365d;"></p>
+        </div>
 
-      <table class="pdf-table">
-        <thead>
-          <tr>
-            <th style="width: 10%;">Qtd</th>
-            <th style="width: 50%;">Descrição do Serviço / Equipamento</th>
-            <th style="width: 20%;">Valor Unit.</th>
-            <th style="width: 20%;">Subtotal</th>
-          </tr>
-        </thead>
-        <tbody id="pdfTbody"></tbody>
-      </table>
+        <div class="pdf-client-box">
+          <p><strong>Cliente:</strong> <span id="pdfClienteNome">---</span></p>
+          <p><strong>Telefone / WhatsApp:</strong> <span id="pdfClienteTel">---</span></p>
+        </div>
 
-      <div class="pdf-total" id="pdfValorTotal">R$ 0,00</div>
+        <table class="pdf-table">
+          <thead>
+            <tr>
+              <th style="width: 10%;">Qtd</th>
+              <th style="width: 50%;">Descrição do Serviço / Equipamento</th>
+              <th style="width: 20%;">Valor Unit.</th>
+              <th style="width: 20%;">Subtotal</th>
+            </tr>
+          </thead>
+          <tbody id="pdfTbody"></tbody>
+        </table>
 
-      <div class="pdf-terms">
-        <p><strong>Condições Gerais de Fornecimento:</strong></p>
-        <p>• Pagamento: 50% na aprovação / início do serviço e 50% na entrega e testes.</p>
-        <p>• Formas de pagamento: Pix e Cartões de Crédito.</p>
-        <p>• Validade deste orçamento: 15 dias corridos.</p>
-        <p>• Garantia da Mão de Obra: 90 dias após a conclusão do serviço.</p>
-      </div>
+        <div class="pdf-total" id="pdfValorTotal">R$ 0,00</div>
 
-      <div class="pdf-footer">
-        <p>Erick Hergesel - ERTEC SOLUÇÕES ELÉTRICAS | Atendimento Técnico Especializado</p>
+        <div class="pdf-terms">
+          <p><strong>Condições Gerais de Fornecimento:</strong></p>
+          <p>• Pagamento: 50% na aprovação / início do serviço e 50% na entrega e testes.</p>
+          <p>• Formas de pagamento: Pix e Cartões de Crédito.</p>
+          <p>• Validade deste orçamento: 15 dias corridos.</p>
+          <p>• Garantia da Mão de Obra: 90 dias após a conclusão do serviço.</p>
+        </div>
+
+        <div class="pdf-footer">
+          <p>Erick Hergesel - ERTEC SOLUÇÕES ELÉTRICAS | Atendimento Técnico Especializado</p>
+        </div>
       </div>
     </div>
   </div>
