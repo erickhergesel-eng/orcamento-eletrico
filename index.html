@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Erick Hergesel - ERTEC SOLUÇÕES ELÉTRICAS</title>
   
-  <link rel="apple-touch-icon" sizes="180x180" href="WhatsApp Image 2026-08-31 at 08.26.55.jpeg">
-  <link rel="icon" type="image/jpeg" href="WhatsApp Image 2026-08-31 at 08.26.55.jpeg">
+  <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'><rect width='500' height='500' fill='%231b365d'/><circle cx='250' cy='200' r='100' fill='none' stroke='%23eab308' stroke-width='30'/><path d='M250 130 L250 210' stroke='%23eab308' stroke-width='30' stroke-linecap='round'/><text x='250' y='360' font-family='sans-serif' font-weight='bold' font-size='70' fill='%23ffffff' text-anchor='middle'>ERTEC</text><text x='250' y='420' font-family='sans-serif' font-size='32' fill='%23eab308' text-anchor='middle'>ELÉTRICA</text></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'><rect width='500' height='500' fill='%231b365d'/><circle cx='250' cy='200' r='100' fill='none' stroke='%23eab308' stroke-width='30'/><path d='M250 130 L250 210' stroke='%23eab308' stroke-width='30' stroke-linecap='round'/><text x='250' y='360' font-family='sans-serif' font-weight='bold' font-size='70' fill='%23ffffff' text-anchor='middle'>ERTEC</text><text x='250' y='420' font-family='sans-serif' font-size='32' fill='%23eab308' text-anchor='middle'>ELÉTRICA</text></svg>">
   
   <!-- Biblioteca para Gerar PDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -24,7 +24,7 @@
     body { background-color: var(--bg); color: var(--text); padding: 12px; max-width: 650px; margin: 0 auto; }
     
     header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; padding: 18px; border-radius: 12px; text-align: center; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
-    header img.logo-header { max-width: 130px; height: auto; border-radius: 8px; border: 2px solid rgba(255, 255, 255, 0.2); }
+    header svg.logo-header { max-width: 130px; height: auto; border-radius: 8px; border: 2px solid rgba(255, 255, 255, 0.2); }
     header h1 { font-size: 1.2rem; font-weight: 700; text-transform: uppercase; }
     header p { font-size: 0.8rem; opacity: 0.9; }
     
@@ -76,10 +76,8 @@
     .tech-table th { background-color: #f1f5f9; color: var(--primary); font-weight: 700; text-transform: uppercase; font-size: 0.72rem; }
     .tech-table tr:nth-child(even) { background-color: #f8fafc; }
     .tech-table td strong { color: var(--primary); }
-    .tech-table input { width: 100%; padding: 5px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 0.8rem; }
 
     .result-box { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px; padding: 14px; margin-top: 15px; }
-    .result-box h3 { color: #1e40af; font-size: 1rem; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
     .result-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px dashed #cbd5e1; font-size: 0.88rem; }
     .result-row:last-child { border-bottom: none; }
     .result-row span.val { font-weight: bold; color: var(--primary); }
@@ -107,13 +105,9 @@
       pointer-events: none;
     }
 
-    .pdf-content {
-      position: relative;
-      z-index: 1;
-    }
-
+    .pdf-content { position: relative; z-index: 1; }
     .pdf-header { text-align: center; border-bottom: 2px solid #1b365d; padding-bottom: 12px; margin-bottom: 15px; }
-    .pdf-header img.pdf-logo { max-width: 100px; height: auto; margin-bottom: 8px; }
+    .pdf-header svg.pdf-logo { max-width: 100px; height: auto; margin-bottom: 8px; }
     .pdf-header h1 { color: #1b365d; font-size: 18px; text-transform: uppercase; margin-bottom: 4px; }
     .pdf-header p { font-size: 11px; color: #555; }
     .pdf-client-box { background: rgba(248, 249, 250, 0.85); border: 1px solid #e9ecef; padding: 10px; border-radius: 6px; margin-bottom: 15px; font-size: 12px; line-height: 1.4; }
@@ -128,7 +122,14 @@
 <body>
 
   <header>
-    <img src="WhatsApp Image 2026-08-31 at 08.26.55.jpeg" alt="ERTEC Soluções Elétricas" class="logo-header">
+    <!-- Logo incorporado diretamente via SVG vetorial estruturado -->
+    <svg class="logo-header" viewBox="0 0 400 350" xmlns="http://www.w3.org/2000/svg">
+      <rect width="400" height="350" rx="20" fill="#1e1e1e"/>
+      <circle cx="200" cy="120" r="70" fill="none" stroke="#eab308" stroke-width="18"/>
+      <path d="M200 70 L200 125" stroke="#eab308" stroke-width="18" stroke-linecap="round"/>
+      <text x="200" y="245" font-family="'Segoe UI', Arial, sans-serif" font-weight="900" font-size="62" fill="#808080" text-anchor="middle">ER<tspan fill="#eab308">TEC</tspan></text>
+      <text x="200" y="295" font-family="'Segoe UI', Arial, sans-serif" font-weight="400" font-size="28" fill="#ffffff" text-anchor="middle">Soluções Elétricas</text>
+    </svg>
     <h1>ERTEC SOLUÇÕES ELÉTRICAS</h1>
     <p>Erick Hergesel - Elétrica, Climatização Residencial & Segurança Eletrônica</p>
   </header>
@@ -157,7 +158,6 @@
 
     <div class="card">
       <h2>🛠️ Adicionar Serviços</h2>
-      
       <div class="field">
         <label>Buscar Serviço Rapidamente:</label>
         <div class="search-box">
@@ -556,12 +556,24 @@
   <!-- CONTAINER DO TEMPLATE PDF COM MARCA D'ÁGUA -->
   <div id="pdfContainer">
     <div id="pdfTemplate">
-      <!-- Marca D'água do PDF -->
-      <img src="WhatsApp Image 2026-08-31 at 08.26.55.jpeg" class="watermark" alt="Marca D'água ERTEC">
+      <!-- Marca D'água em SVG no PDF -->
+      <svg class="watermark" viewBox="0 0 400 350" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="350" rx="20" fill="#1e1e1e"/>
+        <circle cx="200" cy="120" r="70" fill="none" stroke="#eab308" stroke-width="18"/>
+        <path d="M200 70 L200 125" stroke="#eab308" stroke-width="18" stroke-linecap="round"/>
+        <text x="200" y="245" font-family="'Segoe UI', Arial, sans-serif" font-weight="900" font-size="62" fill="#808080" text-anchor="middle">ER<tspan fill="#eab308">TEC</tspan></text>
+        <text x="200" y="295" font-family="'Segoe UI', Arial, sans-serif" font-weight="400" font-size="28" fill="#ffffff" text-anchor="middle">Soluções Elétricas</text>
+      </svg>
 
       <div class="pdf-content">
         <div class="pdf-header">
-          <img src="WhatsApp Image 2026-08-31 at 08.26.55.jpeg" alt="ERTEC Logo" class="pdf-logo">
+          <svg class="pdf-logo" viewBox="0 0 400 350" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="350" rx="20" fill="#1e1e1e"/>
+            <circle cx="200" cy="120" r="70" fill="none" stroke="#eab308" stroke-width="18"/>
+            <path d="M200 70 L200 125" stroke="#eab308" stroke-width="18" stroke-linecap="round"/>
+            <text x="200" y="245" font-family="'Segoe UI', Arial, sans-serif" font-weight="900" font-size="62" fill="#808080" text-anchor="middle">ER<tspan fill="#eab308">TEC</tspan></text>
+            <text x="200" y="295" font-family="'Segoe UI', Arial, sans-serif" font-weight="400" font-size="28" fill="#ffffff" text-anchor="middle">Soluções Elétricas</text>
+          </svg>
           <h1>ERTEC SOLUÇÕES ELÉTRICAS</h1>
           <p>Erick Hergesel - Proposta Comercial de Elétrica, Climatização & Segurança</p>
           <p id="pdfData" style="margin-top: 5px; font-weight: bold; color: #1b365d;"></p>
