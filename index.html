@@ -14,9 +14,6 @@
   <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'><rect width='500' height='500' fill='%231b365d'/><circle cx='250' cy='200' r='100' fill='none' stroke='%23eab308' stroke-width='30'/><path d='M250 130 L250 210' stroke='%23eab308' stroke-width='30' stroke-linecap='round'/><text x='250' y='360' font-family='sans-serif' font-weight='bold' font-size='70' fill='%23ffffff' text-anchor='middle'>ERTEC</text><text x='250' y='420' font-family='sans-serif' font-size='32' fill='%23eab308' text-anchor='middle'>ELÉTRICA</text></svg>">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'><rect width='500' height='500' fill='%231b365d'/><circle cx='250' cy='200' r='100' fill='none' stroke='%23eab308' stroke-width='30'/><path d='M250 130 L250 210' stroke='%23eab308' stroke-width='30' stroke-linecap='round'/><text x='250' y='360' font-family='sans-serif' font-weight='bold' font-size='70' fill='%23ffffff' text-anchor='middle'>ERTEC</text><text x='250' y='420' font-family='sans-serif' font-size='32' fill='%23eab308' text-anchor='middle'>ELÉTRICA</text></svg>">
   
-  <!-- Biblioteca para Gerar PDF -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  
   <style>
     :root {
       --primary: #1b365d;
@@ -88,40 +85,32 @@
     .result-row:last-child { border-bottom: none; }
     .result-row span.val { font-weight: bold; color: var(--primary); }
 
-    /* RENDERIZAÇÃO SEGURA PARA MOBILE E IOS */
-    #pdfContainer { 
-      position: fixed; 
-      top: 0;
-      left: 0;
-      width: 794px; /* Largura padrão A4 a 96 DPI */
-      z-index: -9999;
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    #pdfTemplate { 
-      background: #ffffff !important; 
-      padding: 30px; 
-      font-family: Arial, sans-serif; 
-      color: #333; 
-      width: 100%; 
-      box-sizing: border-box;
-    }
-    
-    .pdf-header { text-align: center; border-bottom: 2px solid #1b365d; padding-bottom: 12px; margin-bottom: 15px; }
-    .pdf-header h1 { color: #1b365d; font-size: 18px; text-transform: uppercase; margin-bottom: 4px; }
-    .pdf-header p { font-size: 11px; color: #555; }
-    .pdf-client-box { background: #f8f9fa; border: 1px solid #e9ecef; padding: 10px; border-radius: 6px; margin-bottom: 15px; font-size: 12px; line-height: 1.4; }
-    .pdf-table { width: 100%; border-collapse: collapse; margin-top: 10px; background: #ffffff; }
-    .pdf-table th, .pdf-table td { border: 1px solid #ddd; padding: 8px; text-align: left; font-size: 11px; }
-    .pdf-table th { background-color: #1b365d; color: white; text-transform: uppercase; font-size: 10px; }
-    .pdf-total { margin-top: 15px; text-align: right; font-size: 15px; font-weight: bold; color: #107c41; }
-    .pdf-terms { margin-top: 20px; font-size: 10px; background: #f9f9f9; padding: 10px; border-radius: 6px; border-left: 4px solid #1b365d; line-height: 1.5; }
-    .pdf-footer { margin-top: 25px; font-size: 10px; text-align: center; color: #777; border-top: 1px solid #eee; padding-top: 8px; }
+    /* LAYOUT DE IMPRESSÃO / PDF NATIVO UNIVERSAL */
+    #pdfContainer { display: none; }
 
     @media print {
-      body { background: #fff !important; padding: 0 !important; }
-      .nav-tabs, .btn-group, .btn-add, .search-box { display: none !important; }
+      @page { size: A4; margin: 15mm; }
+      body { background: #ffffff !important; padding: 0 !important; margin: 0 !important; max-width: 100% !important; color: #000 !important; }
+      header, .nav-tabs, .tab-content, .btn-group, .btn-add, .search-box { display: none !important; }
+      
+      #pdfContainer { 
+        display: block !important; 
+        width: 100% !important; 
+        background: #ffffff !important; 
+        font-family: Arial, sans-serif !important; 
+        color: #000000 !important;
+      }
+      
+      .pdf-header { text-align: center; border-bottom: 2px solid #1b365d; padding-bottom: 12px; margin-bottom: 15px; }
+      .pdf-header h1 { color: #1b365d; font-size: 20px; text-transform: uppercase; margin-bottom: 4px; font-weight: bold; }
+      .pdf-header p { font-size: 12px; color: #333; margin: 2px 0; }
+      .pdf-client-box { background: #f8f9fa; border: 1px solid #cccccc; padding: 12px; border-radius: 6px; margin-bottom: 20px; font-size: 13px; line-height: 1.5; }
+      .pdf-table { width: 100%; border-collapse: collapse; margin-top: 10px; background: #ffffff; }
+      .pdf-table th, .pdf-table td { border: 1px solid #cccccc; padding: 9px; text-align: left; font-size: 12px; }
+      .pdf-table th { background-color: #1b365d !important; color: #ffffff !important; text-transform: uppercase; font-size: 11px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .pdf-total { margin-top: 20px; text-align: right; font-size: 16px; font-weight: bold; color: #107c41; }
+      .pdf-terms { margin-top: 25px; font-size: 11px; background: #f9f9f9; padding: 12px; border-radius: 6px; border-left: 4px solid #1b365d; line-height: 1.5; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .pdf-footer { margin-top: 30px; font-size: 11px; text-align: center; color: #666666; border-top: 1px solid #eeeeee; padding-top: 10px; }
     }
   </style>
 </head>
@@ -249,7 +238,6 @@
         </select>
       </div>
 
-      <!-- Campos Dinâmicos para Entradas Personalizadas -->
       <div id="campoCustomBox" style="display: none; background: #f1f5f9; padding: 10px; border-radius: 8px; margin-bottom: 12px;">
         <div class="field">
           <label id="lblCustomNome">Descrição do Item Extra:</label>
@@ -281,7 +269,7 @@
       </div>
 
       <div class="btn-group">
-        <button type="button" class="btn-pdf" onclick="gerarPDF()">📄 Baixar PDF do Orçamento</button>
+        <button type="button" class="btn-pdf" onclick="gerarPDF()">📄 Baixar / Salvar PDF</button>
         <button type="button" class="btn-whatsapp" onclick="enviarWhatsApp()">📱 Enviar Resumo no WhatsApp</button>
       </div>
     </div>
@@ -584,46 +572,44 @@
     </div>
   </div>
 
-  <!-- CONTAINER DE RENDERIZAÇÃO DO PDF (OCULTO DE FORMA SEGURA PARA IOS) -->
+  <!-- TEMPLATE EXCLUSIVO PARA O PDF / IMPRESSÃO -->
   <div id="pdfContainer">
-    <div id="pdfTemplate">
-      <div class="pdf-header">
-        <h1>ERTEC SOLUÇÕES ELÉTRICAS</h1>
-        <p>Erick Hergesel - Serviços Elétricos, Ar Condicionado & CFTV</p>
-        <p>Contato / WhatsApp: (11) 99999-8888</p>
-      </div>
+    <div class="pdf-header">
+      <h1>ERTEC SOLUÇÕES ELÉTRICAS</h1>
+      <p>Erick Hergesel - Serviços Elétricos, Ar Condicionado & CFTV</p>
+      <p>Contato / WhatsApp: (11) 99999-8888</p>
+    </div>
 
-      <div class="pdf-client-box">
-        <p><strong>CLIENTE:</strong> <span id="pdfClienteNome">Cliente Não Informado</span></p>
-        <p><strong>CONTATO:</strong> <span id="pdfClienteTel">-</span></p>
-        <p><strong>DATA:</strong> <span id="pdfData">00/00/0000</span></p>
-      </div>
+    <div class="pdf-client-box">
+      <p><strong>CLIENTE:</strong> <span id="pdfClienteNome">Cliente Não Informado</span></p>
+      <p><strong>CONTATO:</strong> <span id="pdfClienteTel">-</span></p>
+      <p><strong>DATA:</strong> <span id="pdfData">00/00/0000</span></p>
+    </div>
 
-      <table class="pdf-table">
-        <thead>
-          <tr>
-            <th>Item / Serviço</th>
-            <th style="width: 10%; text-align: center;">Qtd</th>
-            <th style="width: 20%; text-align: right;">Unitário</th>
-            <th style="width: 20%; text-align: right;">Subtotal</th>
-          </tr>
-        </thead>
-        <tbody id="pdfTbody">
-        </tbody>
-      </table>
+    <table class="pdf-table">
+      <thead>
+        <tr>
+          <th>Item / Serviço</th>
+          <th style="width: 10%; text-align: center;">Qtd</th>
+          <th style="width: 20%; text-align: right;">Unitário</th>
+          <th style="width: 20%; text-align: right;">Subtotal</th>
+        </tr>
+      </thead>
+      <tbody id="pdfTbody">
+      </tbody>
+    </table>
 
-      <div class="pdf-total" id="pdfValorTotal">TOTAL: R$ 0,00</div>
+    <div class="pdf-total" id="pdfValorTotal">TOTAL: R$ 0,00</div>
 
-      <div class="pdf-terms">
-        <p><strong>Condições Gerais:</strong></p>
-        <p>1. Este orçamento possui validade de 15 dias a contar da data de sua emissão.</p>
-        <p>2. Os valores contemplam a execução da mão de obra especializada conforme descrito nos itens.</p>
-        <p>3. Alterações no escopo do projeto durante a execução serão orçadas separadamente.</p>
-      </div>
+    <div class="pdf-terms">
+      <p><strong>Condições Gerais:</strong></p>
+      <p>1. Este orçamento possui validade de 15 dias a contar da data de sua emissão.</p>
+      <p>2. Os valores contemplam a execução da mão de obra especializada conforme descrito nos itens.</p>
+      <p>3. Alterações no escopo do projeto durante a execução serão orçadas separadamente.</p>
+    </div>
 
-      <div class="pdf-footer">
-        ERTEC Soluções Elétricas - Garantia e Qualidade nos Serviços
-      </div>
+    <div class="pdf-footer">
+      ERTEC Soluções Elétricas - Garantia e Qualidade nos Serviços
     </div>
   </div>
 
@@ -927,39 +913,7 @@
       }
 
       prepararTemplatePDF();
-
-      const container = document.getElementById('pdfContainer');
-      const element = document.getElementById('pdfTemplate');
-
-      // Torna visível momentaneamente para a captura no iOS/Safari
-      container.style.opacity = '1';
-      container.style.zIndex = '9999';
-
-      const opt = {
-        margin: [10, 10, 10, 10],
-        filename: 'Orcamento_ERTEC.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { 
-          scale: 2, 
-          useCORS: true, 
-          logging: false,
-          width: 794,
-          windowWidth: 794,
-          scrollX: 0,
-          scrollY: 0
-        },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-      };
-
-      html2pdf().set(opt).from(element).save().then(() => {
-        // Restaura a ocultação após a geração
-        container.style.opacity = '0';
-        container.style.zIndex = '-9999';
-      }).catch(err => {
-        container.style.opacity = '0';
-        container.style.zIndex = '-9999';
-        console.error('Erro ao gerar PDF:', err);
-      });
+      window.print();
     }
 
     function enviarWhatsApp() {
