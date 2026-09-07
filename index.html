@@ -10,196 +10,189 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: Arial, sans-serif;
       background-color: #f4f4f9;
       margin: 0;
-      padding: 0;
+      padding: 15px;
       color: #333;
     }
     
     .orcamento-container {
       max-width: 800px;
       margin: 0 auto;
-      background: #ffffff !important; 
-      padding-bottom: 30px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background: #ffffff; 
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
-    /* Cabeçalho igual ao da foto */
-    .header-azul {
-      background-color: #0c3866; /* Azul escuro oficial */
-      color: #ffffff;
-      text-align: center;
-      padding: 30px 20px;
-      border-radius: 0 0 4px 4px;
-    }
-
-    .header-azul .logo-container {
+    .header-app {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      border-bottom: 2px solid #0c3866;
+      padding-bottom: 12px;
       margin-bottom: 15px;
     }
 
-    .header-azul img {
-      max-height: 120px;
+    .header-app img {
+      height: 50px;
       width: auto;
-      border-radius: 12px;
     }
 
-    .header-azul h1 {
-      margin: 10px 0 5px 0;
-      font-size: 24px;
-      font-weight: bold;
-      letter-spacing: 1px;
+    .header-app .titulo {
+      flex: 1;
     }
 
-    .header-azul p {
+    .header-app h2 {
       margin: 0;
-      font-size: 14px;
-      opacity: 0.9;
+      font-size: 18px;
+      color: #0c3866;
     }
 
-    .conteudo-orcamento {
-      padding: 20px 30px;
+    .header-app p {
+      margin: 2px 0 0 0;
+      font-size: 12px;
+      color: #666;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 20px;
+      margin-top: 15px;
     }
 
     th, td {
       border: 1px solid #ddd;
-      padding: 10px;
+      padding: 8px;
       text-align: left;
     }
 
     th {
       background-color: #0c3866;
       color: white;
-      font-size: 14px;
+      font-size: 13px;
+    }
+
+    input, select {
+      padding: 6px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 13px;
     }
 
     .total-container {
       text-align: right;
-      margin-top: 20px;
-      font-size: 18px;
+      margin-top: 15px;
+      font-size: 16px;
       font-weight: bold;
       color: #0c3866;
     }
 
     .controles {
-      margin-top: 20px;
+      margin-top: 15px;
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
     }
 
     button {
-      padding: 10px 15px;
+      padding: 10px 14px;
       border: none;
       border-radius: 4px;
       cursor: pointer;
       font-weight: bold;
+      font-size: 13px;
     }
 
     .btn-add { background-color: #27ae60; color: white; }
     .btn-print { background-color: #2980b9; color: white; }
-    .btn-remove { background-color: #c0392b; color: white; padding: 5px 10px; }
+    .btn-remove { background-color: #c0392b; color: white; padding: 4px 8px; }
 
     @media print {
       body { background: none; padding: 0; }
       .controles, .btn-remove { display: none !important; }
-      .orcamento-container { box-shadow: none; width: 100%; }
-      .header-azul {
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-      }
+      .orcamento-container { box-shadow: none; width: 100%; padding: 0; }
     }
   </style>
 </head>
 <body>
 
 <div class="orcamento-container" id="orcamento">
-  <!-- Cabeçalho idêntico ao da imagem fornecida -->
-  <div class="header-azul">
-    <div class="logo-container">
-      <img src="logo.png" alt="ERTEC Soluções Elétricas" id="logo-img">
+  <div class="header-app">
+    <img src="logo.png" alt="ERTEC Logo" id="logo-img">
+    <div class="titulo">
+      <h2>ERTEC SOLUÇÕES ELÉTRICAS</h2>
+      <p>Erick Hergesel - Elétrica, Climatização & Segurança</p>
     </div>
-    <h1>ERTEC SOLUÇÕES ELÉTRICAS</h1>
-    <p>Erick Hergesel - Elétrica, Climatização Residencial & Segurança Eletrônica</p>
   </div>
 
-  <div class="conteudo-orcamento">
-    <table id="tabela-itens">
-      <thead>
-        <tr>
-          <th style="width: 10%;">QTD</th>
-          <th style="width: 50%;">DESCRIÇÃO DO SERVIÇO / EQUIPAMENTO / MATERIAL</th>
-          <th style="width: 20%;">VALOR UNIT. (R$)</th>
-          <th style="width: 15%;">SUBTOTAL (R$)</th>
-          <th class="controles" style="width: 5%;">AÇÃO</th>
-        </tr>
-      </thead>
-      <tbody id="corpo-tabela">
-        <tr>
-          <td><input type="number" value="1" min="1" onchange="calcularTotal()" class="qtd" style="width: 80%;"></td>
-          <td>
-            <select onchange="atualizarDescricao(this)" class="select-servico" style="width: 100%;">
-              <option value="custom">-- Digitar Item Personalizado --</option>
-              <optgroup label="Câmeras e Segurança">
-                <option value="Instalação de Câmera Wi-Fi Inteligente" data-preco="90.00">Instalação de Câmera Wi-Fi Inteligente</option>
-                <option value="Configuração e Formatação de Cartão MicroSD" data-preco="35.00">Configuração e Formatação de Cartão MicroSD</option>
-                <option value="Configuração de Acesso Remoto no Celular" data-preco="100.00">Configuração de Acesso Remoto no Celular</option>
-              </optgroup>
-              <optgroup label="Iluminação & Sensores">
-                <option value="Instalação de Refletor LED" data-preco="80.00">Instalação de Refletor LED</option>
-                <option value="Instalação de Relé Fotocélula" data-preco="70.00">Instalação de Relé Fotocélula</option>
-                <option value="Instalação de Sensor de Presença" data-preco="65.00">Instalação de Sensor de Presença</option>
-                <option value="Instalação de Interruptor Inteligente Wi-Fi" data-preco="90.00">Instalação de Interruptor Inteligente Wi-Fi</option>
-                <option value="Instalação de Fita LED com Perfil de Alumínio" data-preco="110.00">Instalação de Fita LED com Perfil de Alumínio</option>
-              </optgroup>
-              <optgroup label="Instalações Elétricas & Quadros">
-                <option value="Instalação de Ponto Novo de Tomada/Iluminação" data-preco="120.00">Instalação de Ponto Novo de Tomada/Iluminação</option>
-                <option value="Montagem / Organização de Quadro de Distribuição (QDC)" data-preco="350.00">Montagem / Organização de QDC</option>
-                <option value="Instalação de Disjuntor DIN/NEMA" data-preco="45.00">Instalação de Disjuntor DIN/NEMA</option>
-                <option value="Instalação de Dispositivo DR / DPS" data-preco="85.00">Instalação de Dispositivo DR / DPS</option>
-                <option value="Passagem / Troca de Fiação Elétrica (por ponto)" data-preco="75.00">Passagem / Troca de Fiação Elétrica</option>
-                <option value="Instalação de Haste de Aterramento" data-preco="130.00">Instalação de Haste de Aterramento</option>
-              </optgroup>
-              <optgroup label="Ajustes e Extras Manual">
-                <option value="Mão de Obra Extra / Adicional" data-preco="0.00">Mão de Obra Extra / Adicional</option>
-                <option value="Material Extra de Infraestrutura (Cabos, Caixas, Conduítes)" data-preco="0.00">Material Extra de Infraestrutura</option>
-                <option value="Taxa de Deslocamento" data-preco="30.00">Taxa de Deslocamento</option>
-              </optgroup>
-            </select>
-            <input type="text" placeholder="Descrição personalizada..." class="desc-custom" style="width: 95%; margin-top: 5px; display: none;">
-          </td>
-          <td><input type="number" step="0.01" value="0.00" onchange="calcularTotal()" class="preco" style="width: 80%;"></td>
-          <td class="subtotal">R$ 0,00</td>
-          <td class="controles"><button class="btn-remove" onclick="removerLinha(this)">X</button></td>
-        </tr>
-      </tbody>
-    </table>
+  <table id="tabela-itens">
+    <thead>
+      <tr>
+        <th style="width: 10%;">QTD</th>
+        <th style="width: 50%;">DESCRIÇÃO DO SERVIÇO / MATERIAL</th>
+        <th style="width: 20%;">VALOR UNIT.</th>
+        <th style="width: 15%;">SUBTOTAL</th>
+        <th class="controles" style="width: 5%;">AÇÃO</th>
+      </tr>
+    </thead>
+    <tbody id="corpo-tabela">
+      <tr>
+        <td><input type="number" value="1" min="1" onchange="calcularTotal()" class="qtd" style="width: 100%;"></td>
+        <td>
+          <select onchange="atualizarDescricao(this)" class="select-servico" style="width: 100%;">
+            <option value="custom">-- Digitar Item Personalizado --</option>
+            <optgroup label="Câmeras e Segurança">
+              <option value="Instalação de Câmera Wi-Fi Inteligente" data-preco="90.00">Instalação de Câmera Wi-Fi Inteligente</option>
+              <option value="Configuração de Cartão MicroSD e App" data-preco="35.00">Configuração de Cartão MicroSD e App</option>
+            </optgroup>
+            <optgroup label="Iluminação & Sensores">
+              <option value="Instalação de Refletor LED" data-preco="80.00">Instalação de Refletor LED</option>
+              <option value="Instalação de Relé Fotocélula" data-preco="70.00">Instalação de Relé Fotocélula</option>
+              <option value="Instalação de Sensor de Presença" data-preco="65.00">Instalação de Sensor de Presença</option>
+              <option value="Instalação de Interruptor Inteligente" data-preco="90.00">Instalação de Interruptor Inteligente</option>
+            </optgroup>
+            <optgroup label="Instalações Elétricas">
+              <option value="Instalação de Ponto Novo de Tomada" data-preco="120.00">Instalação de Ponto Novo de Tomada</option>
+              <option value="Montagem de Quadro de Distribuição (QDC)" data-preco="350.00">Montagem de QDC</option>
+              <option value="Instalação de Disjuntor" data-preco="45.00">Instalação de Disjuntor</option>
+              <option value="Instalação de Dispositivo DR / DPS" data-preco="85.00">Instalação de Dispositivo DR / DPS</option>
+              <option value="Troca de Fiação Elétrica (ponto)" data-preco="75.00">Troca de Fiação Elétrica</option>
+            </optgroup>
+            <optgroup label="Extras">
+              <option value="Mão de Obra Extra" data-preco="0.00">Mão de Obra Extra</option>
+              <option value="Material Extra" data-preco="0.00">Material Extra</option>
+              <option value="Taxa de Deslocamento" data-preco="30.00">Taxa de Deslocamento</option>
+            </optgroup>
+          </select>
+          <input type="text" placeholder="Descrição do serviço/material..." class="desc-custom" style="width: 100%; margin-top: 5px;">
+        </td>
+        <td><input type="number" step="0.01" value="0.00" onchange="calcularTotal()" class="preco" style="width: 100%;"></td>
+        <td class="subtotal">R$ 0,00</td>
+        <td class="controles"><button class="btn-remove" onclick="removerLinha(this)">X</button></td>
+      </tr>
+    </tbody>
+  </table>
 
-    <div class="controles">
-      <button class="btn-add" onclick="adicionarLinha()">+ Adicionar Item / Serviço</button>
-      <button class="btn-print" onclick="window.print()">Imprimir / Salvar PDF</button>
-    </div>
+  <div class="controles">
+    <button class="btn-add" onclick="adicionarLinha()">+ Adicionar Item</button>
+    <button class="btn-print" onclick="window.print()">Imprimir / Salvar PDF</button>
+  </div>
 
-    <div class="total-container">
-      VALOR TOTAL: <span id="valor-total">R$ 0,00</span>
-    </div>
+  <div class="total-container">
+    VALOR TOTAL: <span id="valor-total">R$ 0,00</span>
+  </div>
 
-    <div style="margin-top: 30px; border-top: 1px solid #ddd; padding-top: 10px; font-size: 12px; color: #555;">
-      <p><strong>Condições Gerais de Fornecimento:</strong></p>
-      <ul>
-        <li>Pagamento: 50% na aprovação / início do serviço e 50% na entrega e testes.</li>
-        <li>Formas de pagamento: Pix e Cartões de Crédito.</li>
-        <li>Validade deste orçamento: 15 dias corridos.</li>
-        <li>Garantia da Mão de Obra: 90 dias após a conclusão do serviço.</li>
-      </ul>
-    </div>
+  <div style="margin-top: 20px; border-top: 1px solid #ddd; padding-top: 8px; font-size: 11px; color: #666;">
+    <p style="margin: 0 0 5px 0;"><strong>Condições Gerais:</strong></p>
+    <p style="margin: 2px 0;">• Pagamento: 50% na aprovação e 50% na conclusão.</p>
+    <p style="margin: 2px 0;">• Validade: 15 dias. | Garantia: 90 dias.</p>
   </div>
 </div>
 
@@ -245,7 +238,7 @@
     novaLinha.querySelector('.preco').value = '0.00';
     novaLinha.querySelector('.subtotal').innerText = 'R$ 0,00';
     novaLinha.querySelector('.select-servico').selectedIndex = 0;
-    novaLinha.querySelector('.desc-custom').style.display = 'none';
+    novaLinha.querySelector('.desc-custom').style.display = 'block';
     novaLinha.querySelector('.desc-custom').value = '';
 
     corpo.appendChild(novaLinha);
@@ -260,7 +253,9 @@
     }
   }
 
-  window.onload = calcularTotal;
+  window.onload = function() {
+    calcularTotal();
+  };
 </script>
 
 </body>
