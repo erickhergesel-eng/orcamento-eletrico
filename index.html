@@ -88,8 +88,13 @@
     .result-row:last-child { border-bottom: none; }
     .result-row span.val { font-weight: bold; color: var(--primary); }
 
-    /* LAYOUT DO TEMPLATE PDF COM FUNDO BRANCO E CONTRASTE */
-    #pdfContainer { display: none; }
+    /* POSICIONAMENTO DO PDF FORA DA TELA PARA EVITAR PAGINA EM BRANCO */
+    #pdfContainer { 
+      position: absolute; 
+      left: -9999px; 
+      top: 0; 
+      width: 680px; 
+    }
     #pdfTemplate { 
       background: #ffffff !important; 
       padding: 25px; 
@@ -814,7 +819,7 @@
       window.open(link, '_blank');
     }
 
-    // GERAR PDF COM HTML2PDF
+    // GERAR PDF COM HTML2PDF CORRIGIDO
     function gerarPDF() {
       if (itensOrcamento.length === 0) {
         alert('Adicione ao menos um serviço para gerar o PDF.');
@@ -857,9 +862,8 @@
       const total = itensOrcamento.reduce((acc, i) => acc + i.subtotal, 0) + taxaExtra;
       document.getElementById('pdfValorTotal').innerText = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
+      // Pega o elemento do PDF diretamente sem alterar display
       const element = document.getElementById('pdfTemplate');
-      const container = document.getElementById('pdfContainer');
-      container.style.display = 'block';
 
       const opt = {
         margin: 5,
@@ -869,9 +873,7 @@
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
 
-      html2pdf().set(opt).from(element).save().then(() => {
-        container.style.display = 'none';
-      });
+      html2pdf().set(opt).from(element).save();
     }
 
     // MÓDULO AR CONDICIONADO - BTUs
