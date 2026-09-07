@@ -10,10 +10,6 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="ERTEC">
   
-  <!-- Ícones PWA / iOS com fundo azul estático e alta compatibilidade -->
-  <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'><rect width='500' height='500' fill='%231b365d'/><circle cx='250' cy='200' r='100' fill='none' stroke='%23eab308' stroke-width='30'/><path d='M250 130 L250 210' stroke='%23eab308' stroke-width='30' stroke-linecap='round'/><text x='250' y='360' font-family='sans-serif' font-weight='bold' font-size='70' fill='%23ffffff' text-anchor='middle'>ERTEC</text><text x='250' y='420' font-family='sans-serif' font-size='32' fill='%23eab308' text-anchor='middle'>ELÉTRICA</text></svg>">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'><rect width='500' height='500' fill='%231b365d'/><circle cx='250' cy='200' r='100' fill='none' stroke='%23eab308' stroke-width='30'/><path d='M250 130 L250 210' stroke='%23eab308' stroke-width='30' stroke-linecap='round'/><text x='250' y='360' font-family='sans-serif' font-weight='bold' font-size='70' fill='%23ffffff' text-anchor='middle'>ERTEC</text><text x='250' y='420' font-family='sans-serif' font-size='32' fill='%23eab308' text-anchor='middle'>ELÉTRICA</text></svg>">
-  
   <!-- Biblioteca para Gerar PDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   
@@ -30,10 +26,9 @@
     * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; }
     body { background-color: var(--bg); color: var(--text); padding: 12px; max-width: 650px; margin: 0 auto; }
     
-    header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; padding: 18px; border-radius: 12px; text-align: center; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
-    header svg.logo-header { max-width: 130px; height: auto; border-radius: 8px; border: 2px solid rgba(255, 255, 255, 0.2); background-color: #1e1e1e; }
+    header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; padding: 18px; border-radius: 12px; text-align: center; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
     header h1 { font-size: 1.2rem; font-weight: 700; text-transform: uppercase; }
-    header p { font-size: 0.8rem; opacity: 0.9; }
+    header p { font-size: 0.8rem; opacity: 0.9; margin-top: 4px; }
     
     .nav-tabs { display: flex; gap: 4px; margin-bottom: 15px; flex-wrap: wrap; }
     .tab-btn { flex: 1 1 18%; padding: 10px 2px; border: none; border-radius: 8px; font-weight: bold; font-size: 0.75rem; cursor: pointer; background: #e2e8f0; color: #475569; transition: 0.2s; text-align: center; }
@@ -88,38 +83,18 @@
     .result-row:last-child { border-bottom: none; }
     .result-row span.val { font-weight: bold; color: var(--primary); }
 
-    /* POSICIONAMENTO DO PDF FORA DA TELA PARA EVITAR PAGINA EM BRANCO */
-    #pdfContainer { 
-      position: absolute; 
-      left: -9999px; 
-      top: 0; 
-      width: 680px; 
-    }
+    /* ESTILO ANTERIOR DO PDF COM DISPLAY NONE */
+    #pdfContainer { display: none; }
     #pdfTemplate { 
       background: #ffffff !important; 
       padding: 25px; 
       font-family: Arial, sans-serif; 
       color: #333; 
       width: 680px; 
-      position: relative;
-      overflow: hidden;
     }
     
-    .watermark {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 380px;
-      opacity: 0.06;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .pdf-content { position: relative; z-index: 1; }
     .pdf-header { text-align: center; border-bottom: 2px solid #1b365d; padding-bottom: 12px; margin-bottom: 15px; background: #ffffff !important; }
-    .pdf-header svg.pdf-logo { max-width: 110px; height: auto; margin-bottom: 8px; background-color: #1e1e1e; border-radius: 6px; }
-    .pdf-header h1 { color: #1b365d; font-size: 18px; text-transform: uppercase; margin-bottom: 4px; }
+    .pdf-header h1 { color: #1b365d; font-size: 20px; text-transform: uppercase; margin-bottom: 4px; }
     .pdf-header p { font-size: 11px; color: #555; }
     .pdf-client-box { background: #f8f9fa; border: 1px solid #e9ecef; padding: 10px; border-radius: 6px; margin-bottom: 15px; font-size: 12px; line-height: 1.4; }
     .pdf-table { width: 100%; border-collapse: collapse; margin-top: 10px; background: #ffffff; }
@@ -133,13 +108,6 @@
 <body>
 
   <header>
-    <svg class="logo-header" viewBox="0 0 400 350" xmlns="http://www.w3.org/2000/svg">
-      <rect width="400" height="350" rx="20" fill="#1e1e1e"/>
-      <circle cx="200" cy="120" r="70" fill="none" stroke="#eab308" stroke-width="18"/>
-      <path d="M200 70 L200 125" stroke="#eab308" stroke-width="18" stroke-linecap="round"/>
-      <text x="200" y="245" font-family="'Segoe UI', Arial, sans-serif" font-weight="900" font-size="62" fill="#808080" text-anchor="middle">ER<tspan fill="#eab308">TEC</tspan></text>
-      <text x="200" y="295" font-family="'Segoe UI', Arial, sans-serif" font-weight="400" font-size="28" fill="#ffffff" text-anchor="middle">Soluções Elétricas</text>
-    </svg>
     <h1>ERTEC SOLUÇÕES ELÉTRICAS</h1>
     <p>Erick Hergesel - Elétrica, Climatização Residencial & Segurança Eletrônica</p>
   </header>
@@ -254,7 +222,6 @@
         </select>
       </div>
 
-      <!-- Campos Dinâmicos para Entradas Personalizadas -->
       <div id="campoCustomBox" style="display: none; background: #f1f5f9; padding: 10px; border-radius: 8px; margin-bottom: 12px;">
         <div class="field">
           <label id="lblCustomNome">Descrição do Item Extra:</label>
@@ -589,72 +556,53 @@
     </div>
   </div>
 
-  <!-- CONTAINER DO TEMPLATE PDF COM MARCA D'ÁGUA -->
+  <!-- CONTAINER DO TEMPLATE PDF (SEM LOGO E COM DISPLAY NONE) -->
   <div id="pdfContainer">
     <div id="pdfTemplate">
-      <svg class="watermark" viewBox="0 0 400 350" xmlns="http://www.w3.org/2000/svg">
-        <rect width="400" height="350" rx="20" fill="#1e1e1e"/>
-        <circle cx="200" cy="120" r="70" fill="none" stroke="#eab308" stroke-width="18"/>
-        <path d="M200 70 L200 125" stroke="#eab308" stroke-width="18" stroke-linecap="round"/>
-        <text x="200" y="245" font-family="'Segoe UI', Arial, sans-serif" font-weight="900" font-size="62" fill="#808080" text-anchor="middle">ER<tspan fill="#eab308">TEC</tspan></text>
-        <text x="200" y="295" font-family="'Segoe UI', Arial, sans-serif" font-weight="400" font-size="28" fill="#ffffff" text-anchor="middle">Soluções Elétricas</text>
-      </svg>
+      <div class="pdf-header">
+        <h1>ERTEC SOLUÇÕES ELÉTRICAS</h1>
+        <p>Erick Hergesel - Proposta Comercial de Elétrica, Climatização & Segurança</p>
+        <p id="pdfData" style="margin-top: 5px; font-weight: bold; color: #1b365d;"></p>
+      </div>
 
-      <div class="pdf-content">
-        <div class="pdf-header">
-          <svg class="pdf-logo" viewBox="0 0 400 350" xmlns="http://www.w3.org/2000/svg">
-            <rect width="400" height="350" rx="20" fill="#1e1e1e"/>
-            <circle cx="200" cy="120" r="70" fill="none" stroke="#eab308" stroke-width="18"/>
-            <path d="M200 70 L200 125" stroke="#eab308" stroke-width="18" stroke-linecap="round"/>
-            <text x="200" y="245" font-family="'Segoe UI', Arial, sans-serif" font-weight="900" font-size="62" fill="#808080" text-anchor="middle">ER<tspan fill="#eab308">TEC</tspan></text>
-            <text x="200" y="295" font-family="'Segoe UI', Arial, sans-serif" font-weight="400" font-size="28" fill="#ffffff" text-anchor="middle">Soluções Elétricas</text>
-          </svg>
-          <h1>ERTEC SOLUÇÕES ELÉTRICAS</h1>
-          <p>Erick Hergesel - Proposta Comercial de Elétrica, Climatização & Segurança</p>
-          <p id="pdfData" style="margin-top: 5px; font-weight: bold; color: #1b365d;"></p>
-        </div>
+      <div class="pdf-client-box">
+        <p><strong>Cliente:</strong> <span id="pdfClienteNome">Não informado</span></p>
+        <p><strong>Contato:</strong> <span id="pdfClienteTel">Não informado</span></p>
+      </div>
 
-        <div class="pdf-client-box">
-          <p><strong>Cliente:</strong> <span id="pdfClienteNome">Não informado</span></p>
-          <p><strong>Contato:</strong> <span id="pdfClienteTel">Não informado</span></p>
-        </div>
+      <table class="pdf-table">
+        <thead>
+          <tr>
+            <th style="width: 10%;">QTD</th>
+            <th style="width: 60%;">SERVIÇO / MATERIAL</th>
+            <th style="width: 15%;">VALOR UN.</th>
+            <th style="width: 15%;">SUBTOTAL</th>
+          </tr>
+        </thead>
+        <tbody id="pdfTbody"></tbody>
+      </table>
 
-        <table class="pdf-table">
-          <thead>
-            <tr>
-              <th style="width: 10%;">QTD</th>
-              <th style="width: 60%;">SERVIÇO / MATERIAL</th>
-              <th style="width: 15%;">VALOR UN.</th>
-              <th style="width: 15%;">SUBTOTAL</th>
-            </tr>
-          </thead>
-          <tbody id="pdfTbody"></tbody>
-        </table>
+      <div class="pdf-total">
+        TOTAL ESTIMADO: <span id="pdfValorTotal">R$ 0,00</span>
+      </div>
 
-        <div class="pdf-total">
-          TOTAL ESTIMADO: <span id="pdfValorTotal">R$ 0,00</span>
-        </div>
+      <div class="pdf-terms">
+        <p><strong>Condições Comerciais & Garantia:</strong></p>
+        <p>• Pagamento: 50% de sinal na aprovação do serviço e 50% na conclusão e testes.</p>
+        <p>• Formas de pagamento: Pix, Transferência ou Cartão de Crédito.</p>
+        <p>• Validade deste orçamento: 15 dias corridos a contar da data de emissão.</p>
+        <p>• Garantia de Mão de Obra: 90 dias conforme NBR / Código de Defesa do Consumidor.</p>
+      </div>
 
-        <div class="pdf-terms">
-          <p><strong>Condições Comerciais & Garantia:</strong></p>
-          <p>• Pagamento: 50% de sinal na aprovação do serviço e 50% na conclusão e testes.</p>
-          <p>• Formas de pagamento: Pix, Transferência ou Cartão de Crédito.</p>
-          <p>• Validade deste orçamento: 15 dias corridos a contar da data de emissão.</p>
-          <p>• Garantia de Mão de Obra: 90 dias conforme NBR / Código de Defesa do Consumidor.</p>
-        </div>
-
-        <div class="pdf-footer">
-          <p>ERTEC Soluções Elétricas - Erick Hergesel - Contato Profissional</p>
-        </div>
+      <div class="pdf-footer">
+        <p>ERTEC Soluções Elétricas - Erick Hergesel - Contato Profissional</p>
       </div>
     </div>
   </div>
 
   <script>
-    // ESTADO GLOBAL DO ORÇAMENTO
     let itensOrcamento = [];
 
-    // TROCA DE ABAS
     function trocarAba(tabId, btn) {
       document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -676,7 +624,6 @@
       btn.classList.add('active');
     }
 
-    // FILTRO DE BUSCA DE SERVIÇOS
     function filtrarServicos() {
       const termo = document.getElementById('buscaServico').value.toLowerCase();
       const select = document.getElementById('servicoSelect');
@@ -689,7 +636,6 @@
       }
     }
 
-    // VERIFICAR ITEM CUSTOMIZADO/EXTRA
     function verificarItemCustomizado() {
       const select = document.getElementById('servicoSelect');
       const box = document.getElementById('campoCustomBox');
@@ -706,7 +652,6 @@
       }
     }
 
-    // ADICIONAR ITEM AO ORÇAMENTO
     function adicionarItem() {
       const select = document.getElementById('servicoSelect');
       const qtdInput = document.getElementById('servicoQtd');
@@ -745,7 +690,6 @@
         subtotal: qtd * valorUnitario
       });
 
-      // Resetar formulário
       select.selectedIndex = 0;
       qtdInput.value = 1;
       document.getElementById('campoCustomBox').style.display = 'none';
@@ -787,7 +731,6 @@
       document.getElementById('valorTotal').innerText = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     }
 
-    // ENVIAR RESUMO NO WHATSAPP
     function enviarWhatsApp() {
       const nome = document.getElementById('clienteNome').value.trim();
       const tel = document.getElementById('clienteTel').value.trim().replace(/\D/g, '');
@@ -819,13 +762,14 @@
       window.open(link, '_blank');
     }
 
-    // GERAR PDF COM HTML2PDF CORRIGIDO
+    // GERAR PDF COM ALTERNÂNCIA TEMPORÁRIA DE DISPLAY
     function gerarPDF() {
       if (itensOrcamento.length === 0) {
         alert('Adicione ao menos um serviço para gerar o PDF.');
         return;
       }
 
+      const container = document.getElementById('pdfContainer');
       const nomeCliente = document.getElementById('clienteNome').value.trim() || 'Não informado';
       const telCliente = document.getElementById('clienteTel').value.trim() || 'Não informado';
       const taxaExtra = parseFloat(document.getElementById('taxaExtra').value) || 0;
@@ -862,9 +806,10 @@
       const total = itensOrcamento.reduce((acc, i) => acc + i.subtotal, 0) + taxaExtra;
       document.getElementById('pdfValorTotal').innerText = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
-      // Pega o elemento do PDF diretamente sem alterar display
-      const element = document.getElementById('pdfTemplate');
+      // Exibe temporariamente para captura
+      container.style.display = 'block';
 
+      const element = document.getElementById('pdfTemplate');
       const opt = {
         margin: 5,
         filename: `Orcamento_Ertec_${nomeCliente.replace(/\s+/g, '_')}.pdf`,
@@ -873,10 +818,14 @@
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
 
-      html2pdf().set(opt).from(element).save();
+      html2pdf().set(opt).from(element).save().then(() => {
+        container.style.display = 'none';
+      }).catch(err => {
+        container.style.display = 'none';
+        console.error(err);
+      });
     }
 
-    // MÓDULO AR CONDICIONADO - BTUs
     function calcularBTUs() {
       const comp = parseFloat(document.getElementById('arComp').value) || 0;
       const larg = parseFloat(document.getElementById('arLarg').value) || 0;
@@ -901,7 +850,6 @@
       document.getElementById('resArBtuRecomendado').innerText = recomendado;
     }
 
-    // MATERIAIS AR CONDICIONADO
     function gerarMateriaisAr() {
       const metro = parseFloat(document.getElementById('metroCobreAr').value) || 1;
       const tbody = document.getElementById('tbodyMateriaisAr');
@@ -950,7 +898,6 @@
       renderizarListaItens();
     }
 
-    // INSTALAÇÃO CASA - MÃO DE OBRA M2
     function calcularMaoObraMetragem() {
       const m2 = parseFloat(document.getElementById('casaMetragem').value) || 0;
       const precoM2 = parseFloat(document.getElementById('casaPadrao').value) || 50;
@@ -980,7 +927,6 @@
       renderizarListaItens();
     }
 
-    // INSTALAÇÃO CASA - PONTOS
     function calcularMaoObraPontos() {
       const tomadas = parseInt(document.getElementById('qtdTomadas').value) || 0;
       const ilum = parseInt(document.getElementById('qtdIlum').value) || 0;
@@ -1010,7 +956,6 @@
       renderizarListaItens();
     }
 
-    // CÁLCULO DE DISJUNTOR / CABO
     function executarCalculoElétrico() {
       const tensao = parseFloat(document.getElementById('calcTensao').value);
       const potencia = parseFloat(document.getElementById('calcPotencia').value) || 0;
@@ -1035,7 +980,6 @@
       document.getElementById('resCabo').innerText = cabo;
     }
 
-    // INICIALIZAÇÕES NA CARGA
     window.onload = function() {
       calcularBTUs();
       gerarMateriaisAr();
