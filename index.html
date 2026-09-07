@@ -10,7 +10,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="ERTEC">
   
-  <!-- Ícones PWA / iOS com fundo azul estático e alta compatibilidade -->
+  <!-- Ícones PWA / iOS -->
   <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'><rect width='500' height='500' fill='%231b365d'/><circle cx='250' cy='200' r='100' fill='none' stroke='%23eab308' stroke-width='30'/><path d='M250 130 L250 210' stroke='%23eab308' stroke-width='30' stroke-linecap='round'/><text x='250' y='360' font-family='sans-serif' font-weight='bold' font-size='70' fill='%23ffffff' text-anchor='middle'>ERTEC</text><text x='250' y='420' font-family='sans-serif' font-size='32' fill='%23eab308' text-anchor='middle'>ELÉTRICA</text></svg>">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'><rect width='500' height='500' fill='%231b365d'/><circle cx='250' cy='200' r='100' fill='none' stroke='%23eab308' stroke-width='30'/><path d='M250 130 L250 210' stroke='%23eab308' stroke-width='30' stroke-linecap='round'/><text x='250' y='360' font-family='sans-serif' font-weight='bold' font-size='70' fill='%23ffffff' text-anchor='middle'>ERTEC</text><text x='250' y='420' font-family='sans-serif' font-size='32' fill='%23eab308' text-anchor='middle'>ELÉTRICA</text></svg>">
   
@@ -88,32 +88,24 @@
     .result-row:last-child { border-bottom: none; }
     .result-row span.val { font-weight: bold; color: var(--primary); }
 
-    /* LAYOUT DO TEMPLATE PDF COM FUNDO BRANCO E CONTRASTE */
-    #pdfContainer { display: none; }
+    /* RENDERIZAÇÃO SEGURA DO PDF (Renders fora da tela para evitar páginas em branco) */
+    #pdfContainer { 
+      position: absolute; 
+      left: -9999px; 
+      top: 0;
+      width: 700px;
+    }
     #pdfTemplate { 
       background: #ffffff !important; 
       padding: 25px; 
       font-family: Arial, sans-serif; 
       color: #333; 
-      width: 680px; 
+      width: 100%; 
       position: relative;
-      overflow: hidden;
+      box-sizing: border-box;
     }
     
-    .watermark {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 380px;
-      opacity: 0.06;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .pdf-content { position: relative; z-index: 1; }
-    .pdf-header { text-align: center; border-bottom: 2px solid #1b365d; padding-bottom: 12px; margin-bottom: 15px; background: #ffffff !important; }
-    .pdf-header svg.pdf-logo { max-width: 110px; height: auto; margin-bottom: 8px; background-color: #1e1e1e; border-radius: 6px; }
+    .pdf-header { text-align: center; border-bottom: 2px solid #1b365d; padding-bottom: 12px; margin-bottom: 15px; }
     .pdf-header h1 { color: #1b365d; font-size: 18px; text-transform: uppercase; margin-bottom: 4px; }
     .pdf-header p { font-size: 11px; color: #555; }
     .pdf-client-box { background: #f8f9fa; border: 1px solid #e9ecef; padding: 10px; border-radius: 6px; margin-bottom: 15px; font-size: 12px; line-height: 1.4; }
@@ -123,6 +115,11 @@
     .pdf-total { margin-top: 15px; text-align: right; font-size: 15px; font-weight: bold; color: #107c41; }
     .pdf-terms { margin-top: 20px; font-size: 10px; background: #f9f9f9; padding: 10px; border-radius: 6px; border-left: 4px solid #1b365d; line-height: 1.5; }
     .pdf-footer { margin-top: 25px; font-size: 10px; text-align: center; color: #777; border-top: 1px solid #eee; padding-top: 8px; }
+
+    @media print {
+      body { background: #fff !important; padding: 0 !important; }
+      .nav-tabs, .btn-group, .btn-add, .search-box { display: none !important; }
+    }
   </style>
 </head>
 <body>
@@ -578,469 +575,403 @@
           <tr><td><strong>20 A</strong></td><td>2,5 mm²</td><td>Tomadas gerais (TUG)</td></tr>
           <tr><td><strong>25 A</strong></td><td>4,0 mm²</td><td>Ar condicionado / Tomadas de força</td></tr>
           <tr><td><strong>40 A</strong></td><td>6,0 mm²</td><td>Chuveiro, Forno elétrico</td></tr>
-          <tr><td><strong>50 A</strong></td><td>10,0 mm²</td><td>Chuveiro forte / Geral</td></tr>
+          <tr><td><strong>50 A / 63 A</strong></td><td>10,0 mm²</td><td>Entrada principal / Chuveiro alta potência</td></tr>
         </tbody>
       </table>
     </div>
   </div>
 
-  <!-- CONTAINER DO TEMPLATE PDF COM MARCA D'ÁGUA -->
+  <!-- CONTAINER DE RENDERIZAÇÃO DO PDF (FORA DA TELA) -->
   <div id="pdfContainer">
     <div id="pdfTemplate">
-      <svg class="watermark" viewBox="0 0 400 350" xmlns="http://www.w3.org/2000/svg">
-        <rect width="400" height="350" rx="20" fill="#1e1e1e"/>
-        <circle cx="200" cy="120" r="70" fill="none" stroke="#eab308" stroke-width="18"/>
-        <path d="M200 70 L200 125" stroke="#eab308" stroke-width="18" stroke-linecap="round"/>
-        <text x="200" y="245" font-family="'Segoe UI', Arial, sans-serif" font-weight="900" font-size="62" fill="#808080" text-anchor="middle">ER<tspan fill="#eab308">TEC</tspan></text>
-        <text x="200" y="295" font-family="'Segoe UI', Arial, sans-serif" font-weight="400" font-size="28" fill="#ffffff" text-anchor="middle">Soluções Elétricas</text>
-      </svg>
+      <div class="pdf-header">
+        <h1>ERTEC SOLUÇÕES ELÉTRICAS</h1>
+        <p>Erick Hergesel - Serviços Elétricos, Ar Condicionado & CFTV</p>
+        <p>Contato / WhatsApp: (11) 99999-8888</p>
+      </div>
 
-      <div class="pdf-content">
-        <div class="pdf-header">
-          <svg class="pdf-logo" viewBox="0 0 400 350" xmlns="http://www.w3.org/2000/svg">
-            <rect width="400" height="350" rx="20" fill="#1e1e1e"/>
-            <circle cx="200" cy="120" r="70" fill="none" stroke="#eab308" stroke-width="18"/>
-            <path d="M200 70 L200 125" stroke="#eab308" stroke-width="18" stroke-linecap="round"/>
-            <text x="200" y="245" font-family="'Segoe UI', Arial, sans-serif" font-weight="900" font-size="62" fill="#808080" text-anchor="middle">ER<tspan fill="#eab308">TEC</tspan></text>
-            <text x="200" y="295" font-family="'Segoe UI', Arial, sans-serif" font-weight="400" font-size="28" fill="#ffffff" text-anchor="middle">Soluções Elétricas</text>
-          </svg>
-          <h1>ERTEC SOLUÇÕES ELÉTRICAS</h1>
-          <p>Erick Hergesel - Proposta Comercial de Elétrica, Climatização & Segurança</p>
-          <p id="pdfData" style="margin-top: 5px; font-weight: bold; color: #1b365d;"></p>
-        </div>
+      <div class="pdf-client-box">
+        <p><strong>CLIENTE:</strong> <span id="pdfClienteNome">Cliente Não Informado</span></p>
+        <p><strong>CONTATO:</strong> <span id="pdfClienteTel">-</span></p>
+        <p><strong>DATA:</strong> <span id="pdfData">00/00/0000</span></p>
+      </div>
 
-        <div class="pdf-client-box">
-          <p><strong>Cliente:</strong> <span id="pdfClienteNome">Não informado</span></p>
-          <p><strong>Contato:</strong> <span id="pdfClienteTel">Não informado</span></p>
-        </div>
+      <table class="pdf-table">
+        <thead>
+          <tr>
+            <th>Item / Serviço</th>
+            <th style="width: 10%; text-align: center;">Qtd</th>
+            <th style="width: 20%; text-align: right;">Unitário</th>
+            <th style="width: 20%; text-align: right;">Subtotal</th>
+          </tr>
+        </thead>
+        <tbody id="pdfTbody">
+        </tbody>
+      </table>
 
-        <table class="pdf-table">
-          <thead>
-            <tr>
-              <th style="width: 10%;">QTD</th>
-              <th style="width: 60%;">SERVIÇO / MATERIAL</th>
-              <th style="width: 15%;">VALOR UN.</th>
-              <th style="width: 15%;">SUBTOTAL</th>
-            </tr>
-          </thead>
-          <tbody id="pdfTbody"></tbody>
-        </table>
+      <div class="pdf-total" id="pdfValorTotal">TOTAL: R$ 0,00</div>
 
-        <div class="pdf-total">
-          TOTAL ESTIMADO: <span id="pdfValorTotal">R$ 0,00</span>
-        </div>
+      <div class="pdf-terms">
+        <p><strong>Condições Gerais:</strong></p>
+        <p>1. Este orçamento possui validade de 15 dias a contar da data de sua emissão.</p>
+        <p>2. Os valores contemplam a execução da mão de obra especializada conforme descrito nos itens.</p>
+        <p>3. Alterações no escopo do projeto durante a execução serão orçadas separadamente.</p>
+      </div>
 
-        <div class="pdf-terms">
-          <p><strong>Condições Comerciais & Garantia:</strong></p>
-          <p>• Pagamento: 50% de sinal na aprovação do serviço e 50% na conclusão e testes.</p>
-          <p>• Formas de pagamento: Pix, Transferência ou Cartão de Crédito.</p>
-          <p>• Validade deste orçamento: 15 dias corridos a contar da data de emissão.</p>
-          <p>• Garantia de Mão de Obra: 90 dias conforme NBR / Código de Defesa do Consumidor.</p>
-        </div>
-
-        <div class="pdf-footer">
-          <p>ERTEC Soluções Elétricas - Erick Hergesel - Contato Profissional</p>
-        </div>
+      <div class="pdf-footer">
+        ERTEC Soluções Elétricas - Garantia e Qualidade nos Serviços
       </div>
     </div>
   </div>
 
   <script>
-    // ESTADO GLOBAL DO ORÇAMENTO
     let itensOrcamento = [];
 
-    // TROCA DE ABAS
-    function trocarAba(tabId, btn) {
-      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      document.getElementById(tabId).classList.add('active');
+    function trocarAba(abaId, btn) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById(abaId).classList.add('active');
       btn.classList.add('active');
     }
 
     function trocarSubAr(subId, btn) {
-      document.querySelectorAll('.sub-ar-content').forEach(s => s.style.display = 'none');
-      document.querySelectorAll('#arTab .sub-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.sub-ar-content').forEach(el => el.style.display = 'none');
+      document.querySelectorAll('#arTab .sub-btn').forEach(el => el.classList.remove('active'));
       document.getElementById(subId).style.display = 'block';
       btn.classList.add('active');
     }
 
     function trocarSubCasa(subId, btn) {
-      document.querySelectorAll('.sub-casa-content').forEach(s => s.style.display = 'none');
-      document.querySelectorAll('#casaTab .sub-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.sub-casa-content').forEach(el => el.style.display = 'none');
+      document.querySelectorAll('#casaTab .sub-btn').forEach(el => el.classList.remove('active'));
       document.getElementById(subId).style.display = 'block';
       btn.classList.add('active');
     }
 
-    // FILTRO DE BUSCA DE SERVIÇOS
     function filtrarServicos() {
-      const termo = document.getElementById('buscaServico').value.toLowerCase();
-      const select = document.getElementById('servicoSelect');
-      const options = select.getElementsByTagName('option');
-
-      for (let opt of options) {
-        if (opt.value === "") continue;
-        const txt = opt.textContent.toLowerCase();
-        opt.style.display = txt.includes(termo) ? "" : "none";
-      }
+      let termo = document.getElementById('buscaServico').value.toLowerCase();
+      let options = document.querySelectorAll('#servicoSelect option');
+      options.forEach(opt => {
+        if (!opt.value) return;
+        let txt = opt.textContent.toLowerCase();
+        opt.style.display = txt.includes(termo) ? 'block' : 'none';
+      });
     }
 
-    // VERIFICAR ITEM CUSTOMIZADO/EXTRA
     function verificarItemCustomizado() {
-      const select = document.getElementById('servicoSelect');
-      const box = document.getElementById('campoCustomBox');
-      const lbl = document.getElementById('lblCustomNome');
-
-      if (select.value === "CUSTOM_OBRA|0") {
+      let val = document.getElementById('servicoSelect').value;
+      let box = document.getElementById('campoCustomBox');
+      if (val.startsWith('CUSTOM')) {
         box.style.display = 'block';
-        lbl.innerText = 'Descrição da Mão de Obra Extra:';
-      } else if (select.value === "CUSTOM_MAT|0") {
-        box.style.display = 'block';
-        lbl.innerText = 'Descrição do Material Extra:';
       } else {
         box.style.display = 'none';
       }
     }
 
-    // ADICIONAR ITEM AO ORÇAMENTO
     function adicionarItem() {
-      const select = document.getElementById('servicoSelect');
-      const qtdInput = document.getElementById('servicoQtd');
-      const qtd = parseInt(qtdInput.value) || 1;
+      let sel = document.getElementById('servicoSelect');
+      let val = sel.value;
+      let qtd = parseFloat(document.getElementById('servicoQtd').value) || 1;
 
-      if (!select.value) {
-        alert('Por favor, selecione um serviço na lista.');
+      if (!val) {
+        alert('Por favor, selecione um serviço.');
         return;
       }
 
-      let nome = "";
-      let valorUnitario = 0;
+      let nome = '';
+      let preco = 0;
 
-      if (select.value.startsWith("CUSTOM")) {
-        const descCustom = document.getElementById('customNome').value.trim();
-        const valorCustom = parseFloat(document.getElementById('customValor').value) || 0;
-
-        if (!descCustom) {
-          alert('Por favor, digite a descrição do item extra.');
-          return;
-        }
-
-        nome = select.value.startsWith("CUSTOM_OBRA") ? `[Mão de Obra] ${descCustom}` : `[Material] ${descCustom}`;
-        valorUnitario = valorCustom;
+      if (val.startsWith('CUSTOM')) {
+        nome = document.getElementById('customNome').value.trim() || 'Serviço Personalizado';
+        preco = parseFloat(document.getElementById('customValor').value) || 0;
       } else {
-        const partes = select.value.split('|');
+        let partes = val.split('|');
         nome = partes[0];
-        valorUnitario = parseFloat(partes[1]);
+        preco = parseFloat(partes[1]) || 0;
       }
 
-      itensOrcamento.push({
-        id: Date.now(),
-        nome: nome,
-        qtd: qtd,
-        valorUnitario: valorUnitario,
-        subtotal: qtd * valorUnitario
-      });
-
-      // Resetar formulário
-      select.selectedIndex = 0;
-      qtdInput.value = 1;
+      itensOrcamento.push({ nome, preco, qtd });
+      atualizarLista();
+      
+      sel.value = '';
       document.getElementById('campoCustomBox').style.display = 'none';
-      document.getElementById('customNome').value = '';
-      document.getElementById('customValor').value = '0.00';
-
-      renderizarListaItens();
+      document.getElementById('servicoQtd').value = 1;
     }
 
-    function removerItem(id) {
-      itensOrcamento = itensOrcamento.filter(item => item.id !== id);
-      renderizarListaItens();
+    function removerItem(idx) {
+      itensOrcamento.splice(idx, 1);
+      atualizarLista();
     }
 
-    function renderizarListaItens() {
-      const lista = document.getElementById('listaItens');
-      lista.innerHTML = '';
+    function atualizarLista() {
+      let ul = document.getElementById('listaItens');
+      ul.innerHTML = '';
 
-      itensOrcamento.forEach(item => {
-        const li = document.createElement('li');
+      itensOrcamento.forEach((item, index) => {
+        let subtotal = item.preco * item.qtd;
+        let li = document.createElement('li');
         li.innerHTML = `
           <div class="item-info">
             <span class="item-title">${item.nome}</span>
-            <span class="item-sub">${item.qtd}x R$ ${item.valorUnitario.toFixed(2)} = <strong>R$ ${item.subtotal.toFixed(2)}</strong></span>
+            <span class="item-sub">${item.qtd}x R$ ${item.preco.toFixed(2)} = R$ ${subtotal.toFixed(2)}</span>
           </div>
-          <span class="remove-btn" onclick="removerItem(${item.id})">✕</span>
+          <span class="remove-btn" onclick="removerItem(${index})">✕</span>
         `;
-        lista.appendChild(li);
+        ul.appendChild(li);
       });
 
       calcularTotal();
     }
 
     function calcularTotal() {
-      const taxaExtra = parseFloat(document.getElementById('taxaExtra').value) || 0;
-      const subtotalItens = itensOrcamento.reduce((acc, item) => acc + item.subtotal, 0);
-      const total = subtotalItens + taxaExtra;
-
-      document.getElementById('valorTotal').innerText = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      let soma = itensOrcamento.reduce((acc, item) => acc + (item.preco * item.qtd), 0);
+      let taxa = parseFloat(document.getElementById('taxaExtra').value) || 0;
+      let total = soma + taxa;
+      document.getElementById('valorTotal').innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+      return total;
     }
 
-    // ENVIAR RESUMO NO WHATSAPP
-    function enviarWhatsApp() {
-      const nome = document.getElementById('clienteNome').value.trim();
-      const tel = document.getElementById('clienteTel').value.trim().replace(/\D/g, '');
-      const taxaExtra = parseFloat(document.getElementById('taxaExtra').value) || 0;
-
-      if (itensOrcamento.length === 0) {
-        alert('Adicione ao menos um serviço para enviar o orçamento.');
-        return;
-      }
-
-      let msg = `*ERTEC SOLUÇÕES ELÉTRICAS*\n`;
-      msg += `*Erick Hergesel - Orçamento Técnico*\n\n`;
-      if (nome) msg += `👤 *Cliente:* ${nome}\n\n`;
-
-      msg += `🛠️ *Serviços / Materiais:* \n`;
-      itensOrcamento.forEach(item => {
-        msg += `• ${item.qtd}x ${item.nome} - R$ ${item.subtotal.toFixed(2)}\n`;
-      });
-
-      if (taxaExtra > 0) {
-        msg += `• Taxa de Deslocamento / Extras: R$ ${taxaExtra.toFixed(2)}\n`;
-      }
-
-      const total = itensOrcamento.reduce((acc, i) => acc + i.subtotal, 0) + taxaExtra;
-      msg += `\n💰 *Total Estimado:* R$ ${total.toFixed(2)}\n`;
-      msg += `\n Gostaríamos de agendar a execução? Ficamos à disposição!`;
-
-      const link = tel ? `https://wa.me/55${tel}?text=${encodeURIComponent(msg)}` : `https://wa.me/?text=${encodeURIComponent(msg)}`;
-      window.open(link, '_blank');
-    }
-
-    // GERAR PDF COM HTML2PDF
-    function gerarPDF() {
-      if (itensOrcamento.length === 0) {
-        alert('Adicione ao menos um serviço para gerar o PDF.');
-        return;
-      }
-
-      const nomeCliente = document.getElementById('clienteNome').value.trim() || 'Não informado';
-      const telCliente = document.getElementById('clienteTel').value.trim() || 'Não informado';
-      const taxaExtra = parseFloat(document.getElementById('taxaExtra').value) || 0;
-
-      document.getElementById('pdfClienteNome').innerText = nomeCliente;
-      document.getElementById('pdfClienteTel').innerText = telCliente;
-      document.getElementById('pdfData').innerText = `Data de Emissão: ${new Date().toLocaleDateString('pt-BR')}`;
-
-      const tbody = document.getElementById('pdfTbody');
-      tbody.innerHTML = '';
-
-      itensOrcamento.forEach(item => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td>${item.qtd}</td>
-          <td>${item.nome}</td>
-          <td>R$ ${item.valorUnitario.toFixed(2)}</td>
-          <td>R$ ${item.subtotal.toFixed(2)}</td>
-        `;
-        tbody.appendChild(tr);
-      });
-
-      if (taxaExtra > 0) {
-        const trExtra = document.createElement('tr');
-        trExtra.innerHTML = `
-          <td>1</td>
-          <td>Taxa de Deslocamento / Materiais Extras</td>
-          <td>R$ ${taxaExtra.toFixed(2)}</td>
-          <td>R$ ${taxaExtra.toFixed(2)}</td>
-        `;
-        tbody.appendChild(trExtra);
-      }
-
-      const total = itensOrcamento.reduce((acc, i) => acc + i.subtotal, 0) + taxaExtra;
-      document.getElementById('pdfValorTotal').innerText = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-
-      const element = document.getElementById('pdfTemplate');
-      const container = document.getElementById('pdfContainer');
-      container.style.display = 'block';
-
-      const opt = {
-        margin: 5,
-        filename: `Orcamento_Ertec_${nomeCliente.replace(/\s+/g, '_')}.pdf`,
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-      };
-
-      html2pdf().set(opt).from(element).save().then(() => {
-        container.style.display = 'none';
-      });
-    }
-
-    // MÓDULO AR CONDICIONADO - BTUs
     function calcularBTUs() {
-      const comp = parseFloat(document.getElementById('arComp').value) || 0;
-      const larg = parseFloat(document.getElementById('arLarg').value) || 0;
-      const sol = parseFloat(document.getElementById('arSol').value) || 600;
-      const pessoas = parseInt(document.getElementById('arPessoas').value) || 1;
-      const eletro = parseInt(document.getElementById('arEletro').value) || 0;
+      let comp = parseFloat(document.getElementById('arComp').value) || 0;
+      let larg = parseFloat(document.getElementById('arLarg').value) || 0;
+      let sol = parseFloat(document.getElementById('arSol').value) || 600;
+      let pessoas = parseFloat(document.getElementById('arPessoas').value) || 1;
+      let eletro = parseFloat(document.getElementById('arEletro').value) || 0;
 
-      const area = comp * larg;
-      let btuExato = area * sol;
-      if (pessoas > 1) btuExato += (pessoas - 1) * 600;
-      btuExato += eletro * 600;
+      let area = comp * larg;
+      let btuBase = area * sol;
+      let btuPessoas = (pessoas > 1 ? (pessoas - 1) : 0) * 600;
+      let btuEletro = eletro * 600;
+      let exato = btuBase + btuPessoas + btuEletro;
 
       document.getElementById('resArArea').innerText = `${area.toFixed(1)} m²`;
-      document.getElementById('resArBtuExato').innerText = `${btuExato.toLocaleString('pt-BR')} BTU/h`;
+      document.getElementById('resArBtuExato').innerText = `${Math.round(exato).toLocaleString('pt-BR')} BTU/h`;
 
-      let recomendado = "9.000 BTU/h";
-      if (btuExato > 9000 && btuExato <= 12000) recomendado = "12.000 BTU/h";
-      else if (btuExato > 12000 && btuExato <= 18000) recomendado = "18.000 BTU/h";
-      else if (btuExato > 18000 && btuExato <= 24000) recomendado = "24.000 BTU/h";
-      else if (btuExato > 24000) recomendado = "30.000 BTU/h";
+      let rec = '9.000 BTU/h';
+      if (exato > 9000 && exato <= 12000) rec = '12.000 BTU/h';
+      else if (exato > 12000 && exato <= 18000) rec = '18.000 BTU/h';
+      else if (exato > 18000 && exato <= 24000) rec = '24.000 BTU/h';
+      else if (exato > 24000) rec = '30.000 BTU/h ou mais';
 
-      document.getElementById('resArBtuRecomendado').innerText = recomendado;
+      document.getElementById('resArBtuRecomendado').innerText = rec;
     }
 
-    // MATERIAIS AR CONDICIONADO
     function gerarMateriaisAr() {
-      const metro = parseFloat(document.getElementById('metroCobreAr').value) || 1;
-      const tbody = document.getElementById('tbodyMateriaisAr');
+      let metro = parseFloat(document.getElementById('metroCobreAr').value) || 1;
+      let tbody = document.getElementById('tbodyMateriaisAr');
       
-      const itens = [
-        { nome: 'Tubulação de Cobre Flexível (2 linhas)', qtd: metro, preco: 45.00 },
-        { nome: 'Isolamento Térmico Blindado / Armaflex', qtd: metro, preco: 15.00 },
-        { nome: 'Cabo PP Interligação 4x1,5mm', qtd: metro + 1, preco: 12.00 },
-        { nome: 'Suporte de Condensadora Inox/Pintado', qtd: 1, preco: 65.00 },
-        { nome: 'Fita de Vinil de Proteção', qtd: 1, preco: 18.00 }
+      let materiais = [
+        { nome: 'Tubulação de Cobre Isolada', qtd: metro, preco: 45 },
+        { nome: 'Cabo PP Flexível 4x1.5mm', qtd: metro + 1, preco: 8 },
+        { nome: 'Mangueira de Dreno Cristal', qtd: metro, preco: 5 },
+        { nome: 'Suporte para Condensadora', qtd: 1, preco: 60 }
       ];
 
       tbody.innerHTML = '';
       let total = 0;
 
-      itens.forEach(item => {
-        const sub = item.qtd * item.preco;
+      materiais.forEach(m => {
+        let sub = m.qtd * m.preco;
         total += sub;
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td>${item.nome}</td>
-          <td>${item.qtd}</td>
-          <td>R$ ${item.preco.toFixed(2)}</td>
-          <td>R$ ${sub.toFixed(2)}</td>
+        tbody.innerHTML += `
+          <tr>
+            <td>${m.nome}</td>
+            <td>${m.qtd}</td>
+            <td>R$ ${m.preco.toFixed(2)}</td>
+            <td>R$ ${sub.toFixed(2)}</td>
+          </tr>
         `;
-        tbody.appendChild(tr);
       });
 
-      document.getElementById('totalCustoMateriaisAr').innerText = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      document.getElementById('totalCustoMateriaisAr').innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
     }
 
     function adicionarMateriaisArAoOrcamento() {
-      const metro = parseFloat(document.getElementById('metroCobreAr').value) || 1;
-      const totalTexto = document.getElementById('totalCustoMateriaisAr').innerText;
-      const valor = parseFloat(totalTexto.replace(/[^\d,]/g, '').replace(',', '.'));
-
+      let metro = parseFloat(document.getElementById('metroCobreAr').value) || 1;
+      let total = metro * 45 + (metro + 1) * 8 + metro * 5 + 60;
       itensOrcamento.push({
-        id: Date.now(),
-        nome: `Kit Material/Infraestrutura Ar Condicionado (${metro}m tubulação)`,
-        qtd: 1,
-        valorUnitario: valor,
-        subtotal: valor
+        nome: `Kit Material para Infra de Ar (${metro}m)`,
+        preco: total,
+        qtd: 1
       });
-
+      atualizarLista();
       trocarAba('orcamentoTab', document.querySelectorAll('.tab-btn')[0]);
-      renderizarListaItens();
     }
 
-    // INSTALAÇÃO CASA - MÃO DE OBRA M2
     function calcularMaoObraMetragem() {
-      const m2 = parseFloat(document.getElementById('casaMetragem').value) || 0;
-      const precoM2 = parseFloat(document.getElementById('casaPadrao').value) || 50;
-      const estagio = parseFloat(document.getElementById('casaEstagio').value) || 1;
+      let m2 = parseFloat(document.getElementById('casaMetragem').value) || 0;
+      let precoM2 = parseFloat(document.getElementById('casaPadrao').value) || 50;
+      let estagio = parseFloat(document.getElementById('casaEstagio').value) || 1;
 
-      const total = m2 * precoM2 * estagio;
-
+      let total = m2 * precoM2 * estagio;
       document.getElementById('resM2Area').innerText = `${m2} m²`;
-      document.getElementById('resM2Preco').innerText = `R$ ${precoM2.toFixed(2)}`;
-      document.getElementById('resM2Total').innerText = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      document.getElementById('resM2Preco').innerText = `R$ ${(precoM2 * estagio).toFixed(2)}`;
+      document.getElementById('resM2Total').innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
     }
 
     function adicionarM2AoOrcamento() {
-      const m2 = parseFloat(document.getElementById('casaMetragem').value) || 0;
-      const totalTexto = document.getElementById('resM2Total').innerText;
-      const valor = parseFloat(totalTexto.replace(/[^\d,]/g, '').replace(',', '.'));
+      let m2 = parseFloat(document.getElementById('casaMetragem').value) || 0;
+      let precoM2 = parseFloat(document.getElementById('casaPadrao').value) || 50;
+      let estagio = parseFloat(document.getElementById('casaEstagio').value) || 1;
+      let total = m2 * precoM2 * estagio;
 
       itensOrcamento.push({
-        id: Date.now(),
-        nome: `Mão de Obra Elétrica Completa por Metragem (${m2}m²)`,
-        qtd: 1,
-        valorUnitario: valor,
-        subtotal: valor
+        nome: `Mão de Obra Elétrica Residencial (${m2}m²)`,
+        preco: total,
+        qtd: 1
       });
-
+      atualizarLista();
       trocarAba('orcamentoTab', document.querySelectorAll('.tab-btn')[0]);
-      renderizarListaItens();
     }
 
-    // INSTALAÇÃO CASA - PONTOS
     function calcularMaoObraPontos() {
-      const tomadas = parseInt(document.getElementById('qtdTomadas').value) || 0;
-      const ilum = parseInt(document.getElementById('qtdIlum').value) || 0;
-      const interr = parseInt(document.getElementById('qtdInterr').value) || 0;
-      const especiais = parseInt(document.getElementById('qtdEspeciais').value) || 0;
+      let tomadas = parseFloat(document.getElementById('qtdTomadas').value) || 0;
+      let ilum = parseFloat(document.getElementById('qtdIlum').value) || 0;
+      let interr = parseFloat(document.getElementById('qtdInterr').value) || 0;
+      let espec = parseFloat(document.getElementById('qtdEspeciais').value) || 0;
 
-      const totalPontosSimples = tomadas + ilum + interr;
-      const total = (totalPontosSimples * 50) + (especiais * 150);
+      let simples = tomadas + ilum + interr;
+      let total = (simples * 55) + (espec * 130);
 
-      document.getElementById('resTotalPontosSimples').innerText = `${totalPontosSimples + especiais} pts`;
-      document.getElementById('resPontosTotal').innerText = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      document.getElementById('resTotalPontosSimples').innerText = `${simples} pts`;
+      document.getElementById('resPontosTotal').innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
     }
 
     function adicionarPontosAoOrcamento() {
-      const totalTexto = document.getElementById('resPontosTotal').innerText;
-      const valor = parseFloat(totalTexto.replace(/[^\d,]/g, '').replace(',', '.'));
+      let tomadas = parseFloat(document.getElementById('qtdTomadas').value) || 0;
+      let ilum = parseFloat(document.getElementById('qtdIlum').value) || 0;
+      let interr = parseFloat(document.getElementById('qtdInterr').value) || 0;
+      let espec = parseFloat(document.getElementById('qtdEspeciais').value) || 0;
+
+      let simples = tomadas + ilum + interr;
+      let total = (simples * 55) + (espec * 130);
 
       itensOrcamento.push({
-        id: Date.now(),
-        nome: `Mão de Obra Elétrica Residencial (Levantamento por Pontos)`,
-        qtd: 1,
-        valorUnitario: valor,
-        subtotal: valor
+        nome: `Instalação por Pontos (${simples} simples + ${espec} especiais)`,
+        preco: total,
+        qtd: 1
       });
-
+      atualizarLista();
       trocarAba('orcamentoTab', document.querySelectorAll('.tab-btn')[0]);
-      renderizarListaItens();
     }
 
-    // CÁLCULO DE DISJUNTOR / CABO
     function executarCalculoElétrico() {
-      const tensao = parseFloat(document.getElementById('calcTensao').value);
-      const potencia = parseFloat(document.getElementById('calcPotencia').value) || 0;
+      let v = parseFloat(document.getElementById('calcTensao').value) || 220;
+      let w = parseFloat(document.getElementById('calcPotencia').value) || 0;
 
-      if (potencia <= 0) return;
+      if (w <= 0) return;
 
-      const corrente = potencia / tensao;
-      document.getElementById('resCorrente').innerText = `${corrente.toFixed(2)} A`;
+      let i = w / v;
+      document.getElementById('resCorrente').innerText = `${i.toFixed(2)} A`;
 
-      let disjuntor = "10 A";
-      let cabo = "1.5 mm²";
+      let disj = '10 A';
+      let cabo = '1.5 mm²';
 
-      if (corrente > 10 && corrente <= 16) { disjuntor = "16 A"; cabo = "2.5 mm²"; }
-      else if (corrente > 16 && corrente <= 20) { disjuntor = "20 A"; cabo = "2.5 mm²"; }
-      else if (corrente > 20 && corrente <= 25) { disjuntor = "25 A"; cabo = "4.0 mm²"; }
-      else if (corrente > 25 && corrente <= 32) { disjuntor = "32 A"; cabo = "6.0 mm²"; }
-      else if (corrente > 32 && corrente <= 40) { disjuntor = "40 A"; cabo = "6.0 mm² / 10.0 mm²"; }
-      else if (corrente > 40 && corrente <= 50) { disjuntor = "50 A"; cabo = "10.0 mm²"; }
-      else if (corrente > 50) { disjuntor = "63 A ou Superior"; cabo = "16.0 mm²"; }
+      if (i > 10 && i <= 16) { disj = '16 A'; cabo = '2.5 mm²'; }
+      else if (i > 16 && i <= 20) { disj = '20 A'; cabo = '2.5 mm²'; }
+      else if (i > 20 && i <= 25) { disj = '25 A'; cabo = '4.0 mm²'; }
+      else if (i > 25 && i <= 32) { disj = '32 A'; cabo = '6.0 mm²'; }
+      else if (i > 32 && i <= 40) { disj = '40 A'; cabo = '6.0 mm²'; }
+      else if (i > 40 && i <= 50) { disj = '50 A'; cabo = '10.0 mm²'; }
+      else if (i > 50) { disj = '63 A ou superior'; cabo = '16.0 mm²'; }
 
-      document.getElementById('resDisjuntor').innerText = disjuntor;
+      document.getElementById('resDisjuntor').innerText = disj;
       document.getElementById('resCabo').innerText = cabo;
     }
 
-    // INICIALIZAÇÕES NA CARGA
-    window.onload = function() {
-      calcularBTUs();
-      gerarMateriaisAr();
-      calcularMaoObraMetragem();
-      calcularMaoObraPontos();
-      executarCalculoElétrico();
-    };
+    function prepararTemplatePDF() {
+      let nome = document.getElementById('clienteNome').value.trim() || 'Cliente Não Informado';
+      let tel = document.getElementById('clienteTel').value.trim() || '-';
+      let hoje = new Date().toLocaleDateString('pt-BR');
+
+      document.getElementById('pdfClienteNome').innerText = nome;
+      document.getElementById('pdfClienteTel').innerText = tel;
+      document.getElementById('pdfData').innerText = hoje;
+
+      let tbody = document.getElementById('pdfTbody');
+      tbody.innerHTML = '';
+
+      itensOrcamento.forEach(item => {
+        let subtotal = item.preco * item.qtd;
+        tbody.innerHTML += `
+          <tr>
+            <td>${item.nome}</td>
+            <td style="text-align: center;">${item.qtd}</td>
+            <td style="text-align: right;">R$ ${item.preco.toFixed(2)}</td>
+            <td style="text-align: right;">R$ ${subtotal.toFixed(2)}</td>
+          </tr>
+        `;
+      });
+
+      let taxa = parseFloat(document.getElementById('taxaExtra').value) || 0;
+      if (taxa > 0) {
+        tbody.innerHTML += `
+          <tr>
+            <td colspan="3">Taxa de Materiais Extras / Deslocamento</td>
+            <td style="text-align: right;">R$ ${taxa.toFixed(2)}</td>
+          </tr>
+        `;
+      }
+
+      let total = calcularTotal();
+      document.getElementById('pdfValorTotal').innerText = `TOTAL: R$ ${total.toFixed(2).replace('.', ',')}`;
+    }
+
+    function gerarPDF() {
+      if (itensOrcamento.length === 0) {
+        alert('Adicione pelo menos um serviço antes de gerar o PDF.');
+        return;
+      }
+
+      prepararTemplatePDF();
+
+      let element = document.getElementById('pdfTemplate');
+      let opt = {
+        margin:       10,
+        filename:     'Orcamento_ERTEC.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, useCORS: true, logging: false },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+
+      html2pdf().set(opt).from(element).save();
+    }
+
+    function enviarWhatsApp() {
+      if (itensOrcamento.length === 0) {
+        alert('Adicione ao menos um item ao orçamento.');
+        return;
+      }
+
+      let nome = document.getElementById('clienteNome').value.trim() || 'Cliente';
+      let tel = document.getElementById('clienteTel').value.replace(/\D/g, '');
+      let total = calcularTotal().toFixed(2).replace('.', ',');
+
+      let texto = `*ERTEC SOLUÇÕES ELÉTRICAS*\n`;
+      texto += `Olá ${nome}, segue o resumo do seu orçamento:\n\n`;
+
+      itensOrcamento.forEach(item => {
+        let sub = (item.preco * item.qtd).toFixed(2).replace('.', ',');
+        texto += `• *${item.nome}*\n  ${item.qtd}x R$ ${item.preco.toFixed(2).replace('.', ',')} = R$ ${sub}\n`;
+      });
+
+      let taxa = parseFloat(document.getElementById('taxaExtra').value) || 0;
+      if (taxa > 0) {
+        texto += `\n• *Taxa Adicional / Deslocamento:* R$ ${taxa.toFixed(2).replace('.', ',')}\n`;
+      }
+
+      texto += `\n💰 *VALOR TOTAL ESTIMADO: R$ ${total}*\n\n`;
+      texto += `Fico à disposição para dúvidas ou agendamento!`;
+
+      let link = `https://wa.me/${tel ? (tel.startsWith('55') ? tel : '55' + tel) : ''}?text=${encodeURIComponent(texto)}`;
+      window.open(link, '_blank');
+    }
+
+    // Inicialização
+    gerarMateriaisAr();
+    calcularMaoObraMetragem();
+    calcularMaoObraPontos();
+    executarCalculoElétrico();
   </script>
 </body>
 </html>
