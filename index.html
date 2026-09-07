@@ -5,12 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Erick Hergesel - ERTEC SOLUÇÕES ELÉTRICAS</title>
   
-  <!-- Configurações para WebApp / Atalho iPhone (iOS) -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="ERTEC">
   
-  <!-- Ícones PWA / iOS -->
   <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'><rect width='500' height='500' fill='%231b365d'/><circle cx='250' cy='200' r='100' fill='none' stroke='%23eab308' stroke-width='30'/><path d='M250 130 L250 210' stroke='%23eab308' stroke-width='30' stroke-linecap='round'/><text x='250' y='360' font-family='sans-serif' font-weight='bold' font-size='70' fill='%23ffffff' text-anchor='middle'>ERTEC</text><text x='250' y='420' font-family='sans-serif' font-size='32' fill='%23eab308' text-anchor='middle'>ELÉTRICA</text></svg>">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'><rect width='500' height='500' fill='%231b365d'/><circle cx='250' cy='200' r='100' fill='none' stroke='%23eab308' stroke-width='30'/><path d='M250 130 L250 210' stroke='%23eab308' stroke-width='30' stroke-linecap='round'/><text x='250' y='360' font-family='sans-serif' font-weight='bold' font-size='70' fill='%23ffffff' text-anchor='middle'>ERTEC</text><text x='250' y='420' font-family='sans-serif' font-size='32' fill='%23eab308' text-anchor='middle'>ELÉTRICA</text></svg>">
   
@@ -55,6 +53,7 @@
     .field-row .field { flex: 1; }
 
     .btn-add { background: var(--primary); color: #fff; border: none; padding: 12px; border-radius: 8px; width: 100%; font-weight: bold; cursor: pointer; font-size: 0.95rem; margin-top: 5px; }
+    .btn-suggest { background: #d97706; color: #fff; border: none; padding: 10px; border-radius: 8px; width: 100%; font-weight: bold; cursor: pointer; font-size: 0.85rem; margin-top: 5px; }
     
     .item-list { list-style: none; margin-top: 12px; }
     .item-list li { display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #eee; background: #fafafa; border-radius: 6px; margin-bottom: 6px; }
@@ -516,7 +515,43 @@
           <label>Valor Unitário (R$ por Metro, Rolo ou Unidade):</label>
           <input type="number" id="novoMatPreco" placeholder="Ex: 2.80 ou 220.00" step="0.01">
         </div>
+        
+        <button type="button" class="btn-suggest" onclick="sugerirValorEstimado()">💡 Sugerir Preço Médio para o Material Acima</button>
         <button type="button" class="btn-add" onclick="cadastrarNovoMaterial()">+ Adicionar à Lista de Materiais</button>
+      </div>
+
+      <!-- TABELA DE REFERÊNCIA DE MERCADO -->
+      <div class="card" style="background: #faf5ff; border: 1px solid #e9d5ff;">
+        <h2>📊 Tabela de Preços Médios de Mercado (Estimativa)</h2>
+        <p style="font-size: 0.75rem; color: #581c87; margin-bottom: 10px;">Valores médios para referência de cobrança ou repasse ao cliente:</p>
+        <div style="overflow-x: auto;">
+          <table class="tech-table">
+            <thead>
+              <tr>
+                <th>Item / Material</th>
+                <th>Unidade</th>
+                <th>Faixa Média (R$)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Cabo Flexível 1.5mm²</td><td>Metro</td><td>R$ 1,50 - R$ 2,20</td></tr>
+              <tr><td>Cabo Flexível 2.5mm²</td><td>Metro</td><td>R$ 2,50 - R$ 3,50</td></tr>
+              <tr><td>Cabo Flexível 4.0mm²</td><td>Metro</td><td>R$ 4,00 - R$ 5,50</td></tr>
+              <tr><td>Cabo Flexível 6.0mm²</td><td>Metro</td><td>R$ 6,00 - R$ 8,50</td></tr>
+              <tr><td>Cabo Flexível 10.0mm²</td><td>Metro</td><td>R$ 11,00 - R$ 15,00</td></tr>
+              <tr><td>Disjuntor Monopolar DIN (10A a 32A)</td><td>Unidade</td><td>R$ 15,00 - R$ 25,00</td></tr>
+              <tr><td>Disjuntor Bipolar / Tripolar DIN</td><td>Unidade</td><td>R$ 45,00 - R$ 85,00</td></tr>
+              <tr><td>Disjuntor DR Bipolar (30mA)</td><td>Unidade</td><td>R$ 90,00 - R$ 140,00</td></tr>
+              <tr><td>DPS Surtos (175V/275V)</td><td>Unidade</td><td>R$ 40,00 - R$ 65,00</td></tr>
+              <tr><td>Lâmpada LED Bulbo 9W/12W</td><td>Unidade</td><td>R$ 10,00 - R$ 18,00</td></tr>
+              <tr><td>Painel LED Embutir/Sobrepor 18W/24W</td><td>Unidade</td><td>R$ 25,00 - R$ 45,00</td></tr>
+              <tr><td>Tomada / Interruptor Completo (Módulo + Suporte)</td><td>Unidade</td><td>R$ 12,00 - R$ 22,00</td></tr>
+              <tr><td>Eletroduto Corrugado 3/4" (Amarelo/Laranja)</td><td>Metro</td><td>R$ 2,00 - R$ 3,20</td></tr>
+              <tr><td>Caixa de Luz 4x2 / Teto Octogonal</td><td>Unidade</td><td>R$ 3,00 - R$ 5,50</td></tr>
+              <tr><td>Quadro Distribuição 12/16 Disjuntores</td><td>Unidade</td><td>R$ 90,00 - R$ 150,00</td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <div class="card">
@@ -653,16 +688,18 @@
   <script>
     let itensOrcamento = [];
 
-    // Lista de Materiais Residencial Base
+    // Lista de Materiais Residencial Base com Preços Médios Estimados
     let listaMateriaisCasa = [
       { nome: 'Cabo Flexível 1.5mm²', qtd: 100, unidade: 'm', preco: 1.80 },
       { nome: 'Cabo Flexível 2.5mm²', qtd: 100, unidade: 'm', preco: 2.80 },
-      { name: 'Cabo Flexível 6.0mm²', qtd: 30, unidade: 'm', preco: 6.50 },
+      { nome: 'Cabo Flexível 6.0mm²', qtd: 30, unidade: 'm', preco: 6.50 },
       { nome: 'Eletroduto Corrugado 3/4" (Amarelo/Laranja)', qtd: 50, unidade: 'm', preco: 2.20 },
       { nome: 'Caixa de Luz 4x2 PVC Teto/Parede', qtd: 20, unidade: 'un', preco: 3.50 },
       { nome: 'Quadro de Distribuição 12/16 Disjuntores Embutir', qtd: 1, unidade: 'un', preco: 120.00 },
       { nome: 'Disjuntor Din Monopolar (10A, 16A, 20A)', qtd: 8, unidade: 'un', preco: 18.00 },
-      { name: 'Disjuntor DR Bipolar 40A / 30mA', qtd: 1, unidade: 'un', preco: 110.00 }
+      { nome: 'Disjuntor DR Bipolar 40A / 30mA', qtd: 1, unidade: 'un', preco: 110.00 },
+      { nome: 'Lâmpada LED Bulbo 9W/12W', qtd: 10, unidade: 'un', preco: 12.00 },
+      { nome: 'Tomada Simples 10A / 20A Completa', qtd: 15, unidade: 'un', preco: 15.00 }
     ];
 
     function trocarAba(abaId, btn) {
@@ -769,7 +806,41 @@
       return total;
     }
 
-    // FUNÇÕES DA TABELA EDITÁVEL DE MATERIAIS DA CASA
+    // SUGESTÃO AUTOMÁTICA DE PREÇOS COM BASE NA DESCRIÇÃO
+    function sugerirValorEstimado() {
+      let nome = document.getElementById('novoMatNome').value.toLowerCase();
+      let un = document.getElementById('novoMatUnidade').value;
+      let precoInput = document.getElementById('novoMatPreco');
+
+      if (!nome) {
+        alert('Digite o nome do material primeiro para receber uma sugestão de preço.');
+        return;
+      }
+
+      let valorSugerido = 0;
+
+      if (nome.includes('1.5') || nome.includes('1,5')) valorSugerido = 1.85;
+      else if (nome.includes('2.5') || nome.includes('2,5')) valorSugerido = 2.80;
+      else if (nome.includes('4.0') || nome.includes('4,0') || nome.includes('4mm')) valorSugerido = 4.50;
+      else if (nome.includes('6.0') || nome.includes('6,0') || nome.includes('6mm')) valorSugerido = 6.80;
+      else if (nome.includes('10.0') || nome.includes('10,0') || nome.includes('10mm')) valorSugerido = 12.50;
+      else if (nome.includes('dr')) valorSugerido = 110.00;
+      else if (nome.includes('dps')) valorSugerido = 50.00;
+      else if (nome.includes('disjuntor')) valorSugerido = 18.00;
+      else if (nome.includes('lâmpada') || nome.includes('lampada') || nome.includes('led')) valorSugerido = 12.00;
+      else if (nome.includes('painel') || nome.includes('plafon')) valorSugerido = 32.00;
+      else if (nome.includes('tomada') || nome.includes('interruptor')) valorSugerido = 15.00;
+      else if (nome.includes('eletroduto') || nome.includes('conduite')) valorSugerido = 2.50;
+      else if (nome.includes('caixa 4x2') || nome.includes('caixa de luz')) valorSugerido = 3.80;
+      else if (nome.includes('quadro')) valorSugerido = 120.00;
+      else valorSugerido = 10.00;
+
+      if (un === 'rolo 100m') valorSugerido *= 100;
+      if (un === 'rolo 50m') valorSugerido *= 50;
+
+      precoInput.value = valorSugerido.toFixed(2);
+    }
+
     function renderizarTabelaMateriaisCasa() {
       let tbody = document.getElementById('tbodyMateriais');
       tbody.innerHTML = '';
