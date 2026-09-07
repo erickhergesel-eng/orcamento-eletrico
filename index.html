@@ -30,7 +30,7 @@
     header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; padding: 18px; border-radius: 12px; text-align: center; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
     header svg.logo-header { max-width: 130px; height: auto; border-radius: 8px; border: 2px solid rgba(255, 255, 255, 0.2); background-color: #1e1e1e; }
     header h1 { font-size: 1.2rem; font-weight: 700; text-transform: uppercase; }
-    header p { font-size: 0.8rem; opacity: 0.9; }
+    header p { font-size: 0.8rem; opacity: 0.9; margin: 1px 0; }
     
     .nav-tabs { display: flex; gap: 4px; margin-bottom: 15px; flex-wrap: wrap; }
     .tab-btn { flex: 1 1 18%; padding: 10px 2px; border: none; border-radius: 8px; font-weight: bold; font-size: 0.75rem; cursor: pointer; background: #e2e8f0; color: #475569; transition: 0.2s; text-align: center; }
@@ -76,9 +76,11 @@
     .sub-btn.active { background: #e0e7ff; border-color: var(--highlight); color: var(--highlight); }
 
     .tech-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.82rem; }
-    .tech-table th, .tech-table td { border: 1px solid #e2e8f0; padding: 7px 6px; text-align: left; }
+    .tech-table th, .tech-table td { border: 1px solid #e2e8f0; padding: 6px 4px; text-align: left; }
     .tech-table th { background-color: #f1f5f9; color: var(--primary); font-weight: 700; text-transform: uppercase; font-size: 0.72rem; }
     .tech-table tr:nth-child(even) { background-color: #f8fafc; }
+    .tech-table input { width: 100%; padding: 6px 4px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 0.8rem; }
+    .tech-table select { width: 100%; padding: 6px 2px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 0.78rem; }
 
     .result-box { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px; padding: 14px; margin-top: 15px; }
     .result-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px dashed #cbd5e1; font-size: 0.88rem; }
@@ -109,8 +111,8 @@
       .pdf-table th, .pdf-table td { border: 1px solid #cccccc; padding: 9px; text-align: left; font-size: 12px; }
       .pdf-table th { background-color: #1b365d !important; color: #ffffff !important; text-transform: uppercase; font-size: 11px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       .pdf-total { margin-top: 20px; text-align: right; font-size: 16px; font-weight: bold; color: #107c41; }
-      .pdf-terms { margin-top: 25px; font-size: 11px; background: #f9f9f9; padding: 12px; border-radius: 6px; border-left: 4px solid #1b365d; line-height: 1.5; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      .pdf-footer { margin-top: 30px; font-size: 11px; text-align: center; color: #666666; border-top: 1px solid #eeeeee; padding-top: 10px; }
+      .pdf-terms { margin-top: 20px; font-size: 11px; background: #f9f9f9; padding: 12px; border-radius: 6px; border-left: 4px solid #1b365d; line-height: 1.5; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .pdf-footer { margin-top: 25px; font-size: 11px; text-align: center; color: #666666; border-top: 1px solid #eeeeee; padding-top: 10px; }
     }
   </style>
 </head>
@@ -126,6 +128,7 @@
     </svg>
     <h1>ERTEC SOLUÇÕES ELÉTRICAS</h1>
     <p>Erick Hergesel - Elétrica, Climatização Residencial & Segurança Eletrônica</p>
+    <p>📞 (15) 99616-1388 | ✉️ erickhergesel@gmail.com</p>
   </header>
 
   <div class="nav-tabs">
@@ -146,7 +149,7 @@
       </div>
       <div class="field">
         <label>WhatsApp do Cliente (com DDD):</label>
-        <input type="tel" id="clienteTel" placeholder="Ex: 11999998888">
+        <input type="tel" id="clienteTel" placeholder="Ex: 15999998888">
       </div>
     </div>
 
@@ -488,15 +491,48 @@
 
     <div id="materiaisSub" class="sub-casa-content" style="display: none;">
       <div class="card">
-        <h2>📦 Lista & Estimativa de Materiais</h2>
-        <div style="overflow-x: auto; margin-top: 15px;">
+        <h2>📦 Adicionar Novo Material / Cabo</h2>
+        <div class="field">
+          <label>Nome / Modelo do Material:</label>
+          <input type="text" id="novoMatNome" placeholder="Ex: Cabo Flexível 2.5mm² Sil / Corfio">
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Tipo de Unidade:</label>
+            <select id="novoMatUnidade">
+              <option value="m">Por Metro (m)</option>
+              <option value="rolo 100m">Por Rolo (100 metros)</option>
+              <option value="rolo 50m">Por Rolo (50 metros)</option>
+              <option value="un">Por Unidade (un)</option>
+              <option value="cx">Por Caixa (cx)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Quantidade / Metragem:</label>
+            <input type="number" id="novoMatQtd" value="100" min="1">
+          </div>
+        </div>
+        <div class="field">
+          <label>Valor Unitário (R$ por Metro, Rolo ou Unidade):</label>
+          <input type="number" id="novoMatPreco" placeholder="Ex: 2.80 ou 220.00" step="0.01">
+        </div>
+        <button type="button" class="btn-add" onclick="cadastrarNovoMaterial()">+ Adicionar à Lista de Materiais</button>
+      </div>
+
+      <div class="card">
+        <h2>📋 Lista de Materiais Residencial (Editável)</h2>
+        <p style="font-size: 0.75rem; color: #666; margin-bottom: 10px;">💡 Você pode alterar nome, quantidade, unidade e valores diretamente nos campos da tabela abaixo.</p>
+        
+        <div style="overflow-x: auto;">
           <table class="tech-table">
             <thead>
               <tr>
-                <th style="width: 40%;">Material</th>
+                <th style="width: 32%;">Item / Modelo</th>
                 <th style="width: 15%;">Qtd</th>
-                <th style="width: 20%;">Preço Un.</th>
-                <th style="width: 20%;">Subtotal</th>
+                <th style="width: 18%;">Unidade</th>
+                <th style="width: 18%;">Valor Un. (R$)</th>
+                <th style="width: 12%;">Subtotal</th>
+                <th style="width: 5%;"></th>
               </tr>
             </thead>
             <tbody id="tbodyMateriais"></tbody>
@@ -504,7 +540,7 @@
         </div>
 
         <div class="total-box" style="background: var(--primary); margin-top: 15px;">
-          <span>CUSTO ESTIMADO DE MATERIAIS</span>
+          <span>CUSTO TOTAL DE MATERIAIS</span>
           <h3 id="totalCustoMateriais">R$ 0,00</h3>
         </div>
 
@@ -577,7 +613,7 @@
     <div class="pdf-header">
       <h1>ERTEC SOLUÇÕES ELÉTRICAS</h1>
       <p>Erick Hergesel - Serviços Elétricos, Ar Condicionado & CFTV</p>
-      <p>Contato / WhatsApp: (11) 99999-8888</p>
+      <p><strong>Contato / WhatsApp:</strong> (15) 99616-1388 | <strong>E-mail:</strong> erickhergesel@gmail.com</p>
     </div>
 
     <div class="pdf-client-box">
@@ -602,6 +638,7 @@
     <div class="pdf-total" id="pdfValorTotal">TOTAL: R$ 0,00</div>
 
     <div class="pdf-terms">
+      <p><strong>Formas de Pagamento Aceitas:</strong> Dinheiro, Pix, Cartão de Débito / Crédito.</p>
       <p><strong>Condições Gerais:</strong></p>
       <p>1. Este orçamento possui validade de 15 dias a contar da data de sua emissão.</p>
       <p>2. Os valores contemplam a execução da mão de obra especializada conforme descrito nos itens.</p>
@@ -615,6 +652,18 @@
 
   <script>
     let itensOrcamento = [];
+
+    // Lista de Materiais Residencial Base
+    let listaMateriaisCasa = [
+      { nome: 'Cabo Flexível 1.5mm²', qtd: 100, unidade: 'm', preco: 1.80 },
+      { nome: 'Cabo Flexível 2.5mm²', qtd: 100, unidade: 'm', preco: 2.80 },
+      { name: 'Cabo Flexível 6.0mm²', qtd: 30, unidade: 'm', preco: 6.50 },
+      { nome: 'Eletroduto Corrugado 3/4" (Amarelo/Laranja)', qtd: 50, unidade: 'm', preco: 2.20 },
+      { nome: 'Caixa de Luz 4x2 PVC Teto/Parede', qtd: 20, unidade: 'un', preco: 3.50 },
+      { nome: 'Quadro de Distribuição 12/16 Disjuntores Embutir', qtd: 1, unidade: 'un', preco: 120.00 },
+      { nome: 'Disjuntor Din Monopolar (10A, 16A, 20A)', qtd: 8, unidade: 'un', preco: 18.00 },
+      { name: 'Disjuntor DR Bipolar 40A / 30mA', qtd: 1, unidade: 'un', preco: 110.00 }
+    ];
 
     function trocarAba(abaId, btn) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
@@ -718,6 +767,87 @@
       let total = soma + taxa;
       document.getElementById('valorTotal').innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
       return total;
+    }
+
+    // FUNÇÕES DA TABELA EDITÁVEL DE MATERIAIS DA CASA
+    function renderizarTabelaMateriaisCasa() {
+      let tbody = document.getElementById('tbodyMateriais');
+      tbody.innerHTML = '';
+      let totalGeral = 0;
+
+      listaMateriaisCasa.forEach((m, idx) => {
+        let subtotal = m.qtd * m.preco;
+        totalGeral += subtotal;
+
+        tbody.innerHTML += `
+          <tr>
+            <td><input type="text" value="${m.nome}" onchange="atualizarCampoMaterial(${idx}, 'nome', this.value)"></td>
+            <td><input type="number" value="${m.qtd}" min="0" step="any" onchange="atualizarCampoMaterial(${idx}, 'qtd', this.value)"></td>
+            <td>
+              <select onchange="atualizarCampoMaterial(${idx}, 'unidade', this.value)">
+                <option value="m" ${m.unidade === 'm' ? 'selected' : ''}>m (metro)</option>
+                <option value="rolo 100m" ${m.unidade === 'rolo 100m' ? 'selected' : ''}>rolo 100m</option>
+                <option value="rolo 50m" ${m.unidade === 'rolo 50m' ? 'selected' : ''}>rolo 50m</option>
+                <option value="un" ${m.unidade === 'un' ? 'selected' : ''}>un (unid.)</option>
+                <option value="cx" ${m.unidade === 'cx' ? 'selected' : ''}>cx (caixa)</option>
+              </select>
+            </td>
+            <td><input type="number" value="${m.preco.toFixed(2)}" step="0.01" min="0" onchange="atualizarCampoMaterial(${idx}, 'preco', this.value)"></td>
+            <td style="font-weight: bold; color: var(--primary); font-size: 0.78rem;">R$ ${subtotal.toFixed(2)}</td>
+            <td style="text-align: center;"><span class="remove-btn" style="font-size: 0.9rem;" onclick="removerMaterialCasa(${idx})">✕</span></td>
+          </tr>
+        `;
+      });
+
+      document.getElementById('totalCustoMateriais').innerText = `R$ ${totalGeral.toFixed(2).replace('.', ',')}`;
+    }
+
+    function atualizarCampoMaterial(idx, campo, valor) {
+      if (campo === 'qtd' || campo === 'preco') {
+        valor = parseFloat(valor) || 0;
+      }
+      listaMateriaisCasa[idx][campo] = valor;
+      renderizarTabelaMateriaisCasa();
+    }
+
+    function cadastrarNovoMaterial() {
+      let nome = document.getElementById('novoMatNome').value.trim();
+      let un = document.getElementById('novoMatUnidade').value;
+      let qtd = parseFloat(document.getElementById('novoMatQtd').value) || 1;
+      let preco = parseFloat(document.getElementById('novoMatPreco').value) || 0;
+
+      if (!nome) {
+        alert('Digite o nome ou especificação do material.');
+        return;
+      }
+
+      listaMateriaisCasa.push({ nome: nome, qtd: qtd, unidade: un, preco: preco });
+      renderizarTabelaMateriaisCasa();
+
+      document.getElementById('novoMatNome').value = '';
+      document.getElementById('novoMatPreco').value = '';
+      document.getElementById('novoMatQtd').value = 1;
+    }
+
+    function removerMaterialCasa(idx) {
+      listaMateriaisCasa.splice(idx, 1);
+      renderizarTabelaMateriaisCasa();
+    }
+
+    function adicionarMateriaisAoOrcamento() {
+      let totalGeral = listaMateriaisCasa.reduce((acc, item) => acc + (item.qtd * item.preco), 0);
+      if (totalGeral <= 0) {
+        alert('A lista de materiais está vazia ou sem valores.');
+        return;
+      }
+
+      itensOrcamento.push({
+        nome: `Lista/Kit de Materiais Elétricos Residencial`,
+        preco: totalGeral,
+        qtd: 1
+      });
+      atualizarLista();
+      trocarAba('orcamentoTab', document.querySelectorAll('.tab-btn')[0]);
     }
 
     function calcularBTUs() {
@@ -927,6 +1057,7 @@
       let total = calcularTotal().toFixed(2).replace('.', ',');
 
       let texto = `*ERTEC SOLUÇÕES ELÉTRICAS*\n`;
+      texto += `Erick Hergesel - (15) 99616-1388\n\n`;
       texto += `Olá ${nome}, segue o resumo do seu orçamento:\n\n`;
 
       itensOrcamento.forEach(item => {
@@ -939,7 +1070,8 @@
         texto += `\n• *Taxa Adicional / Deslocamento:* R$ ${taxa.toFixed(2).replace('.', ',')}\n`;
       }
 
-      texto += `\n💰 *VALOR TOTAL ESTIMADO: R$ ${total}*\n\n`;
+      texto += `\n💰 *VALOR TOTAL ESTIMADO: R$ ${total}*\n`;
+      texto += `💳 *Formas de Pagamento:* Dinheiro, Pix, Cartão Débito/Crédito\n\n`;
       texto += `Fico à disposição para dúvidas ou agendamento!`;
 
       let link = `https://wa.me/${tel ? (tel.startsWith('55') ? tel : '55' + tel) : ''}?text=${encodeURIComponent(texto)}`;
@@ -947,6 +1079,7 @@
     }
 
     // Inicialização
+    renderizarTabelaMateriaisCasa();
     gerarMateriaisAr();
     calcularMaoObraMetragem();
     calcularMaoObraPontos();
