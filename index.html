@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Orçamento - ERTEC Soluções Elétricas</title>
+  
+  <!-- Biblioteca html2pdf para geração de PDF sem tela em branco -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
   <style>
     /* Reset e Configurações Globais */
     * {
@@ -18,12 +22,39 @@
       color: #333;
       padding: 20px 10px;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Container de Ações (Botão de Download) */
+    .actions-bar {
+      width: 100%;
+      max-width: 800px;
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 15px;
+    }
+
+    .btn-download {
+      background-color: #28a745;
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+      transition: background-color 0.2s ease;
+    }
+
+    .btn-download:hover {
+      background-color: #218838;
     }
 
     /* Container Principal Responsivo */
     .invoice-card {
-      background: #fff;
+      background: #ffffff;
       width: 100%;
       max-width: 800px;
       padding: 25px;
@@ -84,7 +115,7 @@
 
     th {
       background-color: #0056b3;
-      color: #fff;
+      color: #ffffff;
       padding: 8px;
       font-size: 12px;
       text-transform: uppercase;
@@ -137,7 +168,7 @@
       font-size: 12px;
     }
 
-    /* --- AJUSTES PARA DISPOSITIVOS MÓVEIS --- */
+    /* Adjustes Mobile */
     @media (max-width: 600px) {
       body {
         padding: 5px;
@@ -162,26 +193,34 @@
       }
     }
 
-    /* --- AJUSTES DE IMPRESSÃO / PDF (ELIMINA PÁGINA EM BRANCO) --- */
+    /* Regras de Impressão e Captura do PDF */
     @page {
       size: A4 portrait;
-      margin: 8mm; /* Margem ajustada para caber em exatamente 1 folha */
+      margin: 8mm;
     }
 
     @media print {
-      body {
-        background: none;
-        padding: 0;
+      html, body {
+        width: 100% !important;
+        height: auto !important;
+        background: #ffffff !important;
+        color: #000000 !important;
+        visibility: visible !important;
+        padding: 0 !important;
       }
 
       .invoice-card {
-        box-shadow: none;
-        padding: 0;
-        max-width: 100%;
-        width: 100%;
+        visibility: visible !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
       }
 
-      /* Oculta elementos que não pertencem ao PDF impresso */
+      .invoice-card * {
+        visibility: visible !important;
+      }
+
       .no-print {
         display: none !important;
       }
@@ -190,11 +229,17 @@
 </head>
 <body>
 
-  <div class="invoice-card">
+  <!-- Barra do Botão (Oculta ao Imprimir / Gerar PDF) -->
+  <div class="actions-bar no-print">
+    <button class="btn-download" onclick="baixarPDF()">Baixar PDF</button>
+  </div>
+
+  <!-- Cartão do Orçamento -->
+  <div class="invoice-card" id="conteudo-orcamento">
     <!-- Cabeçalho -->
     <div class="header">
-      <h1>ERTEC Soluções Elétricas</h1>
-      <p>Erick Hergesel - Serviços Eléticos, Ar Condicionado & CFTV</p>[cite: 1]
+      <h1>ERTEC Soluções Elétricas</h1>[cite: 1]
+      <p>Erick Hergesel - Serviços Elétricos, Ar Condicionado & CFTV</p>[cite: 1]
       <p>Contato / WhatsApp: (15) 99616-1388 | E-mail: erickhergesel@gmail.com</p>[cite: 1]
     </div>
 
@@ -272,6 +317,23 @@
       </div>
     </div>
   </div>
+
+  <!-- Função para Download Seguro do PDF -->
+  <script>
+    function baixarPDF() {
+      const elemento = document.getElementById('conteudo-orcamento');
+      
+      const opcoes = {
+        margin:       [8, 8, 8, 8],
+        filename:     'Orcamento_ERTEC_Matheus.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, useCORS: true, logging: false },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+
+      html2pdf().set(opcoes).from(elemento).save();
+    }
+  </script>
 
 </body>
 </html>
