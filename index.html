@@ -5,11 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ERTEC - Gerador de Orçamentos</title>
   
+  <!-- Configuração do Ícone para iPhone / iOS -->
   <link rel="apple-touch-icon" sizes="180x180" href="logo.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
   <style>
+    /* Estilos Globais e de Impressão */
     body {
       font-family: Arial, sans-serif;
       background-color: #f4f4f9;
@@ -18,8 +20,9 @@
       color: #333;
     }
     
+    /* Container do Documento (Força fundo branco estático para evitar tela preta) */
     .orcamento-container {
-      max-width: 850px;
+      max-width: 800px;
       margin: 0 auto;
       background: #ffffff !important; 
       padding: 30px;
@@ -36,16 +39,16 @@
       margin-bottom: 20px;
     }
 
+    /* Logo em contêiner branco estático */
     .logo-container {
-      background-color: transparent;
-      padding: 0;
+      background-color: #ffffff;
+      padding: 5px;
       display: inline-block;
     }
 
     .logo-container img {
-      max-height: 90px;
+      max-height: 80px;
       width: auto;
-      border-radius: 6px;
       display: block;
     }
 
@@ -65,6 +68,7 @@
       color: #666;
     }
 
+    /* Tabelas */
     table {
       width: 100%;
       border-collapse: collapse;
@@ -80,7 +84,7 @@
     th {
       background-color: #2c3e50;
       color: white;
-      font-size: 13px;
+      font-size: 14px;
     }
 
     .total-container {
@@ -91,40 +95,7 @@
       color: #2c3e50;
     }
 
-    .extras-container {
-      margin-top: 25px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      padding: 15px;
-      background-color: #fbfbfb;
-    }
-
-    .extras-container h3 {
-      margin-top: 0;
-      font-size: 14px;
-      color: #2c3e50;
-      border-bottom: 1px solid #eee;
-      padding-bottom: 8px;
-    }
-
-    .extras-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
-    }
-
-    textarea {
-      width: 100%;
-      height: 70px;
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-family: Arial, sans-serif;
-      font-size: 12px;
-      resize: vertical;
-      box-sizing: border-box;
-    }
-
+    /* Controles e Botões (Ocultos na Impressão/PDF) */
     .controles {
       margin-top: 20px;
       display: flex;
@@ -148,16 +119,17 @@
       body { background: none; padding: 0; }
       .controles, .btn-remove { display: none !important; }
       .orcamento-container { box-shadow: none; width: 100%; }
-      textarea { border: none; padding: 0; background: transparent; }
     }
   </style>
 </head>
 <body>
 
 <div class="orcamento-container" id="orcamento">
+  <!-- Cabeçalho -->
   <div class="header">
     <div class="logo-container">
-      <img src="logo.png" alt="ERTEC Soluções Elétricas" id="logo-img">
+      <!-- Imagem salva obrigatoriamente em JPG/PNG com fundo branco -->
+      <img src="logo.jpg" alt="ERTEC Soluções Elétricas" id="logo-img">
     </div>
     <div class="info-empresa">
       <h2>ERTEC SOLUÇÕES ELÉTRICAS</h2>
@@ -166,96 +138,71 @@
     </div>
   </div>
 
+  <!-- Tabela de Serviços e Materiais -->
   <table id="tabela-itens">
     <thead>
       <tr>
-        <th style="width: 8%;">QTD</th>
-        <th style="width: 52%;">DESCRIÇÃO DO SERVIÇO / EQUIPAMENTO / MATERIAL</th>
-        <th style="width: 18%;">VALOR UNIT. (R$)</th>
-        <th style="width: 17%;">SUBTOTAL (R$)</th>
+        <th style="width: 10%;">QTD</th>
+        <th style="width: 50%;">DESCRIÇÃO DO SERVIÇO / EQUIPAMENTO / MATERIAL</th>
+        <th style="width: 20%;">VALOR UNIT. (R$)</th>
+        <th style="width: 15%;">SUBTOTAL (R$)</th>
         <th class="controles" style="width: 5%;">AÇÃO</th>
       </tr>
     </thead>
     <tbody id="corpo-tabela">
+      <!-- Exemplo de item inicial -->
       <tr>
-        <td><input type="number" value="1" min="1" onchange="calcularTotal()" class="qtd" style="width: 90%;"></td>
+        <td><input type="number" value="1" min="1" onchange="calcularTotal()" class="qtd"></td>
         <td>
-          <select onchange="atualizarDescricao(this)" class="select-servico" style="width: 100%;">
-            <option value="custom">-- Digitar Item Personalizado / Mão de Obra / Material --</option>
-            
-            <optgroup label="Iluminação, Sensores & Automação">
+          <select onchange="atualizarDescricao(this)" class="select-servico">
+            <option value="custom">-- Digitar Item Personalizado --</option>
+            <optgroup label="Câmeras e Segurança">
+              <option value="Instalação de Câmera Wi-Fi Inteligente" data-preco="90.00">Instalação de Câmera Wi-Fi Inteligente</option>
+              <option value="Configuração e Formatação de Cartão MicroSD" data-preco="35.00">Configuração e Formatação de Cartão MicroSD</option>
+              <option value="Configuração de Acesso Remoto no Celular" data-preco="100.00">Configuração de Acesso Remoto no Celular</option>
+            </optgroup>
+            <optgroup label="Iluminação & Sensores">
               <option value="Instalação de Refletor LED" data-preco="80.00">Instalação de Refletor LED</option>
               <option value="Instalação de Relé Fotocélula" data-preco="70.00">Instalação de Relé Fotocélula</option>
               <option value="Instalação de Sensor de Presença" data-preco="65.00">Instalação de Sensor de Presença</option>
-              <option value="Instalação de Luminária / Plafon LED" data-preco="60.00">Instalação de Luminária / Plafon LED</option>
-              <option value="Instalação de Fita LED com Perfil de Alumínio" data-preco="110.00">Instalação de Fita LED com Perfil de Alumínio</option>
-              <option value="Instalação de Interruptor Simples / Paralelo (Three-Way)" data-preco="45.00">Instalação de Interruptor Simples / Paralelo</option>
               <option value="Instalação de Interruptor Inteligente Wi-Fi" data-preco="90.00">Instalação de Interruptor Inteligente Wi-Fi</option>
-              <option value="Instalação de Pendente / Lustre" data-preco="120.00">Instalação de Pendente / Lustre</option>
-              <option value="Instalação de Spot de LED em Gesso" data-preco="40.00">Instalação de Spot de LED em Gesso</option>
+              <option value="Instalação de Fita LED com Perfil de Alumínio" data-preco="110.00">Instalação de Fita LED com Perfil de Alumínio</option>
             </optgroup>
-
-            <optgroup label="Quadros, Proteção & Infraestrutura">
+            <optgroup label="Instalações Elétricas & Quadros">
+              <option value="Instalação de Ponto Novo de Tomada/Iluminação" data-preco="120.00">Instalação de Ponto Novo de Tomada/Iluminação</option>
               <option value="Montagem / Organização de Quadro de Distribuição (QDC)" data-preco="350.00">Montagem / Organização de QDC</option>
-              <option value="Instalação de Disjuntor Monofásico / Bifásico / Trifásico" data-preco="45.00">Instalação de Disjuntor DIN/NEMA</option>
-              <option value="Instalação de Dispositivo DR (IDR) / DPS" data-preco="85.00">Instalação de Dispositivo DR / DPS</option>
+              <option value="Instalação de Disjuntor DIN/NEMA" data-preco="45.00">Instalação de Disjuntor DIN/NEMA</option>
+              <option value="Instalação de Dispositivo DR / DPS" data-preco="85.00">Instalação de Dispositivo DR / DPS</option>
               <option value="Passagem / Troca de Fiação Elétrica (por ponto)" data-preco="75.00">Passagem / Troca de Fiação Elétrica</option>
-              <option value="Instalação de Haste de Aterramento e Barramento" data-preco="130.00">Instalação de Haste de Aterramento</option>
-              <option value="Instalação de Ponto Novo de Tomada (10A / 20A)" data-preco="80.00">Instalação de Ponto Novo de Tomada</option>
-              <option value="Instalação de Tomada Exclusiva para Ar-Condicionado / Chuveiro" data-preco="120.00">Instalação de Tomada para Ar / Chuveiro</option>
-              <option value="Troca de Resistência ou Instalação de Chuveiro Elétrico" data-preco="70.00">Troca / Instalação de Chuveiro Elétrico</option>
-              <option value="Instalação de Canaletas / Eletrodutos Aparentes" data-preco="60.00">Instalação de Canaletas / Eletrodutos</option>
+              <option value="Instalação de Haste de Aterramento" data-preco="130.00">Instalação de Haste de Aterramento</option>
             </optgroup>
-
-            <optgroup label="Câmeras & Segurança Eletrônica">
-              <option value="Instalação de Câmera Wi-Fi Inteligente" data-preco="90.00">Instalação de Câmera Wi-Fi Inteligente</option>
-              <option value="Instalação de Câmera Intelbras HD/Full HD (DVR)" data-preco="110.00">Instalação de Câmera CFTV (DVR)</option>
-              <option value="Instalação / Configuração de DVR / NVR" data-preco="180.00">Instalação / Configuração de DVR / NVR</option>
-              <option value="Configuração de Acesso Remoto no Celular" data-preco="100.00">Configuração de Acesso Remoto no Celular</option>
-              <option value="Instalação de Fechadura Digital / Eletrônica" data-preco="180.00">Instalação de Fechadura Digital</option>
-              <option value="Instalação de Videoporteiro / Interfone" data-preco="150.00">Instalação de Videoporteiro / Interfone</option>
-            </optgroup>
-
-            <optgroup label="Climatização & Outros">
-              <option value="Instalação de Ar Condicionado Split (Mão de Obra)" data-preco="450.00">Instalação de Ar Condicionado Split</option>
-              <option value="Higienização / Limpeza Profunda de Ar Condicionado" data-preco="180.00">Higienização de Ar Condicionado</option>
-              <option value="Instalação de Ventilador de Teto com Controle/Cordinha" data-preco="140.00">Instalação de Ventilador de Teto</option>
-              <option value="Manutenção Preventiva / Corretiva Elétrica (Hora)" data-preco="120.00">Manutenção / Diagnóstico de Falha Elétrica</option>
+            <optgroup label="Ajustes e Extras Manual">
+              <option value="Mão de Obra Extra / Adicional" data-preco="0.00">Mão de Obra Extra / Adicional</option>
+              <option value="Material Extra de Infraestrutura (Cabos, Caixas, Conduítes)" data-preco="0.00">Material Extra de Infraestrutura</option>
+              <option value="Taxa de Deslocamento" data-preco="30.00">Taxa de Deslocamento</option>
             </optgroup>
           </select>
-          <input type="text" placeholder="Escreva aqui a descrição detalhada do serviço ou material..." class="desc-custom" style="width: 96%; margin-top: 5px;">
+          <input type="text" placeholder="Descrição personalizada..." class="desc-custom" style="width: 95%; margin-top: 5px; display: none;">
         </td>
-        <td><input type="number" step="0.01" value="0.00" onchange="calcularTotal()" class="preco" style="width: 90%;"></td>
+        <td><input type="number" step="0.01" value="0.00" onchange="calcularTotal()" class="preco"></td>
         <td class="subtotal">R$ 0,00</td>
         <td class="controles"><button class="btn-remove" onclick="removerLinha(this)">X</button></td>
       </tr>
     </tbody>
   </table>
 
-  <!-- Área de Inclusões Manuais (Materiais Extras e Mão de Obra Adicional) -->
-  <div class="extras-container">
-    <h3>Detalhamento Adicional (Manuais e Extras)</h3>
-    <div class="extras-grid">
-      <div>
-        <label style="font-size: 12px; font-weight: bold;">Materiais Extras / Fornecidos pelo Cliente:</label>
-        <textarea placeholder="Ex: 50m de cabo 2.5mm², 2 caixas 4x2, disjuntor 20A extra..."></textarea>
-      </div>
-      <div>
-        <label style="font-size: 12px; font-weight: bold;">Observações de Mão de Obra / Condições do Serviço:</label>
-        <textarea placeholder="Ex: Mão de Obra inclui furação em alvenaria e passagem por conduíte existente. Não inclui pintura..."></textarea>
-      </div>
-    </div>
-  </div>
-
+  <!-- Botões de Adição -->
   <div class="controles">
     <button class="btn-add" onclick="adicionarLinha()">+ Adicionar Item / Serviço</button>
     <button class="btn-print" onclick="window.print()">Imprimir / Salvar PDF</button>
   </div>
 
+  <!-- Total -->
   <div class="total-container">
     VALOR TOTAL: <span id="valor-total">R$ 0,00</span>
   </div>
 
+  <!-- Condições -->
   <div style="margin-top: 30px; border-top: 1px solid #ddd; padding-top: 10px; font-size: 12px; color: #555;">
     <p><strong>Condições Gerais de Fornecimento:</strong></p>
     <ul>
@@ -309,7 +256,7 @@
     novaLinha.querySelector('.preco').value = '0.00';
     novaLinha.querySelector('.subtotal').innerText = 'R$ 0,00';
     novaLinha.querySelector('.select-servico').selectedIndex = 0;
-    novaLinha.querySelector('.desc-custom').style.display = 'block';
+    novaLinha.querySelector('.desc-custom').style.display = 'none';
     novaLinha.querySelector('.desc-custom').value = '';
 
     corpo.appendChild(novaLinha);
@@ -324,15 +271,8 @@
     }
   }
 
-  window.onload = function() {
-    calcularTotal();
-    const selects = document.querySelectorAll('.select-servico');
-    selects.forEach(select => {
-      if(select.value === 'custom') {
-        select.closest('tr').querySelector('.desc-custom').style.display = 'block';
-      }
-    });
-  };
+  // Inicializar cálculo na carga da página
+  window.onload = calcularTotal;
 </script>
 
 </body>
