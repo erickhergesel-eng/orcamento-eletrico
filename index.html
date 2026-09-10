@@ -173,84 +173,108 @@
 
       <div class="field">
         <label>Selecione o Serviço:</label>
-        <select id="servicoSelect" size="6" style="height: auto; max-height: 180px;" onchange="verificarItemCustomizado()">
+        <select id="servicoSelect" size="8" style="height: auto; max-height: 220px;" onchange="verificarItemCustomizado()">
           <option value="" selected>-- Selecione um serviço abaixo --</option>
-          <option value="Visita Técnica / Avaliação Diagnóstica simples|85">Visita Técnica / Avaliação Diagnóstica simples - R$ 85,00</option>
-          <option value="Hora de Trabalho Comum (Residencial)|115">Hora de Trabalho Comum (Residencial) - R$ 115,00</option>
-          <option value="Hora de Trabalho Especializada (Comercial / Industrial)|200">Hora de Trabalho Especializada (Comercial / Industrial) - R$ 200,00</option>
-          <option value="Diária de Eletricista (Período de 8h útil)|375">Diária de Eletricista (Período de 8h útil) - R$ 375,00</option>
-          <option value="Taxa de Plantão / Emergência (Madrugada ou Finais de Semana)|150">Taxa de Plantão / Emergência - R$ 150,00</option>
-          <option value="Instalação de Plafon, Arandela ou Luminária Simples|130">Instalação de Plafon, Arandela ou Luminária Simples - R$ 130,00</option>
-          <option value="Instalação de Spot LED Embutido (Com furo em gesso)|110">Instalação de Spot LED Embutido (Com furo em gesso) - R$ 110,00</option>
-          <option value="Instalação de Spot LED (Apenas fixação na fiação existente)|60">Instalação de Spot LED (Apenas fiação existente) - R$ 60,00</option>
-          <option value="Instalação de Lustre Decorativo / Pendente Grande|250">Instalação de Lustre Decorativo / Pendente Grande - R$ 250,00</option>
-          <option value="Instalação de Fita de LED com Driver (Até 5 metros)|160">Instalação de Fita de LED com Driver (Até 5m) - R$ 160,00</option>
-          <option value="Instalação de Refletor Externo / Jardim|120">Instalação de Refletor Externo / Jardim - R$ 120,00</option>
-          <option value="Instalação de Luminária de Emergência|80">Instalação de Luminária de Emergência - R$ 80,00</option>
-          <option value="Instalação de Sensor de Presença ou Fotocélula|110">Instalação de Sensor de Presença ou Fotocélula - R$ 110,00</option>
-          <option value="Instalação de Interruptor Inteligente Wi-Fi (Tuya/Sonoff)|90">Instalação Interruptor Inteligente Wi-Fi - R$ 90,00</option>
-          <option value="Substituição simples de Tomada ou Interruptor (Mesmo ponto)|85">Substituição simples de Tomada ou Interruptor - R$ 85,00</option>
-          <option value="Instalação de Nova Tomada (Puxando fiação externa via canaleta)|135">Instalação de Nova Tomada (Canaleta externa) - R$ 135,00</option>
-          <option value="Instalação de Nova Tomada (Embutida na alvenaria com quebra)|195">Instalação de Nova Tomada (Embutida na alvenaria) - R$ 195,00</option>
-          <option value="Instalação de Tomada de Alta Corrente (20A dedicada)|120">Instalação de Tomada 20A Dedicada - R$ 120,00</option>
-          <option value="Instalação de Interruptor Paralelo (Three-Way)|185">Instalação de Interruptor Paralelo (Three-Way) - R$ 185,00</option>
-          <option value="Instalação de Interruptor Intermediário (Four-Way)|215">Instalação de Interruptor Intermediário (Four-Way) - R$ 215,00</option>
-          <option value="Passagem de cabo guia por eletroduto obstruído|100">Passagem de cabo guia em eletroduto obstruído - R$ 100,00</option>
-          <option value="Instalação ou Troca de Chuveiro Elétrico (Na rede pronta)|185">Instalação ou Troca de Chuveiro Elétrico - R$ 185,00</option>
-          <option value="Troca de Resistência de Chuveiro Elétrico|110">Troca de Resistência de Chuveiro Elétrico - R$ 110,00</option>
-          <option value="Instalação de Ventilador de Teto (Com montagem mecânica)|290">Instalação de Ventilador de Teto - R$ 290,00</option>
-          <option value="Instalação de Ventilador de Parede|155">Instalação de Ventilador de Parede - R$ 155,00</option>
-          <option value="Instalação Elétrica para Ar-Condicionado Split (Até QDC)|800">Instalação Elétrica para Ar-Condicionado Split - R$ 800,00</option>
-          <option value="Instalação Ar Split 9.000 a 12.000 BTU (até 3m tubulação)|550">Instalação Split 9k/12k BTU (até 3m) - R$ 550,00</option>
-          <option value="Instalação Ar Split 18.000 a 24.000 BTU (até 3m tubulação)|750">Instalação Split 18k/24k BTU (até 3m) - R$ 750,00</option>
-          <option value="Instalação Ar Split 30.000 BTU (até 3m tubulação)|950">Instalação Split 30k BTU (até 3m) - R$ 950,00</option>
-          <option value="Manutenção Prévia / Higienização de Ar-Condicionado|200">Higienização e Limpeza Completa Split - R$ 200,00</option>
-          <option value="Carga de Gás Refrigerante (R410A / R32)|250">Carga de Gás Refrigerante (R410A/R32) - R$ 250,00</option>
-          <option value="Desinstalação de Ar Condicionado Split|200">Desinstalação de Ar Split - R$ 200,00</option>
-          <option value="Instalação de Exaustor de Cozinha / Coifa|225">Instalação de Exaustor / Coifa - R$ 225,00</option>
-          <option value="Instalação de Cooktop ou Forno Elétrico|275">Instalação de Cooktop ou Forno Elétrico - R$ 275,00</option>
-          <option value="Substituição de Disjuntor Monopolar Comum|92">Substituição de Disjuntor Monopolar - R$ 92,00</option>
-          <option value="Substituição de Disjuntor Bipolar ou Tripolar|150">Substituição de Disjuntor Bipolar / Tripolar - R$ 150,00</option>
-          <option value="Instalação de Interruptor Diferencial Residual (DR)|200">Instalação de Disjuntor / Interruptor DR - R$ 200,00</option>
-          <option value="Instalação de Dispositivo de Proteção contra Surtos (DPS)|135">Instalação de Protetor contra Surtos (DPS) - R$ 135,00</option>
-          <option value="Reorganização, Identificação e Limpeza de QDC|425">Reorganização e Limpeza de Quadro (QDC) - R$ 425,00</option>
-          <option value="Montagem e Instalação Completa de QDC (Até 12 circuitos)|1150">Montagem Completa de QDC (Até 12 circuitos) - R$ 1.150,00</option>
-          <option value="Montagem e Instalação Completa de QDC (Acima de 24 circuitos)|2300">Montagem Completa de QDC (Acima de 24 circuitos) - R$ 2.300,00</option>
-          <option value="Passagem de Fiação Geral por cômodo|250">Passagem de Fiação Geral (Por cômodo) - R$ 250,00</option>
-          <option value="Instalação de Perfilado ou Eletrocalha Metálica|90">Instalação de Perfilado / Eletrocalha (Por metro) - R$ 90,00</option>
-          <option value="Fixação de Eletroduto Aparente (Por metro)|65">Fixação de Eletroduto Aparente (Por metro) - R$ 65,00</option>
-          <option value="Instalação de Caixa de Passagem em Alvenaria|140">Instalação de Caixa de Passagem em Alvenaria - R$ 140,00</option>
-          <option value="Instalação de Hastes de Aterramento com Caixa de Inspeção|800">Instalação de Hastes de Aterramento - R$ 800,00</option>
-          <option value="Montagem e Instalação de Padrão de Entrada Monofásico|1300">Montagem de Padrão de Entrada (Monofásico) - R$ 1.300,00</option>
-          <option value="Investigação e Correção de Curto-Circuito / Fuga|350">Investigação e Correção de Curto-Circuito - R$ 350,00</option>
-          <option value="Substituição de Fiação Antiga / Condutores derretidos|500">Substituição de Fiação Antiga (Por cômodo) - R$ 500,00</option>
-          <option value="Medição de Aterramento com Terrômetro e Laudo|375">Medição de Aterramento com Laudo - R$ 375,00</option>
-          <option value="Remoção de Pontos Elétricos Antigos e Isolamento|85">Remoção de Pontos Elétricos Antigos - R$ 85,00</option>
-          <option value="Identificação de Circuitos Desconhecidos no Quadro|210">Identificação de Circuitos no Quadro - R$ 210,00</option>
-          <option value="Reforma Elétrica Completa por Ponto|225">Reforma Elétrica Completa (Por ponto) - R$ 225,00</option>
-          <option value="Reforma Elétrica Total (Apartamento até 70m²)|5500">Reforma Elétrica Total (Apto até 70m²) - R$ 5.500,00</option>
-          <option value="Reforma Elétrica Total (Casa até 150m²)|10500">Reforma Elétrica Total (Casa até 150m²) - R$ 10.500,00</option>
-          <option value="Emissão de TRT / ART de Execução Elétrica|650">Emissão de TRT / ART Elétrica - R$ 650,00</option>
-          <option value="Instalação de Câmera HD Intelbras/Hikvision (DVR)|110">Instalação Câmera DVR (Ponto + Config) - R$ 110,00</option>
-          <option value="Instalação de Câmera IP / NVR (Poe)|140">Instalação Câmera IP NVR - R$ 140,00</option>
-          <option value="Instalação de Câmera Wi-Fi (Ponto Elétrico + Configuração)|150">Instalação de Câmera Wi-Fi - R$ 150,00</option>
-          <option value="Kit DVR / NVR 4 Câmeras (Instalação e Passagem)|450">Kit DVR / NVR 4 Câmeras - R$ 450,00</option>
-          <option value="Instalação de Caixa de Passagem Hermética (IP65)|45">Instalação Caixa de Passagem Externa (IP65) - R$ 45,00</option>
-          <option value="Configuração e Formatação de Cartão MicroSD|35">Configuração e Formatação Cartão MicroSD - R$ 35,00</option>
-          <option value="Configuração de Acesso Remoto no Celular|100">Configuração de Acesso Remoto Celular - R$ 100,00</option>
-          <option value="Lançamento de Cabo Coaxial/UTP para Câmeras (metro)|8">Lançamento Cabo Câmera (por metro) - R$ 8,00</option>
-          <option value="Instalação de Kit Motor de Portão Deslizante|350">Instalação de Kit Motor de Portão Deslizante - R$ 350,00</option>
-          <option value="Instalação de Motor de Portão Basculante/Pivotante|420">Instalação Motor Basculante/Pivotante - R$ 420,00</option>
-          <option value="Codificação de Controle Remoto de Portão|30">Codificação de Controle de Portão - R$ 30,00</option>
-          <option value="Instalação de Sensor Anti-esmagamento (Fotocélula)|90">Instalação Fotocélula Anti-esmagamento - R$ 90,00</option>
-          <option value="Troca de Placa Central de Comando de Portão|140">Troca de Placa Central de Portão - R$ 140,00</option>
-          <option value="Instalação de Interfone / Kit Vídeo Porteiro|250">Instalação de Interfone / Vídeo Porteiro - R$ 250,00</option>
-          <option value="Instalação de Fechadura Elétrica / Eletroímã|160">Instalação Fechadura Elétrica/Eletroímã - R$ 160,00</option>
-          <option value="Instalação de Fechadura Digital / Biometria|200">Instalação Fechadura Digital/Biometria - R$ 200,00</option>
-          <option value="Instalação de Central de Alarme + Sensores (Kit)|380">Instalação Central Alarme + Sensores - R$ 380,00</option>
-          <option value="Instalação/Manutenção Cerca Elétrica (metro linear)|25">Cerca Elétrica (por metro linear) - R$ 25,00</option>
-          <option value="CUSTOM_OBRA|0">🔧 Mão de Obra Extra / Adicional (Digitar)</option>
-          <option value="CUSTOM_MAT|0">📦 Material Extra / Infraestrutura (Digitar)</option>
+
+          <optgroup label="── VISITA E HORAS DE TRABALHO ──">
+            <option value="Visita Técnica / Avaliação Diagnóstica simples|85">Visita Técnica / Avaliação Diagnóstica simples - R$ 85,00</option>
+            <option value="Hora de Trabalho Comum (Residencial)|115">Hora de Trabalho Comum (Residencial) - R$ 115,00</option>
+            <option value="Hora de Trabalho Especializada (Comercial / Industrial)|200">Hora de Trabalho Especializada (Comercial / Industrial) - R$ 200,00</option>
+            <option value="Diária de Eletricista (Período de 8h útil)|375">Diária de Eletricista (Período de 8h útil) - R$ 375,00</option>
+            <option value="Taxa de Plantão / Emergência (Madrugada ou Finais de Semana)|150">Taxa de Plantão / Emergência - R$ 150,00</option>
+          </optgroup>
+
+          <optgroup label="── ILUMINAÇÃO E AUTOMAÇÃO ──">
+            <option value="Instalação de Plafon, Arandela ou Luminária Simples|130">Instalação de Plafon, Arandela ou Luminária Simples - R$ 130,00</option>
+            <option value="Instalação de Spot LED Embutido (Com furo em gesso)|110">Instalação de Spot LED Embutido (Com furo em gesso) - R$ 110,00</option>
+            <option value="Instalação de Spot LED (Apenas fixação na fiação existente)|60">Instalação de Spot LED (Apenas fiação existente) - R$ 60,00</option>
+            <option value="Instalação de Lustre Decorativo / Pendente Grande|250">Instalação de Lustre Decorativo / Pendente Grande - R$ 250,00</option>
+            <option value="Instalação de Fita de LED com Driver (Até 5 metros)|160">Instalação de Fita de LED com Driver (Até 5m) - R$ 160,00</option>
+            <option value="Instalação de Refletor Externo / Jardim|120">Instalação de Refletor Externo / Jardim - R$ 120,00</option>
+            <option value="Instalação de Luminária de Emergência|80">Instalação de Luminária de Emergência - R$ 80,00</option>
+            <option value="Instalação de Sensor de Presença ou Fotocélula|110">Instalação de Sensor de Presença ou Fotocélula - R$ 110,00</option>
+            <option value="Instalação de Interruptor Inteligente Wi-Fi (Tuya/Sonoff)|90">Instalação Interruptor Inteligente Wi-Fi - R$ 90,00</option>
+          </optgroup>
+
+          <optgroup label="── TOMADAS E INTERRUPTORES ──">
+            <option value="Substituição simples de Tomada ou Interruptor (Mesmo ponto)|85">Substituição simples de Tomada ou Interruptor - R$ 85,00</option>
+            <option value="Instalação de Nova Tomada (Puxando fiação externa via canaleta)|135">Instalação de Nova Tomada (Canaleta externa) - R$ 135,00</option>
+            <option value="Instalação de Nova Tomada (Embutida na alvenaria com quebra)|195">Instalação de Nova Tomada (Embutida na alvenaria) - R$ 195,00</option>
+            <option value="Instalação de Tomada de Alta Corrente (20A dedicada)|120">Instalação de Tomada 20A Dedicada - R$ 120,00</option>
+            <option value="Instalação de Interruptor Paralelo (Three-Way)|185">Instalação de Interruptor Paralelo (Three-Way) - R$ 185,00</option>
+            <option value="Instalação de Interruptor Intermediário (Four-Way)|215">Instalação de Interruptor Intermediário (Four-Way) - R$ 215,00</option>
+            <option value="Passagem de cabo guia por eletroduto obstruído|100">Passagem de cabo guia em eletroduto obstruído - R$ 100,00</option>
+          </optgroup>
+
+          <optgroup label="── ELETRODOMÉSTICOS E CLIMATIZAÇÃO ──">
+            <option value="Instalação ou Troca de Chuveiro Elétrico (Na rede pronta)|185">Instalação ou Troca de Chuveiro Elétrico - R$ 185,00</option>
+            <option value="Troca de Resistência de Chuveiro Elétrico|110">Troca de Resistência de Chuveiro Elétrico - R$ 110,00</option>
+            <option value="Instalação de Ventilador de Teto (Com montagem mecânica)|290">Instalação de Ventilador de Teto - R$ 290,00</option>
+            <option value="Instalação de Ventilador de Parede|155">Instalação de Ventilador de Parede - R$ 155,00</option>
+            <option value="Instalação Elétrica para Ar-Condicionado Split (Até QDC)|800">Instalação Elétrica para Ar-Condicionado Split - R$ 800,00</option>
+            <option value="Instalação Ar Split 9.000 a 12.000 BTU (até 3m tubulação)|550">Instalação Split 9k/12k BTU (até 3m) - R$ 550,00</option>
+            <option value="Instalação Ar Split 18.000 a 24.000 BTU (até 3m tubulação)|750">Instalação Split 18k/24k BTU (até 3m) - R$ 750,00</option>
+            <option value="Instalação Ar Split 30.000 BTU (até 3m tubulação)|950">Instalação Split 30k BTU (até 3m) - R$ 950,00</option>
+            <option value="Manutenção Prévia / Higienização de Ar-Condicionado|200">Higienização e Limpeza Completa Split - R$ 200,00</option>
+            <option value="Carga de Gás Refrigerante (R410A / R32)|250">Carga de Gás Refrigerante (R410A/R32) - R$ 250,00</option>
+            <option value="Desinstalação de Ar Condicionado Split|200">Desinstalação de Ar Split - R$ 200,00</option>
+            <option value="Instalação de Exaustor de Cozinha / Coifa|225">Instalação de Exaustor / Coifa - R$ 225,00</option>
+            <option value="Instalação de Cooktop ou Forno Elétrico|275">Instalação de Cooktop ou Forno Elétrico - R$ 275,00</option>
+          </optgroup>
+
+          <optgroup label="── QUADROS, DISJUNTORES E INFRAESTRUTURA ──">
+            <option value="Substituição de Disjuntor Monopolar Comum|92">Substituição de Disjuntor Monopolar - R$ 92,00</option>
+            <option value="Substituição de Disjuntor Bipolar ou Tripolar|150">Substituição de Disjuntor Bipolar / Tripolar - R$ 150,00</option>
+            <option value="Instalação de Interruptor Diferencial Residual (DR)|200">Instalação de Disjuntor / Interruptor DR - R$ 200,00</option>
+            <option value="Instalação de Dispositivo de Proteção contra Surtos (DPS)|135">Instalação de Protetor contra Surtos (DPS) - R$ 135,00</option>
+            <option value="Reorganização, Identificação e Limpeza de QDC|425">Reorganização e Limpeza de Quadro (QDC) - R$ 425,00</option>
+            <option value="Montagem e Instalação Completa de QDC (Até 12 circuitos)|1150">Montagem Completa de QDC (Até 12 circuitos) - R$ 1.150,00</option>
+            <option value="Montagem e Instalação Completa de QDC (Acima de 24 circuitos)|2300">Montagem Completa de QDC (Acima de 24 circuitos) - R$ 2.300,00</option>
+            <option value="Passagem de Fiação Geral por cômodo|250">Passagem de Fiação Geral (Por cômodo) - R$ 250,00</option>
+            <option value="Instalação de Perfilado ou Eletrocalha Metálica|90">Instalação de Perfilado / Eletrocalha (Por metro) - R$ 90,00</option>
+            <option value="Fixação de Eletroduto Aparente (Por metro)|65">Fixação de Eletroduto Aparente (Por metro) - R$ 65,00</option>
+            <option value="Instalação de Caixa de Passagem em Alvenaria|140">Instalação de Caixa de Passagem em Alvenaria - R$ 140,00</option>
+            <option value="Instalação de Hastes de Aterramento com Caixa de Inspeção|800">Instalação de Hastes de Aterramento - R$ 800,00</option>
+            <option value="Montagem e Instalação de Padrão de Entrada Monofásico|1300">Montagem de Padrão de Entrada (Monofásico) - R$ 1.300,00</option>
+          </optgroup>
+
+          <optgroup label="── MANUTENÇÃO, REFORMAS E LAUDOS ──">
+            <option value="Investigação e Correção de Curto-Circuito / Fuga|350">Investigação e Correção de Curto-Circuito - R$ 350,00</option>
+            <option value="Substituição de Fiação Antiga / Condutores derretidos|500">Substituição de Fiação Antiga (Por cômodo) - R$ 500,00</option>
+            <option value="Medição de Aterramento com Terrômetro e Laudo|375">Medição de Aterramento com Laudo - R$ 375,00</option>
+            <option value="Remoção de Pontos Elétricos Antigos e Isolamento|85">Remoção de Pontos Elétricos Antigos - R$ 85,00</option>
+            <option value="Identificação de Circuitos Desconhecidos no Quadro|210">Identificação de Circuitos no Quadro - R$ 210,00</option>
+            <option value="Reforma Elétrica Completa por Ponto|225">Reforma Elétrica Completa (Por ponto) - R$ 225,00</option>
+            <option value="Reforma Elétrica Total (Apartamento até 70m²)|5500">Reforma Elétrica Total (Apto até 70m²) - R$ 5.500,00</option>
+            <option value="Reforma Elétrica Total (Casa até 150m²)|10500">Reforma Elétrica Total (Casa até 150m²) - R$ 10.500,00</option>
+            <option value="Emissão de TRT / ART de Execução Elétrica|650">Emissão de TRT / ART Elétrica - R$ 650,00</option>
+          </optgroup>
+
+          <optgroup label="── CFTV E SEGURANÇA ELETRÔNICA ──">
+            <option value="Instalação de Câmera HD Intelbras/Hikvision (DVR)|110">Instalação Câmera DVR (Ponto + Config) - R$ 110,00</option>
+            <option value="Instalação de Câmera IP / NVR (Poe)|140">Instalação Câmera IP NVR - R$ 140,00</option>
+            <option value="Instalação de Câmera Wi-Fi (Ponto Elétrico + Configuração)|150">Instalação de Câmera Wi-Fi - R$ 150,00</option>
+            <option value="Kit DVR / NVR 4 Câmeras (Instalação e Passagem)|450">Kit DVR / NVR 4 Câmeras - R$ 450,00</option>
+            <option value="Instalação de Caixa de Passagem Hermética (IP65)|45">Instalação Caixa de Passagem Externa (IP65) - R$ 45,00</option>
+            <option value="Configuração e Formatação de Cartão MicroSD|35">Configuração e Formatação Cartão MicroSD - R$ 35,00</option>
+            <option value="Configuração de Acesso Remoto no Celular|100">Configuração de Acesso Remoto Celular - R$ 100,00</option>
+            <option value="Lançamento de Cabo Coaxial/UTP para Câmeras (metro)|8">Lançamento Cabo Câmera (por metro) - R$ 8,00</option>
+            <option value="Instalação de Kit Motor de Portão Deslizante|350">Instalação de Kit Motor de Portão Deslizante - R$ 350,00</option>
+            <option value="Instalação de Motor de Portão Basculante/Pivotante|420">Instalação Motor Basculante/Pivotante - R$ 420,00</option>
+            <option value="Codificação de Controle Remoto de Portão|30">Codificação de Controle de Portão - R$ 30,00</option>
+            <option value="Instalação de Sensor Anti-esmagamento (Fotocélula)|90">Instalação Fotocélula Anti-esmagamento - R$ 90,00</option>
+            <option value="Troca de Placa Central de Comando de Portão|140">Troca de Placa Central de Portão - R$ 140,00</option>
+            <option value="Instalação de Interfone / Kit Vídeo Porteiro|250">Instalação de Interfone / Vídeo Porteiro - R$ 250,00</option>
+            <option value="Instalação de Fechadura Elétrica / Eletroímã|160">Instalação Fechadura Elétrica/Eletroímã - R$ 160,00</option>
+            <option value="Instalação de Fechadura Digital / Biometria|200">Instalação Fechadura Digital/Biometria - R$ 200,00</option>
+            <option value="Instalação de Central de Alarme + Sensores (Kit)|380">Instalação Central Alarme + Sensores - R$ 380,00</option>
+            <option value="Instalação/Manutenção Cerca Elétrica (metro linear)|25">Cerca Elétrica (por metro linear) - R$ 25,00</option>
+          </optgroup>
+
+          <optgroup label="── ITENS PERSONALIZADOS ──">
+            <option value="CUSTOM_OBRA|0">🔧 Mão de Obra Extra / Adicional (Digitar)</option>
+            <option value="CUSTOM_MAT|0">📦 Material Extra / Infraestrutura (Digitar)</option>
+          </optgroup>
         </select>
       </div>
 
@@ -589,5 +613,539 @@
     </div>
   </div>
 
+  <!-- CONTAINER ESCONDIDO DO PDF PARA IMPRESSÃO -->
+  <div id="pdfContainer">
+    <div id="pdfTemplate">
+      <!-- Marca D'água Transparente no Fundo do PDF -->
+      <svg class="watermark" viewBox="0 0 400 350" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="200" cy="120" r="70" fill="none" stroke="#1b365d" stroke-width="18"/>
+        <path d="M200 70 L200 125" stroke="#1b365d" stroke-width="18" stroke-linecap="round"/>
+        <text x="200" y="245" font-family="'Segoe UI', Arial, sans-serif" font-weight="900" font-size="62" fill="#1b365d" text-anchor="middle">ERTEC</text>
+      </svg>
+
+      <div class="pdf-content">
+        <div class="pdf-header">
+          <svg class="pdf-logo" viewBox="0 0 400 350" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="350" rx="20" fill="#1e1e1e"/>
+            <circle cx="200" cy="120" r="70" fill="none" stroke="#eab308" stroke-width="18"/>
+            <path d="M200 70 L200 125" stroke="#eab308" stroke-width="18" stroke-linecap="round"/>
+            <text x="200" y="245" font-family="'Segoe UI', Arial, sans-serif" font-weight="900" font-size="62" fill="#808080" text-anchor="middle">ER<tspan fill="#eab308">TEC</tspan></text>
+            <text x="200" y="295" font-family="'Segoe UI', Arial, sans-serif" font-weight="400" font-size="28" fill="#ffffff" text-anchor="middle">Soluções Elétricas</text>
+          </svg>
+          <h1>ERTEC SOLUÇÕES ELÉTRICAS</h1>
+          <p>Erick Hergesel - Serviços Elétricos, Climatização & Automação</p>
+          <p>WhatsApp: (15) 99123-4567 | Sorocaba - SP</p>
+        </div>
+
+        <div class="pdf-client-box">
+          <strong>ORÇAMENTO DE SERVIÇOS</strong><br>
+          <strong>Cliente:</strong> <span id="pdfClienteNome">-</span><br>
+          <strong>Telefone:</strong> <span id="pdfClienteTel">-</span><br>
+          <strong>Data de Emissão:</strong> <span id="pdfData">-</span>
+        </div>
+
+        <table class="pdf-table">
+          <thead>
+            <tr>
+              <th style="width: 50%;">Descrição do Serviço / Item</th>
+              <th style="width: 10%; text-align: center;">Qtd</th>
+              <th style="width: 20%; text-align: right;">Unitário</th>
+              <th style="width: 20%; text-align: right;">Subtotal</th>
+            </tr>
+          </thead>
+          <tbody id="pdfListaItens"></tbody>
+        </table>
+
+        <div class="pdf-total" id="pdfTotalBox">
+          VALOR TOTAL ESTIMADO: R$ 0,00
+        </div>
+
+        <div class="pdf-terms">
+          <strong>Condições Gerais & Validade:</strong><br>
+          • Este orçamento é válido por 15 (quinze) dias a contar da data de emissão.<br>
+          • Os valores cobrem a execução dos serviços detalhados e mão de obra técnica especializada.<br>
+          • Quaisquer alterações na infraestrutura técnica não informadas previamente poderão alterar o valor final.<br>
+          • Garantia legal de 90 dias sobre a mão de obra prestada conforme NBR 5410.
+        </div>
+
+        <div class="pdf-footer">
+          ERTEC Soluções Elétricas — Compromisso com Segurança, Eficiência e Qualidade Técnicas.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let itensOrcamento = [];
+
+    // NAVEGAÇÃO DE ABAS
+    function trocarAba(abaId, elemento) {
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(abaId).classList.add('active');
+      elemento.classList.add('active');
+    }
+
+    function trocarSubAr(subId, elemento) {
+      document.querySelectorAll('.sub-ar-content').forEach(s => s.style.display = 'none');
+      document.querySelectorAll('#arTab .sub-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(subId).style.display = 'block';
+      elemento.classList.add('active');
+    }
+
+    function trocarSubCasa(subId, elemento) {
+      document.querySelectorAll('.sub-casa-content').forEach(s => s.style.display = 'none');
+      document.querySelectorAll('#casaTab .sub-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(subId).style.display = 'block';
+      elemento.classList.add('active');
+    }
+
+    // FILTRO DE SERVIÇOS
+    function filtrarServicos() {
+      const busca = document.getElementById('buscaServico').value.toLowerCase();
+      const select = document.getElementById('servicoSelect');
+      const options = select.getElementsByTagName('option');
+      const optgroups = select.getElementsByTagName('optgroup');
+
+      for (let i = 0; i < options.length; i++) {
+        const texto = options[i].text.toLowerCase();
+        if (options[i].value === "") continue;
+        options[i].style.display = texto.includes(busca) ? "" : "none";
+      }
+
+      for (let g = 0; g < optgroups.length; g++) {
+        let visibleCount = 0;
+        const opts = optgroups[g].getElementsByTagName('option');
+        for (let j = 0; j < opts.length; j++) {
+          if (opts[j].style.display !== "none") visibleCount++;
+        }
+        optgroups[g].style.display = visibleCount > 0 ? "" : "none";
+      }
+    }
+
+    // VERIFICAÇÃO DE ENTRADA PERSONALIZADA
+    function verificarItemCustomizado() {
+      const select = document.getElementById('servicoSelect');
+      const val = select.value;
+      const box = document.getElementById('campoCustomBox');
+      const lbl = document.getElementById('lblCustomNome');
+
+      if (val.startsWith("CUSTOM_OBRA")) {
+        box.style.display = "block";
+        lbl.innerText = "Descrição da Mão de Obra Extra:";
+      } else if (val.startsWith("CUSTOM_MAT")) {
+        box.style.display = "block";
+        lbl.innerText = "Descrição do Material Extra:";
+      } else {
+        box.style.display = "none";
+      }
+    }
+
+    // ADICIONAR ITEM AO ORÇAMENTO
+    function adicionarItem() {
+      const select = document.getElementById('servicoSelect');
+      const val = select.value;
+      const qtdInput = document.getElementById('servicoQtd');
+      const qtd = parseFloat(qtdInput.value) || 1;
+
+      if (!val) {
+        alert("Por favor, selecione um serviço na lista!");
+        return;
+      }
+
+      let nome = "";
+      let precoUnitario = 0;
+
+      if (val.startsWith("CUSTOM_")) {
+        nome = document.getElementById('customNome').value.trim();
+        precoUnitario = parseFloat(document.getElementById('customValor').value) || 0;
+        if (!nome) {
+          alert("Por favor, informe a descrição do item personalizado!");
+          return;
+        }
+      } else {
+        const partes = val.split("|");
+        nome = partes[0];
+        precoUnitario = parseFloat(partes[1]) || 0;
+      }
+
+      const itemExistente = itensOrcamento.find(i => i.nome === nome);
+      if (itemExistente) {
+        itemExistente.qtd += qtd;
+      } else {
+        itensOrcamento.push({
+          nome: nome,
+          preco: precoUnitario,
+          qtd: qtd
+        });
+      }
+
+      document.getElementById('customNome').value = "";
+      document.getElementById('customValor').value = "0.00";
+      document.getElementById('campoCustomBox').style.display = "none";
+      select.value = "";
+      qtdInput.value = 1;
+
+      atualizarListaOrcamento();
+    }
+
+    function removerItem(index) {
+      itensOrcamento.splice(index, 1);
+      atualizarListaOrcamento();
+    }
+
+    function atualizarListaOrcamento() {
+      const lista = document.getElementById('listaItens');
+      lista.innerHTML = "";
+
+      itensOrcamento.forEach((item, idx) => {
+        const subtotal = item.preco * item.qtd;
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <div class="item-info">
+            <span class="item-title">${item.nome}</span>
+            <span class="item-sub">${item.qtd}x R$ ${item.preco.toFixed(2).replace('.', ',')} = R$ ${subtotal.toFixed(2).replace('.', ',')}</span>
+          </div>
+          <a class="remove-btn" onclick="removerItem(${idx})">✕</a>
+        `;
+        lista.appendChild(li);
+      });
+
+      calcularTotal();
+    }
+
+    function calcularTotal() {
+      let total = 0;
+      itensOrcamento.forEach(i => total += (i.preco * i.qtd));
+      const taxa = parseFloat(document.getElementById('taxaExtra').value) || 0;
+      total += taxa;
+
+      document.getElementById('valorTotal').innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+    }
+
+    // CÁLCULO DE BTUs PARA AR CONDICIONADO
+    function calcularBTUs() {
+      const comp = parseFloat(document.getElementById('arComp').value) || 0;
+      const larg = parseFloat(document.getElementById('arLarg').value) || 0;
+      const fatorSol = parseFloat(document.getElementById('arSol').value) || 600;
+      const pessoas = parseFloat(document.getElementById('arPessoas').value) || 1;
+      const eletro = parseFloat(document.getElementById('arEletro').value) || 0;
+
+      const area = comp * larg;
+      let btuExato = (area * fatorSol) + ((pessoas - 1) * 600) + (eletro * 600);
+      if (pessoas === 1 && eletro === 0) btuExato = area * fatorSol;
+
+      let btuRec = "9.000 BTU/h";
+      if (btuExato > 9000 && btuExato <= 12000) btuRec = "12.000 BTU/h";
+      else if (btuExato > 12000 && btuExato <= 18000) btuRec = "18.000 BTU/h";
+      else if (btuExato > 18000 && btuExato <= 24000) btuRec = "24.000 BTU/h";
+      else if (btuExato > 24000) btuRec = "30.000 BTU/h ou superior";
+
+      document.getElementById('resArArea').innerText = `${area.toFixed(1)} m²`;
+      document.getElementById('resArBtuExato').innerText = `${Math.round(btuExato).toLocaleString('pt-BR')} BTU/h`;
+      document.getElementById('resArBtuRecomendado').innerText = btuRec;
+    }
+
+    function gerarMateriaisAr() {
+      const metros = parseFloat(document.getElementById('metroCobreAr').value) || 3;
+      const materiais = [
+        { nome: 'Tubulação de Cobre Flexível (Par)', qtd: metros, preco: 45.00 },
+        { nome: 'Isolamento Térmico Blindado', qtd: metros * 2, preco: 8.50 },
+        { nome: 'Cabo PP Flexível 4x1.5mm²', qtd: metros + 1, preco: 7.20 },
+        { nome: 'Suporte Reforçado para Condensadora', qtd: 1, preco: 65.00 },
+        { nome: 'Fita de Acabamento PVC / Prata', qtd: 1, preco: 18.00 },
+        { nome: 'Mangueira de Dreno Cristal (m)', qtd: 2, preco: 5.00 }
+      ];
+
+      const tbody = document.getElementById('tbodyMateriaisAr');
+      tbody.innerHTML = "";
+      let total = 0;
+
+      materiais.forEach(m => {
+        const sub = m.qtd * m.preco;
+        total += sub;
+        tbody.innerHTML += `
+          <tr>
+            <td>${m.nome}</td>
+            <td>${m.qtd}</td>
+            <td>R$ ${m.preco.toFixed(2).replace('.', ',')}</td>
+            <td>R$ ${sub.toFixed(2).replace('.', ',')}</td>
+          </tr>
+        `;
+      });
+
+      document.getElementById('totalCustoMateriaisAr').innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+    }
+
+    function adicionarMateriaisArAoOrcamento() {
+      const totalTexto = document.getElementById('totalCustoMateriaisAr').innerText;
+      const valor = parseFloat(totalTexto.replace('R$', '').replace('.', '').replace(',', '.').trim()) || 0;
+
+      if (valor === 0) return;
+
+      itensOrcamento.push({
+        nome: "Kit Completo de Materiais de Infraestrutura para Ar-Condicionado",
+        preco: valor,
+        qtd: 1
+      });
+
+      atualizarListaOrcamento();
+      trocarAba('orcamentoTab', document.querySelectorAll('.tab-btn')[0]);
+      alert("Kit de Materiais do Ar adicionado ao Orçamento com sucesso!");
+    }
+
+    // INSTALAÇÃO DA CASA (POR METRAGEM E PONTOS)
+    function calcularMaoObraMetragem() {
+      const m2 = parseFloat(document.getElementById('casaMetragem').value) || 0;
+      const padrao = parseFloat(document.getElementById('casaPadrao').value) || 50;
+      const estagio = parseFloat(document.getElementById('casaEstagio').value) || 1;
+
+      const total = m2 * padrao * estagio;
+
+      document.getElementById('resM2Area').innerText = `${m2} m²`;
+      document.getElementById('resM2Preco').innerText = `R$ ${(padrao * estagio).toFixed(2).replace('.', ',')}`;
+      document.getElementById('resM2Total').innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+    }
+
+    function adicionarM2AoOrcamento() {
+      const m2 = parseFloat(document.getElementById('casaMetragem').value) || 0;
+      const totalTexto = document.getElementById('resM2Total').innerText;
+      const valor = parseFloat(totalTexto.replace('R$', '').replace('.', '').replace(',', '.').trim()) || 0;
+
+      if (valor === 0) return;
+
+      itensOrcamento.push({
+        nome: `Mão de Obra de Instalação Elétrica Geral (${m2}m²)`,
+        preco: valor,
+        qtd: 1
+      });
+
+      atualizarListaOrcamento();
+      trocarAba('orcamentoTab', document.querySelectorAll('.tab-btn')[0]);
+      alert("Mão de Obra por m² adicionada ao Orçamento!");
+    }
+
+    function calcularMaoObraPontos() {
+      const t = parseFloat(document.getElementById('qtdTomadas').value) || 0;
+      const i = parseFloat(document.getElementById('qtdIlum').value) || 0;
+      const sw = parseFloat(document.getElementById('qtdInterr').value) || 0;
+      const esp = parseFloat(document.getElementById('qtdEspeciais').value) || 0;
+
+      const totalPontos = t + i + sw;
+      const total = (totalPontos * 55) + (esp * 135);
+
+      document.getElementById('resTotalPontosSimples').innerText = `${totalPontos} pts`;
+      document.getElementById('resPontosTotal').innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+    }
+
+    function adicionarPontosAoOrcamento() {
+      const totalTexto = document.getElementById('resPontosTotal').innerText;
+      const valor = parseFloat(totalTexto.replace('R$', '').replace('.', '').replace(',', '.').trim()) || 0;
+
+      if (valor === 0) return;
+
+      itensOrcamento.push({
+        nome: "Mão de Obra Elétrica por Levantamento de Pontos",
+        preco: valor,
+        qtd: 1
+      });
+
+      atualizarListaOrcamento();
+      trocarAba('orcamentoTab', document.querySelectorAll('.tab-btn')[0]);
+      alert("Mão de obra por pontos adicionada ao Orçamento!");
+    }
+
+    function gerarMateriaisCasa() {
+      const m2 = parseFloat(document.getElementById('casaMetragem').value) || 80;
+      const fator = m2 / 80;
+
+      const materiais = [
+        { nome: 'Cabo Flexível 1,5mm² (Rolo 100m)', qtd: Math.ceil(1.5 * fator), preco: 135.00 },
+        { nome: 'Cabo Flexível 2,5mm² (Rolo 100m)', qtd: Math.ceil(2.5 * fator), preco: 210.00 },
+        { nome: 'Cabo Flexível 6,0mm² (Metro)', qtd: Math.ceil(25 * fator), preco: 8.50 },
+        { nome: 'Eletroduto Corrugado Amarelo 3/4" (Rolo 50m)', qtd: Math.ceil(1 * fator), preco: 85.00 },
+        { nome: 'Quadro de Distribuição (QDC) 12/16 Disjuntores', qtd: 1, preco: 120.00 },
+        { nome: 'Disjuntores Monopolares (Unidade)', qtd: Math.ceil(10 * fator), preco: 18.00 },
+        { nome: 'Interruptor / Disjuntor DR Bipolar 40A', qtd: 1, preco: 110.00 },
+        { nome: 'Protetor contra Surtos DPS 275V', qtd: 2, preco: 45.00 },
+        { nome: 'Kits Tomadas e Interruptores Completos', qtd: Math.ceil(25 * fator), preco: 14.50 }
+      ];
+
+      const tbody = document.getElementById('tbodyMateriais');
+      tbody.innerHTML = "";
+      let total = 0;
+
+      materiais.forEach(m => {
+        const sub = m.qtd * m.preco;
+        total += sub;
+        tbody.innerHTML += `
+          <tr>
+            <td>${m.nome}</td>
+            <td>${m.qtd}</td>
+            <td>R$ ${m.preco.toFixed(2).replace('.', ',')}</td>
+            <td>R$ ${sub.toFixed(2).replace('.', ',')}</td>
+          </tr>
+        `;
+      });
+
+      document.getElementById('totalCustoMateriais').innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+    }
+
+    function adicionarMateriaisAoOrcamento() {
+      const totalTexto = document.getElementById('totalCustoMateriais').innerText;
+      const valor = parseFloat(totalTexto.replace('R$', '').replace('.', '').replace(',', '.').trim()) || 0;
+
+      if (valor === 0) return;
+
+      itensOrcamento.push({
+        nome: "Lista Estimada de Materiais Elétricos Residenciais",
+        preco: valor,
+        qtd: 1
+      });
+
+      atualizarListaOrcamento();
+      trocarAba('orcamentoTab', document.querySelectorAll('.tab-btn')[0]);
+      alert("Lista de Materiais incluída no Orçamento!");
+    }
+
+    // CÁLCULO DE DISJUNTOR CERTO
+    function executarCalculoElétrico() {
+      const V = parseFloat(document.getElementById('calcTensao').value) || 220;
+      const W = parseFloat(document.getElementById('calcPotencia').value) || 0;
+
+      if (W <= 0) {
+        document.getElementById('resCorrente').innerText = "0.00 A";
+        document.getElementById('resDisjuntor').innerText = "-";
+        document.getElementById('resCabo').innerText = "-";
+        return;
+      }
+
+      const I = W / V;
+      let disjuntor = "10A";
+      let cabo = "1,5 mm²";
+
+      if (I > 10 && I <= 16) { disjuntor = "16A"; cabo = "2,5 mm²"; }
+      else if (I > 16 && I <= 20) { disjuntor = "20A"; cabo = "2,5 mm²"; }
+      else if (I > 20 && I <= 25) { disjuntor = "25A"; cabo = "4,0 mm²"; }
+      else if (I > 25 && I <= 32) { disjuntor = "32A"; cabo = "6,0 mm²"; }
+      else if (I > 32 && I <= 40) { disjuntor = "40A"; cabo = "6,0 mm²"; }
+      else if (I > 40 && I <= 50) { disjuntor = "50A"; cabo = "10,0 mm²"; }
+      else if (I > 50 && I <= 63) { disjuntor = "63A"; cabo = "16,0 mm²"; }
+      else if (I > 63) { disjuntor = "Acima de 63A (Análise Trifásica Especial)"; cabo = "25,0 mm² ou superior"; }
+
+      document.getElementById('resCorrente').innerText = `${I.toFixed(2)} A`;
+      document.getElementById('resDisjuntor').innerText = disjuntor;
+      document.getElementById('resCabo').innerText = cabo;
+    }
+
+    // ENVIO PARA WHATSAPP
+    function enviarWhatsApp() {
+      const nome = document.getElementById('clienteNome').value || "Cliente";
+      const tel = document.getElementById('clienteTel').value.replace(/\D/g, '');
+
+      if (itensOrcamento.length === 0) {
+        alert("Adicione pelo menos um serviço ao orçamento!");
+        return;
+      }
+
+      let msg = `⚡ *ORÇAMENTO - ERTEC SOLUÇÕES ELÉTRICAS* ⚡\n`;
+      msg += `👤 *Cliente:* ${nome}\n`;
+      msg += `--------------------------------------\n`;
+      msg += `🛠️ *SERVIÇOS SOLICITADOS:*\n\n`;
+
+      let total = 0;
+      itensOrcamento.forEach(i => {
+        const sub = i.preco * i.qtd;
+        total += sub;
+        msg += `• *${i.qtd}x ${i.nome}*\n  Subtotal: R$ ${sub.toFixed(2).replace('.', ',')}\n`;
+      });
+
+      const taxa = parseFloat(document.getElementById('taxaExtra').value) || 0;
+      if (taxa > 0) {
+        total += taxa;
+        msg += `\n📦 *Taxa de Materiais/Deslocamento:* R$ ${taxa.toFixed(2).replace('.', ',')}\n`;
+      }
+
+      msg += `--------------------------------------\n`;
+      msg += `💰 *VALOR TOTAL ESTIMADO: R$ ${total.toFixed(2).replace('.', ',')}*\n\n`;
+      msg += `📌 _Orçamento válido por 15 dias._\n`;
+      msg += `Erick Hergesel - ERTEC Soluções Elétricas`;
+
+      const url = tel ? `https://wa.me/55${tel}?text=${encodeURIComponent(msg)}` : `https://wa.me/?text=${encodeURIComponent(msg)}`;
+      window.open(url, '_blank');
+    }
+
+    // GERADOR DE PDF
+    function gerarPDF() {
+      if (itensOrcamento.length === 0) {
+        alert("Adicione ao menos um serviço para gerar o PDF!");
+        return;
+      }
+
+      const nome = document.getElementById('clienteNome').value || "Não informado";
+      const tel = document.getElementById('clienteTel').value || "Não informado";
+      const hoje = new Date().toLocaleDateString('pt-BR');
+
+      document.getElementById('pdfClienteNome').innerText = nome;
+      document.getElementById('pdfClienteTel').innerText = tel;
+      document.getElementById('pdfData').innerText = hoje;
+
+      const pdfTbody = document.getElementById('pdfListaItens');
+      pdfTbody.innerHTML = "";
+
+      let total = 0;
+      itensOrcamento.forEach(i => {
+        const sub = i.preco * i.qtd;
+        total += sub;
+        pdfTbody.innerHTML += `
+          <tr>
+            <td>${i.nome}</td>
+            <td style="text-align: center;">${i.qtd}</td>
+            <td style="text-align: right;">R$ ${i.preco.toFixed(2).replace('.', ',')}</td>
+            <td style="text-align: right;">R$ ${sub.toFixed(2).replace('.', ',')}</td>
+          </tr>
+        `;
+      });
+
+      const taxa = parseFloat(document.getElementById('taxaExtra').value) || 0;
+      if (taxa > 0) {
+        total += taxa;
+        pdfTbody.innerHTML += `
+          <tr>
+            <td colspan="3"><strong>Taxa de Materiais Extras / Deslocamento</strong></td>
+            <td style="text-align: right;">R$ ${taxa.toFixed(2).replace('.', ',')}</td>
+          </tr>
+        `;
+      }
+
+      document.getElementById('pdfTotalBox').innerText = `VALOR TOTAL ESTIMADO: R$ ${total.toFixed(2).replace('.', ',')}`;
+
+      const element = document.getElementById('pdfTemplate');
+      const container = document.getElementById('pdfContainer');
+      container.style.display = 'block';
+
+      const opt = {
+        margin:       [10, 10, 10, 10],
+        filename:     `Orcamento_ERTEC_${nome.replace(/\s+/g, '_')}.pdf`,
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, useCORS: true, logging: false },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+
+      html2pdf().set(opt).from(element).save().then(() => {
+        container.style.display = 'none';
+      });
+    }
+
+    // INICIALIZADORES
+    window.onload = function() {
+      calcularBTUs();
+      gerarMateriaisAr();
+      calcularMaoObraMetragem();
+      calcularMaoObraPontos();
+      gerarMateriaisCasa();
+      executarCalculoElétrico();
+    };
+  </script>
 </body>
 </html>
