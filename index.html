@@ -1,57 +1,1011 @@
-<select id="servicoSelect" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3.5 text-slate-100 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all text-sm appearance-none">
-  <option value="" disabled selected>Selecione um serviço para adicionar...</option>
-  <option value="Visita Técnica / Avaliação Diagnóstica simples|85">Visita Técnica / Avaliação Diagnóstica simples — R$ 85,00</option>
-  <option value="Hora de Trabalho Comum (Residencial)|115">Hora de Trabalho Comum (Residencial) — R$ 115,00</option>
-  <option value="Hora de Trabalho Especializada (Comercial / Industrial)|200">Hora de Trabalho Especializada (Comercial / Industrial) — R$ 200,00</option>
-  <option value="Diária de Eletricista (Período de 8h útil)|375">Diária de Eletricista (Período de 8h útil) — R$ 375,00</option>
-  <option value="Taxa de Plantão / Emergência (Madrugada ou Finais de Semana)|150">Taxa de Plantão / Emergência — R$ 150,00</option>
-  <option value="Instalação de Plafon, Arandela ou Luminária Simples|130">Instalação de Plafon, Arandela ou Luminária Simples — R$ 130,00</option>
-  <option value="Instalação de Spot LED Embutido (Com furo em gesso)|110">Instalação de Spot LED Embutido (Com furo em gesso) — R$ 110,00</option>
-  <option value="Instalação de Spot LED (Apenas fixação na fiação existente)|60">Instalação de Spot LED (Apenas fiação existente) — R$ 60,00</option>
-  <option value="Instalação de Lustre Decorativo / Pendente Grande|250">Instalação de Lustre Decorativo / Pendente Grande — R$ 250,00</option>
-  <option value="Instalação de Fita de LED com Driver (Até 5 metros)|160">Instalação de Fita de LED com Driver (Até 5m) — R$ 160,00</option>
-  <option value="Instalação de Refletor Externo / Jardim|120">Instalação de Refletor Externo / Jardim — R$ 120,00</option>
-  <option value="Instalação de Luminária de Emergência|80">Instalação de Luminária de Emergência — R$ 80,00</option>
-  <option value="Instalação de Sensor de Presença ou Fotocélula|110">Instalação de Sensor de Presença ou Fotocélula — R$ 110,00</option>
-  <option value="Substituição simples de Tomada ou Interruptor (Mesmo ponto)|85">Substituição simples de Tomada ou Interruptor — R$ 85,00</option>
-  <option value="Instalação de Nova Tomada (Puxando fiação externa via canaleta)|135">Instalação de Nova Tomada (Canaleta externa) — R$ 135,00</option>
-  <option value="Instalação de Nova Tomada (Embutida na alvenaria com quebra)|195">Instalação de Nova Tomada (Embutida na alvenaria) — R$ 195,00</option>
-  <option value="Instalação de Tomada de Alta Corrente (20A dedicada)|120">Instalação de Tomada 20A Dedicada — R$ 120,00</option>
-  <option value="Instalação de Interruptor Paralelo (Three-Way)|185">Instalação de Interruptor Paralelo (Three-Way) — R$ 185,00</option>
-  <option value="Instalação de Interruptor Intermediário (Four-Way)|215">Instalação de Interruptor Intermediário (Four-Way) — R$ 215,00</option>
-  <option value="Passagem de cabo guia por eletroduto obstruído|100">Passagem de cabo guia em eletroduto obstruído — R$ 100,00</option>
-  <option value="Instalação ou Troca de Chuveiro Elétrico (Na rede pronta)|185">Instalação ou Troca de Chuveiro Elétrico — R$ 185,00</option>
-  <option value="Troca de Resistência de Chuveiro Elétrico|110">Troca de Resistência de Chuveiro Elétrico — R$ 110,00</option>
-  <option value="Instalação de Ventilador de Teto (Com montagem mecânica)|290">Instalação de Ventilador de Teto — R$ 290,00</option>
-  <option value="Instalação de Ventilador de Parede|155">Instalação de Ventilador de Parede — R$ 155,00</option>
-  <option value="Instalação Elétrica para Ar-Condicionado Split (Até QDC)|800">Instalação Elétrica para Ar-Condicionado Split — R$ 800,00</option>
-  <option value="Instalação de Exaustor de Cozinha / Coifa|225">Instalação de Exaustor / Coifa — R$ 225,00</option>
-  <option value="Instalação de Cooktop ou Forno Elétrico|275">Instalação de Cooktop ou Forno Elétrico — R$ 275,00</option>
-  <option value="Substituição de Disjuntor Monopolar Comum|92">Substituição de Disjuntor Monopolar — R$ 92,00</option>
-  <option value="Substituição de Disjuntor Bipolar ou Tripolar|150">Substituição de Disjuntor Bipolar / Tripolar — R$ 150,00</option>
-  <option value="Instalação de Interruptor Diferencial Residual (DR)|200">Instalação de Disjuntor / Interruptor DR — R$ 200,00</option>
-  <option value="Instalação de Dispositivo de Proteção contra Surtos (DPS)|135">Instalação de Protetor contra Surtos (DPS) — R$ 135,00</option>
-  <option value="Reorganização, Identificação e Limpeza de QDC|425">Reorganização e Limpeza de Quadro (QDC) — R$ 425,00</option>
-  <option value="Montagem e Instalação Completa de QDC (Até 12 circuitos)|1150">Montagem Completa de QDC (Até 12 circuitos) — R$ 1.150,00</option>
-  <option value="Montagem e Instalação Completa de QDC (Acima de 24 circuitos)|2300">Montagem Completa de QDC (Acima de 24 circuitos) — R$ 2.300,00</option>
-  <option value="Passagem de Fiação Geral por cômodo|250">Passagem de Fiação Geral (Por cômodo) — R$ 250,00</option>
-  <option value="Instalação de Perfilado ou Eletrocalha Metálica|90">Instalação de Perfilado / Eletrocalha (Por metro) — R$ 90,00</option>
-  <option value="Fixação de Eletroduto Aparente (Por metro)|65">Fixação de Eletroduto Aparente (Por metro) — R$ 65,00</option>
-  <option value="Instalação de Caixa de Passagem em Alvenaria|140">Instalação de Caixa de Passagem em Alvenaria — R$ 140,00</option>
-  <option value="Instalação de Hastes de Aterramento com Caixa de Inspeção|800">Instalação de Hastes de Aterramento — R$ 800,00</option>
-  <option value="Montagem e Instalação de Padrão de Entrada Monofásico|1300">Montagem de Padrão de Entrada (Monofásico) — R$ 1.300,00</option>
-  <option value="Investigação e Correção de Curto-Circuito / Fuga|350">Investigação e Correção de Curto-Circuito — R$ 350,00</option>
-  <option value="Substituição de Fiação Antiga / Condutores derretidos|500">Substituição de Fiação Antiga (Por cômodo) — R$ 500,00</option>
-  <option value="Medição de Aterramento com Terrômetro e Laudo|375">Medição de Aterramento com Laudo — R$ 375,00</option>
-  <option value="Remoção de Pontos Elétricos Antigos e Isolamento|85">Remoção de Pontos Elétricos Antigos — R$ 85,00</option>
-  <option value="Identificação de Circuitos Desconhecidos no Quadro|210">Identificação de Circuitos no Quadro — R$ 210,00</option>
-  <option value="Reforma Elétrica Completa por Ponto|225">Reforma Elétrica Completa (Por ponto) — R$ 225,00</option>
-  <option value="Reforma Elétrica Total (Apartamento até 70m²)|5500">Reforma Elétrica Total (Apto até 70m²) — R$ 5.500,00</option>
-  <option value="Reforma Elétrica Total (Casa até 150m²)|10500">Reforma Elétrica Total (Casa até 150m²) — R$ 10.500,00</option>
-  <option value="Emissão de TRT / ART de Execução Elétrica|650">Emissão de TRT / ART Elétrica — R$ 650,00</option>
-  <option value="Instalação de Câmera Wi-Fi (Ponto Elétrico + Configuração)|150">Instalação de Câmera Wi-Fi — R$ 150,00</option>
-  <option value="Kit DVR / NVR 4 Câmeras (Instalação e Passagem)|450">Kit DVR / NVR 4 Câmeras — R$ 450,00</option>
-  <option value="Instalação de Kit Motor de Portão Deslizante|350">Instalação de Kit Motor de Portão Deslizante — R$ 350,00</option>
-  <option value="Instalação de Interfone / Kit Vídeo Porteiro|250">Instalação de Interfone / Vídeo Porteiro — R$ 250,00</option>
-  <option value="Manutenção Prévia / Higienização de Ar-Condicionado|200">Higienização de Ar-Condicionado — R$ 200,00</option>
-</select>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Erick Hergesel - ERTEC SOLUÇÕES ELÉTRICAS</title>
+  
+  <!-- Configurações para WebApp / Atalho iPhone (iOS) -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="ERTEC">
+  
+  <!-- Ícones PWA / iOS com fundo azul estático e alta compatibilidade -->
+  <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'><rect width='500' height='500' fill='%231b365d'/><circle cx='250' cy='200' r='100' fill='none' stroke='%23eab308' stroke-width='30'/><path d='M250 130 L250 210' stroke='%23eab308' stroke-width='30' stroke-linecap='round'/><text x='250' y='360' font-family='sans-serif' font-weight='bold' font-size='70' fill='%23ffffff' text-anchor='middle'>ERTEC</text><text x='250' y='420' font-family='sans-serif' font-size='32' fill='%23eab308' text-anchor='middle'>ELÉTRICA</text></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'><rect width='500' height='500' fill='%231b365d'/><circle cx='250' cy='200' r='100' fill='none' stroke='%23eab308' stroke-width='30'/><path d='M250 130 L250 210' stroke='%23eab308' stroke-width='30' stroke-linecap='round'/><text x='250' y='360' font-family='sans-serif' font-weight='bold' font-size='70' fill='%23ffffff' text-anchor='middle'>ERTEC</text><text x='250' y='420' font-family='sans-serif' font-size='32' fill='%23eab308' text-anchor='middle'>ELÉTRICA</text></svg>">
+  
+  <!-- Biblioteca para Gerar PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  
+  <style>
+    :root {
+      --primary: #1b365d;
+      --secondary: #0d233a;
+      --accent: #107c41;
+      --highlight: #2563eb;
+      --bg: #f4f6f9;
+      --card: #ffffff;
+      --text: #333333;
+    }
+    * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; }
+    body { background-color: var(--bg); color: var(--text); padding: 12px; max-width: 650px; margin: 0 auto; }
+    
+    header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; padding: 18px; border-radius: 12px; text-align: center; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+    header svg.logo-header { max-width: 130px; height: auto; border-radius: 8px; border: 2px solid rgba(255, 255, 255, 0.2); background-color: #1e1e1e; }
+    header h1 { font-size: 1.2rem; font-weight: 700; text-transform: uppercase; }
+    header p { font-size: 0.8rem; opacity: 0.9; }
+    
+    .nav-tabs { display: flex; gap: 4px; margin-bottom: 15px; flex-wrap: wrap; }
+    .tab-btn { flex: 1 1 18%; padding: 10px 2px; border: none; border-radius: 8px; font-weight: bold; font-size: 0.75rem; cursor: pointer; background: #e2e8f0; color: #475569; transition: 0.2s; text-align: center; }
+    .tab-btn.active { background: var(--highlight); color: #ffffff; box-shadow: 0 2px 6px rgba(37,99,235,0.3); }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    .card { background: var(--card); border-radius: 12px; padding: 16px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    .card h2 { font-size: 1.05rem; color: var(--primary); margin-bottom: 12px; border-bottom: 2px solid var(--bg); padding-bottom: 6px; }
+    
+    .field { margin-bottom: 12px; }
+    .field label { display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 5px; color: #444; }
+    .field input, .field select { width: 100%; padding: 11px; border: 1px solid #ccc; border-radius: 8px; font-size: 0.92rem; outline: none; }
+    .field input:focus, .field select:focus { border-color: var(--primary); }
+    
+    .search-box { position: relative; margin-bottom: 10px; }
+    .search-box input { padding-left: 36px; background-color: #f8fafc; border: 1px solid #cbd5e1; }
+    .search-box .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 0.9rem; color: #64748b; }
+
+    .field-row { display: flex; gap: 10px; }
+    .field-row .field { flex: 1; }
+
+    .btn-add { background: var(--primary); color: #fff; border: none; padding: 12px; border-radius: 8px; width: 100%; font-weight: bold; cursor: pointer; font-size: 0.95rem; margin-top: 5px; }
+    
+    .item-list { list-style: none; margin-top: 12px; }
+    .item-list li { display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #eee; background: #fafafa; border-radius: 6px; margin-bottom: 6px; }
+    .item-info { display: flex; flex-direction: column; }
+    .item-title { font-weight: 600; color: #222; font-size: 0.88rem; }
+    .item-sub { font-size: 0.78rem; color: #666; }
+    .remove-btn { color: #e74c3c; font-weight: bold; text-decoration: none; padding: 4px 8px; font-size: 1.1rem; cursor: pointer; }
+    
+    .total-box { background: var(--accent); color: #fff; border-radius: 10px; padding: 15px; text-align: center; margin-top: 15px; }
+    .total-box span { font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; }
+    .total-box h3 { font-size: 1.6rem; margin-top: 2px; }
+    
+    .btn-group { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
+    .btn-whatsapp { background: #25d366; color: #fff; border: none; padding: 13px; border-radius: 8px; font-size: 0.95rem; font-weight: bold; cursor: pointer; text-align: center; }
+    .btn-pdf { background: #e74c3c; color: #fff; border: none; padding: 13px; border-radius: 8px; font-size: 0.95rem; font-weight: bold; cursor: pointer; text-align: center; }
+
+    .sub-tabs { display: flex; gap: 6px; margin-bottom: 15px; flex-wrap: wrap; }
+    .sub-btn { flex: 1 1 30%; padding: 8px 4px; border: 1px solid #cbd5e1; border-radius: 6px; background: #fff; font-size: 0.78rem; font-weight: 600; cursor: pointer; color: #334155; text-align: center; }
+    .sub-btn.active { background: #e0e7ff; border-color: var(--highlight); color: var(--highlight); }
+
+    .tech-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.82rem; }
+    .tech-table th, .tech-table td { border: 1px solid #e2e8f0; padding: 7px 6px; text-align: left; }
+    .tech-table th { background-color: #f1f5f9; color: var(--primary); font-weight: 700; text-transform: uppercase; font-size: 0.72rem; }
+    .tech-table tr:nth-child(even) { background-color: #f8fafc; }
+
+    .result-box { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px; padding: 14px; margin-top: 15px; }
+    .result-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px dashed #cbd5e1; font-size: 0.88rem; }
+    .result-row:last-child { border-bottom: none; }
+    .result-row span.val { font-weight: bold; color: var(--primary); }
+
+    /* LAYOUT DO TEMPLATE PDF */
+    #pdfContainer { display: none; }
+    #pdfTemplate { 
+      background: #ffffff !important; 
+      padding: 25px; 
+      font-family: Arial, sans-serif; 
+      color: #333; 
+      width: 680px; 
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 380px;
+      opacity: 0.06;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .pdf-content { position: relative; z-index: 1; }
+    .pdf-header { text-align: center; border-bottom: 2px solid #1b365d; padding-bottom: 12px; margin-bottom: 15px; background: #ffffff !important; }
+    .pdf-header svg.pdf-logo { max-width: 110px; height: auto; margin-bottom: 8px; background-color: #1e1e1e; border-radius: 6px; }
+    .pdf-header h1 { color: #1b365d; font-size: 18px; text-transform: uppercase; margin-bottom: 4px; }
+    .pdf-header p { font-size: 11px; color: #555; }
+    .pdf-client-box { background: #f8f9fa; border: 1px solid #e9ecef; padding: 10px; border-radius: 6px; margin-bottom: 15px; font-size: 12px; line-height: 1.4; }
+    .pdf-table { width: 100%; border-collapse: collapse; margin-top: 10px; background: #ffffff; }
+    .pdf-table th, .pdf-table td { border: 1px solid #ddd; padding: 8px; text-align: left; font-size: 11px; }
+    .pdf-table th { background-color: #1b365d; color: white; text-transform: uppercase; font-size: 10px; }
+    .pdf-total { margin-top: 15px; text-align: right; font-size: 15px; font-weight: bold; color: #107c41; }
+    .pdf-terms { margin-top: 20px; font-size: 10px; background: #f9f9f9; padding: 10px; border-radius: 6px; border-left: 4px solid #1b365d; line-height: 1.5; }
+    .pdf-footer { margin-top: 25px; font-size: 10px; text-align: center; color: #777; border-top: 1px solid #eee; padding-top: 8px; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <svg class="logo-header" viewBox="0 0 400 350" xmlns="http://www.w3.org/2000/svg">
+      <rect width="400" height="350" rx="20" fill="#1e1e1e"/>
+      <circle cx="200" cy="120" r="70" fill="none" stroke="#eab308" stroke-width="18"/>
+      <path d="M200 70 L200 125" stroke="#eab308" stroke-width="18" stroke-linecap="round"/>
+      <text x="200" y="245" font-family="'Segoe UI', Arial, sans-serif" font-weight="900" font-size="62" fill="#808080" text-anchor="middle">ER<tspan fill="#eab308">TEC</tspan></text>
+      <text x="200" y="295" font-family="'Segoe UI', Arial, sans-serif" font-weight="400" font-size="28" fill="#ffffff" text-anchor="middle">Soluções Elétricas</text>
+    </svg>
+    <h1>ERTEC SOLUÇÕES ELÉTRICAS</h1>
+    <p>Erick Hergesel - Elétrica, Climatização Residencial & Segurança Eletrônica</p>
+  </header>
+
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="trocarAba('orcamentoTab', this)">📝 Orçamento</button>
+    <button class="tab-btn" onclick="trocarAba('arTab', this)">❄️ Ar Condicionado</button>
+    <button class="tab-btn" onclick="trocarAba('casaTab', this)">🏠 Instalação Casa</button>
+    <button class="tab-btn" onclick="trocarAba('calculoTab', this)">🔧 Disjuntor Certo</button>
+    <button class="tab-btn" onclick="trocarAba('consultaTab', this)">📚 Tabelas NBR</button>
+  </div>
+
+  <!-- ABA 1: GERADOR DE ORÇAMENTOS -->
+  <div id="orcamentoTab" class="tab-content active">
+    <div class="card">
+      <h2>👤 Dados do Cliente</h2>
+      <div class="field">
+        <label>Nome do Cliente:</label>
+        <input type="text" id="clienteNome" placeholder="Ex: João Silva">
+      </div>
+      <div class="field">
+        <label>WhatsApp do Cliente (com DDD):</label>
+        <input type="tel" id="clienteTel" placeholder="Ex: 11999998888">
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>🛠️ Adicionar Serviços</h2>
+      <div class="field">
+        <label>Buscar Serviço Rapidamente:</label>
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="buscaServico" placeholder="Digite para filtrar os serviços abaixo..." onkeyup="filtrarServicos()">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Selecione o Serviço:</label>
+        <select id="servicoSelect" size="6" style="height: auto; max-height: 180px;" onchange="verificarItemCustomizado()">
+          <option value="" selected>-- Selecione um serviço abaixo --</option>
+          
+          <optgroup label="💡 Iluminação, Sensores & Automação">
+            <option value="Instalação de Refletor LED (Interno/Externo)|80">Instalação de Refletor LED - R$ 80,00</option>
+            <option value="Instalação de Relé Fotocélula (Acionamento Noturno)|70">Instalação de Relé Fotocélula - R$ 70,00</option>
+            <option value="Instalação de Sensor de Presença (Teto/Parede)|65">Instalação de Sensor de Presença - R$ 65,00</option>
+            <option value="Instalação de Interruptor Inteligente Wi-Fi (Tuya/Sonoff)|90">Instalação Interruptor Inteligente Wi-Fi - R$ 90,00</option>
+            <option value="Instalação de Fita LED com Fonte e Perfil de Alumínio|120">Instalação Fita LED com Perfil - R$ 120,00</option>
+            <option value="Instalação de Luminária / Plafon / Lustre|80">Instalação Luminária/Plafon/Lustre - R$ 80,00</option>
+            <option value="Instalação de Painel LED Embutir/Sobrepor|85">Painel LED Embutir/Sobrepor - R$ 85,00</option>
+          </optgroup>
+
+          <optgroup label="⚡ Elétrica Básica & Instalações">
+            <option value="Troca/Instalação de Tomada ou Interruptor|50">Troca/Instalação Tomada ou Interruptor - R$ 50,00</option>
+            <option value="Instalação de Ponto Novo de Tomada/Iluminação|120">Ponto Novo Elétrico (infra + fiação) - R$ 120,00</option>
+            <option value="Troca/Instalação de Chuveiro Elétrico|90">Troca de Chuveiro Elétrico - R$ 90,00</option>
+            <option value="Instalação de Ventilador de Teto|160">Instalação Ventilador de Teto - R$ 160,00</option>
+            <option value="Passagem de Fiação Elétrica (por metro)|9">Passagem Fiação Elétrica (por metro) - R$ 9,00</option>
+          </optgroup>
+
+          <optgroup label="⚙️ Quadros Elétricos, Proteção & Entrada">
+            <option value="Troca/Instalação de Disjuntor Individual|60">Troca/Instalação Disjuntor Individual - R$ 60,00</option>
+            <option value="Instalação de Disjuntor DR ou DPS|90">Instalação Disjuntor DR ou DPS - R$ 90,00</option>
+            <option value="Montagem de Quadro Elétrico (até 12 disjuntor)|450">Montagem Quadro Elétrico (até 12 disj.) - R$ 450,00</option>
+            <option value="Montagem de Quadro Elétrico (acima de 12 disj.)|750">Montagem Quadro Elétrico (acima 12 disj.) - R$ 750,00</option>
+            <option value="Instalação de Sistema de Aterramento|350">Instalação Haste de Aterramento - R$ 350,00</option>
+            <option value="Diagnóstico Elétrico / Busca de Curto-Circuito|180">Diagnóstico / Busca de Curto - R$ 180,00</option>
+          </optgroup>
+
+          <optgroup label="❄️ Ar Condicionado & Climatização">
+            <option value="Instalação Ar Split 9.000 a 12.000 BTU (até 3m tubulação)|550">Instalação Split 9k/12k BTU (até 3m) - R$ 550,00</option>
+            <option value="Instalação Ar Split 18.000 a 24.000 BTU (até 3m tubulação)|750">Instalação Split 18k/24k BTU (até 3m) - R$ 750,00</option>
+            <option value="Instalação Ar Split 30.000 BTU (até 3m tubulação)|950">Instalação Split 30k BTU (até 3m) - R$ 950,00</option>
+            <option value="Higienização e Limpeza Completa Ar Split|200">Higienização e Limpeza Completa Split - R$ 200,00</option>
+            <option value="Carga de Gás Refrigerante (R410A / R32)|250">Carga de Gás Refrigerante (R410A/R32) - R$ 250,00</option>
+            <option value="Desinstalação de Ar Condicionado Split|200">Desinstalação de Ar Split - R$ 200,00</option>
+            <option value="Instalação de Infraestrutura de Ar (por metro adicional)|120">Infraestrutura Ar Condicionado (metro extra) - R$ 120,00</option>
+            <option value="Instalação de Circuito Elétrico Dedicado 220V P/ Ar|280">Circuito Elétrico Dedicado 220V p/ Ar - R$ 280,00</option>
+          </optgroup>
+
+          <optgroup label="📹 Câmeras de Segurança (DVR / NVR / Wi-Fi)">
+            <option value="Instalação de Câmera HD Intelbras/Hikvision (DVR)|110">Instalação Câmera DVR (Ponto + Config) - R$ 110,00</option>
+            <option value="Instalação de Câmera IP / NVR (Poe)|140">Instalação Câmera IP NVR - R$ 140,00</option>
+            <option value="Instalação de Câmera Wi-Fi Inteligente|90">Instalação Câmera Wi-Fi (Robô/Externa) - R$ 90,00</option>
+            <option value="Instalação de Caixa de Passagem Hermética (IP65)|45">Instalação Caixa de Passagem Externa (IP65) - R$ 45,00</option>
+            <option value="Configuração e Formatação de Cartão MicroSD|35">Configuração e Formatação Cartão MicroSD - R$ 35,00</option>
+            <option value="Configuração e Fixação de DVR/NVR + HD|150">Instalação e Configuração DVR/NVR - R$ 150,00</option>
+            <option value="Configuração de Acesso Remoto no Celular|100">Configuração de Acesso Remoto Celular - R$ 100,00</option>
+            <option value="Lançamento de Cabo Coaxial/UTP para Câmeras (metro)|8">Lançamento Cabo Câmera (por metro) - R$ 8,00</option>
+          </optgroup>
+
+          <optgroup label="🚗 Automadores & Motores de Portão">
+            <option value="Instalação de Motor de Portão Deslizante (Kit)|350">Instalação Motor Portão Deslizante - R$ 350,00</option>
+            <option value="Instalação de Motor de Portão Basculante/Pivotante|420">Instalação Motor Basculante/Pivotante - R$ 420,00</option>
+            <option value="Codificação de Controle Remoto de Portão|30">Codificação de Controle de Portão - R$ 30,00</option>
+            <option value="Instalação de Sensor Anti-esmagamento (Fotocélula)|90">Instalação Fotocélula Anti-esmagamento - R$ 90,00</option>
+            <option value="Troca de Placa Central de Comando de Portão|140">Troca de Placa Central de Portão - R$ 140,00</option>
+          </optgroup>
+
+          <optgroup label="🚨 Controle de Acesso, Alarmes & Cerca Elétrica">
+            <option value="Instalação de Interfone / Porteiro Eletrônico|180">Instalação Interfone Residencial - R$ 180,00</option>
+            <option value="Instalação de Vídeo Porteiro|250">Instalação Vídeo Porteiro - R$ 250,00</option>
+            <option value="Instalação de Fechadura Elétrica / Eletroímã|160">Instalação Fechadura Elétrica/Eletroímã - R$ 160,00</option>
+            <option value="Instalação de Fechadura Digital / Biometria|200">Instalação Fechadura Digital/Biometria - R$ 200,00</option>
+            <option value="Instalação de Central de Alarme + Sensores (Kit)|380">Instalação Central Alarme + Sensores - R$ 380,00</option>
+            <option value="Instalação/Manutenção Cerca Elétrica (metro linear)|25">Cerca Elétrica (por metro linear) - R$ 25,00</option>
+          </optgroup>
+
+          <optgroup label="✏️ Personalizado e Entradas Extras">
+            <option value="CUSTOM_OBRA|0">🔧 Mão de Obra Extra / Adicional (Digitar)</option>
+            <option value="CUSTOM_MAT|0">📦 Material Extra / Infraestrutura (Digitar)</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <!-- Campos Dinâmicos para Entradas Personalizadas -->
+      <div id="campoCustomBox" style="display: none; background: #f1f5f9; padding: 10px; border-radius: 8px; margin-bottom: 12px;">
+        <div class="field">
+          <label id="lblCustomNome">Descrição do Item Extra:</label>
+          <input type="text" id="customNome" placeholder="Ex: Mão de Obra Troca de Disjuntor Geral">
+        </div>
+        <div class="field">
+          <label>Valor Unitário (R$):</label>
+          <input type="number" id="customValor" placeholder="Ex: 150.00" value="0.00" step="0.01">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Quantidade / Metros:</label>
+        <input type="number" id="servicoQtd" value="1" min="1" placeholder="Qtd">
+      </div>
+
+      <button type="button" class="btn-add" onclick="adicionarItem()">+ Adicionar Serviço ao Orçamento</button>
+
+      <ul class="item-list" id="listaItens"></ul>
+
+      <div class="field" style="margin-top: 15px;">
+        <label>Taxa de Materiais Extras / Deslocamento (R$):</label>
+        <input type="number" id="taxaExtra" value="0" oninput="calcularTotal()">
+      </div>
+
+      <div class="total-box">
+        <span>VALOR TOTAL ESTIMADO</span>
+        <h3 id="valorTotal">R$ 0,00</h3>
+      </div>
+
+      <div class="btn-group">
+        <button type="button" class="btn-pdf" onclick="gerarPDF()">📄 Baixar PDF do Orçamento</button>
+        <button type="button" class="btn-whatsapp" onclick="enviarWhatsApp()">📱 Enviar Resumo no WhatsApp</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABA AR CONDICIONADO -->
+  <div id="arTab" class="tab-content">
+    <div class="sub-tabs">
+      <button class="sub-btn active" onclick="trocarSubAr('btuSub', this)">❄️ Cálculo BTUs</button>
+      <button class="sub-btn" onclick="trocarSubAr('especsSub', this)">📐 Tabela NBR & Tubos</button>
+      <button class="sub-btn" onclick="trocarSubAr('matArSub', this)">📦 Kit de Materiais</button>
+    </div>
+
+    <div id="btuSub" class="sub-ar-content">
+      <div class="card">
+        <h2>🌡️ Dimensionamento de BTUs (Carga Térmica)</h2>
+        <div class="field-row">
+          <div class="field">
+            <label>Comprimento (m):</label>
+            <input type="number" id="arComp" value="4" oninput="calcularBTUs()">
+          </div>
+          <div class="field">
+            <label>Largura (m):</label>
+            <input type="number" id="arLarg" value="3.5" oninput="calcularBTUs()">
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Exposição Solar:</label>
+          <select id="arSol" onchange="calcularBTUs()">
+            <option value="600">Sol da Manhã ou Sombra (600 BTU/m²)</option>
+            <option value="800" selected>Sol Tarde / Incidência Direta (800 BTU/m²)</option>
+          </select>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label>Pessoas no Ambiente:</label>
+            <input type="number" id="arPessoas" value="2" min="1" oninput="calcularBTUs()">
+          </div>
+          <div class="field">
+            <label>Eletrônicos (TV, PC):</label>
+            <input type="number" id="arEletro" value="1" min="0" oninput="calcularBTUs()">
+          </div>
+        </div>
+
+        <div class="result-box">
+          <h3>⚡ Resultado da Potência Recomendada</h3>
+          <div class="result-row">
+            <span>Área Total:</span>
+            <span class="val" id="resArArea">14.0 m²</span>
+          </div>
+          <div class="result-row">
+            <span>Carga Térmica Exata:</span>
+            <span class="val" id="resArBtuExato">11.800 BTU/h</span>
+          </div>
+          <div class="result-row">
+            <span>Aparelho Recomendado:</span>
+            <span class="val" id="resArBtuRecomendado" style="font-size: 1.1rem; color: var(--highlight);">12.000 BTU/h</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="especsSub" class="sub-ar-content" style="display: none;">
+      <div class="card">
+        <h2>📊 Especificações Técnicas de Instalação (Padrão NBR)</h2>
+        <div style="overflow-x: auto;">
+          <table class="tech-table">
+            <thead>
+              <tr>
+                <th>Capacidade</th>
+                <th>Linha Líquido</th>
+                <th>Linha Sucção</th>
+                <th>Cabo Elétrico</th>
+                <th>Disjuntor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>9.000 BTU</strong></td><td>1/4" (6,35mm)</td><td>3/8" (9,52mm)</td><td>2,5 mm²</td><td>10A / 16A</td></tr>
+              <tr><td><strong>12.000 BTU</strong></td><td>1/4" (6,35mm)</td><td>1/2" (12,7mm)</td><td>2,5 mm²</td><td>16A</td></tr>
+              <tr><td><strong>18.000 BTU</strong></td><td>1/4" (6,35mm)</td><td>1/2" ou 5/8"</td><td>2,5 mm² / 4mm²</td><td>20A / 25A</td></tr>
+              <tr><td><strong>24.000 BTU</strong></td><td>3/8" (9,52mm)</td><td>5/8" (15,88mm)</td><td>4,0 mm²</td><td>25A / 32A</td></tr>
+              <tr><td><strong>30.000 BTU</strong></td><td>3/8" (9,52mm)</td><td>5/8" ou 3/4"</td><td>4,0 mm² / 6mm²</td><td>32A / 40A</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div id="matArSub" class="sub-ar-content" style="display: none;">
+      <div class="card">
+        <h2>📦 Materiais Necessários para Instalação (Kit Infra)</h2>
+        <div class="field">
+          <label>Metragem da Tubulação de Cobre (m):</label>
+          <input type="number" id="metroCobreAr" value="3" min="1" oninput="gerarMateriaisAr()">
+        </div>
+
+        <div style="overflow-x: auto; margin-top: 10px;">
+          <table class="tech-table">
+            <thead>
+              <tr>
+                <th style="width: 45%;">Item / Material</th>
+                <th style="width: 15%;">Qtd</th>
+                <th style="width: 20%;">Preço Un.</th>
+                <th style="width: 20%;">Subtotal</th>
+              </tr>
+            </thead>
+            <tbody id="tbodyMateriaisAr"></tbody>
+          </table>
+        </div>
+
+        <div class="total-box" style="background: var(--primary); margin-top: 15px;">
+          <span>CUSTO ESTIMADO DE MATERIAIS DO AR</span>
+          <h3 id="totalCustoMateriaisAr">R$ 0,00</h3>
+        </div>
+
+        <button type="button" class="btn-add" style="margin-top: 15px;" onclick="adicionarMateriaisArAoOrcamento()">📦 Incluir Materiais do Ar no Orçamento</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABA CASA -->
+  <div id="casaTab" class="tab-content">
+    <div class="sub-tabs">
+      <button class="sub-btn active" onclick="trocarSubCasa('metragemSub', this)">📐 Por m²</button>
+      <button class="sub-btn" onclick="trocarSubCasa('pontosSub', this)">🔌 Por Pontos</button>
+      <button class="sub-btn" onclick="trocarSubCasa('materiaisSub', this)">📦 Lista de Materiais</button>
+    </div>
+
+    <div id="metragemSub" class="sub-casa-content">
+      <div class="card">
+        <h2>📐 Instalação Completa por Metragem (m²)</h2>
+        <div class="field">
+          <label>Área Construída da Casa (m²):</label>
+          <input type="number" id="casaMetragem" placeholder="Ex: 80" value="80" oninput="calcularMaoObraMetragem()">
+        </div>
+
+        <div class="field">
+          <label>Padrão da Instalação / Acabamento:</label>
+          <select id="casaPadrao" onchange="calcularMaoObraMetragem()">
+            <option value="35">Econômico / Simples (R$ 35/m²)</option>
+            <option value="50" selected>Médio Padrão (R$ 50/m²)</option>
+            <option value="75">Alto Padrão / Automação (R$ 75/m²)</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Estágio da Obra:</label>
+          <select id="casaEstagio" onchange="calcularMaoObraMetragem()">
+            <option value="1">Obra Nova / Do Zero</option>
+            <option value="1.2">Reforma Residencial (+20%)</option>
+          </select>
+        </div>
+
+        <div class="result-box">
+          <h3>💰 Mão de Obra Estimada (m²)</h3>
+          <div class="result-row">
+            <span>Área da Casa:</span>
+            <span class="val" id="resM2Area">80 m²</span>
+          </div>
+          <div class="result-row">
+            <span>Preço Médio / m²:</span>
+            <span class="val" id="resM2Preco">R$ 50,00</span>
+          </div>
+          <div class="result-row">
+            <span>Total Mão de Obra:</span>
+            <span class="val" id="resM2Total" style="font-size: 1.1rem; color: var(--accent);">R$ 4.000,00</span>
+          </div>
+        </div>
+
+        <button type="button" class="btn-add" style="margin-top: 15px;" onclick="adicionarM2AoOrcamento()">➕ Adicionar Mão de Obra ao Orçamento Principal</button>
+      </div>
+    </div>
+
+    <div id="pontosSub" class="sub-casa-content" style="display: none;">
+      <div class="card">
+        <h2>🔌 Mão de Obra por Levantamento de Pontos</h2>
+        <div class="field-row">
+          <div class="field">
+            <label>Tomadas Simples:</label>
+            <input type="number" id="qtdTomadas" value="20" min="0" oninput="calcularMaoObraPontos()">
+          </div>
+          <div class="field">
+            <label>Pontos de Iluminação:</label>
+            <input type="number" id="qtdIlum" value="12" min="0" oninput="calcularMaoObraPontos()">
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label>Interruptores:</label>
+            <input type="number" id="qtdInterr" value="10" min="0" oninput="calcularMaoObraPontos()">
+          </div>
+          <div class="field">
+            <label>Circuitos Especiais:</label>
+            <input type="number" id="qtdEspeciais" value="3" min="0" oninput="calcularMaoObraPontos()">
+          </div>
+        </div>
+
+        <div class="result-box">
+          <h3>💰 Mão de Obra por Pontos</h3>
+          <div class="result-row">
+            <span>Total de Pontos Simples:</span>
+            <span class="val" id="resTotalPontosSimples">42 pts</span>
+          </div>
+          <div class="result-row">
+            <span>Total Mão de Obra:</span>
+            <span class="val" id="resPontosTotal" style="font-size: 1.1rem; color: var(--accent);">R$ 2.710,00</span>
+          </div>
+        </div>
+
+        <button type="button" class="btn-add" style="margin-top: 15px;" onclick="adicionarPontosAoOrcamento()">➕ Adicionar Mão de Obra ao Orçamento</button>
+      </div>
+    </div>
+
+    <div id="materiaisSub" class="sub-casa-content" style="display: none;">
+      <div class="card">
+        <h2>📦 Lista & Estimativa de Materiais</h2>
+        <div style="overflow-x: auto; margin-top: 15px;">
+          <table class="tech-table">
+            <thead>
+              <tr>
+                <th style="width: 40%;">Material</th>
+                <th style="width: 15%;">Qtd</th>
+                <th style="width: 20%;">Preço Un.</th>
+                <th style="width: 20%;">Subtotal</th>
+              </tr>
+            </thead>
+            <tbody id="tbodyMateriais"></tbody>
+          </table>
+        </div>
+
+        <div class="total-box" style="background: var(--primary); margin-top: 15px;">
+          <span>CUSTO ESTIMADO DE MATERIAIS</span>
+          <h3 id="totalCustoMateriais">R$ 0,00</h3>
+        </div>
+
+        <button type="button" class="btn-add" style="margin-top: 15px;" onclick="adicionarMateriaisAoOrcamento()">📦 Incluir Custo dos Materiais no Orçamento Principal</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABA CÁLCULO ELÉTRICO -->
+  <div id="calculoTab" class="tab-content">
+    <div class="card">
+      <h2>🔧 Disjuntor Certo</h2>
+      <div class="field-row">
+        <div class="field">
+          <label>TENSÃO</label>
+          <select id="calcTensao" onchange="executarCalculoElétrico()">
+            <option value="220">220 V</option>
+            <option value="127">127 V</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>POTÊNCIA (W)</label>
+          <input type="number" id="calcPotencia" placeholder="Ex: 5500" value="5500" oninput="executarCalculoElétrico()">
+        </div>
+      </div>
+
+      <div class="result-box">
+        <h3>⚡ Resultado da Análise</h3>
+        <div class="result-row">
+          <span>Corrente Calculada (I):</span>
+          <span class="val" id="resCorrente">0.00 A</span>
+        </div>
+        <div class="result-row">
+          <span>Disjuntor Recomendado:</span>
+          <span class="val" id="resDisjuntor">-</span>
+        </div>
+        <div class="result-row">
+          <span>Cabo Mínimo (NBR 5410):</span>
+          <span class="val" id="resCabo">-</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABA CONSULTA NBR -->
+  <div id="consultaTab" class="tab-content">
+    <div class="card">
+      <h2>📖 Consulta Rápida (NBR 5410)</h2>
+      <table class="tech-table">
+        <thead>
+          <tr>
+            <th>Disjuntor</th>
+            <th>Cabo Mínimo</th>
+            <th>Uso Típico</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>10 A</strong></td><td>1,5 mm²</td><td>Iluminação e tomadas leves</td></tr>
+          <tr><td><strong>20 A</strong></td><td>2,5 mm²</td><td>Tomadas gerais (TUG)</td></tr>
+          <tr><td><strong>25 A</strong></td><td>4,0 mm²</td><td>Ar condicionado / Tomadas de força</td></tr>
+          <tr><td><strong>40 A</strong></td><td>6,0 mm²</td><td>Chuveiro, Forno elétrico</td></tr>
+          <tr><td><strong>50 A</strong></td><td>10,0 mm²</td><td>Chuveiros de alta potência / Entrada</td></tr>
+          <tr><td><strong>63 A</strong></td><td>16,0 mm²</td><td>Entrada residencial de grande porte</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TEMPLATE OCULTO PARA IMPRESSÃO EM PDF -->
+  <div id="pdfContainer">
+    <div id="pdfTemplate">
+      <svg class="watermark" viewBox="0 0 400 350" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="200" cy="120" r="70" fill="none" stroke="#1b365d" stroke-width="18"/>
+        <path d="M200 70 L200 125" stroke="#1b365d" stroke-width="18" stroke-linecap="round"/>
+        <text x="200" y="245" font-family="Arial, sans-serif" font-weight="900" font-size="62" fill="#1b365d" text-anchor="middle">ERTEC</text>
+      </svg>
+      <div class="pdf-content">
+        <div class="pdf-header">
+          <h1>ERTEC SOLUÇÕES ELÉTRICAS</h1>
+          <p>Erick Hergesel - Serviços Elétricos, Climatização & Segurança Eletrônica</p>
+          <p>Contato / WhatsApp: (15) 99700-0000</p>
+        </div>
+        
+        <div class="pdf-client-box">
+          <strong>ORÇAMENTO DE SERVIÇOS ELÉTRICOS</strong><br>
+          <strong>Cliente:</strong> <span id="pdfClienteNome">-</span><br>
+          <strong>Data:</strong> <span id="pdfData">-</span>
+        </div>
+
+        <table class="pdf-table">
+          <thead>
+            <tr>
+              <th>Descrição do Serviço / Material</th>
+              <th style="width: 50px; text-align: center;">Qtd</th>
+              <th style="width: 90px; text-align: right;">Unitário</th>
+              <th style="width: 90px; text-align: right;">Subtotal</th>
+            </tr>
+          </thead>
+          <tbody id="pdfTbody"></tbody>
+        </table>
+
+        <div class="pdf-total" id="pdfTotalBox">TOTAL: R$ 0,00</div>
+
+        <div class="pdf-terms">
+          <strong>Termos e Condições:</strong><br>
+          • Este orçamento tem validade de 15 dias a contar da data de emissão.<br>
+          • Não inclui serviços de alvenaria, pintura ou gesso, salvo estipulado em contrato.<br>
+          • Garantia de 90 dias sobre a mão de obra executada.
+        </div>
+
+        <div class="pdf-footer">
+          ERTEC Soluções Elétricas — Excelência, Segurança e Qualidade Técnica.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let itensOrcamento = [];
+
+    // NAVEGAÇÃO ENTRE ABAS
+    function trocarAba(abaId, btn) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById(abaId).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    function trocarSubAr(subId, btn) {
+      document.querySelectorAll('.sub-ar-content').forEach(el => el.style.display = 'none');
+      document.querySelectorAll('#arTab .sub-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById(subId).style.display = 'block';
+      btn.classList.add('active');
+    }
+
+    function trocarSubCasa(subId, btn) {
+      document.querySelectorAll('.sub-casa-content').forEach(el => el.style.display = 'none');
+      document.querySelectorAll('#casaTab .sub-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById(subId).style.display = 'block';
+      btn.classList.add('active');
+    }
+
+    // FILTRO DE SERVIÇOS
+    function filtrarServicos() {
+      let termo = document.getElementById('buscaServico').value.toLowerCase();
+      let options = document.querySelectorAll('#servicoSelect option');
+      options.forEach(opt => {
+        if (!opt.value) return;
+        let texto = opt.innerText.toLowerCase();
+        opt.style.display = texto.includes(termo) ? '' : 'none';
+      });
+    }
+
+    function verificarItemCustomizado() {
+      let val = document.getElementById('servicoSelect').value;
+      let box = document.getElementById('campoCustomBox');
+      if (val.startsWith('CUSTOM_')) {
+        box.style.display = 'block';
+        document.getElementById('lblCustomNome').innerText = val === 'CUSTOM_OBRA' ? 'Descrição da Mão de Obra Extra:' : 'Descrição do Material Extra:';
+      } else {
+        box.style.display = 'none';
+      }
+    }
+
+    // ADICIONAR E GERENCIAR ITENS DO ORÇAMENTO
+    function adicionarItem() {
+      let sel = document.getElementById('servicoSelect');
+      let val = sel.value;
+      if (!val) { alert('Selecione um serviço!'); return; }
+
+      let desc = '', preco = 0;
+      let qtd = parseFloat(document.getElementById('servicoQtd').value) || 1;
+
+      if (val.startsWith('CUSTOM_')) {
+        desc = document.getElementById('customNome').value.trim() || 'Serviço Personalizado';
+        preco = parseFloat(document.getElementById('customValor').value) || 0;
+      } else {
+        let partes = val.split('|');
+        desc = partes[0];
+        preco = parseFloat(partes[1]);
+      }
+
+      itensOrcamento.push({ id: Date.now(), desc, preco, qtd });
+      atualizarListaItens();
+      document.getElementById('servicoQtd').value = 1;
+      document.getElementById('customNome').value = '';
+      document.getElementById('customValor').value = '0.00';
+    }
+
+    function removerItem(id) {
+      itensOrcamento = itensOrcamento.filter(item => item.id !== id);
+      atualizarListaItens();
+    }
+
+    function atualizarListaItens() {
+      let ul = document.getElementById('listaItens');
+      ul.innerHTML = '';
+      itensOrcamento.forEach(item => {
+        let li = document.createElement('li');
+        li.innerHTML = `
+          <div class="item-info">
+            <span class="item-title">${item.desc}</span>
+            <span class="item-sub">${item.qtd}x R$ ${item.preco.toFixed(2)} = R$ ${(item.qtd * item.preco).toFixed(2)}</span>
+          </div>
+          <span class="remove-btn" onclick="removerItem(${item.id})">✕</span>
+        `;
+        ul.appendChild(li);
+      });
+      calcularTotal();
+    }
+
+    function calcularTotal() {
+      let totalServicos = itensOrcamento.reduce((acc, i) => acc + (i.preco * i.qtd), 0);
+      let taxa = parseFloat(document.getElementById('taxaExtra').value) || 0;
+      let total = totalServicos + taxa;
+      document.getElementById('valorTotal').innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+      return total;
+    }
+
+    // CÁLCULOS DA ABA AR CONDICIONADO
+    function calcularBTUs() {
+      let c = parseFloat(document.getElementById('arComp').value) || 0;
+      let l = parseFloat(document.getElementById('arLarg').value) || 0;
+      let sol = parseFloat(document.getElementById('arSol').value);
+      let pessoas = parseInt(document.getElementById('arPessoas').value) || 1;
+      let eletro = parseInt(document.getElementById('arEletro').value) || 0;
+
+      let area = c * l;
+      let btuPessoas = (pessoas - 1) * 600;
+      let btuEletro = eletro * 600;
+      let btuExato = (area * sol) + btuPessoas + btuEletro;
+
+      let rec = "9.000 BTU/h";
+      if (btuExato > 9000 && btuExato <= 12000) rec = "12.000 BTU/h";
+      else if (btuExato > 12000 && btuExato <= 18000) rec = "18.000 BTU/h";
+      else if (btuExato > 18000 && btuExato <= 24000) rec = "24.000 BTU/h";
+      else if (btuExato > 24000) rec = "30.000 BTU/h ou mais";
+
+      document.getElementById('resArArea').innerText = `${area.toFixed(1)} m²`;
+      document.getElementById('resArBtuExato').innerText = `${Math.ceil(btuExato).toLocaleString('pt-BR')} BTU/h`;
+      document.getElementById('resArBtuRecomendado').innerText = rec;
+    }
+
+    function gerarMateriaisAr() {
+      let m = parseFloat(document.getElementById('metroCobreAr').value) || 1;
+      let materiais = [
+        { nome: 'Tubulação Cobre 1/4" + 3/8"', qtd: m, preco: 45 },
+        { nome: 'Isolamento Térmico Blindado', qtd: m * 2, preco: 8 },
+        { nome: 'Cabo PP 4x1.5mm²', qtd: m + 1, preco: 7 },
+        { nome: 'Suporte Condensadora + Coxins', qtd: 1, preco: 65 },
+        { nome: 'Fita Fitotape / Acabamento', qtd: 1, preco: 25 }
+      ];
+
+      let tbody = document.getElementById('tbodyMateriaisAr');
+      tbody.innerHTML = '';
+      let total = 0;
+      materiais.forEach(mat => {
+        let sub = mat.qtd * mat.preco;
+        total += sub;
+        tbody.innerHTML += `
+          <tr>
+            <td>${mat.nome}</td>
+            <td>${mat.qtd}</td>
+            <td>R$ ${mat.preco.toFixed(2)}</td>
+            <td>R$ ${sub.toFixed(2)}</td>
+          </tr>
+        `;
+      });
+      document.getElementById('totalCustoMateriaisAr').innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+      return total;
+    }
+
+    function adicionarMateriaisArAoOrcamento() {
+      let total = gerarMateriaisAr();
+      itensOrcamento.push({
+        id: Date.now(),
+        desc: `Kit Materiais p/ Infra Ar (${document.getElementById('metroCobreAr').value}m Tubulação)`,
+        preco: total,
+        qtd: 1
+      });
+      atualizarListaItens();
+      trocarAba('orcamentoTab', document.querySelectorAll('.tab-btn')[0]);
+    }
+
+    // CÁLCULOS DA ABA CASA
+    function calcularMaoObraMetragem() {
+      let m2 = parseFloat(document.getElementById('casaMetragem').value) || 0;
+      let padrao = parseFloat(document.getElementById('casaPadrao').value);
+      let estagio = parseFloat(document.getElementById('casaEstagio').value);
+
+      let precoM2 = padrao * estagio;
+      let total = m2 * precoM2;
+
+      document.getElementById('resM2Area').innerText = `${m2} m²`;
+      document.getElementById('resM2Preco').innerText = `R$ ${precoM2.toFixed(2)}`;
+      document.getElementById('resM2Total').innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+      return total;
+    }
+
+    function adicionarM2AoOrcamento() {
+      let total = calcularMaoObraMetragem();
+      let m2 = document.getElementById('casaMetragem').value;
+      itensOrcamento.push({
+        id: Date.now(),
+        desc: `Mão de Obra Instalação Elétrica Completa (${m2} m²)`,
+        preco: total,
+        qtd: 1
+      });
+      atualizarListaItens();
+      trocarAba('orcamentoTab', document.querySelectorAll('.tab-btn')[0]);
+    }
+
+    function calcularMaoObraPontos() {
+      let tomadas = parseInt(document.getElementById('qtdTomadas').value) || 0;
+      let ilum = parseInt(document.getElementById('qtdIlum').value) || 0;
+      let interr = parseInt(document.getElementById('qtdInterr').value) || 0;
+      let espec = parseInt(document.getElementById('qtdEspeciais').value) || 0;
+
+      let ptsSimples = tomadas + ilum + interr;
+      let total = (ptsSimples * 50) + (espec * 150) + 200; // 200 base do quadro
+
+      document.getElementById('resTotalPontosSimples').innerText = `${ptsSimples} pts`;
+      document.getElementById('resPontosTotal').innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+      return total;
+    }
+
+    function adicionarPontosAoOrcamento() {
+      let total = calcularMaoObraPontos();
+      itensOrcamento.push({
+        id: Date.now(),
+        desc: `Mão de Obra Elétrica Por Pontos Levantados`,
+        preco: total,
+        qtd: 1
+      });
+      atualizarListaItens();
+      trocarAba('orcamentoTab', document.querySelectorAll('.tab-btn')[0]);
+    }
+
+    function gerarMateriaisCasa() {
+      let m2 = parseFloat(document.getElementById('casaMetragem').value) || 80;
+      let materiais = [
+        { nome: 'Cabo Flexível 2,5mm² (Rolo 100m)', qtd: Math.ceil(m2 / 30), preco: 180 },
+        { nome: 'Cabo Flexível 1,5mm² (Rolo 100m)', qtd: Math.ceil(m2 / 50), preco: 120 },
+        { nome: 'Cabo Flexível 6,0mm² (Metro)', qtd: 30, preco: 8 },
+        { nome: 'Eletroduto Flexível Corrugado 3/4" (Rolo 50m)', qtd: Math.ceil(m2 / 40), preco: 75 },
+        { nome: 'Quadro de Distribuição 12/16 Disjuntores', qtd: 1, preco: 110 },
+        { nome: 'Disjuntores Monopolares (Unidade)', qtd: 10, preco: 18 },
+        { nome: 'Disjuntor DR Tetrapolar / Bipolar', qtd: 1, preco: 130 },
+        { nome: 'Kits Tomadas e Interruptores Completos', qtd: Math.ceil(m2 * 0.4), preco: 15 }
+      ];
+
+      let tbody = document.getElementById('tbodyMateriais');
+      tbody.innerHTML = '';
+      let total = 0;
+      materiais.forEach(mat => {
+        let sub = mat.qtd * mat.preco;
+        total += sub;
+        tbody.innerHTML += `
+          <tr>
+            <td>${mat.nome}</td>
+            <td>${mat.qtd}</td>
+            <td>R$ ${mat.preco.toFixed(2)}</td>
+            <td>R$ ${sub.toFixed(2)}</td>
+          </tr>
+        `;
+      });
+      document.getElementById('totalCustoMateriais').innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+      return total;
+    }
+
+    function adicionarMateriaisAoOrcamento() {
+      let total = gerarMateriaisCasa();
+      itensOrcamento.push({
+        id: Date.now(),
+        desc: `Estimativa de Materiais para Instalação Residencial`,
+        preco: total,
+        qtd: 1
+      });
+      atualizarListaItens();
+      trocarAba('orcamentoTab', document.querySelectorAll('.tab-btn')[0]);
+    }
+
+    // CÁLCULO ELÉTRICO
+    function executarCalculoElétrico() {
+      let v = parseFloat(document.getElementById('calcTensao').value);
+      let p = parseFloat(document.getElementById('calcPotencia').value) || 0;
+
+      let i = p / v;
+      let disj = "-", cabo = "-";
+
+      if (i > 0 && i <= 10) { disj = "10 A"; cabo = "1,5 mm²"; }
+      else if (i > 10 && i <= 16) { disj = "16 A"; cabo = "2,5 mm²"; }
+      else if (i > 16 && i <= 20) { disj = "20 A"; cabo = "2,5 mm²"; }
+      else if (i > 20 && i <= 25) { disj = "25 A"; cabo = "4,0 mm²"; }
+      else if (i > 25 && i <= 32) { disj = "32 A"; cabo = "6,0 mm²"; }
+      else if (i > 32 && i <= 40) { disj = "40 A"; cabo = "6,0 mm²"; }
+      else if (i > 40 && i <= 50) { disj = "50 A"; cabo = "10,0 mm²"; }
+      else if (i > 50) { disj = "63 A ou superior"; cabo = "16,0 mm² ou superior"; }
+
+      document.getElementById('resCorrente').innerText = `${i.toFixed(2)} A`;
+      document.getElementById('resDisjuntor').innerText = disj;
+      document.getElementById('resCabo').innerText = cabo;
+    }
+
+    // ENVIO VIA WHATSAPP
+    function enviarWhatsApp() {
+      let nome = document.getElementById('clienteNome').value || 'Cliente';
+      let tel = document.getElementById('clienteTel').value.replace(/\D/g, '');
+      
+      if (itensOrcamento.length === 0) { alert('Adicione serviços antes de enviar!'); return; }
+
+      let msg = `*ERTEC SOLUÇÕES ELÉTRICAS*\n`;
+      msg += `*Orçamento para:* ${nome}\n\n`;
+      msg += `*Serviços Solicitados:*\n`;
+
+      itensOrcamento.forEach(i => {
+        msg += `• ${i.desc} (${i.qtd}x) - R$ ${(i.qtd * i.preco).toFixed(2)}\n`;
+      });
+
+      let taxa = parseFloat(document.getElementById('taxaExtra').value) || 0;
+      if (taxa > 0) msg += `• Taxa de deslocamento/extras: R$ ${taxa.toFixed(2)}\n`;
+
+      msg += `\n*TOTAL ESTIMADO: R$ ${calcularTotal().toFixed(2)}*\n\n`;
+      msg += `Qualquer dúvida estou à disposição!`;
+
+      let url = tel ? `https://wa.me/55${tel}?text=${encodeURIComponent(msg)}` : `https://wa.me/?text=${encodeURIComponent(msg)}`;
+      window.open(url, '_blank');
+    }
+
+    // GERAR PDF
+    function gerarPDF() {
+      if (itensOrcamento.length === 0) { alert('Adicione itens para gerar o PDF!'); return; }
+
+      document.getElementById('pdfClienteNome').innerText = document.getElementById('clienteNome').value || 'Não informado';
+      document.getElementById('pdfData').innerText = new Date().toLocaleDateString('pt-BR');
+
+      let tbody = document.getElementById('pdfTbody');
+      tbody.innerHTML = '';
+      itensOrcamento.forEach(i => {
+        tbody.innerHTML += `
+          <tr>
+            <td>${i.desc}</td>
+            <td style="text-align: center;">${i.qtd}</td>
+            <td style="text-align: right;">R$ ${i.preco.toFixed(2)}</td>
+            <td style="text-align: right;">R$ ${(i.qtd * i.preco).toFixed(2)}</td>
+          </tr>
+        `;
+      });
+
+      let taxa = parseFloat(document.getElementById('taxaExtra').value) || 0;
+      if (taxa > 0) {
+        tbody.innerHTML += `
+          <tr>
+            <td>Taxa de Materiais Extras / Deslocamento</td>
+            <td style="text-align: center;">1</td>
+            <td style="text-align: right;">R$ ${taxa.toFixed(2)}</td>
+            <td style="text-align: right;">R$ ${taxa.toFixed(2)}</td>
+          </tr>
+        `;
+      }
+
+      document.getElementById('pdfTotalBox').innerText = `TOTAL: R$ ${calcularTotal().toFixed(2).replace('.', ',')}`;
+
+      let container = document.getElementById('pdfContainer');
+      container.style.display = 'block';
+
+      let element = document.getElementById('pdfTemplate');
+      let opt = {
+        margin:       10,
+        filename:     `Orcamento_ERTEC_${Date.now()}.pdf`,
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, useCORS: true },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+
+      html2pdf().set(opt).from(element).save().then(() => {
+        container.style.display = 'none';
+      });
+    }
+
+    // INICIALIZAÇÕES
+    window.onload = function() {
+      calcularBTUs();
+      gerarMateriaisAr();
+      calcularMaoObraMetragem();
+      calcularMaoObraPontos();
+      gerarMateriaisCasa();
+      executarCalculoElétrico();
+    };
+  </script>
+</body>
+</html>
