@@ -1,81 +1,57 @@
 <select id="servicoSelect" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3.5 text-slate-100 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition-all text-sm appearance-none">
   <option value="" disabled selected>Selecione um serviço para adicionar...</option>
-  
-  <optgroup label="Atendimentos, Visitas e Diagnósticos">
-    <option value="Visita Técnica / Avaliação Diagnóstica simples|85">Visita Técnica / Avaliação Diagnóstica simples — R$ 50 a R$ 120</option>
-    <option value="Hora de Trabalho Comum (Residencial)|115">Hora de Trabalho Comum (Residencial) — R$ 80 a R$ 150</option>
-    <option value="Hora de Trabalho Especializada (Comercial / Industrial)|200">Hora de Trabalho Especializada (Comercial / Industrial) — R$ 150 a R$ 250</option>
-    <option value="Diária de Eletricista (Período de 8h útil)|375">Diária de Eletricista (Período de 8h útil) — R$ 250 a R$ 500</option>
-    <option value="Taxa de Plantão / Emergência (Madrugada ou Finais de Semana)|150">Taxa de Plantão / Emergência (Madrugada ou Finais de Semana) — Sob consulta / Adicional</option>
-    <option value="Investigação e Correção de Curto-Circuito (Fuga de corrente)|350">Investigação e Correção de Curto-Circuito (Fuga de corrente) — R$ 200 a R$ 500</option>
-    <option value="Medição de Aterramento com Terrômetro e Laudo Simples|375">Medição de Aterramento com Terrômetro e Laudo Simples — R$ 250 a R$ 500</option>
-    <option value="Identificação de Circuitos Desconhecidos no Quadro|210">Identificação de Circuitos Desconhecidos no Quadro — R$ 120 a R$ 300</option>
-  </optgroup>
-
-  <optgroup label="Iluminação, Sensores & Automação">
-    <option value="Instalação de Plafon, Arandela ou Luminária Simples|130">Instalação de Plafon, Arandela ou Luminária Simples — R$ 80 a R$ 180</option>
-    <option value="Instalação de Spot LED Embutido (Com furo em gesso)|110">Instalação de Spot LED Embutido (Com furo em gesso) — R$ 70 a R$ 150</option>
-    <option value="Instalação de Spot LED (Apenas fixação na fiação existente)|60">Instalação de Spot LED (Apenas fixação na fiação existente) — R$ 40 a R$ 80</option>
-    <option value="Instalação de Lustre Decorativo / Pendente Grande|250">Instalação de Lustre Decorativo / Pendente Grande — R$ 150 a R$ 350</option>
-    <option value="Instalação de Fita de LED com Driver (Até 5 metros)|160">Instalação de Fita de LED com Driver (Até 5 metros) — R$ 100 a R$ 220</option>
-    <option value="Instalação de Refletor Externo / Jardim|120">Instalação de Refletor Externo / Jardim — R$ 90 a R$ 150</option>
-    <option value="Instalação de Luminária de Emergência|80">Instalação de Luminária de Emergência — R$ 65 a R$ 95</option>
-    <option value="Instalação de Sensor de Presença ou Fotocélula|110">Instalação de Sensor de Presença ou Fotocélula — R$ 80 a R$ 140</option>
-  </optgroup>
-
-  <optgroup label="Tomadas, Interruptores & Pontos Elétricos">
-    <option value="Substituição simples de Tomada ou Interruptor (Mesmo ponto)|85">Substituição simples de Tomada ou Interruptor (Mesmo ponto) — R$ 50 a R$ 120</option>
-    <option value="Instalação de Nova Tomada (Puxando fiação externa via canaleta)|135">Instalação de Nova Tomada (Puxando fiação externa via canaleta) — R$ 90 a R$ 180</option>
-    <option value="Instalação de Nova Tomada (Embutida na alvenaria com quebra)|195">Instalação de Nova Tomada (Embutida na alvenaria com quebra) — R$ 140 a R$ 250</option>
-    <option value="Instalação de Tomada de Alta Corrente (20A dedicada)|120">Instalação de Tomada de Alta Corrente (20A dedicada) — R$ 80 a R$ 160</option>
-    <option value="Instalação de Interruptor Paralelo (Three-Way)|185">Instalação de Interruptor Paralelo (Three-Way) — R$ 120 a R$ 250</option>
-    <option value="Instalação de Interruptor Intermediário (Four-Way)|215">Instalação de Interruptor Intermediário (Four-Way) — R$ 150 a R$ 280</option>
-    <option value="Passagem de cabo guia por eletroduto obstruído (Por ponto)|100">Passagem de cabo guia por eletroduto obstruído (Por ponto) — R$ 70 a R$ 130</option>
-    <option value="Remoção de Pontos Elétricos Antigos e Isolamento Seguro|85">Remoção de Pontos Elétricos Antigos e Isolamento Seguro — R$ 60 a R$ 110</option>
-  </optgroup>
-
-  <optgroup label="Eletrodomésticos & Equipamentos">
-    <option value="Instalação ou Troca de Chuveiro Elétrico (Na rede pronta)|185">Instalação ou Troca de Chuveiro Elétrico (Na rede pronta) — R$ 120 a R$ 250</option>
-    <option value="Troca de Resistência de Chuveiro Elétrico|110">Troca de Resistência de Chuveiro Elétrico — R$ 70 a R$ 150</option>
-    <option value="Instalação de Ventilador de Teto (Com montagem mecânica)|290">Instalação de Ventilador de Teto (Com montagem mecânica) — R$ 180 a R$ 400</option>
-    <option value="Instalação de Ventilador de Parede|155">Instalação de Ventilador de Parede — R$ 110 a R$ 200</option>
-    <option value="Instalação Elétrica para Ar-Condicionado Split (Até QDC)|800">Instalação Elétrica para Ar-Condicionado Split (Até QDC) — R$ 400 a R$ 1.200</option>
-    <option value="Instalação de Exaustor de Cozinha / Coifa|225">Instalação de Exaustor de Cozinha / Coifa — R$ 150 a R$ 300</option>
-    <option value="Instalação de Cooktop ou Forno Elétrico|275">Instalação de Cooktop ou Forno Elétrico — R$ 200 a R$ 350</option>
-  </optgroup>
-
-  <optgroup label="Quadros de Distribuição (QDC) & Proteção">
-    <option value="Substituição de Disjuntor Monopolar Comum|92">Substituição de Disjuntor Monopolar Comum — R$ 55 a R$ 130</option>
-    <option value="Substituição de Disjuntor Bipolar ou Tripolar|150">Substituição de Disjuntor Bipolar ou Tripolar — R$ 100 a R$ 200</option>
-    <option value="Instalação de Interruptor Diferencial Residual (DR)|200">Instalação de Interruptor Diferencial Residual (DR) — R$ 150 a R$ 250</option>
-    <option value="Instalação de Dispositivo de Proteção contra Surtos (DPS)|135">Instalação de Dispositivo de Proteção contra Surtos (DPS) — R$ 90 a R$ 180</option>
-    <option value="Reorganização, Identificação e Limpeza de QDC|425">Reorganização, Identificação e Limpeza de QDC — R$ 250 a R$ 600</option>
-    <option value="Montagem e Instalação Completa de QDC (Até 12 circuitos)|1150">Montagem e Instalação Completa de QDC (Até 12 circuitos) — R$ 800 a R$ 1.500</option>
-    <option value="Montagem e Instalação Completa de QDC (Acima de 24 circuitos)|2300">Montagem e Instalação Completa de QDC (Acima de 24 circuitos) — R$ 1.600 a R$ 3.000</option>
-  </optgroup>
-
-  <optgroup label="Infraestrutura, Redes & Entrada">
-    <option value="Passagem de Fiação Geral (Fase, Neutro, Terra) por cômodo|250">Passagem de Fiação Geral (Fase, Neutro, Terra) por cômodo — R$ 150 a R$ 350</option>
-    <option value="Instalação de Perfilado ou Eletrocalha Metálica (Por metro)|90">Instalação de Perfilado ou Eletrocalha Metálica (Por metro) — R$ 60 a R$ 120</option>
-    <option value="Fixação de Eletroduto Aparente (PVC ou Galvanizado - Por metro)|65">Fixação de Eletroduto Aparente (PVC ou Galvanizado - Por metro) — R$ 40 a R$ 90</option>
-    <option value="Instalação de Caixa de Passagem em Alvenaria|140">Instalação de Caixa de Passagem em Alvenaria — R$ 100 a R$ 180</option>
-    <option value="Instalação de Hastes de Aterramento com Caixa de Inspeção|800">Instalação de Hastes de Aterramento com Caixa de Inspeção — R$ 400 a R$ 1.200</option>
-    <option value="Montagem e Instalação de Padrão de Entrada (Monofásico)|1300">Montagem e Instalação de Padrão de Entrada (Monofásico) — R$ 800 a R$ 1.800</option>
-    <option value="Substituição de Fiação Antiga / Condutores derretidos (Por cômodo)|500">Substituição de Fiação Antiga / Condutores derretidos — R$ 300 a R$ 700</option>
-  </optgroup>
-
-  <optgroup label="Projetos, Reformas & Documentação">
-    <option value="Reforma Elétrica Completa por Ponto (Mão de obra geral)|225">Reforma Elétrica Completa por Ponto — R$ 150 a R$ 300 / ponto</option>
-    <option value="Reforma Elétrica Total (Apartamento até 70m²)|5500">Reforma Elétrica Total (Apartamento até 70m²) — R$ 3.000 a R$ 8.000</option>
-    <option value="Reforma Elétrica Total (Casa até 150m²)|10500">Reforma Elétrica Total (Casa até 150m²) — R$ 6.000 a R$ 15.000</option>
-    <option value="Emissão de TRT / ART de Execução Elétrica|650">Emissão de TRT / ART de Execução Elétrica — R$ 400 a R$ 900</option>
-  </optgroup>
-
-  <optgroup label="Segurança Eletrônica & Climatização">
-    <option value="Instalação de Câmera Wi-Fi (Ponto Elétrico + Configuração)|150">Instalação de Câmera Wi-Fi — R$ 150,00</option>
-    <option value="Kit DVR / NVR 4 Câmeras (Instalação e Passagem)|450">Kit DVR / NVR 4 Câmeras — R$ 450,00</option>
-    <option value="Instalação de Kit Motor de Portão Deslizante|350">Instalação de Kit Motor de Portão Deslizante — R$ 350,00</option>
-    <option value="Instalação de Interfone / Kit Vídeo Porteiro|250">Instalação de Interfone / Kit Vídeo Porteiro — R$ 250,00</option>
-    <option value="Manutenção Prévia / Higienização de Ar-Condicionado|200">Higienização de Ar-Condicionado — R$ 200,00</option>
-  </optgroup>
+  <option value="Visita Técnica / Avaliação Diagnóstica simples|85">Visita Técnica / Avaliação Diagnóstica simples — R$ 85,00</option>
+  <option value="Hora de Trabalho Comum (Residencial)|115">Hora de Trabalho Comum (Residencial) — R$ 115,00</option>
+  <option value="Hora de Trabalho Especializada (Comercial / Industrial)|200">Hora de Trabalho Especializada (Comercial / Industrial) — R$ 200,00</option>
+  <option value="Diária de Eletricista (Período de 8h útil)|375">Diária de Eletricista (Período de 8h útil) — R$ 375,00</option>
+  <option value="Taxa de Plantão / Emergência (Madrugada ou Finais de Semana)|150">Taxa de Plantão / Emergência — R$ 150,00</option>
+  <option value="Instalação de Plafon, Arandela ou Luminária Simples|130">Instalação de Plafon, Arandela ou Luminária Simples — R$ 130,00</option>
+  <option value="Instalação de Spot LED Embutido (Com furo em gesso)|110">Instalação de Spot LED Embutido (Com furo em gesso) — R$ 110,00</option>
+  <option value="Instalação de Spot LED (Apenas fixação na fiação existente)|60">Instalação de Spot LED (Apenas fiação existente) — R$ 60,00</option>
+  <option value="Instalação de Lustre Decorativo / Pendente Grande|250">Instalação de Lustre Decorativo / Pendente Grande — R$ 250,00</option>
+  <option value="Instalação de Fita de LED com Driver (Até 5 metros)|160">Instalação de Fita de LED com Driver (Até 5m) — R$ 160,00</option>
+  <option value="Instalação de Refletor Externo / Jardim|120">Instalação de Refletor Externo / Jardim — R$ 120,00</option>
+  <option value="Instalação de Luminária de Emergência|80">Instalação de Luminária de Emergência — R$ 80,00</option>
+  <option value="Instalação de Sensor de Presença ou Fotocélula|110">Instalação de Sensor de Presença ou Fotocélula — R$ 110,00</option>
+  <option value="Substituição simples de Tomada ou Interruptor (Mesmo ponto)|85">Substituição simples de Tomada ou Interruptor — R$ 85,00</option>
+  <option value="Instalação de Nova Tomada (Puxando fiação externa via canaleta)|135">Instalação de Nova Tomada (Canaleta externa) — R$ 135,00</option>
+  <option value="Instalação de Nova Tomada (Embutida na alvenaria com quebra)|195">Instalação de Nova Tomada (Embutida na alvenaria) — R$ 195,00</option>
+  <option value="Instalação de Tomada de Alta Corrente (20A dedicada)|120">Instalação de Tomada 20A Dedicada — R$ 120,00</option>
+  <option value="Instalação de Interruptor Paralelo (Three-Way)|185">Instalação de Interruptor Paralelo (Three-Way) — R$ 185,00</option>
+  <option value="Instalação de Interruptor Intermediário (Four-Way)|215">Instalação de Interruptor Intermediário (Four-Way) — R$ 215,00</option>
+  <option value="Passagem de cabo guia por eletroduto obstruído|100">Passagem de cabo guia em eletroduto obstruído — R$ 100,00</option>
+  <option value="Instalação ou Troca de Chuveiro Elétrico (Na rede pronta)|185">Instalação ou Troca de Chuveiro Elétrico — R$ 185,00</option>
+  <option value="Troca de Resistência de Chuveiro Elétrico|110">Troca de Resistência de Chuveiro Elétrico — R$ 110,00</option>
+  <option value="Instalação de Ventilador de Teto (Com montagem mecânica)|290">Instalação de Ventilador de Teto — R$ 290,00</option>
+  <option value="Instalação de Ventilador de Parede|155">Instalação de Ventilador de Parede — R$ 155,00</option>
+  <option value="Instalação Elétrica para Ar-Condicionado Split (Até QDC)|800">Instalação Elétrica para Ar-Condicionado Split — R$ 800,00</option>
+  <option value="Instalação de Exaustor de Cozinha / Coifa|225">Instalação de Exaustor / Coifa — R$ 225,00</option>
+  <option value="Instalação de Cooktop ou Forno Elétrico|275">Instalação de Cooktop ou Forno Elétrico — R$ 275,00</option>
+  <option value="Substituição de Disjuntor Monopolar Comum|92">Substituição de Disjuntor Monopolar — R$ 92,00</option>
+  <option value="Substituição de Disjuntor Bipolar ou Tripolar|150">Substituição de Disjuntor Bipolar / Tripolar — R$ 150,00</option>
+  <option value="Instalação de Interruptor Diferencial Residual (DR)|200">Instalação de Disjuntor / Interruptor DR — R$ 200,00</option>
+  <option value="Instalação de Dispositivo de Proteção contra Surtos (DPS)|135">Instalação de Protetor contra Surtos (DPS) — R$ 135,00</option>
+  <option value="Reorganização, Identificação e Limpeza de QDC|425">Reorganização e Limpeza de Quadro (QDC) — R$ 425,00</option>
+  <option value="Montagem e Instalação Completa de QDC (Até 12 circuitos)|1150">Montagem Completa de QDC (Até 12 circuitos) — R$ 1.150,00</option>
+  <option value="Montagem e Instalação Completa de QDC (Acima de 24 circuitos)|2300">Montagem Completa de QDC (Acima de 24 circuitos) — R$ 2.300,00</option>
+  <option value="Passagem de Fiação Geral por cômodo|250">Passagem de Fiação Geral (Por cômodo) — R$ 250,00</option>
+  <option value="Instalação de Perfilado ou Eletrocalha Metálica|90">Instalação de Perfilado / Eletrocalha (Por metro) — R$ 90,00</option>
+  <option value="Fixação de Eletroduto Aparente (Por metro)|65">Fixação de Eletroduto Aparente (Por metro) — R$ 65,00</option>
+  <option value="Instalação de Caixa de Passagem em Alvenaria|140">Instalação de Caixa de Passagem em Alvenaria — R$ 140,00</option>
+  <option value="Instalação de Hastes de Aterramento com Caixa de Inspeção|800">Instalação de Hastes de Aterramento — R$ 800,00</option>
+  <option value="Montagem e Instalação de Padrão de Entrada Monofásico|1300">Montagem de Padrão de Entrada (Monofásico) — R$ 1.300,00</option>
+  <option value="Investigação e Correção de Curto-Circuito / Fuga|350">Investigação e Correção de Curto-Circuito — R$ 350,00</option>
+  <option value="Substituição de Fiação Antiga / Condutores derretidos|500">Substituição de Fiação Antiga (Por cômodo) — R$ 500,00</option>
+  <option value="Medição de Aterramento com Terrômetro e Laudo|375">Medição de Aterramento com Laudo — R$ 375,00</option>
+  <option value="Remoção de Pontos Elétricos Antigos e Isolamento|85">Remoção de Pontos Elétricos Antigos — R$ 85,00</option>
+  <option value="Identificação de Circuitos Desconhecidos no Quadro|210">Identificação de Circuitos no Quadro — R$ 210,00</option>
+  <option value="Reforma Elétrica Completa por Ponto|225">Reforma Elétrica Completa (Por ponto) — R$ 225,00</option>
+  <option value="Reforma Elétrica Total (Apartamento até 70m²)|5500">Reforma Elétrica Total (Apto até 70m²) — R$ 5.500,00</option>
+  <option value="Reforma Elétrica Total (Casa até 150m²)|10500">Reforma Elétrica Total (Casa até 150m²) — R$ 10.500,00</option>
+  <option value="Emissão de TRT / ART de Execução Elétrica|650">Emissão de TRT / ART Elétrica — R$ 650,00</option>
+  <option value="Instalação de Câmera Wi-Fi (Ponto Elétrico + Configuração)|150">Instalação de Câmera Wi-Fi — R$ 150,00</option>
+  <option value="Kit DVR / NVR 4 Câmeras (Instalação e Passagem)|450">Kit DVR / NVR 4 Câmeras — R$ 450,00</option>
+  <option value="Instalação de Kit Motor de Portão Deslizante|350">Instalação de Kit Motor de Portão Deslizante — R$ 350,00</option>
+  <option value="Instalação de Interfone / Kit Vídeo Porteiro|250">Instalação de Interfone / Vídeo Porteiro — R$ 250,00</option>
+  <option value="Manutenção Prévia / Higienização de Ar-Condicionado|200">Higienização de Ar-Condicionado — R$ 200,00</option>
 </select>
