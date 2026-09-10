@@ -10,7 +10,9 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
   <style>
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       font-family: Arial, sans-serif;
@@ -21,7 +23,7 @@
     }
     
     .orcamento-container {
-      max-width: 850px;
+      max-width: 800px;
       margin: 0 auto;
       background: #ffffff; 
       padding: 20px;
@@ -43,7 +45,9 @@
       width: auto;
     }
 
-    .header-app .titulo { flex: 1; }
+    .header-app .titulo {
+      flex: 1;
+    }
 
     .header-app h2 {
       margin: 0;
@@ -132,8 +136,8 @@
     <thead>
       <tr>
         <th style="width: 10%;">QTD</th>
-        <th style="width: 52%;">DESCRIÇÃO DO SERVIÇO / MATERIAL</th>
-        <th style="width: 18%;">VALOR UNIT.</th>
+        <th style="width: 50%;">DESCRIÇÃO DO SERVIÇO / MATERIAL</th>
+        <th style="width: 20%;">VALOR UNIT.</th>
         <th style="width: 15%;">SUBTOTAL</th>
         <th class="controles" style="width: 5%;">AÇÃO</th>
       </tr>
@@ -144,83 +148,30 @@
         <td>
           <select onchange="atualizarDescricao(this)" class="select-servico" style="width: 100%;">
             <option value="custom">-- Digitar Item Personalizado --</option>
-            
+            <optgroup label="Câmeras e Segurança">
+              <option value="Instalação de Câmera Wi-Fi Inteligente" data-preco="90.00">Instalação de Câmera Wi-Fi Inteligente</option>
+              <option value="Configuração de Cartão MicroSD e App" data-preco="35.00">Configuração de Cartão MicroSD e App</option>
+            </optgroup>
             <optgroup label="Iluminação & Sensores">
-              <option value="Arandela, Pendente ou Spot Comum" data-preco="55.00">Arandela, Pendente ou Spot Comum</option>
-              <option value="Lâmpada Fluorescente / LED (Tubular)" data-preco="60.00">Lâmpada Fluorescente / LED (Tubular)</option>
-              <option value="Lustre Simples / Luminária" data-preco="80.00">Lustre Simples / Luminária</option>
-              <option value="Lustre Grande / Luminária Especial" data-preco="135.00">Lustre Grande / Luminária Especial</option>
-              <option value="Refletor de Jardim" data-preco="90.00">Refletor de Jardim</option>
-              <option value="Refletor de Poste Comum" data-preco="110.00">Refletor de Poste Comum</option>
-              <option value="Fotocélula / Sensor de Presença" data-preco="85.00">Fotocélula / Sensor de Presença</option>
-              <option value="Refletor LED + Fotocélula / Sensor" data-preco="60.00">Refletor LED + Fotocélula / Sensor</option>
-              <option value="Instalação Perfil de LED (Metro Linear)" data-preco="140.00">Instalação Perfil de LED (Metro)</option>
-              <option value="Luminária de Emergência (Sobrepor)" data-preco="90.00">Luminária de Emergência (Sobrepor)</option>
-              <option value="Luminária de Emergência (Embutir 2x4)" data-preco="50.00">Luminária de Emergência (Embutir)</option>
-              <option value="Interruptor Simples ou Pulsador" data-preco="50.00">Interruptor Simples ou Pulsador</option>
-              <option value="Interruptor Three-Way / Four-Way" data-preco="50.00">Interruptor Three-Way / Four-Way</option>
-              <option value="Interruptor + Tomada (Juntos)" data-preco="50.00">Interruptor + Tomada (Juntos)</option>
+              <option value="Instalação de Refletor LED" data-preco="80.00">Instalação de Refletor LED</option>
+              <option value="Instalação de Relé Fotocélula" data-preco="70.00">Instalação de Relé Fotocélula</option>
+              <option value="Instalação de Sensor de Presença" data-preco="65.00">Instalação de Sensor de Presença</option>
+              <option value="Instalação de Interruptor Inteligente" data-preco="90.00">Instalação de Interruptor Inteligente</option>
             </optgroup>
-
-            <optgroup label="Tomadas & Pontos Elétricos">
-              <option value="Tomada Simples" data-preco="30.00">Tomada Simples</option>
-              <option value="Tomada Dupla" data-preco="40.00">Tomada Dupla</option>
-              <option value="Tomada Tripla" data-preco="50.00">Tomada Tripla</option>
-              <option value="Tomada de Piso / Telefone" data-preco="50.00">Tomada de Piso / Telefone</option>
-              <option value="Tomada Industrial (3P+T)" data-preco="80.00">Tomada Industrial (3P+T)</option>
-              <option value="Tomada de Sobrepor com Canaleta" data-preco="60.00">Tomada de Sobrepor com Canaleta</option>
-              <option value="Campainha (Até 20m)" data-preco="60.00">Campainha (Até 20m)</option>
+            <optgroup label="Instalações Elétricas">
+              <option value="Instalação de Ponto Novo de Tomada" data-preco="120.00">Instalação de Ponto Novo de Tomada</option>
+              <option value="Montagem de Quadro de Distribuição (QDC)" data-preco="350.00">Montagem de QDC</option>
+              <option value="Instalação de Disjuntor" data-preco="45.00">Instalação de Disjuntor</option>
+              <option value="Instalação de Dispositivo DR / DPS" data-preco="85.00">Instalação de Dispositivo DR / DPS</option>
+              <option value="Troca de Fiação Elétrica (ponto)" data-preco="75.00">Troca de Fiação Elétrica</option>
             </optgroup>
-
-            <optgroup label="Equipamentos Residencias & Chuveiros">
-              <option value="Ventilador de Teto" data-preco="120.00">Ventilador de Teto</option>
-              <option value="Ventilador de Parede" data-preco="90.00">Ventilador de Parede</option>
-              <option value="Chuveiro Elétrico Simples" data-preco="80.00">Chuveiro Elétrico Simples</option>
-              <option value="Chuveiro Luxo (Eletrônico / Pressurizado / Ducha)" data-preco="135.00">Chuveiro Luxo (Ducha / Pressurizado)</option>
-              <option value="Troca de Resistência de Chuveiro" data-preco="70.00">Troca de Resistência de Chuveiro</option>
-              <option value="Torneira Elétrica" data-preco="80.00">Torneira Elétrica</option>
-              <option value="Exaustor Cozinha ou Banheiro" data-preco="200.00">Exaustor Cozinha ou Banheiro</option>
-              <option value="Chave de Boia Superior / Inferior" data-preco="120.00">Chave de Boia Superior / Inferior</option>
-            </optgroup>
-
-            <optgroup label="Quadros, Proteção & Entrada">
-              <option value="Substituição de Disjuntor Monofásico" data-preco="40.00">Substituição de Disjuntor Monofásico</option>
-              <option value="Substituição de Disjuntor Bifásico" data-preco="60.00">Substituição de Disjuntor Bifásico</option>
-              <option value="Substituição de Disjuntor Trifásico" data-preco="90.00">Substituição de Disjuntor Trifásico</option>
-              <option value="Instalação de IDR (Interruptor Diferencial Residual)" data-preco="110.00">Instalação de IDR</option>
-              <option value="Instalação de DPS (Proteção de Surtos)" data-preco="95.00">Instalação de DPS</option>
-              <option value="Barramento de Neutro e/ou Terra" data-preco="65.00">Barramento de Neutro e/ou Terra</option>
-              <option value="Instalação de Haste de Aterramento" data-preco="160.00">Instalação de Haste de Aterramento</option>
-              <option value="Montagem QDC (6 Circuitos + DR + DPS)" data-preco="460.00">Montagem QDC (6 Circuitos + DR + DPS)</option>
-              <option value="Montagem QDC (12 Circuitos + DR + DPS)" data-preco="700.00">Montagem QDC (12 Circuitos + DR + DPS)</option>
-              <option value="Montagem QDC (18 Circuitos + DR + DPS)" data-preco="875.00">Montagem QDC (18 Circuitos + DR + DPS)</option>
-              <option value="Instalação de Medidor Monofásico (Padrão Entrada)" data-preco="1000.00">Instalação de Medidor Monofásico</option>
-              <option value="Instalação de Medidor Bifásico (Padrão Entrada)" data-preco="1200.00">Instalação de Medidor Bifásico</option>
-            </optgroup>
-
-            <optgroup label="Câmeras, Segurança & Automação">
-              <option value="Câmera CFTV Wi-Fi (Sem ponto elétrico)" data-preco="130.00">Câmera CFTV Wi-Fi</option>
-              <option value="Interfone (1 Chamada)" data-preco="130.00">Interfone (1 Chamada)</option>
-              <option value="Videoporteiro" data-preco="160.00">Videoporteiro</option>
-              <option value="Fechadura Eletrônica (Portão Social)" data-preco="130.00">Fechadura Eletrônica (Portão Social)</option>
-              <option value="Botoeira para Fechadura Eletrônica" data-preco="50.00">Botoeira para Fechadura Eletrônica</option>
-              <option value="Portão Eletrônico Deslizante" data-preco="230.00">Portão Eletrônico Deslizante</option>
-              <option value="Portão Eletrônico Pivotante / Basculante" data-preco="460.00">Portão Eletrônico Pivotante/Basculante</option>
-              <option value="Instalação de Sistema de Alarme Residencial" data-preco="700.00">Sistema de Alarme Residencial</option>
-              <option value="Instalação de Cerca Elétrica (por Metro)" data-preco="50.00">Instalação de Cerca Elétrica (Metro)</option>
-            </optgroup>
-
-            <optgroup label="Climatização & Emergência">
-              <option value="Alimentação Elétrica para Ar Condicionado" data-preco="90.00">Alimentação Elétrica p/ Ar Condicionado</option>
-              <option value="Limpeza em Tubulação de Ar Condicionado" data-preco="50.00">Limpeza em Tubulação de Ar Condicionado</option>
-              <option value="Instalação Ar Split Inverter 9000 BTUs" data-preco="450.00">Instalação Ar Split Inverter 9000 BTUs</option>
-              <option value="Instalação Ar Split Inverter 12000 BTUs" data-preco="450.00">Instalação Ar Split Inverter 12000 BTUs</option>
-              <option value="Instalação Ar Split Inverter 18000 BTUs" data-preco="550.00">Instalação Ar Split Inverter 18000 BTUs</option>
-              <option value="Atendimento Técnico Emergencial (Durante a semana)" data-preco="150.00">Atendimento Emergencial (Semana)</option>
-              <option value="Atendimento Técnico Emergencial (Final de semana)" data-preco="210.00">Atendimento Emergencial (Fim de Semana)</option>
+            <optgroup label="Extras">
+              <option value="Mão de Obra Extra" data-preco="0.00">Mão de Obra Extra</option>
+              <option value="Material Extra" data-preco="0.00">Material Extra</option>
+              <option value="Taxa de Deslocamento" data-preco="30.00">Taxa de Deslocamento</option>
             </optgroup>
           </select>
-          <input type="text" placeholder="Descrição personalizada..." class="desc-custom" style="width: 100%; margin-top: 5px;">
+          <input type="text" placeholder="Descrição do serviço/material..." class="desc-custom" style="width: 100%; margin-top: 5px;">
         </td>
         <td><input type="number" step="0.01" value="0.00" onchange="calcularTotal()" class="preco" style="width: 100%;"></td>
         <td class="subtotal">R$ 0,00</td>
