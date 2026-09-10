@@ -88,8 +88,13 @@
     .result-row:last-child { border-bottom: none; }
     .result-row span.val { font-weight: bold; color: var(--primary); }
 
-    /* LAYOUT DO TEMPLATE PDF */
-    #pdfContainer { display: none; }
+    /* LAYOUT DO TEMPLATE PDF - CORRIGIDO PARA RENDERIZAÇÃO */
+    #pdfContainer { 
+      position: absolute; 
+      left: -9999px; 
+      top: -9999px; 
+      width: 680px; 
+    }
     #pdfTemplate { 
       background: #ffffff !important; 
       padding: 25px; 
@@ -1075,7 +1080,7 @@
       window.open(url, '_blank');
     }
 
-    // GERADOR DE PDF
+    // GERADOR DE PDF CORRIGIDO
     function gerarPDF() {
       if (itensOrcamento.length === 0) {
         alert("Adicione ao menos um serviço para gerar o PDF!");
@@ -1121,8 +1126,6 @@
       document.getElementById('pdfTotalBox').innerText = `VALOR TOTAL ESTIMADO: R$ ${total.toFixed(2).replace('.', ',')}`;
 
       const element = document.getElementById('pdfTemplate');
-      const container = document.getElementById('pdfContainer');
-      container.style.display = 'block';
 
       const opt = {
         margin:       [10, 10, 10, 10],
@@ -1132,9 +1135,7 @@
         jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
 
-      html2pdf().set(opt).from(element).save().then(() => {
-        container.style.display = 'none';
-      });
+      html2pdf().set(opt).from(element).save();
     }
 
     // INICIALIZADORES
