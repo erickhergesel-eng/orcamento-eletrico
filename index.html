@@ -1,351 +1,1254 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agendamento de Visitas Tecnica</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Erick Hergesel - ERTEC SOLUÇÕES ELÉTRICAS</title>
+  
+  <!-- Configurações para WebApp / Atalho iPhone (iOS) -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="ERTEC">
+  
+  <!-- Ícones PWA / iOS -->
+  <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'><rect width='500' height='500' fill='%231b365d'/><circle cx='250' cy='200' r='100' fill='none' stroke='%23eab308' stroke-width='30'/><path d='M250 130 L250 210' stroke='%23eab308' stroke-width='30' stroke-linecap='round'/><text x='250' y='360' font-family='sans-serif' font-weight='bold' font-size='70' fill='%23ffffff' text-anchor='middle'>ERTEC</text><text x='250' y='420' font-family='sans-serif' font-size='32' fill='%23eab308' text-anchor='middle'>ELÉTRICA</text></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'><rect width='500' height='500' fill='%231b365d'/><circle cx='250' cy='200' r='100' fill='none' stroke='%23eab308' stroke-width='30'/><path d='M250 130 L250 210' stroke='%23eab308' stroke-width='30' stroke-linecap='round'/><text x='250' y='360' font-family='sans-serif' font-weight='bold' font-size='70' fill='%23ffffff' text-anchor='middle'>ERTEC</text><text x='250' y='420' font-family='sans-serif' font-size='32' fill='%23eab308' text-anchor='middle'>ELÉTRICA</text></svg>">
+  
+  <style>
+    :root {
+      --primary: #1b365d;
+      --secondary: #0d233a;
+      --accent: #107c41;
+      --highlight: #2563eb;
+      --bg: #f4f6f9;
+      --card: #ffffff;
+      --text: #333333;
+    }
+    * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; }
+    body { background-color: var(--bg); color: var(--text); padding: 12px; max-width: 650px; margin: 0 auto; }
+    
+    header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; padding: 18px; border-radius: 12px; text-align: center; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+    header svg.logo-header { max-width: 130px; height: auto; border-radius: 8px; border: 2px solid rgba(255, 255, 255, 0.2); background-color: #1e1e1e; }
+    header h1 { font-size: 1.2rem; font-weight: 700; text-transform: uppercase; }
+    header p { font-size: 0.8rem; opacity: 0.9; }
+    
+    .nav-tabs { display: flex; gap: 4px; margin-bottom: 15px; flex-wrap: wrap; }
+    .tab-btn { flex: 1 1 15%; padding: 10px 2px; border: none; border-radius: 8px; font-weight: bold; font-size: 0.75rem; cursor: pointer; background: #e2e8f0; color: #475569; transition: 0.2s; text-align: center; }
+    .tab-btn.active { background: var(--highlight); color: #ffffff; box-shadow: 0 2px 6px rgba(37,99,235,0.3); }
 
-        body {
-            background-color: #f4f6f9;
-            color: #333;
-            padding: 20px;
-        }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
+    .card { background: var(--card); border-radius: 12px; padding: 16px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    .card h2 { font-size: 1.05rem; color: var(--primary); margin-bottom: 12px; border-bottom: 2px solid var(--bg); padding-bottom: 6px; }
+    
+    .field { margin-bottom: 12px; }
+    .field label { display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 5px; color: #444; }
+    .field input, .field select, .field textarea { width: 100%; padding: 11px; border: 1px solid #ccc; border-radius: 8px; font-size: 0.92rem; outline: none; }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--primary); }
+    
+    .search-box { position: relative; margin-bottom: 10px; }
+    .search-box input { padding-left: 36px; background-color: #f8fafc; border: 1px solid #cbd5e1; }
+    .search-box .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 0.9rem; color: #64748b; }
 
-        h1, h2 {
-            margin-bottom: 15px;
-            color: #1e293b;
-        }
+    .field-row { display: flex; gap: 10px; }
+    .field-row .field { flex: 1; }
 
-        .card {
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            margin-bottom: 25px;
-        }
+    .btn-add { background: var(--primary); color: #fff; border: none; padding: 12px; border-radius: 8px; width: 100%; font-weight: bold; cursor: pointer; font-size: 0.95rem; margin-top: 5px; }
+    
+    .item-list { list-style: none; margin-top: 12px; }
+    .item-list li { display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #eee; background: #fafafa; border-radius: 6px; margin-bottom: 6px; }
+    .item-info { display: flex; flex-direction: column; }
+    .item-title { font-weight: 600; color: #222; font-size: 0.88rem; }
+    .item-sub { font-size: 0.78rem; color: #666; }
+    .remove-btn { color: #e74c3c; font-weight: bold; text-decoration: none; padding: 4px 8px; font-size: 1.1rem; cursor: pointer; }
+    
+    .total-box { background: var(--accent); color: #fff; border-radius: 10px; padding: 15px; text-align: center; margin-top: 15px; }
+    .total-box span { font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; }
+    .total-box h3 { font-size: 1.6rem; margin-top: 2px; }
+    
+    .btn-group { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
+    .btn-whatsapp { background: #25d366; color: #fff; border: none; padding: 13px; border-radius: 8px; font-size: 0.95rem; font-weight: bold; cursor: pointer; text-align: center; text-decoration: none; display: block; }
+    .btn-pdf { background: #e74c3c; color: #fff; border: none; padding: 13px; border-radius: 8px; font-size: 0.95rem; font-weight: bold; cursor: pointer; text-align: center; }
+    .btn-maps { background: #4285f4; color: #fff; border: none; padding: 8px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: bold; cursor: pointer; text-decoration: none; display: inline-block; margin-top: 6px; }
 
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
-        }
+    .sub-tabs { display: flex; gap: 6px; margin-bottom: 15px; flex-wrap: wrap; }
+    .sub-btn { flex: 1 1 30%; padding: 8px 4px; border: 1px solid #cbd5e1; border-radius: 6px; background: #fff; font-size: 0.78rem; font-weight: 600; cursor: pointer; color: #334155; text-align: center; }
+    .sub-btn.active { background: #e0e7ff; border-color: var(--highlight); color: var(--highlight); }
 
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
+    .tech-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.82rem; }
+    .tech-table th, .tech-table td { border: 1px solid #e2e8f0; padding: 7px 6px; text-align: left; }
+    .tech-table th { background-color: #f1f5f9; color: var(--primary); font-weight: 700; text-transform: uppercase; font-size: 0.72rem; }
+    .tech-table tr:nth-child(even) { background-color: #f8fafc; }
 
-        .form-group.full-width {
-            grid-column: 1 / -1;
-        }
+    .result-box { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px; padding: 14px; margin-top: 15px; }
+    .result-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px dashed #cbd5e1; font-size: 0.88rem; }
+    .result-row:last-child { border-bottom: none; }
+    .result-row span.val { font-weight: bold; color: var(--primary); }
 
-        label {
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: #475569;
-        }
+    .status-badge { display: inline-block; padding: 3px 8px; border-radius: 12px; font-size: 0.72rem; font-weight: bold; text-transform: uppercase; }
+    .status-agendado { background: #fef3c7; color: #d97706; }
+    .status-concluido { background: #dcfce7; color: #15803d; }
+    .status-cancelado { background: #fee2e2; color: #b91c1c; }
 
-        input, select, textarea {
-            padding: 10px 12px;
-            border: 1px solid #cbd5e1;
-            border-radius: 6px;
-            font-size: 0.95rem;
-            outline: none;
-            transition: border-color 0.2s;
-        }
+    /* LAYOUT DO TEMPLATE PDF */
+    #pdfContainer { display: none; }
 
-        input:focus, select:focus, textarea:focus {
-            border-color: #2563eb;
-        }
-
-        .btn {
-            background-color: #2563eb;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s;
-            margin-top: 15px;
-            width: 100%;
-        }
-
-        .btn:hover {
-            background-color: #1d4ed8;
-        }
-
-        /* Lista de Visitas */
-        .visita-card {
-            background: #fff;
-            border-left: 5px solid #2563eb;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .visita-card.status-Concluída { border-left-color: #10b981; }
-        .visita-card.status-Cancelada { border-left-color: #ef4444; }
-
-        .visita-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .cliente-nome {
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: #0f172a;
-        }
-
-        .badge {
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        .badge-Pendente { background: #fef3c7; color: #d97706; }
-        .badge-Concluída { background: #d1fae5; color: #059669; }
-        .badge-Cancelada { background: #fee2e2; color: #dc2626; }
-
-        .visita-info {
-            font-size: 0.9rem;
-            color: #64748b;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 8px;
-        }
-
-        .actions {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: 5px;
-        }
-
-        .btn-action {
-            padding: 6px 12px;
-            border-radius: 4px;
-            border: none;
-            font-size: 0.8rem;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .btn-wsp { background-color: #25d366; color: white; }
-        .btn-map { background-color: #ea4335; color: white; }
-        .btn-status { background-color: #f1f5f9; color: #334155; }
-        .btn-delete { background-color: #fee2e2; color: #dc2626; }
-
-        .empty-msg {
-            text-align: center;
-            color: #94a3b8;
-            padding: 20px;
-        }
-    </style>
+    /* ESTILOS EXCLUSIVOS PARA MODO DE IMPRESSÃO / GERAR PDF */
+    @media print {
+      body * { visibility: hidden; }
+      body { background: #ffffff !important; padding: 0 !important; margin: 0 !important; }
+      #pdfContainer, #pdfContainer * { visibility: visible; }
+      #pdfContainer { 
+        display: block !important; 
+        position: absolute; 
+        left: 0; 
+        top: 0; 
+        width: 100%; 
+      }
+      #pdfTemplate { 
+        background: #ffffff !important; 
+        padding: 20px; 
+        font-family: Arial, sans-serif; 
+        color: #333; 
+      }
+      .watermark {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 350px;
+        opacity: 0.05;
+        z-index: 0;
+      }
+      .pdf-content { position: relative; z-index: 1; }
+      .pdf-header { text-align: center; border-bottom: 2px solid #1b365d; padding-bottom: 10px; margin-bottom: 15px; }
+      .pdf-header svg.pdf-logo { max-width: 100px; height: auto; margin-bottom: 5px; background-color: #1e1e1e; border-radius: 6px; }
+      .pdf-header h1 { color: #1b365d; font-size: 18px; text-transform: uppercase; margin-bottom: 2px; }
+      .pdf-header p { font-size: 11px; color: #555; margin-bottom: 2px; }
+      .pdf-client-box { background: #f8f9fa; border: 1px solid #ddd; padding: 10px; border-radius: 6px; margin-bottom: 15px; font-size: 12px; line-height: 1.5; }
+      .pdf-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+      .pdf-table th, .pdf-table td { border: 1px solid #ccc; padding: 8px; text-align: left; font-size: 11px; }
+      .pdf-table th { background-color: #1b365d !important; color: white !important; text-transform: uppercase; font-size: 10px; -webkit-print-color-adjust: exact; }
+      .pdf-total { margin-top: 15px; text-align: right; font-size: 15px; font-weight: bold; color: #107c41; }
+      .pdf-terms { margin-top: 20px; font-size: 10px; background: #f9f9f9; padding: 10px; border-radius: 6px; border-left: 4px solid #1b365d; line-height: 1.5; }
+      .pdf-footer { margin-top: 25px; font-size: 10px; text-align: center; color: #777; border-top: 1px solid #eee; padding-top: 8px; }
+    }
+  </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>📅 Agendamento de Visitas Técnicas</h1>
+  <header>
+    <svg class="logo-header" viewBox="0 0 400 350" xmlns="http://www.w3.org/2000/svg">
+      <rect width="400" height="350" rx="20" fill="#1e1e1e"/>
+      <circle cx="200" cy="120" r="70" fill="none" stroke="#eab308" stroke-width="18"/>
+      <path d="M200 70 L200 125" stroke="#eab308" stroke-width="18" stroke-linecap="round"/>
+      <text x="200" y="245" font-family="'Segoe UI', Arial, sans-serif" font-weight="900" font-size="62" fill="#808080" text-anchor="middle">ER<tspan fill="#eab308">TEC</tspan></text>
+      <text x="200" y="295" font-family="'Segoe UI', Arial, sans-serif" font-weight="400" font-size="28" fill="#ffffff" text-anchor="middle">Soluções Elétricas</text>
+    </svg>
+    <h1>ERTEC SOLUÇÕES ELÉTRICAS</h1>
+    <p>Erick Hergesel - Elétrica, Climatização Residencial & Segurança Eletrônica</p>
+  </header>
 
-    <!-- FORMULÁRIO DE CADASTRO -->
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="trocarAba('orcamentoTab', this)">📝 Orçamento</button>
+    <button class="tab-btn" onclick="trocarAba('visitasTab', this)">📅 Visitas</button>
+    <button class="tab-btn" onclick="trocarAba('arTab', this)">❄️ Ar Condicionado</button>
+    <button class="tab-btn" onclick="trocarAba('casaTab', this)">🏠 Instalação Casa</button>
+    <button class="tab-btn" onclick="trocarAba('calculoTab', this)">🔧 Disjuntor Certo</button>
+    <button class="tab-btn" onclick="trocarAba('consultaTab', this)">📚 Tabelas NBR</button>
+  </div>
+
+  <!-- ABA 1: GERADOR DE ORÇAMENTOS -->
+  <div id="orcamentoTab" class="tab-content active">
     <div class="card">
-        <h2>Nova Visita</h2>
-        <form id="formVisita">
-            <div class="form-grid">
-                <div class="form-group">
-                    <label for="cliente">Nome do Cliente *</label>
-                    <input type="text" id="cliente" required placeholder="Ex: João Silva">
-                </div>
+      <h2>👤 Dados do Cliente</h2>
+      <div class="field">
+        <label>Nome do Cliente:</label>
+        <input type="text" id="clienteNome" placeholder="Ex: João Silva">
+      </div>
+      <div class="field">
+        <label>WhatsApp do Cliente (com DDD):</label>
+        <input type="tel" id="clienteTel" placeholder="Ex: 11999998888">
+      </div>
+    </div>
 
-                <div class="form-group">
-                    <label for="telefone">WhatsApp / Telefone</label>
-                    <input type="tel" id="telefone" placeholder="Ex: 11999999999">
-                </div>
+    <div class="card">
+      <h2>🛠️ Adicionar Serviços</h2>
+      <div class="field">
+        <label>Buscar Serviço Rapidamente:</label>
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="buscaServico" placeholder="Digite para filtrar os serviços abaixo..." onkeyup="filtrarServicos()">
+        </div>
+      </div>
 
-                <div class="form-group">
-                    <label for="data">Data da Visita *</label>
-                    <input type="date" id="data" required>
-                </div>
+      <div class="field">
+        <label>Selecione o Serviço:</label>
+        <select id="servicoSelect" size="8" style="height: auto; max-height: 220px;" onchange="verificarItemCustomizado()">
+          <option value="" selected>-- Selecione um serviço abaixo --</option>
 
-                <div class="form-group">
-                    <label for="hora">Horário *</label>
-                    <input type="time" id="hora" required>
-                </div>
+          <optgroup label="── VISITA E HORAS DE TRABALHO ──">
+            <option value="Visita Técnica / Avaliação Diagnóstica simples|85">Visita Técnica / Avaliação Diagnóstica simples - R$ 85,00</option>
+            <option value="Hora de Trabalho Comum (Residencial)|115">Hora de Trabalho Comum (Residencial) - R$ 115,00</option>
+            <option value="Hora de Trabalho Especializada (Comercial / Industrial)|200">Hora de Trabalho Especializada (Comercial / Industrial) - R$ 200,00</option>
+            <option value="Diária de Eletricista (Período de 8h útil)|375">Diária de Eletricista (Período de 8h útil) - R$ 375,00</option>
+            <option value="Taxa de Plantão / Emergência (Madrugada ou Finais de Semana)|150">Taxa de Plantão / Emergência - R$ 150,00</option>
+          </optgroup>
 
-                <div class="form-group">
-                    <label for="tipoServico">Tipo de Serviço</label>
-                    <select id="tipoServico">
-                        <option value="Orçamento">Orçamento</option>
-                        <option value="Instalação">Instalação</option>
-                        <option value="Manutenção">Manutenção</option>
-                        <option value="Vistoria">Vistoria Técnia</option>
-                    </select>
-                </div>
+          <optgroup label="── ILUMINAÇÃO E AUTOMAÇÃO ──">
+            <option value="Instalação de Plafon, Arandela ou Luminária Simples|130">Instalação de Plafon, Arandela ou Luminária Simples - R$ 130,00</option>
+            <option value="Instalação de Spot LED Embutido (Com furo em gesso)|110">Instalação de Spot LED Embutido (Com furo em gesso) - R$ 110,00</option>
+            <option value="Instalação de Spot LED (Apenas fixação na fiação existente)|60">Instalação de Spot LED (Apenas fiação existente) - R$ 60,00</option>
+            <option value="Instalação de Lustre Decorativo / Pendente Grande|250">Instalação de Lustre Decorativo / Pendente Grande - R$ 250,00</option>
+            <option value="Instalação de Fita de LED com Driver (Até 5 metros)|160">Instalação de Fita de LED com Driver (Até 5m) - R$ 160,00</option>
+            <option value="Instalação de Refletor Externo / Jardim|120">Instalação de Refletor Externo / Jardim - R$ 120,00</option>
+            <option value="Instalação de Luminária de Emergência|80">Instalação de Luminária de Emergência - R$ 80,00</option>
+            <option value="Instalação de Sensor de Presença ou Fotocélula|110">Instalação de Sensor de Presença ou Fotocélula - R$ 110,00</option>
+            <option value="Instalação de Interruptor Inteligente Wi-Fi (Tuya/Sonoff)|90">Instalação Interruptor Inteligente Wi-Fi - R$ 90,00</option>
+          </optgroup>
 
-                <div class="form-group">
-                    <label for="status">Status Inicial</label>
-                    <select id="status">
-                        <option value="Pendente">Pendente</option>
-                        <option value="Concluída">Concluída</option>
-                        <option value="Cancelada">Cancelada</option>
-                    </select>
-                </div>
+          <optgroup label="── TOMADAS E INTERRUPTORES ──">
+            <option value="Substituição simples de Tomada ou Interruptor (Mesmo ponto)|85">Substituição simples de Tomada ou Interruptor - R$ 85,00</option>
+            <option value="Instalação de Nova Tomada (Puxando fiação externa via canaleta)|135">Instalação de Nova Tomada (Canaleta externa) - R$ 135,00</option>
+            <option value="Instalação de Nova Tomada (Embutida na alvenaria com quebra)|195">Instalação de Nova Tomada (Embutida na alvenaria) - R$ 195,00</option>
+            <option value="Instalação de Tomada de Alta Corrente (20A dedicada)|120">Instalação de Tomada 20A Dedicada - R$ 120,00</option>
+            <option value="Instalação de Interruptor Paralelo (Three-Way)|185">Instalação de Interruptor Paralelo (Three-Way) - R$ 185,00</option>
+            <option value="Instalação de Interruptor Intermediário (Four-Way)|215">Instalação de Interruptor Intermediário (Four-Way) - R$ 215,00</option>
+            <option value="Passagem de cabo guia por eletroduto obstruído|100">Passagem de cabo guia em eletroduto obstruído - R$ 100,00</option>
+          </optgroup>
 
-                <div class="form-group full-width">
-                    <label for="endereco">Endereço Completo</label>
-                    <input type="text" id="endereco" placeholder="Rua, número, bairro - Cidade">
-                </div>
+          <optgroup label="── ELETRODOMÉSTICOS E CLIMATIZAÇÃO ──">
+            <option value="Instalação ou Troca de Chuveiro Elétrico (Na rede pronta)|185">Instalação ou Troca de Chuveiro Elétrico - R$ 185,00</option>
+            <option value="Troca de Resistência de Chuveiro Elétrico|110">Troca de Resistência de Chuveiro Elétrico - R$ 110,00</option>
+            <option value="Instalação de Ventilador de Teto (Com montagem mecânica)|290">Instalação de Ventilador de Teto - R$ 290,00</option>
+            <option value="Instalação de Ventilador de Parede|155">Instalação de Ventilador de Parede - R$ 155,00</option>
+            <option value="Instalação Elétrica para Ar-Condicionado Split (Até QDC)|800">Instalação Elétrica para Ar-Condicionado Split - R$ 800,00</option>
+            <option value="Instalação Ar Split 9.000 a 12.000 BTU (até 3m tubulação)|550">Instalação Split 9k/12k BTU (até 3m) - R$ 550,00</option>
+            <option value="Instalação Ar Split 18.000 a 24.000 BTU (até 3m tubulação)|750">Instalação Split 18k/24k BTU (até 3m) - R$ 750,00</option>
+            <option value="Instalação Ar Split 30.000 BTU (até 3m tubulação)|950">Instalação Split 30k BTU (até 3m) - R$ 950,00</option>
+            <option value="Manutenção Prévia / Higienização de Ar-Condicionado|200">Higienização e Limpeza Completa Split - R$ 200,00</option>
+            <option value="Carga de Gás Refrigerante (R410A / R32)|250">Carga de Gás Refrigerante (R410A/R32) - R$ 250,00</option>
+            <option value="Desinstalação de Ar Condicionado Split|200">Desinstalação de Ar Split - R$ 200,00</option>
+            <option value="Instalação de Exaustor de Cozinha / Coifa|225">Instalação de Exaustor / Coifa - R$ 225,00</option>
+            <option value="Instalação de Cooktop ou Forno Elétrico|275">Instalação de Cooktop ou Forno Elétrico - R$ 275,00</option>
+          </optgroup>
 
-                <div class="form-group full-width">
-                    <label for="obs">Observações / Detalhes</label>
-                    <textarea id="obs" rows="2" placeholder="Ex: Padrão 220V, levar escada alta..."></textarea>
-                </div>
+          <optgroup label="── QUADROS, DISJUNTORES E INFRAESTRUTURA ──">
+            <option value="Substituição de Disjuntor Monopolar Comum|92">Substituição de Disjuntor Monopolar - R$ 92,00</option>
+            <option value="Substituição de Disjuntor Bipolar ou Tripolar|150">Substituição de Disjuntor Bipolar / Tripolar - R$ 150,00</option>
+            <option value="Instalação de Interruptor Diferencial Residual (DR)|200">Instalação de Disjuntor / Interruptor DR - R$ 200,00</option>
+            <option value="Instalação de Dispositivo de Proteção contra Surtos (DPS)|135">Instalação de Protetor contra Surtos (DPS) - R$ 135,00</option>
+            <option value="Reorganização, Identificação e Limpeza de QDC|425">Reorganização e Limpeza de Quadro (QDC) - R$ 425,00</option>
+            <option value="Montagem e Instalação Completa de QDC (Até 12 circuitos)|1150">Montagem Completa de QDC (Até 12 circuitos) - R$ 1.150,00</option>
+            <option value="Montagem e Instalação Completa de QDC (Acima de 24 circuitos)|2300">Montagem Completa de QDC (Acima de 24 circuitos) - R$ 2.300,00</option>
+            <option value="Passagem de Fiação Geral por cômodo|250">Passagem de Fiação Geral (Por cômodo) - R$ 250,00</option>
+            <option value="Instalação de Perfilado ou Eletrocalha Metálica|90">Instalação de Perfilado / Eletrocalha (Por metro) - R$ 90,00</option>
+            <option value="Fixação de Eletroduto Aparente (Por metro)|65">Fixação de Eletroduto Aparente (Por metro) - R$ 65,00</option>
+            <option value="Instalação de Caixa de Passagem em Alvenaria|140">Instalação de Caixa de Passagem em Alvenaria - R$ 140,00</option>
+            <option value="Instalação de Hastes de Aterramento com Caixa de Inspeção|800">Instalação de Hastes de Aterramento - R$ 800,00</option>
+            <option value="Montagem e Instalação de Padrão de Entrada Monofásico|1300">Montagem de Padrão de Entrada (Monofásico) - R$ 1.300,00</option>
+          </optgroup>
+
+          <optgroup label="── MANUTENÇÃO, REFORMAS E LAUDOS ──">
+            <option value="Investigação e Correção de Curto-Circuito / Fuga|350">Investigação e Correção de Curto-Circuito - R$ 350,00</option>
+            <option value="Substituição de Fiação Antiga / Condutores derretidos|500">Substituição de Fiação Antiga (Por cômodo) - R$ 500,00</option>
+            <option value="Medição de Aterramento com Terrômetro e Laudo|375">Medição de Aterramento com Laudo - R$ 375,00</option>
+            <option value="Remoção de Pontos Elétricos Antigos e Isolamento|85">Remoção de Pontos Elétricos Antigos - R$ 85,00</option>
+            <option value="Identificação de Circuitos Desconhecidos no Quadro|210">Identificação de Circuitos no Quadro - R$ 210,00</option>
+            <option value="Reforma Elétrica Completa por Ponto|225">Reforma Elétrica Completa (Por ponto) - R$ 225,00</option>
+            <option value="Reforma Elétrica Total (Apartamento até 70m²)|5500">Reforma Elétrica Total (Apto até 70m²) - R$ 5.500,00</option>
+            <option value="Reforma Elétrica Total (Casa até 150m²)|10500">Reforma Elétrica Total (Casa até 150m²) - R$ 10.500,00</option>
+            <option value="Emissão de TRT / ART de Execução Elétrica|650">Emissão de TRT / ART Elétrica - R$ 650,00</option>
+          </optgroup>
+
+          <optgroup label="── CFTV E SEGURANÇA ELETRÔNICA ──">
+            <option value="Instalação de Câmera HD Intelbras/Hikvision (DVR)|110">Instalação Câmera DVR (Ponto + Config) - R$ 110,00</option>
+            <option value="Instalação de Câmera IP / NVR (Poe)|140">Instalação Câmera IP NVR - R$ 140,00</option>
+            <option value="Instalação de Câmera Wi-Fi (Ponto Elétrico + Configuração)|150">Instalação de Câmera Wi-Fi - R$ 150,00</option>
+            <option value="Kit DVR / NVR 4 Câmeras (Instalação e Passagem)|450">Kit DVR / NVR 4 Câmeras - R$ 450,00</option>
+            <option value="Instalação de Caixa de Passagem Hermética (IP65)|45">Instalação Caixa de Passagem Externa (IP65) - R$ 45,00</option>
+            <option value="Configuração e Formatação de Cartão MicroSD|35">Configuração e Formatação Cartão MicroSD - R$ 35,00</option>
+            <option value="Configuração de Acesso Remoto no Celular|100">Configuração de Acesso Remoto Celular - R$ 100,00</option>
+            <option value="Lançamento de Cabo Coaxial/UTP para Câmeras (metro)|8">Lançamento Cabo Câmera (por metro) - R$ 8,00</option>
+            <option value="Instalação de Kit Motor de Portão Deslizante|350">Instalação de Kit Motor de Portão Deslizante - R$ 350,00</option>
+            <option value="Instalação de Motor de Portão Basculante/Pivotante|420">Instalação Motor Basculante/Pivotante - R$ 420,00</option>
+            <option value="Codificação de Controle Remoto de Portão|30">Codificação de Controle de Portão - R$ 30,00</option>
+            <option value="Instalação de Sensor Anti-esmagamento (Fotocélula)|90">Instalação Fotocélula Anti-esmagamento - R$ 90,00</option>
+            <option value="Troca de Placa Central de Comando de Portão|140">Troca de Placa Central de Portão - R$ 140,00</option>
+            <option value="Instalação de Interfone / Kit Vídeo Porteiro|250">Instalação de Interfone / Vídeo Porteiro - R$ 250,00</option>
+            <option value="Instalação de Fechadura Elétrica / Eletroímã|160">Instalação Fechadura Elétrica/Eletroímã - R$ 160,00</option>
+            <option value="Instalação de Fechadura Digital / Biometria|200">Instalação Fechadura Digital/Biometria - R$ 200,00</option>
+            <option value="Instalação de Central de Alarme + Sensores (Kit)|380">Instalação Central Alarme + Sensores - R$ 380,00</option>
+            <option value="Instalação/Manutenção Cerca Elétrica (metro linear)|25">Cerca Elétrica (por metro linear) - R$ 25,00</option>
+          </optgroup>
+
+          <optgroup label="── ITENS PERSONALIZADOS ──">
+            <option value="CUSTOM_OBRA|0">🔧 Mão de Obra Extra / Adicional (Digitar)</option>
+            <option value="CUSTOM_MAT|0">📦 Material Extra / Infraestrutura (Digitar)</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <!-- Campos Dinâmicos para Entradas Personalizadas -->
+      <div id="campoCustomBox" style="display: none; background: #f1f5f9; padding: 10px; border-radius: 8px; margin-bottom: 12px;">
+        <div class="field">
+          <label id="lblCustomNome">Descrição do Item Extra:</label>
+          <input type="text" id="customNome" placeholder="Ex: Mão de Obra Troca de Disjuntor Geral">
+        </div>
+        <div class="field">
+          <label>Valor Unitário (R$):</label>
+          <input type="number" id="customValor" placeholder="Ex: 150.00" value="0.00" step="0.01">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Quantidade / Metros:</label>
+        <input type="number" id="servicoQtd" value="1" min="1" placeholder="Qtd">
+      </div>
+
+      <button type="button" class="btn-add" onclick="adicionarItem()">+ Adicionar Serviço ao Orçamento</button>
+
+      <ul class="item-list" id="listaItens"></ul>
+
+      <div class="field" style="margin-top: 15px;">
+        <label>Taxa de Materiais Extras / Deslocamento (R$):</label>
+        <input type="number" id="taxaExtra" value="0" oninput="calcularTotal()">
+      </div>
+
+      <div class="total-box">
+        <span>VALOR TOTAL ESTIMADO</span>
+        <h3 id="valorTotal">R$ 0,00</h3>
+      </div>
+
+      <div class="btn-group">
+        <button type="button" class="btn-pdf" onclick="gerarPDF()">🖨️ Imprimir / Salvar PDF do Orçamento</button>
+        <button type="button" class="btn-whatsapp" onclick="enviarWhatsApp()">📱 Enviar Resumo no WhatsApp</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABA 2: AGENDAMENTO DE VISITAS TÉCNICAS -->
+  <div id="visitasTab" class="tab-content">
+    <div class="card">
+      <h2>🚗 Agendar Nova Visita Técnica</h2>
+      <div class="field">
+        <label>Nome do Cliente / Empresa:</label>
+        <input type="text" id="vCliente" placeholder="Ex: Maria Fernandes">
+      </div>
+      <div class="field">
+        <label>WhatsApp / Telefone:</label>
+        <input type="tel" id="vTel" placeholder="Ex: 11988887777">
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Data:</label>
+          <input type="date" id="vData">
+        </div>
+        <div class="field">
+          <label>Horário:</label>
+          <input type="time" id="vHora">
+        </div>
+      </div>
+      <div class="field">
+        <label>Endereço Completo:</label>
+        <input type="text" id="vEndereco" placeholder="Rua, Número, Bairro, Cidade">
+      </div>
+      <div class="field">
+        <label>Tipo de Serviço / Assunto:</label>
+        <select id="vTipo">
+          <option value="Visita Diagnóstica / Orçamento">Visita Diagnóstica / Orçamento</option>
+          <option value="Instalação Elétrica">Instalação Elétrica</option>
+          <option value="Manutenção de Ar-Condicionado">Manutenção de Ar-Condicionado</option>
+          <option value="Segurança Eletrônica / CFTV">Segurança Eletrônica / CFTV</option>
+          <option value="Emergência / Manutenção">Emergência / Manutenção</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Observações / Anotações Rápidas:</label>
+        <textarea id="vObs" rows="2" placeholder="Detalhes do local, defeito relatado, etc."></textarea>
+      </div>
+      <button type="button" class="btn-add" onclick="salvarVisita()">📅 Agendar Visita</button>
+    </div>
+
+    <div class="card">
+      <h2>📌 Agenda de Visitas Téc.</h2>
+      <ul class="item-list" id="listaVisitas"></ul>
+    </div>
+  </div>
+
+  <!-- ABA AR CONDICIONADO -->
+  <div id="arTab" class="tab-content">
+    <div class="sub-tabs">
+      <button class="sub-btn active" onclick="trocarSubAr('btuSub', this)">❄️ Cálculo BTUs</button>
+      <button class="sub-btn" onclick="trocarSubAr('especsSub', this)">📐 Tabela NBR & Tubos</button>
+      <button class="sub-btn" onclick="trocarSubAr('matArSub', this)">📦 Kit de Materiais</button>
+    </div>
+
+    <div id="btuSub" class="sub-ar-content">
+      <div class="card">
+        <h2>🌡️ Dimensionamento de BTUs (Carga Térmica)</h2>
+        <div class="field-row">
+          <div class="field">
+            <label>Comprimento (m):</label>
+            <input type="number" id="arComp" value="4" oninput="calcularBTUs()">
+          </div>
+          <div class="field">
+            <label>Largura (m):</label>
+            <input type="number" id="arLarg" value="3.5" oninput="calcularBTUs()">
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Exposição Solar:</label>
+          <select id="arSol" onchange="calcularBTUs()">
+            <option value="600">Sol da Manhã ou Sombra (600 BTU/m²)</option>
+            <option value="800" selected>Sol Tarde / Incidência Direta (800 BTU/m²)</option>
+          </select>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label>Pessoas no Ambiente:</label>
+            <input type="number" id="arPessoas" value="2" min="1" oninput="calcularBTUs()">
+          </div>
+          <div class="field">
+            <label>Eletrônicos (TV, PC):</label>
+            <input type="number" id="arEletro" value="1" min="0" oninput="calcularBTUs()">
+          </div>
+        </div>
+
+        <div class="result-box">
+          <h3>⚡ Resultado da Potência Recomendada</h3>
+          <div class="result-row">
+            <span>Área Total:</span>
+            <span class="val" id="resArArea">14.0 m²</span>
+          </div>
+          <div class="result-row">
+            <span>Carga Térmica Exata:</span>
+            <span class="val" id="resArBtuExato">11.800 BTU/h</span>
+          </div>
+          <div class="result-row">
+            <span>Aparelho Recomendado:</span>
+            <span class="val" id="resArBtuRecomendado" style="font-size: 1.1rem; color: var(--highlight);">12.000 BTU/h</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="especsSub" class="sub-ar-content" style="display: none;">
+      <div class="card">
+        <h2>📊 Especificações Técnicas de Instalação (Padrão NBR)</h2>
+        <div style="overflow-x: auto;">
+          <table class="tech-table">
+            <thead>
+              <tr>
+                <th>Capacidade</th>
+                <th>Linha Líquido</th>
+                <th>Linha Sucção</th>
+                <th>Cabo Elétrico</th>
+                <th>Disjuntor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>9.000 BTU</strong></td><td>1/4" (6,35mm)</td><td>3/8" (9,52mm)</td><td>2,5 mm²</td><td>10A / 16A</td></tr>
+              <tr><td><strong>12.000 BTU</strong></td><td>1/4" (6,35mm)</td><td>1/2" (12,7mm)</td><td>2,5 mm²</td><td>16A</td></tr>
+              <tr><td><strong>18.000 BTU</strong></td><td>1/4" (6,35mm)</td><td>1/2" ou 5/8"</td><td>2,5 mm² / 4mm²</td><td>20A / 25A</td></tr>
+              <tr><td><strong>24.000 BTU</strong></td><td>3/8" (9,52mm)</td><td>5/8" (15,88mm)</td><td>4,0 mm²</td><td>25A / 32A</td></tr>
+              <tr><td><strong>30.000 BTU</strong></td><td>3/8" (9,52mm)</td><td>5/8" ou 3/4"</td><td>4,0 mm² / 6mm²</td><td>32A / 40A</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div id="matArSub" class="sub-ar-content" style="display: none;">
+      <div class="card">
+        <h2>📦 Materiais Necessários para Instalação (Kit Infra)</h2>
+        <div class="field">
+          <label>Metragem da Tubulação de Cobre (m):</label>
+          <input type="number" id="metroCobreAr" value="3" min="1" oninput="gerarMateriaisAr()">
+        </div>
+
+        <div style="overflow-x: auto; margin-top: 10px;">
+          <table class="tech-table">
+            <thead>
+              <tr>
+                <th style="width: 45%;">Item / Material</th>
+                <th style="width: 15%;">Qtd</th>
+                <th style="width: 20%;">Preço Un.</th>
+                <th style="width: 20%;">Subtotal</th>
+              </tr>
+            </thead>
+            <tbody id="tbodyMateriaisAr"></tbody>
+          </table>
+        </div>
+
+        <div class="total-box" style="background: var(--primary); margin-top: 15px;">
+          <span>CUSTO ESTIMADO DE MATERIAIS DO AR</span>
+          <h3 id="totalCustoMateriaisAr">R$ 0,00</h3>
+        </div>
+
+        <button type="button" class="btn-add" style="margin-top: 15px;" onclick="adicionarMateriaisArAoOrcamento()">📦 Incluir Materiais do Ar no Orçamento</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABA CASA -->
+  <div id="casaTab" class="tab-content">
+    <div class="sub-tabs">
+      <button class="sub-btn active" onclick="trocarSubCasa('metragemSub', this)">📐 Por m²</button>
+      <button class="sub-btn" onclick="trocarSubCasa('pontosSub', this)">🔌 Por Pontos</button>
+      <button class="sub-btn" onclick="trocarSubCasa('materiaisSub', this)">📦 Lista de Materiais</button>
+    </div>
+
+    <div id="metragemSub" class="sub-casa-content">
+      <div class="card">
+        <h2>📐 Instalação Completa por Metragem (m²)</h2>
+        <div class="field">
+          <label>Área Construída da Casa (m²):</label>
+          <input type="number" id="casaMetragem" placeholder="Ex: 80" value="80" oninput="calcularMaoObraMetragem()">
+        </div>
+
+        <div class="field">
+          <label>Padrão da Instalação / Acabamento:</label>
+          <select id="casaPadrao" onchange="calcularMaoObraMetragem()">
+            <option value="35">Econômico / Simples (R$ 35/m²)</option>
+            <option value="50" selected>Médio Padrão (R$ 50/m²)</option>
+            <option value="75">Alto Padrão / Automação (R$ 75/m²)</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Estágio da Obra:</label>
+          <select id="casaEstagio" onchange="calcularMaoObraMetragem()">
+            <option value="1">Obra Nova / Do Zero</option>
+            <option value="1.2">Reforma Residencial (+20%)</option>
+          </select>
+        </div>
+
+        <div class="result-box">
+          <h3>💰 Mão de Obra Estimada (m²)</h3>
+          <div class="result-row">
+            <span>Área da Casa:</span>
+            <span class="val" id="resM2Area">80 m²</span>
+          </div>
+          <div class="result-row">
+            <span>Preço Médio / m²:</span>
+            <span class="val" id="resM2Preco">R$ 50,00</span>
+          </div>
+          <div class="result-row">
+            <span>Total Mão de Obra:</span>
+            <span class="val" id="resM2Total" style="font-size: 1.1rem; color: var(--accent);">R$ 4.000,00</span>
+          </div>
+        </div>
+
+        <button type="button" class="btn-add" style="margin-top: 15px;" onclick="adicionarM2AoOrcamento()">➕ Adicionar Mão de Obra ao Orçamento Principal</button>
+      </div>
+    </div>
+
+    <div id="pontosSub" class="sub-casa-content" style="display: none;">
+      <div class="card">
+        <h2>🔌 Instalação por Contagem de Pontos</h2>
+        <div class="field-row">
+          <div class="field">
+            <label>Pontos Simples (Luz/Tomada):</label>
+            <input type="number" id="ptsSimples" value="20" min="0" oninput="calcularPontos()">
+          </div>
+          <div class="field">
+            <label>Valor / Ponto Simples (R$):</label>
+            <input type="number" id="valSimples" value="45" oninput="calcularPontos()">
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label>Pontos Especiais (20A/ThreeWay):</label>
+            <input type="number" id="ptsEspeciais" value="5" min="0" oninput="calcularPontos()">
+          </div>
+          <div class="field">
+            <label>Valor / Ponto Especial (R$):</label>
+            <input type="number" id="valEspeciais" value="75" oninput="calcularPontos()">
+          </div>
+        </div>
+
+        <div class="result-box">
+          <h3>💰 Mão de Obra por Pontos</h3>
+          <div class="result-row">
+            <span>Total de Pontos:</span>
+            <span class="val" id="resTotalPontos">25 pontos</span>
+          </div>
+          <div class="result-row">
+            <span>Valor Total Mão de Obra:</span>
+            <span class="val" id="resValorPontos" style="font-size: 1.1rem; color: var(--accent);">R$ 1.275,00</span>
+          </div>
+        </div>
+
+        <button type="button" class="btn-add" style="margin-top: 15px;" onclick="adicionarPontosAoOrcamento()">➕ Adicionar Pontos ao Orçamento Principal</button>
+      </div>
+    </div>
+
+    <div id="materiaisSub" class="sub-casa-content" style="display: none;">
+      <div class="card">
+        <h2>📦 Estimativa Básica de Materiais Residencial</h2>
+        <p style="font-size: 0.8rem; color: #666; margin-bottom: 10px;">Estimativa aproximada para dimensionamento geral de insumos elétricos.</p>
+        <div style="overflow-x: auto;">
+          <table class="tech-table">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Qtd Sugerida</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Cabo Flexível 1,5 mm² (Iluminação)</td><td>2 Rolo(s) (200m)</td></tr>
+              <tr><td>Cabo Flexível 2,5 mm² (Tomadas Geral)</td><td>3 Rolo(s) (300m)</td></tr>
+              <tr><td>Cabo Flexível 6,0 mm² (Chuveiro / Alimentação)</td><td>1 Rolo (100m)</td></tr>
+              <tr><td>Eletroduto Corrugado 3/4" (25mm)</td><td>100 metros</td></tr>
+              <tr><td>Caixa de Luz 4x2 Embutir</td><td>25 Unidades</td></tr>
+              <tr><td>Disjuntores Monopolares (10A a 25A)</td><td>8 Unidades</td></tr>
+              <tr><td>Disjuntor DR Tetrapolar / Bipolar</td><td>1 Unidade</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABA DISJUNTOR CERTO -->
+  <div id="calculoTab" class="tab-content">
+    <div class="card">
+      <h2>⚡ Cálculo de Corrente e Disjuntor Ideal</h2>
+      <div class="field">
+        <label>Potência do Equipamento / Circuito (Watts):</label>
+        <input type="number" id="calcWatts" placeholder="Ex: 5500 para Chuveiro" value="5500" oninput="calcularDisjuntor()">
+      </div>
+
+      <div class="field">
+        <label>Tensão / Voltagem (V):</label>
+        <select id="calcVolts" onchange="calcularDisjuntor()">
+          <option value="127">127 V (Monofásico)</option>
+          <option value="220" selected>220 V (Bifásico / Monofásico)</option>
+          <option value="380">380 V (Trifásico)</option>
+        </select>
+      </div>
+
+      <div class="result-box">
+        <h3>🔍 Especificação Recomendada</h3>
+        <div class="result-row">
+          <span>Corrente Calculada (Amperes):</span>
+          <span class="val" id="resCorrente">25.00 A</span>
+        </div>
+        <div class="result-row">
+          <span>Disjuntor Comercial Recomendado:</span>
+          <span class="val" id="resDisjuntor" style="font-size: 1.1rem; color: var(--highlight);">32 A (Curva C)</span>
+        </div>
+        <div class="result-row">
+          <span>Seção Mínima do Cabo (NBR 5410):</span>
+          <span class="val" id="resCaboMinimo">4,0 mm²</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABA TABELAS NBR -->
+  <div id="consultaTab" class="tab-content">
+    <div class="card">
+      <h2>📚 Tabela de Capacidade de Condução de Corrente (NBR 5410)</h2>
+      <p style="font-size: 0.78rem; color: #555; margin-bottom: 8px;">Método B1 (Condutores isolados em eletroduto embutido em alvenaria - 70°C PVC).</p>
+      <div style="overflow-x: auto;">
+        <table class="tech-table">
+          <thead>
+            <tr>
+              <th>Seção Cabo</th>
+              <th>2 Condutores Carregados</th>
+              <th>3 Condutores Carregados</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>1,5 mm²</strong></td><td>17,5 Amperes</td><td>15,5 Amperes</td></tr>
+            <tr><td><strong>2,5 mm²</strong></td><td>24,0 Amperes</td><td>21,0 Amperes</td></tr>
+            <tr><td><strong>4,0 mm²</strong></td><td>32,0 Amperes</td><td>28,0 Amperes</td></tr>
+            <tr><td><strong>6,0 mm²</strong></td><td>41,0 Amperes</td><td>36,0 Amperes</td></tr>
+            <tr><td><strong>10,0 mm²</strong></td><td>57,0 Amperes</td><td>50,0 Amperes</td></tr>
+            <tr><td><strong>16,0 mm²</strong></td><td>76,0 Amperes</td><td>68,0 Amperes</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEMPLATE OCULTO PARA IMPRESSÃO DE PDF -->
+  <div id="pdfContainer">
+    <div id="pdfTemplate">
+      <svg class="watermark" viewBox="0 0 400 350" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="200" cy="120" r="70" fill="none" stroke="#1b365d" stroke-width="18"/>
+        <path d="M200 70 L200 125" stroke="#1b365d" stroke-width="18" stroke-linecap="round"/>
+        <text x="200" y="245" font-family="'Segoe UI', Arial, sans-serif" font-weight="900" font-size="62" fill="#1b365d" text-anchor="middle">ERTEC</text>
+      </svg>
+      <div class="pdf-content">
+        <div class="pdf-header">
+          <svg class="pdf-logo" viewBox="0 0 400 350" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="350" rx="20" fill="#1e1e1e"/>
+            <circle cx="200" cy="120" r="70" fill="none" stroke="#eab308" stroke-width="18"/>
+            <path d="M200 70 L200 125" stroke="#eab308" stroke-width="18" stroke-linecap="round"/>
+            <text x="200" y="245" font-family="'Segoe UI', Arial, sans-serif" font-weight="900" font-size="62" fill="#808080" text-anchor="middle">ER<tspan fill="#eab308">TEC</tspan></text>
+            <text x="200" y="295" font-family="'Segoe UI', Arial, sans-serif" font-weight="400" font-size="28" fill="#ffffff" text-anchor="middle">Soluções Elétricas</text>
+          </svg>
+          <h1>ERTEC SOLUÇÕES ELÉTRICAS</h1>
+          <p>Erick Hergesel - Serviços de Elétrica & Climatização</p>
+          <p><strong>PROPOSTA DE ORÇAMENTO TÉCNICO</strong></p>
+        </div>
+
+        <div class="pdf-client-box">
+          <p><strong>Cliente:</strong> <span id="pdfClienteNome">---</span></p>
+          <p><strong>Contato:</strong> <span id="pdfClienteTel">---</span></p>
+          <p><strong>Data da Proposta:</strong> <span id="pdfDataEmissao">--/--/----</span></p>
+        </div>
+
+        <table class="pdf-table">
+          <thead>
+            <tr>
+              <th>Descrição dos Serviços / Materiais</th>
+              <th style="width: 10%; text-align: center;">Qtd</th>
+              <th style="width: 20%; text-align: right;">Unitário</th>
+              <th style="width: 20%; text-align: right;">Subtotal</th>
+            </tr>
+          </thead>
+          <tbody id="pdfTbodyItens"></tbody>
+        </table>
+
+        <div class="pdf-total">
+          <p id="pdfSubtotalMateriais" style="font-size: 11px; color: #555; font-weight: normal;"></p>
+          <p id="pdfTotalGeral">TOTAL DO ORÇAMENTO: R$ 0,00</p>
+        </div>
+
+        <div class="pdf-terms">
+          <p><strong>Termos e Condições:</strong></p>
+          <p>• Este orçamento tem validade de 15 dias a contar da data de emissão.</p>
+          <p>• Os serviços executados possuem garantia de 90 dias conforme o CDC.</p>
+          <p>• Alterações no escopo do projeto original estarão sujeitas a reajuste de valores.</p>
+        </div>
+
+        <div class="pdf-footer">
+          <p>ERTEC SOLUÇÕES ELÉTRICAS - Compromisso, Segurança e Qualidade</p>
+          <p>Responsável Técnico: Erick Hergesel</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let itensOrcamento = [];
+    let visitasAgendadas = [];
+
+    // Carregar visitas salvas ao iniciar
+    window.onload = function() {
+      const salvas = localStorage.getItem('ertec_visitas');
+      if (salvas) {
+        visitasAgendadas = JSON.parse(salvas);
+        renderizarVisitas();
+      }
+      calcularBTUs();
+      calcularMaoObraMetragem();
+      calcularPontos();
+      gerarMateriaisAr();
+      calcularDisjuntor();
+    };
+
+    function trocarAba(abaId, btn) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.nav-tabs .tab-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById(abaId).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    function trocarSubAr(subId, btn) {
+      document.querySelectorAll('.sub-ar-content').forEach(el => el.style.display = 'none');
+      document.querySelectorAll('#arTab .sub-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById(subId).style.display = 'block';
+      btn.classList.add('active');
+    }
+
+    function trocarSubCasa(subId, btn) {
+      document.querySelectorAll('.sub-casa-content').forEach(el => el.style.display = 'none');
+      document.querySelectorAll('#casaTab .sub-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById(subId).style.display = 'block';
+      btn.classList.add('active');
+    }
+
+    function filtrarServicos() {
+      const busca = document.getElementById('buscaServico').value.toLowerCase();
+      const select = document.getElementById('servicoSelect');
+      const options = select.getElementsByTagName('option');
+
+      for (let i = 0; i < options.length; i++) {
+        const texto = options[i].text.toLowerCase();
+        if (texto.includes(busca) || options[i].value.startsWith('CUSTOM_')) {
+          options[i].style.display = '';
+        } else {
+          options[i].style.display = 'none';
+        }
+      }
+    }
+
+    function verificarItemCustomizado() {
+      const select = document.getElementById('servicoSelect');
+      const customBox = document.getElementById('campoCustomBox');
+      const lblCustomNome = document.getElementById('lblCustomNome');
+
+      if (select.value.startsWith('CUSTOM_OBRA')) {
+        customBox.style.display = 'block';
+        lblCustomNome.innerText = 'Descrição da Mão de Obra Extra:';
+      } else if (select.value.startsWith('CUSTOM_MAT')) {
+        customBox.style.display = 'block';
+        lblCustomNome.innerText = 'Descrição do Material Extra:';
+      } else {
+        customBox.style.display = 'none';
+      }
+    }
+
+    function adicionarItem() {
+      const select = document.getElementById('servicoSelect');
+      const val = select.value;
+      const qtd = parseFloat(document.getElementById('servicoQtd').value) || 1;
+
+      if (!val) {
+        alert('Por favor, selecione um serviço!');
+        return;
+      }
+
+      let nome = "";
+      let preco = 0;
+
+      if (val.startsWith('CUSTOM_')) {
+        nome = document.getElementById('customNome').value.trim();
+        preco = parseFloat(document.getElementById('customValor').value) || 0;
+        if (!nome) {
+          alert('Por favor, preencha a descrição do item extra!');
+          return;
+        }
+      } else {
+        const partes = val.split('|');
+        nome = partes[0];
+        preco = parseFloat(partes[1]);
+      }
+
+      itensOrcamento.push({
+        id: Date.now(),
+        nome: nome,
+        preco: preco,
+        qtd: qtd,
+        subtotal: preco * qtd
+      });
+
+      renderizarItens();
+      calcularTotal();
+
+      // Limpar seleção
+      select.value = "";
+      document.getElementById('servicoQtd').value = 1;
+      document.getElementById('customNome').value = "";
+      document.getElementById('customValor').value = "0.00";
+      document.getElementById('campoCustomBox').style.display = 'none';
+    }
+
+    function removerItem(id) {
+      itensOrcamento = itensOrcamento.filter(item => item.id !== id);
+      renderizarItens();
+      calcularTotal();
+    }
+
+    function renderizarItens() {
+      const lista = document.getElementById('listaItens');
+      lista.innerHTML = "";
+
+      itensOrcamento.forEach(item => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <div class="item-info">
+            <span class="item-title">${item.nome}</span>
+            <span class="item-sub">${item.qtd}x R$ ${item.preco.toFixed(2).replace('.', ',')} = <strong>R$ ${item.subtotal.toFixed(2).replace('.', ',')}</strong></span>
+          </div>
+          <span class="remove-btn" onclick="removerItem(${item.id})">🗑️</span>
+        `;
+        lista.appendChild(li);
+      });
+    }
+
+    function calcularTotal() {
+      const taxa = parseFloat(document.getElementById('taxaExtra').value) || 0;
+      const subtotal = itensOrcamento.reduce((acc, i) => acc + i.subtotal, 0);
+      const total = subtotal + taxa;
+
+      document.getElementById('valorTotal').innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+    }
+
+    function enviarWhatsApp() {
+      const nome = document.getElementById('clienteNome').value || 'Cliente';
+      const tel = document.getElementById('clienteTel').value.replace(/\D/g, '');
+      const taxa = parseFloat(document.getElementById('taxaExtra').value) || 0;
+      const subtotal = itensOrcamento.reduce((acc, i) => acc + i.subtotal, 0);
+      const total = subtotal + taxa;
+
+      if (itensOrcamento.length === 0) {
+        alert('Adicione ao menos um serviço para enviar o orçamento!');
+        return;
+      }
+
+      let txt = `*ERTEC SOLUÇÕES ELÉTRICAS*\n`;
+      txt += `*Orçamento Técnico para:* ${nome}\n\n`;
+      txt += `*Serviços e Materiais:*\n`;
+
+      itensOrcamento.forEach((item, index) => {
+        txt += `${index + 1}. ${item.nome}\n   ${item.qtd}x R$ ${item.preco.toFixed(2).replace('.', ',')} = R$ ${item.subtotal.toFixed(2).replace('.', ',')}\n`;
+      });
+
+      if (taxa > 0) {
+        txt += `\n*Taxa de Deslocamento / Extras:* R$ ${taxa.toFixed(2).replace('.', ',')}\n`;
+      }
+
+      txt += `\n*VALOR TOTAL ESTIMADO:* R$ ${total.toFixed(2).replace('.', ',')}\n\n`;
+      txt += `Orçamento sujeito à confirmação técnica no local. Dúvidas estou à disposição!`;
+
+      const url = `https://api.whatsapp.com/send?phone=${tel ? '55' + tel : ''}&text=${encodeURIComponent(txt)}`;
+      window.open(url, '_blank');
+    }
+
+    function gerarPDF() {
+      const nome = document.getElementById('clienteNome').value || 'Não informado';
+      const tel = document.getElementById('clienteTel').value || 'Não informado';
+      const taxa = parseFloat(document.getElementById('taxaExtra').value) || 0;
+      const subtotal = itensOrcamento.reduce((acc, i) => acc + i.subtotal, 0);
+      const total = subtotal + taxa;
+
+      if (itensOrcamento.length === 0) {
+        alert('Adicione ao menos um serviço para gerar a impressão do orçamento!');
+        return;
+      }
+
+      document.getElementById('pdfClienteNome').innerText = nome;
+      document.getElementById('pdfClienteTel').innerText = tel;
+      
+      const hoje = new Date();
+      document.getElementById('pdfDataEmissao').innerText = hoje.toLocaleDateString('pt-BR');
+
+      const tbody = document.getElementById('pdfTbodyItens');
+      tbody.innerHTML = "";
+
+      itensOrcamento.forEach(item => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${item.nome}</td>
+          <td style="text-align: center;">${item.qtd}</td>
+          <td style="text-align: right;">R$ ${item.preco.toFixed(2).replace('.', ',')}</td>
+          <td style="text-align: right;">R$ ${item.subtotal.toFixed(2).replace('.', ',')}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      if (taxa > 0) {
+        const trTaxa = document.createElement('tr');
+        trTaxa.innerHTML = `
+          <td colspan="3"><strong>Taxa de Deslocamento / Materiais Extras</strong></td>
+          <td style="text-align: right;"><strong>R$ ${taxa.toFixed(2).replace('.', ',')}</strong></td>
+        `;
+        tbody.appendChild(trTaxa);
+      }
+
+      document.getElementById('pdfTotalGeral').innerText = `TOTAL DO ORÇAMENTO: R$ ${total.toFixed(2).replace('.', ',')}`;
+
+      window.print();
+    }
+
+    // --- MÓDULO VISITAS TÉCNICAS ---
+    function salvarVisita() {
+      const cliente = document.getElementById('vCliente').value.trim();
+      const tel = document.getElementById('vTel').value.trim();
+      const data = document.getElementById('vData').value;
+      const hora = document.getElementById('vHora').value;
+      const endereco = document.getElementById('vEndereco').value.trim();
+      const tipo = document.getElementById('vTipo').value;
+      const obs = document.getElementById('vObs').value.trim();
+
+      if (!cliente || !data || !hora) {
+        alert('Preencha ao menos Nome do Cliente, Data e Horário da Visita!');
+        return;
+      }
+
+      const novaVisita = {
+        id: Date.now(),
+        cliente,
+        tel,
+        data,
+        hora,
+        endereco,
+        tipo,
+        obs,
+        status: 'Agendado'
+      };
+
+      visitasAgendadas.push(novaVisita);
+      salvarEAtualizarVisitas();
+
+      // Limpar formulário
+      document.getElementById('vCliente').value = '';
+      document.getElementById('vTel').value = '';
+      document.getElementById('vData').value = '';
+      document.getElementById('vHora').value = '';
+      document.getElementById('vEndereco').value = '';
+      document.getElementById('vObs').value = '';
+      alert('Visita técnica agendada com sucesso!');
+    }
+
+    function salvarEAtualizarVisitas() {
+      localStorage.setItem('ertec_visitas', JSON.stringify(visitasAgendadas));
+      renderizarVisitas();
+    }
+
+    function alternarStatusVisita(id) {
+      const v = visitasAgendadas.find(item => item.id === id);
+      if (v) {
+        if (v.status === 'Agendado') v.status = 'Concluído';
+        else if (v.status === 'Concluído') v.status = 'Cancelado';
+        else v.status = 'Agendado';
+        salvarEAtualizarVisitas();
+      }
+    }
+
+    function removerVisita(id) {
+      if (confirm('Deseja excluir este agendamento?')) {
+        visitasAgendadas = visitasAgendadas.filter(item => item.id !== id);
+        salvarEAtualizarVisitas();
+      }
+    }
+
+    function renderizarVisitas() {
+      const lista = document.getElementById('listaVisitas');
+      lista.innerHTML = '';
+
+      if (visitasAgendadas.length === 0) {
+        lista.innerHTML = '<li style="color: #666; font-size: 0.85rem; text-align: center; justify-content: center;">Nenhuma visita técnica agendada.</li>';
+        return;
+      }
+
+      // Ordenar por data
+      visitasAgendadas.sort((a,b) => (a.data + a.hora).localeCompare(b.data + b.hora));
+
+      visitasAgendadas.forEach(v => {
+        const li = document.createElement('li');
+        li.style.flexDirection = 'column';
+        li.style.alignItems = 'stretch';
+
+        const dataFmt = v.data.split('-').reverse().join('/');
+        let badgeClass = 'status-agendado';
+        if (v.status === 'Concluído') badgeClass = 'status-concluido';
+        if (v.status === 'Cancelado') badgeClass = 'status-cancelado';
+
+        const telClean = v.tel.replace(/\D/g, '');
+        const txtWhats = encodeURIComponent(`Olá ${v.cliente}, aqui é o Erick da ERTEC Soluções Elétricas. Confirmando nossa visita técnica agendada para ${dataFmt} às ${v.hora}.`);
+        const linkWhats = `https://api.whatsapp.com/send?phone=${telClean ? '55' + telClean : ''}&text=${txtWhats}`;
+        const linkMaps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(v.endereco)}`;
+
+        li.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <strong style="color: var(--primary); font-size: 0.95rem;">${v.cliente}</strong>
+            <span class="status-badge ${badgeClass}" onclick="alternarStatusVisita(${v.id})" style="cursor: pointer;" title="Clique para alterar status">${v.status}</span>
+          </div>
+          <div style="font-size: 0.8rem; color: #444; line-height: 1.4;">
+            <p>📅 <strong>Data:</strong> ${dataFmt} às ${v.hora}</p>
+            <p>🔧 <strong>Tipo:</strong> ${v.tipo}</p>
+            ${v.endereco ? `<p>📍 <strong>Endereço:</strong> ${v.endereco}</p>` : ''}
+            ${v.obs ? `<p>📝 <strong>Obs:</strong> ${v.obs}</p>` : ''}
+          </div>
+          <div style="display: flex; gap: 8px; margin-top: 10px; align-items: center; justify-content: space-between;">
+            <div>
+              ${v.tel ? `<a href="${linkWhats}" target="_blank" class="btn-whatsapp" style="padding: 5px 10px; font-size: 0.75rem; display: inline-block;">📱 WhatsApp</a>` : ''}
+              ${v.endereco ? `<a href="${linkMaps}" target="_blank" class="btn-maps">🗺️ Maps</a>` : ''}
             </div>
-
-            <button type="submit" class="btn">＋ Agendar Visita</button>
-        </form>
-    </div>
-
-    <!-- LISTA DE VISITAS -->
-    <div class="card">
-        <h2>Visitas Agendadas</h2>
-        <div id="listaVisitas"></div>
-    </div>
-</div>
-
-<script>
-    // Carrega visitas salvas ou inicia lista vazia
-    let visitas = JSON.parse(localStorage.getItem('visitas_app')) || [];
-
-    const form = document.getElementById('formVisita');
-    const listaContainer = document.getElementById('listaVisitas');
-
-    // Evento de envio do formulário
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const novaVisita = {
-            id: Date.now(),
-            cliente: document.getElementById('cliente').value,
-            telefone: document.getElementById('telefone').value,
-            data: document.getElementById('data').value,
-            hora: document.getElementById('hora').value,
-            tipoServico: document.getElementById('tipoServico').value,
-            status: document.getElementById('status').value,
-            endereco: document.getElementById('endereco').value,
-            obs: document.getElementById('obs').value
-        };
-
-        visitas.push(novaVisita);
-        salvarERenderizar();
-        form.reset();
-    });
-
-    // Salva no localStorage e atualiza a tela
-    function salvarERenderizar() {
-        localStorage.setItem('visitas_app', JSON.stringify(visitas));
-        renderizarLista();
+            <span class="remove-btn" onclick="removerVisita(${v.id})" style="font-size: 1rem;">🗑️</span>
+          </div>
+        `;
+        lista.appendChild(li);
+      });
     }
 
-    // Renderiza a lista de agendamentos
-    function renderizarLista() {
-        listaContainer.innerHTML = '';
+    // --- MÓDULO AR CONDICIONADO ---
+    function calcularBTUs() {
+      const comp = parseFloat(document.getElementById('arComp').value) || 0;
+      const larg = parseFloat(document.getElementById('arLarg').value) || 0;
+      const sol = parseFloat(document.getElementById('arSol').value) || 600;
+      const pessoas = parseFloat(document.getElementById('arPessoas').value) || 1;
+      const eletro = parseFloat(document.getElementById('arEletro').value) || 0;
 
-        if (visitas.length === 0) {
-            listaContainer.innerHTML = '<div class="empty-msg">Nenhuma visita agendada até o momento.</div>';
-            return;
-        }
+      const area = comp * larg;
+      let btuTotal = (area * sol) + ((pessoas - 1) * 600) + (eletro * 600);
 
-        // Ordena por data e hora
-        visitas.sort((a, b) => new Date(`${a.data}T${a.hora}`) - new Date(`${b.data}T${b.hora}`));
+      if (btuTotal < 7000) btuTotal = 7000;
 
-        visitas.forEach(v => {
-            const dataFormatada = v.data.split('-').reverse().join('/');
-            
-            // Links para WhatsApp e Maps
-            const foneLimpo = v.telefone.replace(/\D/g, '');
-            const urlWsp = foneLimpo ? `https://wa.me/55${foneLimpo}` : '#';
-            const urlMap = v.endereco ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(v.endereco)}` : '#';
+      let recomendado = "9.000 BTU/h";
+      if (btuTotal > 9000 && btuTotal <= 12000) recomendado = "12.000 BTU/h";
+      else if (btuTotal > 12000 && btuTotal <= 18000) recomendado = "18.000 BTU/h";
+      else if (btuTotal > 18000 && btuTotal <= 24000) recomendado = "24.000 BTU/h";
+      else if (btuTotal > 24000 && btuTotal <= 30000) recomendado = "30.000 BTU/h";
+      else if (btuTotal > 30000) recomendado = "36.000 BTU/h ou Multi-Split";
 
-            const item = document.createElement('div');
-            item.className = `visita-card status-${v.status}`;
-            item.innerHTML = `
-                <div class="visita-header">
-                    <span class="cliente-nome">${v.cliente}</span>
-                    <span class="badge badge-${v.status}">${v.status}</span>
-                </div>
-                
-                <div class="visita-info">
-                    <div>📅 <strong>Data/Hora:</strong> ${dataFormatada} às ${v.hora}</div>
-                    <div>🛠️ <strong>Serviço:</strong> ${v.tipoServico}</div>
-                    ${v.endereco ? `<div>📍 <strong>Endereço:</strong> ${v.endereco}</div>` : ''}
-                    ${v.telefone ? `<div>📞 <strong>Contato:</strong> ${v.telefone}</div>` : ''}
-                </div>
+      document.getElementById('resArArea').innerText = `${area.toFixed(1)} m²`;
+      document.getElementById('resArBtuExato').innerText = `${Math.ceil(btuTotal).toLocaleString('pt-BR')} BTU/h`;
+      document.getElementById('resArBtuRecomendado').innerText = recomendado;
+    }
 
-                ${v.obs ? `<div style="font-size: 0.85rem; color: #475569;">💬 <em>${v.obs}</em></div>` : ''}
+    function gerarMateriaisAr() {
+      const metros = parseFloat(document.getElementById('metroCobreAr').value) || 1;
+      const tbody = document.getElementById('tbodyMateriaisAr');
 
-                <div class="actions">
-                    ${foneLimpo ? `<a href="${urlWsp}" target="_blank" class="btn-action btn-wsp">💬 WhatsApp</a>` : ''}
-                    ${v.endereco ? `<a href="${urlMap}" target="_blank" class="btn-action btn-map">🗺️ Google Maps</a>` : ''}
-                    
-                    <button onclick="alterarStatus(${v.id})" class="btn-action btn-status">🔄 Mudar Status</button>
-                    <button onclick="excluirVisita(${v.id})" class="btn-action btn-delete">🗑️ Excluir</button>
-                </div>
-            `;
-            listaContainer.appendChild(item);
+      const lista = [
+        { item: 'Tubo de Cobre Flexível (Par)', qtd: `${metros} m`, unit: 65, total: metros * 65 },
+        { item: 'Isolamento Térmico Blindado', qtd: `${metros * 2} m`, unit: 12, total: metros * 2 * 12 },
+        { item: 'Cabo PP 4x1,5mm² (Comunicação)', qtd: `${metros + 1} m`, unit: 9, total: (metros + 1) * 9 },
+        { item: 'Mangueira de Dreno / Cristal', qtd: `${metros} m`, unit: 6, total: metros * 6 },
+        { item: 'Suporte Reforçado Condensadora + Coxins', qtd: '1 Kit', unit: 65, total: 65 },
+        { item: 'Fita Grip / Vinílica Proteção', qtd: '1 Rolo', unit: 18, total: 18 }
+      ];
+
+      tbody.innerHTML = '';
+      let totalGeral = 0;
+
+      lista.forEach(i => {
+        totalGeral += i.total;
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${i.item}</td>
+          <td>${i.qtd}</td>
+          <td>R$ ${i.unit.toFixed(2).replace('.', ',')}</td>
+          <td><strong>R$ ${i.total.toFixed(2).replace('.', ',')}</strong></td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById('totalCustoMateriaisAr').innerText = `R$ ${totalGeral.toFixed(2).replace('.', ',')}`;
+    }
+
+    function adicionarMateriaisArAoOrcamento() {
+      const metros = parseFloat(document.getElementById('metroCobreAr').value) || 1;
+      let totalGeral = (metros * 65) + (metros * 2 * 12) + ((metros + 1) * 9) + (metros * 6) + 65 + 18;
+
+      itensOrcamento.push({
+        id: Date.now(),
+        nome: `Kit Material Completo de Infra para Ar (${metros}m Cobre + Acessórios)`,
+        preco: totalGeral,
+        qtd: 1,
+        subtotal: totalGeral
+      });
+
+      renderizarItens();
+      calcularTotal();
+      trocarAba('orcamentoTab', document.querySelectorAll('.tab-btn')[0]);
+      alert('Materiais do Ar Condicionado adicionados ao orçamento!');
+    }
+
+    // --- MÓDULO CÁLCULO CASA ---
+    function calcularMaoObraMetragem() {
+      const m2 = parseFloat(document.getElementById('casaMetragem').value) || 0;
+      const padrao = parseFloat(document.getElementById('casaPadrao').value) || 50;
+      const estagio = parseFloat(document.getElementById('casaEstagio').value) || 1;
+
+      const precoM2 = padrao * estagio;
+      const total = m2 * precoM2;
+
+      document.getElementById('resM2Area').innerText = `${m2} m²`;
+      document.getElementById('resM2Preco').innerText = `R$ ${precoM2.toFixed(2).replace('.', ',')}`;
+      document.getElementById('resM2Total').innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
+    }
+
+    function adicionarM2AoOrcamento() {
+      const m2 = parseFloat(document.getElementById('casaMetragem').value) || 0;
+      const padrao = parseFloat(document.getElementById('casaPadrao').value) || 50;
+      const estagio = parseFloat(document.getElementById('casaEstagio').value) || 1;
+      const precoM2 = padrao * estagio;
+      const total = m2 * precoM2;
+
+      itensOrcamento.push({
+        id: Date.now(),
+        nome: `Mão de Obra Instalação Elétrica Residencial por Metragem (${m2}m²)`,
+        preco: precoM2,
+        qtd: m2,
+        subtotal: total
+      });
+
+      renderizarItens();
+      calcularTotal();
+      trocarAba('orcamentoTab', document.querySelectorAll('.tab-btn')[0]);
+      alert('Mão de obra por m² adicionada ao orçamento!');
+    }
+
+    function calcularPontos() {
+      const pSimples = parseFloat(document.getElementById('ptsSimples').value) || 0;
+      const vSimples = parseFloat(document.getElementById('valSimples').value) || 0;
+      const pEspeciais = parseFloat(document.getElementById('ptsEspeciais').value) || 0;
+      const vEspeciais = parseFloat(document.getElementById('valEspeciais').value) || 0;
+
+      const totalPontos = pSimples + pEspeciais;
+      const valorTotal = (pSimples * vSimples) + (pEspeciais * vEspeciais);
+
+      document.getElementById('resTotalPontos').innerText = `${totalPontos} pontos`;
+      document.getElementById('resValorPontos').innerText = `R$ ${valorTotal.toFixed(2).replace('.', ',')}`;
+    }
+
+    function adicionarPontosAoOrcamento() {
+      const pSimples = parseFloat(document.getElementById('ptsSimples').value) || 0;
+      const vSimples = parseFloat(document.getElementById('valSimples').value) || 0;
+      const pEspeciais = parseFloat(document.getElementById('ptsEspeciais').value) || 0;
+      const vEspeciais = parseFloat(document.getElementById('valEspeciais').value) || 0;
+
+      if (pSimples > 0) {
+        itensOrcamento.push({
+          id: Date.now(),
+          nome: `Instalação de Pontos Elétricos Simples (Luz/Tomada)`,
+          preco: vSimples,
+          qtd: pSimples,
+          subtotal: pSimples * vSimples
         });
-    }
+      }
 
-    // Função para alterar status (Pendente -> Concluída -> Cancelada)
-    function alterarStatus(id) {
-        visitas = visitas.map(v => {
-            if (v.id === id) {
-                if (v.status === 'Pendente') v.status = 'Concluída';
-                else if (v.status === 'Concluída') v.status = 'Cancelada';
-                else v.status = 'Pendente';
-            }
-            return v;
+      if (pEspeciais > 0) {
+        itensOrcamento.push({
+          id: Date.now() + 1,
+          nome: `Instalação de Pontos Elétricos Especiais (20A / Three-Way)`,
+          preco: vEspeciais,
+          qtd: pEspeciais,
+          subtotal: pEspeciais * vEspeciais
         });
-        salvarERenderizar();
+      }
+
+      renderizarItens();
+      calcularTotal();
+      trocarAba('orcamentoTab', document.querySelectorAll('.tab-btn')[0]);
+      alert('Pontos adicionados ao orçamento!');
     }
 
-    // Função para excluir visita
-    function excluirVisita(id) {
-        if (confirm('Deseja realmente excluir este agendamento?')) {
-            visitas = visitas.filter(v => v.id !== id);
-            salvarERenderizar();
-        }
+    // --- MÓDULO DISJUNTOR CERTO ---
+    function calcularDisjuntor() {
+      const watts = parseFloat(document.getElementById('calcWatts').value) || 0;
+      const volts = parseFloat(document.getElementById('calcVolts').value) || 220;
+
+      const corrente = watts / volts;
+      let disjuntor = "10 A";
+      let cabo = "1,5 mm²";
+
+      if (corrente > 10 && corrente <= 16) { disjuntor = "16 A"; cabo = "2,5 mm²"; }
+      else if (corrente > 16 && corrente <= 20) { disjuntor = "20 A"; cabo = "2,5 mm²"; }
+      else if (corrente > 20 && corrente <= 25) { disjuntor = "25 A"; cabo = "4,0 mm²"; }
+      else if (corrente > 25 && corrente <= 32) { disjuntor = "32 A"; cabo = "4,0 mm² / 6,0 mm²"; }
+      else if (corrente > 32 && corrente <= 40) { disjuntor = "40 A"; cabo = "6,0 mm²"; }
+      else if (corrente > 40 && corrente <= 50) { disjuntor = "50 A"; cabo = "10,0 mm²"; }
+      else if (corrente > 50 && corrente <= 63) { disjuntor = "63 A"; cabo = "16,0 mm²"; }
+      else if (corrente > 63) { disjuntor = "Consulte Projeto Trifásico"; cabo = "25,0 mm² +"; }
+
+      document.getElementById('resCorrente').innerText = `${corrente.toFixed(2)} A`;
+      document.getElementById('resDisjuntor').innerText = `${disjuntor} (Curva C)`;
+      document.getElementById('resCaboMinimo').innerText = cabo;
     }
-
-    // Carregamento inicial
-    renderizarLista();
-</script>
-
+  </script>
 </body>
 </html>
