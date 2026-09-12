@@ -152,7 +152,6 @@
     .btn-group { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
     .btn-whatsapp { background: #25d366; color: #fff; border: none; padding: 13px; border-radius: 8px; font-size: 0.95rem; font-weight: bold; cursor: pointer; text-align: center; text-decoration: none; display: block; }
     .btn-pdf { background: #e74c3c; color: #fff; border: none; padding: 13px; border-radius: 8px; font-size: 0.95rem; font-weight: bold; cursor: pointer; text-align: center; }
-    .btn-maps { background: #4285f4; color: #fff; border: none; padding: 8px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: bold; cursor: pointer; text-decoration: none; display: inline-block; margin-top: 6px; }
 
     .sub-tabs { display: flex; gap: 6px; margin-bottom: 15px; flex-wrap: wrap; }
     .sub-btn { flex: 1 1 30%; padding: 8px 4px; border: 1px solid #cbd5e1; border-radius: 6px; background: #fff; font-size: 0.78rem; font-weight: 600; cursor: pointer; color: #334155; text-align: center; }
@@ -167,55 +166,6 @@
     .result-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px dashed #cbd5e1; font-size: 0.88rem; }
     .result-row:last-child { border-bottom: none; }
     .result-row span.val { font-weight: bold; color: var(--primary); }
-
-    .status-badge { display: inline-block; padding: 3px 8px; border-radius: 12px; font-size: 0.72rem; font-weight: bold; text-transform: uppercase; }
-    .status-agendado { background: #fef3c7; color: #d97706; }
-    .status-concluido { background: #dcfce7; color: #15803d; }
-    .status-cancelado { background: #fee2e2; color: #b91c1c; }
-
-    /* LAYOUT DO TEMPLATE PDF */
-    #pdfContainer { display: none; }
-
-    /* ESTILOS EXCLUSIVOS PARA MODO DE IMPRESSÃO / GERAR PDF */
-    @media print {
-      body * { visibility: hidden; }
-      body { background: #ffffff !important; padding: 0 !important; margin: 0 !important; }
-      #pdfContainer, #pdfContainer * { visibility: visible; }
-      #pdfContainer { 
-        display: block !important; 
-        position: absolute; 
-        left: 0; 
-        top: 0; 
-        width: 100%; 
-      }
-      #pdfTemplate { 
-        background: #ffffff !important; 
-        padding: 20px; 
-        font-family: Arial, sans-serif; 
-        color: #333; 
-      }
-      .watermark {
-        position: absolute;
-        top: 40%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 350px;
-        opacity: 0.05;
-        z-index: 0;
-      }
-      .pdf-content { position: relative; z-index: 1; }
-      .pdf-header { text-align: center; border-bottom: 2px solid #1b365d; padding-bottom: 10px; margin-bottom: 15px; }
-      .pdf-header svg.pdf-logo { max-width: 100px; height: auto; margin-bottom: 5px; background-color: #1e1e1e; border-radius: 6px; }
-      .pdf-header h1 { color: #1b365d; font-size: 18px; text-transform: uppercase; margin-bottom: 2px; }
-      .pdf-header p { font-size: 11px; color: #555; margin-bottom: 2px; }
-      .pdf-client-box { background: #f8f9fa; border: 1px solid #ddd; padding: 10px; border-radius: 6px; margin-bottom: 15px; font-size: 12px; line-height: 1.5; }
-      .pdf-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-      .pdf-table th, .pdf-table td { border: 1px solid #ccc; padding: 8px; text-align: left; font-size: 11px; }
-      .pdf-table th { background-color: #1b365d !important; color: white !important; text-transform: uppercase; font-size: 10px; -webkit-print-color-adjust: exact; }
-      .pdf-total { margin-top: 15px; text-align: right; font-size: 15px; font-weight: bold; color: #107c41; }
-      .pdf-terms { margin-top: 20px; font-size: 10px; background: #f9f9f9; padding: 10px; border-radius: 6px; border-left: 4px solid #1b365d; line-height: 1.5; }
-      .pdf-footer { margin-top: 25px; font-size: 10px; text-align: center; color: #777; border-top: 1px solid #eee; padding-top: 8px; }
-    }
   </style>
 </head>
 <body>
@@ -236,9 +186,6 @@
     <button class="tab-btn active" onclick="trocarAba('orcamentoTab', this)">📝 Orçamento</button>
     <button class="tab-btn" onclick="trocarAba('visitasTab', this)">📅 Visitas</button>
     <button class="tab-btn" onclick="trocarAba('arTab', this)">❄️ Ar Condicionado</button>
-    <button class="tab-btn" onclick="trocarAba('casaTab', this)">🏠 Instalação Casa</button>
-    <button class="tab-btn" onclick="trocarAba('calculoTab', this)">🔧 Disjuntor Certo</button>
-    <button class="tab-btn" onclick="trocarAba('consultaTab', this)">📚 Tabelas NBR</button>
   </div>
 
   <!-- ABA 1: GERADOR DE ORÇAMENTOS -->
@@ -403,7 +350,7 @@
         <h3 id="valorTotal">R$ 0,00</h3>
       </div>
 
-      <!-- ÁREA ADICIONADA: DESCONTO, ENTRADA E PAGAMENTO -->
+      <!-- ÁREA DE DESCONTO, ENTRADA E PAGAMENTO -->
       <div class="pagamento-card">
         <div class="pagamento-title">
           💳 
@@ -449,7 +396,7 @@
       </div>
 
       <div class="btn-group">
-        <button type="button" class="btn-pdf" onclick="gerarPDF()">🖨️ Imprimir / Salvar PDF do Orçamento</button>
+        <button type="button" class="btn-pdf" onclick="window.print()">🖨️ Imprimir / Salvar PDF do Orçamento</button>
         <button type="button" class="btn-whatsapp" onclick="enviarWhatsApp()">📱 Enviar Resumo no WhatsApp</button>
       </div>
     </div>
@@ -509,7 +456,6 @@
     <div class="sub-tabs">
       <button class="sub-btn active" onclick="trocarSubAr('btuSub', this)">❄️ Cálculo BTUs</button>
       <button class="sub-btn" onclick="trocarSubAr('especsSub', this)">📐 Tabela NBR & Tubos</button>
-      <button class="sub-btn" onclick="trocarSubAr('matArSub', this)">📦 Kit de Materiais</button>
     </div>
 
     <div id="btuSub" class="sub-ar-content">
@@ -588,38 +534,12 @@
         </div>
       </div>
     </div>
-
-    <div id="matArSub" class="sub-ar-content" style="display: none;">
-      <div class="card">
-        <h2>📦 Materiais Necessários para Instalação (Kit Infra)</h2>
-        <div class="field">
-          <label>Metragem da Tubulação de Cobre (m):</label>
-          <input type="number" id="metroCobreAr" value="3" min="1" oninput="gerarMateriaisAr()">
-        </div>
-
-        <div style="overflow-x: auto; margin-top: 10px;">
-          <table class="tech-table">
-            <thead>
-              <tr>
-                <th style="width: 45%;">Item / Material</th>
-                <th style="width: 15%;">Qtd</th>
-                <th style="width: 20%;">Preço Un.</th>
-                <th style="width: 20%;">Subtotal</th>
-              </tr>
-            </thead>
-            <tbody id="tbodyMateriaisAr"></tbody>
-          </table>
-        </div>
-
-        <div class="total-box" style="background: var(--primary); margin-top: 15px;">
-          <span>CUSTO ESTIMADO DE MATERIAIS</span>
-          <h3 id="totalMateriaisAr">R$ 0,00</h3>
-        </div>
-      </div>
-    </div>
   </div>
 
   <script>
+    // Variáveis globais para os itens do orçamento e visitas
+    let itensOrcamento = [];
+    let visitas = [];
     let tipoDescontoAtual = 'RS';
 
     function trocarAba(tabId, btn) {
@@ -634,46 +554,6 @@
       document.querySelectorAll('.sub-tabs .sub-btn').forEach(el => el.classList.remove('active'));
       document.getElementById(subId).style.display = 'block';
       btn.classList.add('active');
-    }
-
-    function selecionarTipoDesconto(tipo) {
-      tipoDescontoAtual = tipo;
-      document.getElementById('btnDescRs').classList.toggle('active', tipo === 'RS');
-      document.getElementById('btnDescPct').classList.toggle('active', tipo === 'PCT');
-      calcularTotal();
-    }
-
-    function definirEntrada(modo) {
-      let subtotal = parseFloat(document.getElementById('taxaExtra').value) || 0;
-      // Adicionar soma dos itens da lista se aplicável no seu código JavaScript existente
-      if (modo === 'zero') {
-        document.getElementById('entradaValor').value = 0;
-      } else if (modo === '30%') {
-        document.getElementById('entradaValor').value = (subtotal * 0.30).toFixed(2);
-      } else if (modo === 'metade') {
-        document.getElementById('entradaValor').value = (subtotal * 0.50).toFixed(2);
-      } else if (modo === 'total') {
-        document.getElementById('entradaValor').value = subtotal.toFixed(2);
-      }
-      calcularTotal();
-    }
-
-    function atualizarFormaPagamento() {
-      const select = document.getElementById('formaPagamento');
-      document.getElementById('resumoFormaPagamento').innerText = select.value;
-    }
-
-    function calcularTotal() {
-      let taxa = parseFloat(document.getElementById('taxaExtra').value) || 0;
-      let total = taxa; // Adicionar a soma dos seus itens do orçamento aqui
-
-      let descontoVal = parseFloat(document.getElementById('descontoValor').value) || 0;
-      if (tipoDescontoAtual === 'PCT') {
-        descontoVal = total * (descontoVal / 100);
-      }
-
-      let totalFinal = Math.max(0, total - descontoVal);
-      document.getElementById('valorTotal').innerText = `R$ ${totalFinal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
     }
 
     function filtrarServicos() {
@@ -694,6 +574,226 @@
       } else {
         customBox.style.display = 'none';
       }
+    }
+
+    // FUNÇÃO PRINCIPAL: ADICIONAR ITEM AO ORÇAMENTO
+    function adicionarItem() {
+      const select = document.getElementById('servicoSelect');
+      const val = select.value;
+      const qtd = parseFloat(document.getElementById('servicoQtd').value) || 1;
+
+      if (!val) {
+        alert('Por favor, selecione um serviço na lista!');
+        return;
+      }
+
+      let nome = '';
+      let precoUnitario = 0;
+
+      if (val.startsWith('CUSTOM')) {
+        nome = document.getElementById('customNome').value.trim();
+        precoUnitario = parseFloat(document.getElementById('customValor').value) || 0;
+        if (!nome) {
+          alert('Por favor, informe a descrição do item personalizado.');
+          return;
+        }
+      } else {
+        const partes = val.split('|');
+        nome = partes[0];
+        precoUnitario = parseFloat(partes[1]);
+      }
+
+      const totalItem = precoUnitario * qtd;
+
+      itensOrcamento.push({
+        id: Date.now(),
+        nome: nome,
+        qtd: qtd,
+        unitario: precoUnitario,
+        total: totalItem
+      });
+
+      // Limpar formulário dinâmico
+      select.value = '';
+      document.getElementById('servicoQtd').value = '1';
+      document.getElementById('customNome').value = '';
+      document.getElementById('customValor').value = '0.00';
+      document.getElementById('campoCustomBox').style.display = 'none';
+
+      renderizarItens();
+      calcularTotal();
+    }
+
+    function removerItem(id) {
+      itensOrcamento = itensOrcamento.filter(item => item.id !== id);
+      renderizarItens();
+      calcularTotal();
+    }
+
+    function renderizarItens() {
+      const lista = document.getElementById('listaItens');
+      lista.innerHTML = '';
+
+      itensOrcamento.forEach(item => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <div class="item-info">
+            <span class="item-title">${item.nome}</span>
+            <span class="item-sub">${item.qtd}x R$ ${item.unitario.toFixed(2)} = <strong>R$ ${item.total.toFixed(2)}</strong></span>
+          </div>
+          <span class="remove-btn" onclick="removerItem(${item.id})">✕</span>
+        `;
+        lista.appendChild(li);
+      });
+    }
+
+    function selecionarTipoDesconto(tipo) {
+      tipoDescontoAtual = tipo;
+      document.getElementById('btnDescRs').classList.toggle('active', tipo === 'RS');
+      document.getElementById('btnDescPct').classList.toggle('active', tipo === 'PCT');
+      calcularTotal();
+    }
+
+    function definirEntrada(modo) {
+      let subtotal = itensOrcamento.reduce((acc, item) => acc + item.total, 0);
+      let taxa = parseFloat(document.getElementById('taxaExtra').value) || 0;
+      let totalBruto = subtotal + taxa;
+
+      if (modo === 'zero') {
+        document.getElementById('entradaValor').value = 0;
+      } else if (modo === '30%') {
+        document.getElementById('entradaValor').value = (totalBruto * 0.30).toFixed(2);
+      } else if (modo === 'metade') {
+        document.getElementById('entradaValor').value = (totalBruto * 0.50).toFixed(2);
+      } else if (modo === 'total') {
+        document.getElementById('entradaValor').value = totalBruto.toFixed(2);
+      }
+      calcularTotal();
+    }
+
+    function atualizarFormaPagamento() {
+      const select = document.getElementById('formaPagamento');
+      document.getElementById('resumoFormaPagamento').innerText = select.value;
+    }
+
+    function calcularTotal() {
+      let subtotal = itensOrcamento.reduce((acc, item) => acc + item.total, 0);
+      let taxa = parseFloat(document.getElementById('taxaExtra').value) || 0;
+      let totalBruto = subtotal + taxa;
+
+      let descontoInput = parseFloat(document.getElementById('descontoValor').value) || 0;
+      let valorDesconto = 0;
+
+      if (tipoDescontoAtual === 'PCT') {
+        valorDesconto = totalBruto * (descontoInput / 100);
+      } else {
+        valorDesconto = descontoInput;
+      }
+
+      let totalFinal = Math.max(0, totalBruto - valorDesconto);
+      document.getElementById('valorTotal').innerText = `R$ ${totalFinal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    }
+
+    function calcularBTUs() {
+      let comp = parseFloat(document.getElementById('arComp').value) || 0;
+      let larg = parseFloat(document.getElementById('arLarg').value) || 0;
+      let fatorSol = parseFloat(document.getElementById('arSol').value) || 600;
+      let pessoas = parseInt(document.getElementById('arPessoas').value) || 1;
+      let eletro = parseInt(document.getElementById('arEletro').value) || 0;
+
+      let area = comp * larg;
+      let btuPessoas = (pessoas > 1) ? (pessoas - 1) * fatorSol : 0;
+      let btuEletro = eletro * 600;
+      let btuTotal = (area * fatorSol) + btuPessoas + btuEletro;
+
+      document.getElementById('resArArea').innerText = `${area.toFixed(1)} m²`;
+      document.getElementById('resArBtuExato').innerText = `${Math.round(btuTotal).toLocaleString('pt-BR')} BTU/h`;
+
+      let recomendado = '9.000 BTU/h';
+      if (btuTotal > 9000 && btuTotal <= 12000) recomendado = '12.000 BTU/h';
+      else if (btuTotal > 12000 && btuTotal <= 18000) recomendado = '18.000 BTU/h';
+      else if (btuTotal > 18000 && btuTotal <= 24000) recomendado = '24.000 BTU/h';
+      else if (btuTotal > 24000) recomendado = '30.000+ BTU/h';
+
+      document.getElementById('resArBtuRecomendado').innerText = recomendado;
+    }
+
+    function salvarVisita() {
+      let cli = document.getElementById('vCliente').value.trim();
+      let tel = document.getElementById('vTel').value.trim();
+      let data = document.getElementById('vData').value;
+      let hora = document.getElementById('vHora').value;
+      let end = document.getElementById('vEndereco').value.trim();
+      let tipo = document.getElementById('vTipo').value;
+      let obs = document.getElementById('vObs').value.trim();
+
+      if (!cli || !data) {
+        alert('Preencha ao menos o nome do cliente e a data da visita.');
+        return;
+      }
+
+      visitas.push({ id: Date.now(), cli, tel, data, hora, end, tipo, obs });
+      
+      // Limpar formulário
+      document.getElementById('vCliente').value = '';
+      document.getElementById('vTel').value = '';
+      document.getElementById('vEndereco').value = '';
+      document.getElementById('vObs').value = '';
+
+      renderizarVisitas();
+    }
+
+    function renderizarVisitas() {
+      let lista = document.getElementById('listaVisitas');
+      lista.innerHTML = '';
+
+      visitas.forEach(v => {
+        let li = document.createElement('li');
+        li.innerHTML = `
+          <div class="item-info">
+            <span class="item-title">${v.cli} (${v.tipo})</span>
+            <span class="item-sub">📅 ${v.data} às ${v.hora} | 📍 ${v.end}</span>
+            ${v.obs ? `<span class="item-sub">📝 ${v.obs}</span>` : ''}
+          </div>
+        `;
+        lista.appendChild(li);
+      });
+    }
+
+    function enviarWhatsApp() {
+      let cliente = document.getElementById('clienteNome').value.trim() || 'Cliente';
+      let tel = document.getElementById('clienteTel').value.replace(/\D/g, '');
+      let forma = document.getElementById('formaPagamento').value;
+      let total = document.getElementById('valorTotal').innerText;
+      let entrada = parseFloat(document.getElementById('entradaValor').value) || 0;
+
+      if (itensOrcamento.length === 0) {
+        alert('Adicione ao menos um serviço para gerar a mensagem!');
+        return;
+      }
+
+      let msg = `*ERTEC SOLUÇÕES ELÉTRICAS*\n`;
+      msg += `*Orçamento para:* ${cliente}\n\n`;
+      msg += `*Serviços Relacionados:*\n`;
+
+      itensOrcamento.forEach(i => {
+        msg += `• ${i.nome} (${i.qtd}x) - R$ ${i.total.toFixed(2)}\n`;
+      });
+
+      let taxa = parseFloat(document.getElementById('taxaExtra').value) || 0;
+      if (taxa > 0) {
+        msg += `• Taxa de Materiais/Deslocamento: R$ ${taxa.toFixed(2)}\n`;
+      }
+
+      msg += `\n*Valor Total:* ${total}\n`;
+      if (entrada > 0) {
+        msg += `*Entrada:* R$ ${entrada.toFixed(2)}\n`;
+      }
+      msg += `*Forma de Pagamento:* ${forma}\n\n`;
+      msg += `_Orçamento válido por 7 dias._`;
+
+      let url = `https://api.whatsapp.com/send?phone=${tel}&text=${encodeURIComponent(msg)}`;
+      window.open(url, '_blank');
     }
   </script>
 
