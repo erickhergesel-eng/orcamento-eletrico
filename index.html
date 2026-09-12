@@ -67,7 +67,6 @@
     .total-box span { font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; }
     .total-box h3 { font-size: 1.6rem; margin-top: 2px; }
 
-    /* ESTILOS DA ÁREA DE DESCONTO E PAGAMENTO */
     .pagamento-card {
       background: #ffffff;
       border: 1px solid #e2e8f0;
@@ -166,6 +165,44 @@
     .result-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px dashed #cbd5e1; font-size: 0.88rem; }
     .result-row:last-child { border-bottom: none; }
     .result-row span.val { font-weight: bold; color: var(--primary); }
+
+    /* REGRAS PARA IMPRESSÃO DA PÁGINA (PDF LIMPO) */
+    @media print {
+      body { background: #fff; padding: 0; }
+      .nav-tabs,
+      .search-box,
+      #servicoSelect,
+      #campoCustomBox,
+      #servicoQtd,
+      .btn-add,
+      .pagamento-card,
+      .btn-group,
+      .remove-btn,
+      label[for="buscaServico"],
+      .field:has(#buscaServico),
+      .field:has(#servicoSelect),
+      .field:has(#servicoQtd),
+      .field:has(#taxaExtra) {
+        display: none !important;
+      }
+      .card {
+        box-shadow: none;
+        border: 1px solid #e2e8f0;
+        margin-bottom: 10px;
+        padding: 12px;
+      }
+      input {
+        border: none !important;
+        background: transparent !important;
+        font-weight: bold;
+        padding: 0 !important;
+      }
+      .total-box {
+        background: #1b365d !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
   </style>
 </head>
 <body>
@@ -203,7 +240,7 @@
     </div>
 
     <div class="card">
-      <h2>🛠️ Adicionar Serviços</h2>
+      <h2>🛠️ Serviços do Orçamento</h2>
       <div class="field">
         <label>Buscar Serviço Rapidamente:</label>
         <div class="search-box">
@@ -537,7 +574,6 @@
   </div>
 
   <script>
-    // Variáveis globais para os itens do orçamento e visitas
     let itensOrcamento = [];
     let visitas = [];
     let tipoDescontoAtual = 'RS';
@@ -576,7 +612,6 @@
       }
     }
 
-    // FUNÇÃO PRINCIPAL: ADICIONAR ITEM AO ORÇAMENTO
     function adicionarItem() {
       const select = document.getElementById('servicoSelect');
       const val = select.value;
@@ -613,7 +648,6 @@
         total: totalItem
       });
 
-      // Limpar formulário dinâmico
       select.value = '';
       document.getElementById('servicoQtd').value = '1';
       document.getElementById('customNome').value = '';
@@ -734,7 +768,6 @@
 
       visitas.push({ id: Date.now(), cli, tel, data, hora, end, tipo, obs });
       
-      // Limpar formulário
       document.getElementById('vCliente').value = '';
       document.getElementById('vTel').value = '';
       document.getElementById('vEndereco').value = '';
